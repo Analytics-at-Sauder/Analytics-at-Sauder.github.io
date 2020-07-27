@@ -89,14 +89,3 @@ navbar:
           href: p04_inventory_management.html
         - text: "Project Risk Assessment"
           href: p03_project_risk_assessment.html
-        - text: "---------"
-        - text: "Others"
-        - text: "Stock Returns Analysis"
-          href: p01_stock_returns_analysis.html
-        - text: "Customer Segmentation"
-          href: p10_customer_segmentation.html
-        - text: "Inventory Decision Analysis"
-          href: p12_inventory_decision_analysis.html
-        - text: "Critical Path Analysis"
-          href: p13_critical_path_analysis.html
-          
