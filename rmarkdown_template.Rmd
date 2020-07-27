@@ -1,0 +1,7 @@
+---
+title: "RMarkdown Template"
+---
+
+You can download this notebook and related data from this [GitHub repository](). **If you do not have Python or Jupyter Notebook installed yet**, feel free to experiment with a virtual notebook by clicking "Launch Syzygy" below. Any edits you make via Syzygy will be saved in your own virtual workspace; for more information on how to use Szygy, please read through its [documentation](https://intro.syzygy.ca/).
+
+<a href="" target="_blank" class="button">Launch Syzygy</a>

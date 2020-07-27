@@ -1,0 +1,10 @@
+---
+title: "UBC Business Analytics Learning Resource"
+output:
+  html_document:
+    toc: false
+---
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Sauder-School-of-Business-March-2012.jpg" alt="UBC Sauder School of Business">
+
+UBC Sauder’s Master of Business Analytics (MBAN) program provides students with analytical skills within a broader business context. MBAN graduates are required to apply advanced analytical tools and methods to address management challenges in today’s business world. 

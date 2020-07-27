@@ -1,0 +1,3638 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>RFM Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Others</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">RFM Analysis</h1>
+
+</div>
+
+
+<p>Customer Analytics is important to run a successful business. Sales and marketing resources are finite and expensive, therefore it is important to answer these questions when developing a marketing strategy.</p>
+<ul>
+<li>Who are our most/least valuable customers?</li>
+<li>How can we acquire new customers that resemble our most valuable?</li>
+</ul>
+<p>In this project, we focus on RFM analysis. This type of analysis is used when historical data for existing customers is available. RFM Analysis identifies existing customers who are most likely to remain loyal to a company or respond to a new product. RFM analysis allows you to create customized and personalized messaging, and this can be used to streamline the various messages you send to a specific customer and continue sending messages of only a particular type, thereby reducing the chance of dissatisfaction or annoyance, and create higher customer satisfaction. RFM is a model based on historical data and helps forecast future behavior based on past interactions.</p>
+<p>All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the executable environment Syzygy.</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_06_RFM_Analysis&urlpath=tree%2FProject_06_RFM_Analysis%2FRFM_Analysis.ipynb" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="business-problem" class="section level1">
+<h1>Business Problem</h1>
+<p>How do we segment our customers to reach them effectively through target marketing? By applying the paraeto principle to a customer database, 80% of a company’s revenue comes from 20% of the customers. RFM helps determine who the top 20% of customers are and groups the remaining customers into other segments such as price-sensitive, potentially loyal, brand sensitive, etc. This ensures that each customer is better targeted and convert the other segments into the higher value segments and increase customer lifetime value. In this project, the customer sales data from January 2011 to May 2011 of an E-commerce store is analyzed to group customers from the United Kingdom into segments using the RFM model. The relevant libraries and the dataset is imported into the python environment.</p>
+<div id="data-set" class="section level2">
+<h2>Data Set</h2>
+<p>There are eight variables in the data set:</p>
+<ol style="list-style-type: decimal">
+<li>InvoiceNo: Invoice number, A 6-digit integral number uniquely assigned to each transaction.</li>
+<li>StockCode: Product code, a 5-digit integral number uniquely assigned to each distinct product.</li>
+<li>Description: Product name</li>
+<li>Quantity: The quantities of each product (item) per transaction.</li>
+<li>InvoiceDate: Invoice Date and time. Numeric, the day and time when each transaction was generated.</li>
+<li>UnitPrice: Unit price. Numeric, Product price per unit in sterling.</li>
+<li>CustomerID: Customer number, a 5-digit integral number uniquely assigned to each customer.</li>
+<li>Country</li>
+</ol>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+import seaborn as sns
+from datetime import timedelta
+import numpy as np
+import matplotlib.pyplot as plt
+
+pd.set_option(&quot;display.max_columns&quot;,None);
+pd.set_option(&quot;display.max_rows&quot;,None);
+
+#load data
+url = &#39;https://raw.githubusercontent.com/Master-of-Business-Analytics/Project_06_RFM_Analysis/master/data.csv&#39;
+df = pd.read_csv(url, error_bad_lines=False,encoding= &#39;unicode_escape&#39;)
+</code></pre>
+<pre class="python"><code>
+df.head(5)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+InvoiceNo
+</th>
+<th>
+StockCode
+</th>
+<th>
+Description
+</th>
+<th>
+Quantity
+</th>
+<th>
+InvoiceDate
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+<th>
+Country
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+540558
+</td>
+<td>
+21258
+</td>
+<td>
+?
+</td>
+<td>
+-29
+</td>
+<td>
+1/10/2011 10:04
+</td>
+<td>
+0.00
+</td>
+<td>
+NaN
+</td>
+<td>
+United Kingdom
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+540560
+</td>
+<td>
+21589
+</td>
+<td>
+NaN
+</td>
+<td>
+-14
+</td>
+<td>
+1/10/2011 10:08
+</td>
+<td>
+0.00
+</td>
+<td>
+NaN
+</td>
+<td>
+United Kingdom
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+540561
+</td>
+<td>
+22343
+</td>
+<td>
+PARTY PIZZA DISH RED RETROSPOT
+</td>
+<td>
+24
+</td>
+<td>
+1/10/2011 10:32
+</td>
+<td>
+0.21
+</td>
+<td>
+13004.0
+</td>
+<td>
+United Kingdom
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+540561
+</td>
+<td>
+22344
+</td>
+<td>
+PARTY PIZZA DISH PINK POLKADOT
+</td>
+<td>
+24
+</td>
+<td>
+1/10/2011 10:32
+</td>
+<td>
+0.21
+</td>
+<td>
+13004.0
+</td>
+<td>
+United Kingdom
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+540561
+</td>
+<td>
+47504H
+</td>
+<td>
+ENGLISH ROSE SPIRIT LEVEL
+</td>
+<td>
+24
+</td>
+<td>
+1/10/2011 10:32
+</td>
+<td>
+0.85
+</td>
+<td>
+13004.0
+</td>
+<td>
+United Kingdom
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>#Data cleaning The dataset seemed relatively clean at first glance, but it was actually riddled with Null values. The code chunk below creates a new column that calculates the total purchase for each transaction. The NA values are also identified and the rows containing these NA values are removed. There are several methods of removing NA values from a dataset; replacing with another value or deleting the entire row. The choice of removal is dependent on the what data is been manipulated and how much data is available.</p>
+<pre class="python"><code>df.describe()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Quantity
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+290603.000000
+</td>
+<td>
+290603.000000
+</td>
+<td>
+214539.000000
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+8.363265
+</td>
+<td>
+4.302626
+</td>
+<td>
+15528.122756
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+292.791363
+</td>
+<td>
+72.531652
+</td>
+<td>
+1592.760180
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+-80995.000000
+</td>
+<td>
+0.000000
+</td>
+<td>
+12346.000000
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+1.000000
+</td>
+<td>
+1.250000
+</td>
+<td>
+14159.000000
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+3.000000
+</td>
+<td>
+2.100000
+</td>
+<td>
+15493.000000
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+10.000000
+</td>
+<td>
+4.130000
+</td>
+<td>
+16923.000000
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+80995.000000
+</td>
+<td>
+17836.460000
+</td>
+<td>
+18287.000000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In any event, it is good practice to sift out incorrect transactions, particularly when they result in extreme outliers. So in this section, the large transactions are scanned to clean the data. More information on data cleaning can be found on the <a href="https://master-of-business-analytics.github.io/Website/Data_Cleaning.html">data cleaning project</a>.</p>
+<pre class="python"><code># information about the data set
+print(&#39;{:,} rows; {:,} columns&#39;
+      .format(df.shape[0], df.shape[1]))
+print(&#39;{:,} transactions don\&#39;t have a customer id&#39;
+      .format(df[df.CustomerID.isnull()].shape[0]))
+print(&#39;Transactions timeframe from {} to {}&#39;.format(df[&#39;InvoiceDate&#39;].min(),
+                                    df[&#39;InvoiceDate&#39;].max()))
+
+#Eliminating NA rows in Cstomer ID
+
+df=df[df.notnull().all(axis=1)] #eliminating NA</code></pre>
+<pre><code>    290,603 rows; 8 columns
+    76,064 transactions don&#39;t have a customer id
+    Transactions timeframe from 1/10/2011 10:04 to 5/20/2011 14:06</code></pre>
+<pre class="python"><code>print(&#39;{:,} rows; {:,} columns&#39;
+      .format(df.shape[0], df.shape[1]))</code></pre>
+<pre><code>    214,539 rows; 8 columns
+</code></pre>
+<pre class="python"><code>#remove mi
+df.drop(index=[df[&#39;Quantity&#39;].idxmax(), df[&#39;Quantity&#39;].idxmin()], inplace=True)
+df.describe()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Quantity
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+214537.000000
+</td>
+<td>
+214537.000000
+</td>
+<td>
+214537.000000
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+10.561642
+</td>
+<td>
+3.048388
+</td>
+<td>
+15528.114199
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+232.168351
+</td>
+<td>
+14.165101
+</td>
+<td>
+1592.765139
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+-74215.000000
+</td>
+<td>
+0.000000
+</td>
+<td>
+12346.000000
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+2.000000
+</td>
+<td>
+1.250000
+</td>
+<td>
+14159.000000
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+4.000000
+</td>
+<td>
+1.950000
+</td>
+<td>
+15493.000000
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+12.000000
+</td>
+<td>
+3.750000
+</td>
+<td>
+16923.000000
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+74215.000000
+</td>
+<td>
+3155.950000
+</td>
+<td>
+18287.000000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code>
+df.drop(index=[df[&#39;Quantity&#39;].idxmax(), df[&#39;Quantity&#39;].idxmin()], inplace=True)
+df.describe()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Quantity
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+214535.000000
+</td>
+<td>
+214535.000000
+</td>
+<td>
+214535.000000
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+10.561741
+</td>
+<td>
+3.048407
+</td>
+<td>
+15528.143865
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+50.550843
+</td>
+<td>
+14.165166
+</td>
+<td>
+1592.742929
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+-3114.000000
+</td>
+<td>
+0.000000
+</td>
+<td>
+12747.000000
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+2.000000
+</td>
+<td>
+1.250000
+</td>
+<td>
+14159.000000
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+4.000000
+</td>
+<td>
+1.950000
+</td>
+<td>
+15493.000000
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+12.000000
+</td>
+<td>
+3.750000
+</td>
+<td>
+16923.000000
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+12540.000000
+</td>
+<td>
+3155.950000
+</td>
+<td>
+18287.000000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note that the Minimum quantity and Maximum quantity have different absolute values.</p>
+<pre class="python"><code>df.describe()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Quantity
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+214516.000000
+</td>
+<td>
+214516.000000
+</td>
+<td>
+214516.000000
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+10.503361
+</td>
+<td>
+3.048677
+</td>
+<td>
+15528.224948
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+42.705725
+</td>
+<td>
+14.165764
+</td>
+<td>
+1592.710040
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+-3114.000000
+</td>
+<td>
+0.001000
+</td>
+<td>
+12747.000000
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+2.000000
+</td>
+<td>
+1.250000
+</td>
+<td>
+14159.000000
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+4.000000
+</td>
+<td>
+1.950000
+</td>
+<td>
+15493.000000
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+12.000000
+</td>
+<td>
+3.750000
+</td>
+<td>
+16923.000000
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+4800.000000
+</td>
+<td>
+3155.950000
+</td>
+<td>
+18287.000000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code># Convert InvoiceDate from object to datetime format
+df[&#39;InvoiceDate&#39;] = pd.to_datetime(df[&#39;InvoiceDate&#39;])
+
+#creating a total sales column
+df[&quot;Totalsum&quot;] = df[&#39;Quantity&#39;] * df[&#39;UnitPrice&#39;]</code></pre>
+<pre class="python"><code>#Check the remaining large negative transactions
+df[df.Totalsum&lt;0].sort_values(&#39;Totalsum&#39;).head(10)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+InvoiceNo
+</th>
+<th>
+StockCode
+</th>
+<th>
+Description
+</th>
+<th>
+Quantity
+</th>
+<th>
+InvoiceDate
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+<th>
+Country
+</th>
+<th>
+Totalsum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+257377
+</th>
+<td>
+C550456
+</td>
+<td>
+21108
+</td>
+<td>
+FAIRY CAKE FLANNEL ASSORTED COLOUR
+</td>
+<td>
+-3114
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+2.10
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-6539.40
+</td>
+</tr>
+<tr>
+<th>
+257375
+</th>
+<td>
+C550456
+</td>
+<td>
+85123A
+</td>
+<td>
+WHITE HANGING HEART T-LIGHT HOLDER
+</td>
+<td>
+-1930
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+2.55
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-4921.50
+</td>
+</tr>
+<tr>
+<th>
+257373
+</th>
+<td>
+C550456
+</td>
+<td>
+48185
+</td>
+<td>
+DOORMAT FAIRY CAKE
+</td>
+<td>
+-670
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+6.75
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-4522.50
+</td>
+</tr>
+<tr>
+<th>
+257376
+</th>
+<td>
+C550456
+</td>
+<td>
+21175
+</td>
+<td>
+GIN + TONIC DIET METAL SIGN
+</td>
+<td>
+-2000
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+1.85
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-3700.00
+</td>
+</tr>
+<tr>
+<th>
+257374
+</th>
+<td>
+C550456
+</td>
+<td>
+47566B
+</td>
+<td>
+TEA TIME PARTY BUNTING
+</td>
+<td>
+-1300
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+2.55
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-3315.00
+</td>
+</tr>
+<tr>
+<th>
+275098
+</th>
+<td>
+C549452
+</td>
+<td>
+D
+</td>
+<td>
+Discount
+</td>
+<td>
+-1
+</td>
+<td>
+2011-04-08 14:17:00
+</td>
+<td>
+1867.86
+</td>
+<td>
+17940.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-1867.86
+</td>
+</tr>
+<tr>
+<th>
+35080
+</th>
+<td>
+C570556
+</td>
+<td>
+22273
+</td>
+<td>
+FELTCRAFT DOLL MOLLY
+</td>
+<td>
+-720
+</td>
+<td>
+2011-10-11 11:10:00
+</td>
+<td>
+2.55
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-1836.00
+</td>
+</tr>
+<tr>
+<th>
+35074
+</th>
+<td>
+C570556
+</td>
+<td>
+22273
+</td>
+<td>
+FELTCRAFT DOLL MOLLY
+</td>
+<td>
+-720
+</td>
+<td>
+2011-10-11 11:10:00
+</td>
+<td>
+2.30
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-1656.00
+</td>
+</tr>
+<tr>
+<th>
+69265
+</th>
+<td>
+C569387
+</td>
+<td>
+23284
+</td>
+<td>
+DOORMAT KEEP CALM AND COME IN
+</td>
+<td>
+-200
+</td>
+<td>
+2011-10-03 16:49:00
+</td>
+<td>
+7.08
+</td>
+<td>
+14031.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-1416.00
+</td>
+</tr>
+<tr>
+<th>
+35081
+</th>
+<td>
+C570556
+</td>
+<td>
+20971
+</td>
+<td>
+PINK BLUE FELT CRAFT TRINKET BOX
+</td>
+<td>
+-1296
+</td>
+<td>
+2011-10-11 11:10:00
+</td>
+<td>
+1.06
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-1373.76
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code># Customer 15749 is in the top 10 
+df[df.CustomerID==15749].sort_values(&#39;Totalsum&#39;).head(10)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+InvoiceNo
+</th>
+<th>
+StockCode
+</th>
+<th>
+Description
+</th>
+<th>
+Quantity
+</th>
+<th>
+InvoiceDate
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+<th>
+Country
+</th>
+<th>
+Totalsum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+257377
+</th>
+<td>
+C550456
+</td>
+<td>
+21108
+</td>
+<td>
+FAIRY CAKE FLANNEL ASSORTED COLOUR
+</td>
+<td>
+-3114
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+2.10
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-6539.4
+</td>
+</tr>
+<tr>
+<th>
+257375
+</th>
+<td>
+C550456
+</td>
+<td>
+85123A
+</td>
+<td>
+WHITE HANGING HEART T-LIGHT HOLDER
+</td>
+<td>
+-1930
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+2.55
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-4921.5
+</td>
+</tr>
+<tr>
+<th>
+257373
+</th>
+<td>
+C550456
+</td>
+<td>
+48185
+</td>
+<td>
+DOORMAT FAIRY CAKE
+</td>
+<td>
+-670
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+6.75
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-4522.5
+</td>
+</tr>
+<tr>
+<th>
+257376
+</th>
+<td>
+C550456
+</td>
+<td>
+21175
+</td>
+<td>
+GIN + TONIC DIET METAL SIGN
+</td>
+<td>
+-2000
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+1.85
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-3700.0
+</td>
+</tr>
+<tr>
+<th>
+257374
+</th>
+<td>
+C550456
+</td>
+<td>
+47566B
+</td>
+<td>
+TEA TIME PARTY BUNTING
+</td>
+<td>
+-1300
+</td>
+<td>
+2011-04-18 13:08:00
+</td>
+<td>
+2.55
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-3315.0
+</td>
+</tr>
+<tr>
+<th>
+257775
+</th>
+<td>
+550461
+</td>
+<td>
+47556B
+</td>
+<td>
+TEA TIME TEA TOWELS
+</td>
+<td>
+1300
+</td>
+<td>
+2011-04-18 13:20:00
+</td>
+<td>
+2.10
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+2730.0
+</td>
+</tr>
+<tr>
+<th>
+2204
+</th>
+<td>
+540818
+</td>
+<td>
+47556B
+</td>
+<td>
+TEA TIME TEA TOWELS
+</td>
+<td>
+1300
+</td>
+<td>
+2011-01-11 12:57:00
+</td>
+<td>
+2.55
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+3315.0
+</td>
+</tr>
+<tr>
+<th>
+257777
+</th>
+<td>
+550461
+</td>
+<td>
+21175
+</td>
+<td>
+GIN + TONIC DIET METAL SIGN
+</td>
+<td>
+2000
+</td>
+<td>
+2011-04-18 13:20:00
+</td>
+<td>
+1.69
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+3380.0
+</td>
+</tr>
+<tr>
+<th>
+2143
+</th>
+<td>
+540815
+</td>
+<td>
+21175
+</td>
+<td>
+GIN + TONIC DIET METAL SIGN
+</td>
+<td>
+2000
+</td>
+<td>
+2011-01-11 12:55:00
+</td>
+<td>
+1.85
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+3700.0
+</td>
+</tr>
+<tr>
+<th>
+257776
+</th>
+<td>
+550461
+</td>
+<td>
+48185
+</td>
+<td>
+DOORMAT FAIRY CAKE
+</td>
+<td>
+670
+</td>
+<td>
+2011-04-18 13:20:00
+</td>
+<td>
+6.35
+</td>
+<td>
+15749.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+4254.5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code># removing cancelled orders
+df.drop(index=[257377,257778, 257375, 257373,2142,2205,2143,257374,257376,2204], inplace=True)</code></pre>
+<pre class="python"><code># customer 16029
+df[df.CustomerID==16029].sort_values(&#39;InvoiceDate&#39;).head(10)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+InvoiceNo
+</th>
+<th>
+StockCode
+</th>
+<th>
+Description
+</th>
+<th>
+Quantity
+</th>
+<th>
+InvoiceDate
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+<th>
+Country
+</th>
+<th>
+Totalsum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+25750
+</th>
+<td>
+C540030
+</td>
+<td>
+22070
+</td>
+<td>
+SMALL RED RETROSPOT MUG IN BOX
+</td>
+<td>
+-24
+</td>
+<td>
+2011-01-04 13:47:00
+</td>
+<td>
+3.75
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+-90.00
+</td>
+</tr>
+<tr>
+<th>
+25749
+</th>
+<td>
+540029
+</td>
+<td>
+22207
+</td>
+<td>
+FRYING PAN UNION FLAG
+</td>
+<td>
+24
+</td>
+<td>
+2011-01-04 13:47:00
+</td>
+<td>
+3.75
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+90.00
+</td>
+</tr>
+<tr>
+<th>
+5679
+</th>
+<td>
+541105
+</td>
+<td>
+85099F
+</td>
+<td>
+JUMBO BAG STRAWBERRY
+</td>
+<td>
+200
+</td>
+<td>
+2011-01-13 14:34:00
+</td>
+<td>
+1.65
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+330.00
+</td>
+</tr>
+<tr>
+<th>
+5680
+</th>
+<td>
+541105
+</td>
+<td>
+22386
+</td>
+<td>
+JUMBO BAG PINK POLKADOT
+</td>
+<td>
+200
+</td>
+<td>
+2011-01-13 14:34:00
+</td>
+<td>
+1.65
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+330.00
+</td>
+</tr>
+<tr>
+<th>
+13090
+</th>
+<td>
+541610
+</td>
+<td>
+84880
+</td>
+<td>
+WHITE WIRE EGG HOLDER
+</td>
+<td>
+17
+</td>
+<td>
+2011-01-20 10:18:00
+</td>
+<td>
+4.95
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+84.15
+</td>
+</tr>
+<tr>
+<th>
+13091
+</th>
+<td>
+541610
+</td>
+<td>
+22207
+</td>
+<td>
+FRYING PAN UNION FLAG
+</td>
+<td>
+48
+</td>
+<td>
+2011-01-20 10:18:00
+</td>
+<td>
+3.75
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+180.00
+</td>
+</tr>
+<tr>
+<th>
+13092
+</th>
+<td>
+541610
+</td>
+<td>
+21928
+</td>
+<td>
+JUMBO BAG SCANDINAVIAN PAISLEY
+</td>
+<td>
+100
+</td>
+<td>
+2011-01-20 10:18:00
+</td>
+<td>
+1.65
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+165.00
+</td>
+</tr>
+<tr>
+<th>
+13093
+</th>
+<td>
+541611
+</td>
+<td>
+79321
+</td>
+<td>
+CHILLI LIGHTS
+</td>
+<td>
+96
+</td>
+<td>
+2011-01-20 10:18:00
+</td>
+<td>
+3.82
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+366.72
+</td>
+</tr>
+<tr>
+<th>
+13094
+</th>
+<td>
+541611
+</td>
+<td>
+22779
+</td>
+<td>
+WOODEN OWLS LIGHT GARLAND
+</td>
+<td>
+48
+</td>
+<td>
+2011-01-20 10:18:00
+</td>
+<td>
+3.37
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+161.76
+</td>
+</tr>
+<tr>
+<th>
+19493
+</th>
+<td>
+541992
+</td>
+<td>
+85099B
+</td>
+<td>
+JUMBO BAG RED RETROSPOT
+</td>
+<td>
+100
+</td>
+<td>
+2011-01-25 09:31:00
+</td>
+<td>
+1.65
+</td>
+<td>
+16029.0
+</td>
+<td>
+United Kingdom
+</td>
+<td>
+165.00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code># deleting more cancelled orders
+df.drop(index=[35090,35080,35074,83508,35077,83505,35075,35084,35076,83502,35089,35071,35072,35032,35088,35026,83471,35082,35079,35073,83469,35087], inplace=True)
+</code></pre>
+<pre class="python"><code>df.describe()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Quantity
+</th>
+<th>
+UnitPrice
+</th>
+<th>
+CustomerID
+</th>
+<th>
+Totalsum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+214484.000000
+</td>
+<td>
+214484.000000
+</td>
+<td>
+214484.000000
+</td>
+<td>
+214484.000000
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+10.504928
+</td>
+<td>
+3.048726
+</td>
+<td>
+15528.163290
+</td>
+<td>
+17.793502
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+40.050825
+</td>
+<td>
+14.166812
+</td>
+<td>
+1592.820059
+</td>
+<td>
+62.596212
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+-1350.000000
+</td>
+<td>
+0.001000
+</td>
+<td>
+12747.000000
+</td>
+<td>
+-1867.860000
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+2.000000
+</td>
+<td>
+1.250000
+</td>
+<td>
+14159.000000
+</td>
+<td>
+3.750000
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+4.000000
+</td>
+<td>
+1.950000
+</td>
+<td>
+15493.000000
+</td>
+<td>
+9.950000
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+12.000000
+</td>
+<td>
+3.750000
+</td>
+<td>
+16923.000000
+</td>
+<td>
+17.700000
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+4800.000000
+</td>
+<td>
+3155.950000
+</td>
+<td>
+18287.000000
+</td>
+<td>
+6539.400000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="rfm-analysis" class="section level1">
+<h1>RFM analysis</h1>
+<p>The RFM Model of customer value uses proven marketing principles to help businesses differentiate between marketing to existing and helps them create relevantly and personalized messaging by understanding user behavior. The model allows the business to segment its users based on three criteria based on an existing customer’s transaction history, namely:</p>
+<ol style="list-style-type: decimal">
+<li>The recency of Customer’s Last purchase</li>
+<li>Frequency of purchases</li>
+<li>Total amount spent, which is referred to as monetary</li>
+</ol>
+<p>The RFM model, when used in conjunction with traditional models of segmentation, can help businesses visualize existing customers differently.</p>
+<p>The customer records are grouped by recency of their purchase, the frequency by their quantity, and the monetary value of the purchases.</p>
+<div id="recency-score" class="section level2">
+<h2>Recency Score</h2>
+<p>To calculate recency, a snapshot date is created. This date is one day after the most recent invoice date of the data set. The date difference is used to show the recency of the purchase.</p>
+<pre class="python"><code># Create snapshot date
+snapshot_date = df[&#39;InvoiceDate&#39;].max() + timedelta(days=1)  # set current date as most recent date plus one day
+rec_df = snapshot_date-df.groupby(&quot;CustomerID&quot;).agg({&quot;InvoiceDate&quot;:max}) 
+#group customers by their most recent purchase
+
+rec_df.rename(columns={&quot;InvoiceDate&quot;: &quot;Recency&quot;}, inplace=True)#rename column
+rec_df=rec_df[&quot;Recency&quot;].apply(lambda x: x.days) #extracting number of days only
+rec_df.head(5)</code></pre>
+<pre><code>
+    CustomerID
+    12747.0      2
+    12748.0      1
+    12749.0      4
+    12820.0      3
+    12823.0    255
+    Name: Recency, dtype: int64
+</code></pre>
+</div>
+<div id="frequency-score" class="section level2">
+<h2>Frequency Score</h2>
+<p>To calculate the frequency, the number of invoices per customer is calculated.</p>
+<pre class="python"><code>freq_df = df.groupby(&quot;CustomerID&quot;).agg({&#39;InvoiceNo&#39;: &#39;count&#39;})
+freq_df.rename(columns={&quot;InvoiceNo&quot;: &quot;Frequency&quot;}, inplace=True)#rename column
+freq_df.head()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Frequency
+</th>
+</tr>
+<tr>
+<th>
+CustomerID
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+12747.0
+</th>
+<td>
+50
+</td>
+</tr>
+<tr>
+<th>
+12748.0
+</th>
+<td>
+2729
+</td>
+</tr>
+<tr>
+<th>
+12749.0
+</th>
+<td>
+114
+</td>
+</tr>
+<tr>
+<th>
+12820.0
+</th>
+<td>
+45
+</td>
+</tr>
+<tr>
+<th>
+12823.0
+</th>
+<td>
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="monetary-score" class="section level2">
+<h2>Monetary Score</h2>
+<p>To calculated the monetary score, the total value of the purchases made by each customer is calculated.</p>
+<pre class="python"><code>mon_df = df.groupby(&quot;CustomerID&quot;).agg({&#39;Totalsum&#39;: &#39;sum&#39;})
+mon_df.rename(columns={&quot;Totalsum&quot;: &quot;Monetary&quot;}, inplace=True)#rename column
+mon_df.head(5)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Monetary
+</th>
+</tr>
+<tr>
+<th>
+CustomerID
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+12747.0
+</th>
+<td>
+2040.43
+</td>
+</tr>
+<tr>
+<th>
+12748.0
+</th>
+<td>
+15727.57
+</td>
+</tr>
+<tr>
+<th>
+12749.0
+</th>
+<td>
+2194.75
+</td>
+</tr>
+<tr>
+<th>
+12820.0
+</th>
+<td>
+724.57
+</td>
+</tr>
+<tr>
+<th>
+12823.0
+</th>
+<td>
+994.50
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="rfm-score" class="section level2">
+<h2>RFM Score</h2>
+<pre class="python"><code>rfm=pd.concat([rec_df,freq_df, mon_df], axis=1) #combining all scores
+rfm.head(7)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Recency
+</th>
+<th>
+Frequency
+</th>
+<th>
+Monetary
+</th>
+</tr>
+<tr>
+<th>
+CustomerID
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+12747.0
+</th>
+<td>
+2
+</td>
+<td>
+50
+</td>
+<td>
+2040.43
+</td>
+</tr>
+<tr>
+<th>
+12748.0
+</th>
+<td>
+1
+</td>
+<td>
+2729
+</td>
+<td>
+15727.57
+</td>
+</tr>
+<tr>
+<th>
+12749.0
+</th>
+<td>
+4
+</td>
+<td>
+114
+</td>
+<td>
+2194.75
+</td>
+</tr>
+<tr>
+<th>
+12820.0
+</th>
+<td>
+3
+</td>
+<td>
+45
+</td>
+<td>
+724.57
+</td>
+</tr>
+<tr>
+<th>
+12823.0
+</th>
+<td>
+255
+</td>
+<td>
+3
+</td>
+<td>
+994.50
+</td>
+</tr>
+<tr>
+<th>
+12824.0
+</th>
+<td>
+60
+</td>
+<td>
+25
+</td>
+<td>
+397.12
+</td>
+</tr>
+<tr>
+<th>
+12826.0
+</th>
+<td>
+3
+</td>
+<td>
+62
+</td>
+<td>
+964.20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><b>Creating Rank scores </b></p>
+<p>The customers are ranked in each criteria. Each criteria is broken into 5 buckets. Scores are assigned based on the relative percentile to the RFM features. This approach of scaling customers from 1-5 will result in, at the most, 125 different RFM scores (5x5x5), ranging from 111(lowest) to 555(highest)</p>
+<pre class="python"><code># --Calculate R and F groups--
+
+# Create labels for Recency and Frequency and MonetaryValue
+r_labels = range(5, 0, -1) #[4,3,2,1] 
+f_labels = range(1, 6)   #[1,2,3,4]
+m_labels = range(1, 6)
+
+# Assign these labels to 4 equal percentile groups 
+r_groups = pd.qcut(rfm[&#39;Recency&#39;], q=5, labels=r_labels)
+# Assign these labels to 4 equal percentile groups 
+f_groups = pd.qcut(rfm[&#39;Frequency&#39;], q=5, labels=f_labels)
+
+# Assign these labels to three equal percentile groups 
+m_groups = pd.qcut(rfm[&#39;Monetary&#39;], q=5, labels=m_labels)
+
+# Create new columns R_score, M_score and F_score  
+rfm = rfm.assign(R_score = r_groups.values, F_score = f_groups.values, M_score = m_groups.values)
+rfm.head()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Recency
+</th>
+<th>
+Frequency
+</th>
+<th>
+Monetary
+</th>
+<th>
+R_score
+</th>
+<th>
+F_score
+</th>
+<th>
+M_score
+</th>
+</tr>
+<tr>
+<th>
+CustomerID
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+12747.0
+</th>
+<td>
+2
+</td>
+<td>
+50
+</td>
+<td>
+2040.43
+</td>
+<td>
+5
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<th>
+12748.0
+</th>
+<td>
+1
+</td>
+<td>
+2729
+</td>
+<td>
+15727.57
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<th>
+12749.0
+</th>
+<td>
+4
+</td>
+<td>
+114
+</td>
+<td>
+2194.75
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<th>
+12820.0
+</th>
+<td>
+3
+</td>
+<td>
+45
+</td>
+<td>
+724.57
+</td>
+<td>
+5
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+</tr>
+<tr>
+<th>
+12823.0
+</th>
+<td>
+255
+</td>
+<td>
+3
+</td>
+<td>
+994.50
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+4
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="rfm-score-1" class="section level2">
+<h2>RFM Score</h2>
+<p>There are many ways to calculate the aggregate RFM score. Most companies allocate different weights to each criteria. For example, a customer of R_score =1, F_score =2 , M_score =3 could either have a RFM score of:</p>
+<ol style="list-style-type: decimal">
+<li>123 if weights 100,10,1 were allocated to each criteria.</li>
+<li>1+2+3 = 6 could be obtained</li>
+<li>(1+2+3)/3=2 could also be calculated.</li>
+</ol>
+<p>Depending on the nature of the businesses, one might increase or decrease the relative importance of each RFM variable to arrive at the final score. In this project,the RFM score is simply the average of the individual R, F, and M scores.</p>
+<pre class="python"><code>#create avegare rfm score column
+rfm[&#39;Ave_Score&#39;] = rfm[[&#39;R_score&#39;,&#39;F_score&#39;,&#39;M_score&#39;]].mean(axis=1)
+#create rfm score by combining all scores
+rfm[&#39;RFM score&#39;] = rfm.R_score.astype(str) \
+                            + rfm.F_score.astype(str) \
+                            + rfm.M_score.astype(str)
+rfm.head()
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Recency
+</th>
+<th>
+Frequency
+</th>
+<th>
+Monetary
+</th>
+<th>
+R_score
+</th>
+<th>
+F_score
+</th>
+<th>
+M_score
+</th>
+<th>
+Ave_RFM_Score
+</th>
+<th>
+RFM score
+</th>
+<th>
+Ave_Score
+</th>
+</tr>
+<tr>
+<th>
+CustomerID
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+12747.0
+</th>
+<td>
+2
+</td>
+<td>
+50
+</td>
+<td>
+2040.43
+</td>
+<td>
+5
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+4.666667
+</td>
+<td>
+545
+</td>
+<td>
+4.666667
+</td>
+</tr>
+<tr>
+<th>
+12748.0
+</th>
+<td>
+1
+</td>
+<td>
+2729
+</td>
+<td>
+15727.57
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+<td>
+5.000000
+</td>
+<td>
+555
+</td>
+<td>
+5.000000
+</td>
+</tr>
+<tr>
+<th>
+12749.0
+</th>
+<td>
+4
+</td>
+<td>
+114
+</td>
+<td>
+2194.75
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+<td>
+5.000000
+</td>
+<td>
+555
+</td>
+<td>
+5.000000
+</td>
+</tr>
+<tr>
+<th>
+12820.0
+</th>
+<td>
+3
+</td>
+<td>
+45
+</td>
+<td>
+724.57
+</td>
+<td>
+5
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+4.000000
+</td>
+<td>
+534
+</td>
+<td>
+4.000000
+</td>
+</tr>
+<tr>
+<th>
+12823.0
+</th>
+<td>
+255
+</td>
+<td>
+3
+</td>
+<td>
+994.50
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+4
+</td>
+<td>
+2.000000
+</td>
+<td>
+114
+</td>
+<td>
+2.000000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="customer-classification" class="section level1">
+<h1>Customer Classification</h1>
+<p>There are many ways we can use the RFM scores to create customer segments. The method used depends on the objective of the analysis. One way of using classifying customers is creating segments based on the average RFM score. Here, we take inspiration from some common segment names.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Customer Segment</th>
+<th>Average Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Can’t lose them</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Champions</td>
+<td>4-5</td>
+</tr>
+<tr class="odd">
+<td>Loyal</td>
+<td>3-4</td>
+</tr>
+<tr class="even">
+<td>Needs Attention</td>
+<td>2-3</td>
+</tr>
+<tr class="odd">
+<td>Require Activation</td>
+<td>0-2</td>
+</tr>
+</tbody>
+</table>
+<pre class="python"><code># Define rfm_level function
+def rfm_level(df):
+    if df[&#39;Ave_Score&#39;] &gt;= 5:
+        return &#39;Can\&#39;t Loose Them&#39;
+    elif ((df[&#39;Ave_Score&#39;] &gt;= 4) and (df[&#39;Ave_Score&#39;] &lt; 5)):
+        return &#39;Champions&#39;
+    elif ((df[&#39;Ave_Score&#39;] &gt;= 3) and (df[&#39;Ave_Score&#39;] &lt; 4)):
+        return &#39;Loyal&#39;
+    elif ((df[&#39;Ave_Score&#39;] &gt;= 2) and (df[&#39;Ave_Score&#39;] &lt; 3)):
+        return &#39;Needs Attention&#39;
+    else:
+        return &#39;Require Activation&#39;
+    
+# Create a new variable RFM_Level by applying function to table
+
+rfm[&#39;RFM_Level&#39;] = rfm.apply(rfm_level, axis=1)
+# Print the header with top 5 rows to the console
+rfm.head()</code></pre>
+<p><b> Calculating the size of each segment</b></p>
+<pre class="python"><code># Calculate average values for each RFM_Level, and return a size of each segment 
+rfm_level_agg = rfm.groupby(&#39;RFM_Level&#39;).agg({
+    &#39;Recency&#39;: &#39;mean&#39;,
+    &#39;Frequency&#39;: &#39;mean&#39;,
+    &#39;Monetary&#39;: [&#39;mean&#39;, &#39;count&#39;]
+}).round(1)
+
+
+rfm_level_agg</code></pre>
+<pre class="python"><code>#visualizing customer segments based on average scores
+rfm_level_agg[&#39;Count&#39;].plot(kind=&quot;barh&quot;, use_index=True, color=[&#39;red&#39;, &#39;orange&#39;, &#39;yellow&#39;, &#39;green&#39;, &#39;gold&#39;])
+
+plt.title(&quot;Customer Segments based on average scores&quot;)
+plt.xlabel(&quot;Segments&quot;)
+plt.ylabel(&quot;Number of customers&quot;)</code></pre>
+<p><img src="images/p06_01.png" /></p>
+</div>
+<div id="final-conclusion" class="section level1">
+<h1>Final Conclusion</h1>
+<p>RFM is relatively simple technique that could drastically improve your marketing performance. RFM analysis helps organizations find answers to the following questions:</p>
+<ul>
+<li>Who are your best customers?</li>
+<li>Which of your customers could contribute to your churn rate?</li>
+<li>Who has the potential to become valuable customers?</li>
+<li>Which of your customers can be retained?</li>
+<li>Which of your customers are most likely to respond to engagement campaigns?</li>
+</ul>
+</div>
+<div id="reference" class="section level1">
+<h1>Reference</h1>
+<ol style="list-style-type: decimal">
+<li><p>Aditya,A. (2020, March 20). Predictive Segments using RFM Analysis: An In-Depth Guide. Retrieved July 03, 2020, from <a href="https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/" class="uri">https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/</a></p></li>
+<li><p>Yuan, Y. (2019, August 19). Recency, Frequency, Monetary Model with Python - and how Sephora uses it to optimize their Google… Retrieved July 03, 2020, from <a href="https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17" class="uri">https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17</a></p></li>
+</ol>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Decision Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Others</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Decision Analysis</h1>
+
+</div>
+
+
+<p>In this project, we use Monte Carlo simulation and optimization tools to determine the optimal expected profits under different scenarios. In the <a href="https://analytics-at-sauder.github.io/Website/inv_mangt.html">inventory management project page</a>, we looked at two inventory management policies: continuous review policy and periodic review policy. This project compares the optimal expected profits across these two policies.</p>
+<p>All of the graphs and code can be found in the <a href="https://github.com/Master-of-Business-Analytics/Code_repository/tree/master/Inventory%20managment">MBAN GitHub repository</a>, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the executable environment Syzygy.</p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_12_Decision_Analysis&urlpath=tree%2FProject_12_Decision_Analysis%2Fdecision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="business-background" class="section level2">
+<h2>Business Background</h2>
+<hr />
+<p>In modern business environment, the company needs more significant efforts to reduce the operating cost and also increase customer satisfaction. Inventory has significant role to satisfy the customer demand hence, it becomes important asset for any organization.Therefore, it should be managed effectively and efficiently to minimize total cost and to satisfy the customer’s requirement. In any real condition, inventory management faces barriers in the form of a trade-off between maximizing profits and maximizing service level. Therefore, decisions involving inventory management can have an impact on the profitability of a business. By analyzing the expected profits under different scenarios, some certainty can be introduced into the decision making process.</p>
+<pre class="python"><code>#load packages 
+
+import numpy as np
+import pandas as pd
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_style(&#39;whitegrid&#39;)
+import operator
+import warnings
+warnings.simplefilter(action=&#39;ignore&#39;, category=FutureWarning)
+from mpl_toolkits.mplot3d import Axes3D
+
+</code></pre>
+</div>
+<div id="data-entry-and-manipulation" class="section level2">
+<h2>Data Entry and Manipulation</h2>
+<div id="operational-and-demand-data" class="section level3">
+<h3>Operational and Demand data</h3>
+<p>For this project, we start with one product. To mathematically model customers demand, the annual demand of the product is captured. The demand dataset, demand is the daily demand for 366 days.The summary dataset, Summary provides information on the product operations and associated costs such as:</p>
+<ul>
+<li>Purchase Cost</li>
+<li>Supplier lead time</li>
+<li>Selling price</li>
+<li>Cost of ordering (Co): Administrative cost of ordering product from manufacturer</li>
+<li>Holding cost (Ch): Warehouse cost for each product</li>
+<li>Starting stock</li>
+<li>Product Size</li>
+</ul>
+<pre class="python"><code>#Read in the product demand information
+df = pd.read_excel(&#39;XYZ-1.xlsx&#39;, &#39;Data&#39;)
+demand = df[6:]
+print(demand.head())</code></pre>
+<pre><code>       Product    1
+    6        0   90
+    7        1   94
+    8        2    0
+    9        3  110
+    10       4  106
+</code></pre>
+<pre class="python"><code>#Visualize distribution of demand
+demand[1].hist()
+plt.title(&#39;Histogram of past product sales &#39;)
+plt.show()</code></pre>
+<p><img src="dec_01.png" /></p>
+<pre class="python"><code>demand[1].std()</code></pre>
+<pre><code>
+
+    55.07999993367887
+</code></pre>
+<pre class="python"><code>#Product information
+summary = pd.read_csv(&#39;summary_stats.csv&#39;)
+summary.head()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Purchase Cost
+</th>
+<th>
+Lead Time
+</th>
+<th>
+Size
+</th>
+<th>
+Selling Price
+</th>
+<th>
+Starting Stock
+</th>
+<th>
+Co
+</th>
+<th>
+Ch
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+12
+</td>
+<td>
+9
+</td>
+<td>
+0.57
+</td>
+<td>
+16.1
+</td>
+<td>
+2750
+</td>
+<td>
+1000
+</td>
+<td>
+20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Demand statistics such as, Mean, Standard Deviation, Probability and demand during lead time is added to the summary dataset. The demand mean and standard deviation is calculated applying the mean and std function to the demand dataset. The demand probability is calculated by dividing the number of orders(non-zero) last year by the number of working days. The demand during lead-time (Demand_lead) is calculated by multiplying the mean demand, probability of sales and the supplier lead time.</p>
+<pre class="python"><code>#use the mean_log log demand to avoid negative demand 
+summary[&#39;Mean_log&#39;]= np.mean([np.log(j) for j in demand[demand[1] &gt; 0][1]])
+summary[&#39;Mean&#39;]=demand[1].mean()
+
+#standard deviation of log demand
+summary[&#39;Std_log&#39;]= np.std([np.log(j) for j in demand[demand[1] &gt; 0][1]])
+
+#Calculate probability of sales 
+#count non-zero days
+non_zero = demand[1].astype(bool).sum(axis=0)
+#percentage of non-zero sales
+prob = non_zero /len(demand[1])
+summary[&#39;Probability&#39;]= prob
+
+#Demand during lead time
+summary[&#39;leadtime_demand&#39;] = prob*summary[&#39;Mean&#39;]*summary[&#39;Lead Time&#39;]
+
+summary</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Purchase Cost
+</th>
+<th>
+Lead Time
+</th>
+<th>
+Size
+</th>
+<th>
+Selling Price
+</th>
+<th>
+Starting Stock
+</th>
+<th>
+Co
+</th>
+<th>
+Ch
+</th>
+<th>
+Mean_log
+</th>
+<th>
+Std_log
+</th>
+<th>
+Probability
+</th>
+<th>
+Mean
+</th>
+<th>
+leadtime_demand
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+12
+</td>
+<td>
+9
+</td>
+<td>
+0.57
+</td>
+<td>
+16.1
+</td>
+<td>
+2750
+</td>
+<td>
+1000
+</td>
+<td>
+20
+</td>
+<td>
+4.559988
+</td>
+<td>
+0.434902
+</td>
+<td>
+0.756831
+</td>
+<td>
+78.333333
+</td>
+<td>
+533.565574
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code># Assigning Variables 
+unit_cost = summary[&#39;Purchase Cost&#39;].item()
+lead_time = summary[&#39;Lead Time&#39;].item()
+size = summary[&#39;Size&#39;].item()
+selling_price = summary[&#39;Selling Price&#39;].item()
+holding_cost = summary[&#39;Ch&#39;].item()
+order_cost = summary[&#39;Co&#39;].item()
+probability = summary[&#39;Probability&#39;].item()
+starting_stock = summary[&#39;Starting Stock&#39;].item()
+demand_lead = summary[&#39;leadtime_demand&#39;].item()
+mean = summary[&#39;Mean&#39;].item()
+mean_log = summary[&#39;Mean_log&#39;].item()
+sd_log = summary[&#39;Std_log&#39;].item()</code></pre>
+</div>
+</div>
+<div id="monte-carlo-simulation" class="section level2">
+<h2>Monte Carlo Simulation</h2>
+<p>Monte Carlo simulations are used to model the probability of different outcomes in a process that cannot easily be predicted due to the intervention of random variables. We use this technique to simulate the inventory management policies and resulting costs .</p>
+<div id="daily-demand-simulation" class="section level3">
+<h3>Daily Demand Simulation</h3>
+<p>The daily demand is simulated taking into account the sale probability 0.76, which means the product is sold 76 percent of the time.The function below simulates the possibility that there is a sale using the product’s probability of sale. And if there is a sale, then the demand follows a normal distribution.</p>
+<pre class="python"><code># Creating a function that allocates the demand  if there is a purchase
+# This function is included in the montecarlo simulation
+
+def daily_demand(mean_log, sd_log, probability):
+    #chose a random number between 1 and 0
+    random_num = np.random.uniform(0, 1) 
+    #if number is more than probability then there is no sale
+    if random_num &gt; probability:                      
+        return 0
+    else:
+        #demand follows a log-normal distribution using mean and sd of the previous year&#39;s demand.
+        return np.exp(np.random.normal(mean_log, sd_log))
+    </code></pre>
+</div>
+</div>
+<div id="simulating-the-inventory-status" class="section level2">
+<h2>Simulating the Inventory status</h2>
+<p>In the simulation, the algorithm iterates through each day trying to capture the inventory level which changes based on the daily demand for the product.</p>
+<div id="periodic-review" class="section level3">
+<h3>Periodic Review</h3>
+<p>We assume that the review period is 30 days and the maximum stock that can be held in the warehouse is M = 2170. The logic of the algorithm is as follows:</p>
+<ul>
+<li><p>If the sales can be completely serviced by the current inventory level — the inventory level is reduced by the sales amount and number of units sold on that day increments.</p></li>
+<li><p>If the demand cannot be serviced completely by the inventory level — the inventory on hand would be the number of units sold on that day</p></li>
+</ul>
+<p>In order to model the Periodic Review policy, the algorithm keeps track of the current day in the year. If the day of the year is equal to the review period, then the order is placed to replenish the stock to an order up-to quantity M. This value is the decision variable and is passed as an input to the algorithm. After the lead time has passed for that particular product, the inventory is updated by the order quantity that was placed. This is done for a duration of 365 days.</p>
+<pre class="python"><code># Define Monte Carlo Simulation function to imitate a periodic review model 
+def pr_monte_carlo(M,summary,review_period=30):
+    probability = summary[&#39;Probability&#39;].item()
+    mean=summary[&#39;Mean_log&#39;].item()
+    sd = summary[&#39;Std_log&#39;].item()
+    inventory = M
+    q = 0
+    stock_out = 0
+    order_placed = False
+    # dictionary to store all the information
+    data = {&#39;inv_level&#39;: [], &#39;daily_demand&#39;: [], &#39;units_sold&#39;: [], &#39;units_lost&#39;: [], &#39;orders&#39;: []}
+
+    for day in range(1, 365):
+        day_demand = daily_demand(mean, sd, probability)
+        day_demand = round(day_demand,0)
+        
+        #used to determine if there is a sale and what the demand would be
+        data[&#39;daily_demand&#39;].append(day_demand)
+        if day % review_period == 0: 
+            #check if the day to place order
+            q = M - inventory # quantity to be ordered
+            data[&#39;orders&#39;].append(round(q,0))
+            # update inventory when product has been received from manufacturer
+            inventory += q
+            
+        inv_gap = inventory - day_demand
+        
+        if inv_gap &gt;= 0: #check if inventory is enough to satisfy demand
+            data[&#39;units_sold&#39;].append(day_demand)
+            inventory -= day_demand #reduce inventory by daily demand
+        else:
+            data[&#39;units_sold&#39;].append(round(inventory,0))
+            lost_sales = day_demand - inventory
+            data[&#39;units_lost&#39;].append(round(lost_sales,0))
+            inventory = 0
+            stock_out += 1
+
+        data[&#39;inv_level&#39;].append(round(inventory,0))
+
+    return data</code></pre>
+<p><b> To simplify the problem, we look at only one simulation</b></p>
+<pre class="python"><code>#Assuming order up-to quantity M and review period is 30 days
+df1 = pr_monte_carlo(2170,summary,review_period=30)
+#plot inventory level
+plt.figure(figsize=(25,8))
+plt.plot(df1[&#39;inv_level&#39;])
+plt.xlabel(&quot;Days&quot;)
+plt.ylabel(&quot;Inventory Status&quot;)
+plt.axhline(2170, linewidth=1, color=&quot;red&quot;, linestyle=&quot;:&quot;)
+plt.title(&#39;Periodic Review: Inventory level for one simulation &#39;)
+plt.show()</code></pre>
+<p><img src="dec_02.png" /></p>
+</div>
+<div id="operational-cost" class="section level3">
+<h3>Operational Cost</h3>
+<p>To determine the profit the store would have made for that year, all the units that were sold are multiplied by the products selling price to calculate revenue. The costs come from three components:</p>
+<ol style="list-style-type: decimal">
+<li>Product costs, Product costs are calculated by multiplying the unit costs of each product to the aggregation of the units ordered.</li>
+<li>Ordering costs The ordering costs are calculated by multiplying the number of times in that year an order was placed to the individual cost of ordering for that product. The inventory levels for each day of the year were aggregated to indicate how much stock was held throughout the duration of the year.</li>
+<li>Holding costs. The holdings costs were then calculated by multiplying the amount of stock held with the unit size of the product and the daily cost of holding a unit.</li>
+</ol>
+<pre class="python"><code>#function to calculate profit
+def calculate_profit(data,days,summary):
+    unit_cost =summary[&#39;Purchase Cost&#39;].item()
+    holding_cost = summary[&#39;Ch&#39;].item()
+    order_cost = summary[&#39;Co&#39;].item()
+    selling_price= summary[&#39;Selling Price&#39;].item()
+    revenue = sum(data[&#39;units_sold&#39;]) * selling_price
+    Co = len(data[&#39;orders&#39;]) * order_cost
+    Ch = sum(data[&#39;inv_level&#39;]) * holding_cost * size * (1 / days)
+    cost = sum(data[&#39;orders&#39;]) * unit_cost
+    #profit calculation
+    profit = revenue - cost - Co - Ch
+
+    return profit</code></pre>
+</div>
+<div id="expected-profit-calculation" class="section level3">
+<h3>Expected Profit Calculation</h3>
+<p>This simulation was carried out 100 times to give multiple realizations of profit and proportions of lost orders for each time. These results were used to plot a histogram and calculate the mean and standard deviation of profit and the proportion of lost orders for that particular order up-to point (M).</p>
+<pre class="python"><code>#function to provide expected profits and number of orders lost for each simulation 
+
+def mc_simulation( M, num_simulations,summary,days=365):
+    
+    profit_list = []
+    orders_lost_list = []
+    for sim in range(num_simulations):
+        review_period = 30
+        data = pr_monte_carlo(M,summary)
+        # Calculating the profit
+        profit = calculate_profit(data,days,summary)
+        profit_list.append(round(profit,0))
+        # Calculating the orders lost
+        total_demand = sum(data[&#39;daily_demand&#39;])
+        unsold_orders = sum(data[&#39;units_lost&#39;])
+        orders_lost_list.append(unsold_orders/total_demand)
+
+    return profit_list, orders_lost_list
+
+    </code></pre>
+<p><b> Expected profit and Average percentage of orders lost</b></p>
+<pre class="python"><code>#Using a 100 simulations to obtain the expected profit 
+p_list, o_list = mc_simulation(2170,100,summary)        
+#mean profit and percentage of orders lost
+print([np.mean(p_list),np.mean(o_list)])</code></pre>
+<pre><code>    [87361.3, 0.10891022806232062]
+</code></pre>
+<pre class="python"><code>sns.distplot(
+    p_list,
+    kde=False,
+    color=&#39;red&#39;
+)
+plt.xlabel(&quot;Profits&quot;, labelpad=15)
+plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
+plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
+plt.show()</code></pre>
+<p><img src="dec_03.png" /></p>
+<pre class="python"><code>sns.distplot(
+    o_list,
+    kde=False
+)
+
+plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
+plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
+plt.title(&quot;Mean percentage of orders lost &quot;, y=1.02, fontsize=18)
+plt.show()</code></pre>
+<p><img src="dec_04.png" /></p>
+</div>
+</div>
+<div id="profit-optimization-in-periodic-review-model" class="section level2">
+<h2>Profit Optimization in Periodic Review Model</h2>
+<p>The model provides answers to the following question:</p>
+<ol style="list-style-type: decimal">
+<li>What is the expected profits and whats expected percentage of lost sales?</li>
+<li>What should be the Warehouse Capacity to ensure the highest expected profit?</li>
+</ol>
+<p>The second question can be answered by repeating this exercise for a range of values of M to determine the value that gives us the highest expected profit. In the the model below, we simulated the expected profits for warehouse capacity range 1800 to 4000.</p>
+<pre class="python"><code>#Function to vary M to calculate mean profit and percentage of orders lost
+def periodic_review(low, high,summary,step=100):
+    m_range = [i for i in range(low, high, step)]
+    review_dict = {}
+
+    for M in m_range:
+        num_simulations=100
+        p_list, o_list = mc_simulation(M, num_simulations,summary,days=365)
+        review_dict[M] = (np.mean(p_list), np.std(p_list), np.mean(o_list))
+
+    return review_dict</code></pre>
+<pre class="python"><code>review = periodic_review(2000, 4000,summary,step=150)
+xx = [i for i in review.keys()]
+yy = []
+
+for val in review.values():
+    yy.append(val[0])
+plt.xlabel(&quot;Ware house capacity&quot;)
+plt.ylabel(&quot;Expected Profit&quot;)
+plt.plot(xx, yy)
+plt.show()</code></pre>
+<p><img src="dec_05.png" /></p>
+<p>This gave an optimum expected profit of $93,883 for the order up-to point of 2600.</p>
+<pre class="python"><code># creating a dataframe with all the results
+idx = [&#39;Order-point M&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
+
+prod_review_1 = max(review.items(), key=operator.itemgetter(1))
+
+df_product_review = pd.DataFrame(
+    {&#39;Product&#39;: [prod_review_1[0], prod_review_1[1][0], prod_review_1[1][1], prod_review_1[1][2]]})
+
+df_product_review = df_product_review.set_index(pd.Index(idx))
+df_product_review</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Product
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+Order-point M
+</th>
+<td>
+2600.000000
+</td>
+</tr>
+<tr>
+<th>
+Expected Profit
+</th>
+<td>
+93883.490000
+</td>
+</tr>
+<tr>
+<th>
+Profit Standard Deviation
+</th>
+<td>
+4781.068773
+</td>
+</tr>
+<tr>
+<th>
+Proportion of Lost Orders
+</th>
+<td>
+0.024064
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="continuous-review-model" class="section level3">
+<h3>Continuous Review Model</h3>
+<p>In the Continuous review model, the same quantity of items are ordered in each order. The order frequency varies in continuous systems because the inventory is monitored and orders are placed when items reach a particular level. In this model, the inventory levels are checked regularly and determine the reorder point (r). The distributor can also specify how much they want to order each time (i.e. order quantity (q)). The logic in the Monte Carlo simulation is updated for the Continuous Review policy.</p>
+<pre class="python"><code>
+def cc_monte_carlo(q, r,summary):
+
+    mean = summary[&#39;Mean_log&#39;].item() # log mean of past sales
+    sd = summary[&#39;Std_log&#39;].item()
+    inventory = summary[&#39;Starting Stock&#39;].item()
+    lead_time = summary[&#39;Lead Time&#39;].item()
+    probability = summary[&#39;Probability&#39;].item()
+
+
+    order_placed = False
+    order_time = 0
+    stock_out = 0
+    # dictionary to store all the information
+    data = {&#39;inv_level&#39;: [], &#39;daily_demand&#39;: [], &#39;units_sold&#39;: [], &#39;units_lost&#39;: [], &#39;orders&#39;: []}
+
+    
+    for day in range(1, 365):
+        day_demand = daily_demand(mean, sd, probability)
+        day_demand = round(day_demand,0)
+        
+        #used to determine if there is a sale and what the demand would be
+        data[&#39;daily_demand&#39;].append(day_demand)
+        if inventory &lt;= r and not order_placed:
+            # Time to place an order
+            order_placed = True
+            order_time = day
+
+        if order_placed and (day-order_time) == lead_time:
+            #if order has been placed and product has arrived
+            data[&#39;orders&#39;].append(round(q,0))
+            inventory += q
+            #increase inventory with order quantity
+            order_placed = False
+            order_time = 0
+
+        
+        inv_gap = inventory - day_demand
+        
+        if inv_gap &gt;= 0: #check if inventory is enough to satisfy demand
+            data[&#39;units_sold&#39;].append(day_demand)
+            inventory -= day_demand #reduce inventory by daily demand
+        else:
+            data[&#39;units_sold&#39;].append(round(inventory,0))
+            lost_sales = day_demand - inventory
+            data[&#39;units_lost&#39;].append(round(lost_sales,0))
+            inventory = 0
+            stock_out += 1
+
+        data[&#39;inv_level&#39;].append(round(inventory,0))
+
+    return data</code></pre>
+<p>At each day the algorithm checks the inventory level and compares it with the reorder point. 1. If the inventory level is less than or equal to the reorder point, it then places an order. But this stock is realized only after the lead time for that product has passed. For example, Product 1 has a lead time of 9 days, if the order is placed on day 52, the inventory will be replenished on day 61.</p>
+<p>The algorithm then follows a similar decision logic in updating the inventory level, to the periodic review algorithm. The profit and expected lost orders calculation is similar to that of the periodic review policy.</p>
+<pre class="python"><code>demand_lead = summary[&#39;leadtime_demand&#39;].item()
+#set the reorder point as demand during leadtime and reorder quantity as 2000
+data = cc_monte_carlo(2000, demand_lead,summary)
+
+plt.figure(figsize=(25,8))
+plt.plot(data[&#39;inv_level&#39;])
+plt.xlabel(&quot;Days&quot;)
+plt.ylabel(&quot;Inventory Status&quot;)
+plt.axhline(3000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
+plt.show()</code></pre>
+<p><img src="dec_06.png" /></p>
+<pre class="python"><code>def cc_mc_simulation(q, r, num_simulations,summary,days=365):
+    profit_list = []
+    orders_lost_list = []
+    for sim in range(num_simulations):
+        data = cc_monte_carlo(q, r,summary)
+        # Calculating the profit
+        profit = calculate_profit(data,days,summary)
+        profit_list.append(profit)
+        # Calculating the orders lost
+        total_demand = sum(data[&#39;daily_demand&#39;])
+        unsold_orders = sum(data[&#39;units_lost&#39;])
+        orders_lost_list.append(unsold_orders/total_demand)
+
+    return profit_list, orders_lost_list</code></pre>
+<p><b>Expected profit and Average percentage of orders lost</b></p>
+<pre class="python"><code>p_list2, o_list2 = cc_mc_simulation(2000, demand_lead, 100,summary)
+sns.distplot(
+    p_list2,
+    kde=False,
+    color=&#39;red&#39;
+)
+plt.xlabel(&quot;Profits&quot;, labelpad=15)
+plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
+plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
+plt.show()</code></pre>
+<p><img src="dec_07.png" /></p>
+<pre class="python"><code>sns.distplot(
+    o_list2,
+    kde=False
+)
+
+plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
+plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
+plt.title(&quot;Orders Lost &quot;, y=1.02, fontsize=18)
+plt.show()</code></pre>
+<p><img src="dec_08.png" /></p>
+</div>
+</div>
+<div id="profit-optimization-in-continuous-review-model" class="section level2">
+<h2>Profit Optimization in Continuous Review Model</h2>
+<p>By performing a grid search between a range of values for the reorder value and order quantity points, a combination that optimizes the expected profit can be worked out. The model below performs simulations for order quantities from 1000 to 3000 and the re-order point between 500 and 1100. The plot seems to display a concave function signifying a maximum point for profit.</p>
+<pre class="python"><code>def continous_review(q_guess, r_guess,summary,days):
+    q_low = q_guess - 1000 #lower limit of order quantity
+    q_high = q_guess + 1000 #upper limit of order quantity
+    q_range = [i for i in range(int(q_low), int(q_high), 50)]
+
+    r_low = r_guess - 300 #lower limit of re-order point 
+    r_high = r_guess + 300 #upper limit of re-order point
+    r_range = [i for i in range(int(r_low), int(r_high), 50)]
+
+    review_dict = {}
+
+    for q in q_range:
+        for r in r_range:
+            p_list, o_list = cc_mc_simulation(q, r,100,summary,days)
+            review_dict[(q, r)] = (
+                np.mean(p_list), np.std(p_list), np.mean(o_list))
+
+    return review_dict
+
+#function that returns dictionary with expected profits for each pair of values</code></pre>
+<pre class="python"><code>cc_review = continous_review(2000, demand_lead,summary,days=365)</code></pre>
+<pre class="python"><code>#3D representation of the simulation
+
+fig = plt.figure(figsize=(12,8))
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+
+for key, val in cc_review.items():
+    ax.scatter(key[0], key[1], val[0], marker = &#39;o&#39;)
+
+ax.set_xlabel(&#39;Order Quantity&#39;)
+ax.set_ylabel(&#39;Reorder Point&#39;)
+ax.set_zlabel(&#39;Profit&#39;)
+
+plt.show()</code></pre>
+<p><img src="dec_09.png" /></p>
+<p>Based on the simulations, a maximum profit of $145,331 for the order quantity of 2100 and the re-order point of 950 was derived.Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits and the proportion of orders lost over the period of the year for each of the products.</p>
+<pre class="python"><code>idx = [&#39;Order Quantity&#39;, &#39;Reorder Point&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
+
+prod_review_2 = max(cc_review.items(), key=operator.itemgetter(1))
+
+df_cc_review =  pd.DataFrame({&#39;Product 1&#39;: [prod_review_2[0][0], prod_review_2[0][1], prod_review_2[1][0], prod_review_2[1][1], prod_review_2[1][2]]})
+df_cc_review = df_cc_review.set_index(pd.Index(idx))
+df_cc_review</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Product 1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+Order Quantity
+</th>
+<td>
+2200.000000
+</td>
+</tr>
+<tr>
+<th>
+Reorder Point
+</th>
+<td>
+733.000000
+</td>
+</tr>
+<tr>
+<th>
+Expected Profit
+</th>
+<td>
+111757.333104
+</td>
+</tr>
+<tr>
+<th>
+Profit Standard Deviation
+</th>
+<td>
+9420.395686
+</td>
+</tr>
+<tr>
+<th>
+Proportion of Lost Orders
+</th>
+<td>
+0.042677
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code>df_product_review</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Product
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+Order-point M
+</th>
+<td>
+2600.000000
+</td>
+</tr>
+<tr>
+<th>
+Expected Profit
+</th>
+<td>
+93883.490000
+</td>
+</tr>
+<tr>
+<th>
+Profit Standard Deviation
+</th>
+<td>
+4781.068773
+</td>
+</tr>
+<tr>
+<th>
+Proportion of Lost Orders
+</th>
+<td>
+0.024064
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="final-conclusion" class="section level2">
+<h2>Final Conclusion</h2>
+<p>As seen from the tables above, the Continuous Review policy outperforms the Periodic Review policy in terms of the expected profits for each product and proportion of lost orders. Using the analysis above, we can make a decision on the inventory policy parameter based on the product and operational information.</p>
+<p>The expected profits is dependent on different costs (holding, ordering and other costs) that are different for every product and organization. The right inventory management model depends on the impact of these cost and and the demand distribution of the product.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>[1] Anderson, Sweeney, Williams, Camm, Cochran, Fry, Ohlmann. An Introduction to Management Science: Quantitative approaches to Decision Making. 14th Edition, 2015. Cengage Learning. pp. 457–478.</p>
+<p>[2] Nagpurkar, M. (2020, April 2). Inventory Management using Python. Retrieved June 3, 2020, from <a href="https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314" class="uri">https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314</a></p>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

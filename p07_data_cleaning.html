@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Data Cleaning</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Others</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Data Cleaning</h1>
+
+</div>
+
+
+<p>It is always amazing to see how insights can be generated by data scientists. However, in real life, not all the collected data set can be directly analyzed by the estabilsh tools mainly because of its chaotic nature. 80% of data scientists’ time is actually spent on cleaning of the data. So it is important to understand how to handle the messy data and transfer it into organized data ready for further processing.</p>
+<p>In this project, we will be introducing some basic techniques that can be applied to the majority of dataset to change super messy data into messy data. It is highly likely that after applying all these techniques, your dataset is still not fully ready because each dataset has its unique problems. And you need to adjust it based on problems. However, know these techniques will definitely help you broaden your way of thinking so</p>
+<p>All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the syzygy.</p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_07_Data_Cleaning&urlpath=tree%2FProject_07_Data_Cleaning%2F" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="business-problem" class="section level2">
+<h2>Business Problem</h2>
+<p>Why do we really need to clean the data before applying the statistical analysis to generate business insights? In order to answer this question, we need to know there is a gap between raw data and the insights which managers want to get. Let’s use the Retail industry as an example. Some questions that are usually asked in the industry are: * Which geographic location provides the most profits per person? * What type of customers generate the revenue for us?</p>
+<p>However, the raw data set can only record each transaction for customers who enrolled within the loyalty program. And in the process of recording, we can possible miss some of the information required to solve the problem: * The transaction only record the name of the store but you have no idea where that store is. * The customers are not willing to share gender and age due to privacy issue.</p>
+<p>In such scenario, if we directly apply the statistical methods to the raw data set, we might get weird result: * The stores in happyland(possibly a community with only 1000 residents)provides the most profits per person. * The customers who are not willing to share their gender generate the most revenue.</p>
+<p>Those insights are only “right” statistically. In business context, they provides no value because we can’t have more stores in a community with only 1000 residents, and knowing customer who care about their privacy generate the most revenue doesn’t provide a good descriptive term to know who they truly are. So data cleanning is really important in closing the gap.</p>
+<p>Let’s try to understand how to do it with an example. Here we have a dataset which describes the constuction happens around neighborhoods, can you tell me which neighborhood has the most type 3 construction project?</p>
+<div id="data-set-check" class="section level3">
+<h3>Data Set Check</h3>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+import warnings
+
+# This step prevent warning from showing up for formatting purpose,but ignore this line while practicing yourself
+warnings.filterwarnings(&quot;ignore&quot;)
+
+mydata = pd.read_csv(&quot;data/Building_Permits.csv&quot;)</code></pre>
+<pre class="python"><code>mydata.head(1)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Permit Type Definition
+</th>
+<th>
+Permit Creation Date
+</th>
+<th>
+Block
+</th>
+<th>
+Lot
+</th>
+<th>
+Street Number
+</th>
+<th>
+Street Number Suffix
+</th>
+<th>
+Street Name
+</th>
+<th>
+Street Suffix
+</th>
+<th>
+…
+</th>
+<th>
+Existing Construction Type
+</th>
+<th>
+Existing Construction Type Description
+</th>
+<th>
+Proposed Construction Type
+</th>
+<th>
+Proposed Construction Type Description
+</th>
+<th>
+Site Permit
+</th>
+<th>
+Supervisor District
+</th>
+<th>
+Neighborhoods - Analysis Boundaries
+</th>
+<th>
+Zipcode
+</th>
+<th>
+Location
+</th>
+<th>
+Record ID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+05/06/2015
+</td>
+<td>
+0326
+</td>
+<td>
+023
+</td>
+<td>
+140
+</td>
+<td>
+NaN
+</td>
+<td>
+Ellis
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.785719256680785, -122.40852313194863)
+</td>
+<td>
+1380611233945
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+1 rows × 43 columns
+</p>
+</div>
+<p>Before moving into data cleaning, we need to understand what is happening in the dataset so that we can know in which way the data set is “sick:. It is obvious that there are lots of NaN values existing in the dataset. We definitely don’t want NA values here otherwise we will be having”security concerning customer" issue. That extra space and and NA value would be what we want to look at first.</p>
+<pre class="python"><code># get info about all columns
+mydata.info()
+
+# create some exploratory visualization
+mydata.isna().sum().plot(kind=&#39;bar&#39;)</code></pre>
+<p><img src="images/p07_01.png" /></p>
+</div>
+</div>
+<div id="data-cleaning" class="section level2">
+<h2>Data Cleaning</h2>
+<div id="get-rid-of-extras-spaces" class="section level3">
+<h3>Get Rid Of Extras Spaces</h3>
+<hr />
+<pre class="python"><code>string = &quot;   hello world     &quot;
+
+print(string)
+print(&quot;=&quot;*100)
+
+fresh_string = string.strip()
+print(fresh_string)</code></pre>
+<pre><code>       hello world     
+    ====================================================================================================
+    hello world
+</code></pre>
+<p>The simple example here show that when there are unneeded spaces before the string and after the string, we want to make sure we can get rid of them.</p>
+<p>Then we can apply the same methodology to the entire data set. The major reason why we want to do this is because the extra spaces will lead to both analytical and formatting issue. It is not nice to have extra sapces in front of strings. More importantly, while doing logistic regression analysis," hello" and “hello” in system means two different factors while they are the same in real life.</p>
+</div>
+<div id="replacing-all-na-values" class="section level3">
+<h3>Replacing All NA Values</h3>
+<hr />
+<p>The second step is the most obvious step that we should do. Which is to replace the NA values existing within the dataset with some value that will not influence the analysitcal result. However, there are several techniques that can be applied here:</p>
+<p>The first method is fast and easy. We can simply substitute all of them to 0 if we want to get the sum of a column(because 0 does not influence the value of the sum).</p>
+<pre class="python"><code>test_row = mydata.iloc[0:5]
+test_row.fillna(0, inplace=True)
+test_row.head(1)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Permit Type Definition
+</th>
+<th>
+Permit Creation Date
+</th>
+<th>
+Block
+</th>
+<th>
+Lot
+</th>
+<th>
+Street Number
+</th>
+<th>
+Street Number Suffix
+</th>
+<th>
+Street Name
+</th>
+<th>
+Street Suffix
+</th>
+<th>
+…
+</th>
+<th>
+Existing Construction Type
+</th>
+<th>
+Existing Construction Type Description
+</th>
+<th>
+Proposed Construction Type
+</th>
+<th>
+Proposed Construction Type Description
+</th>
+<th>
+Site Permit
+</th>
+<th>
+Supervisor District
+</th>
+<th>
+Neighborhoods - Analysis Boundaries
+</th>
+<th>
+Zipcode
+</th>
+<th>
+Location
+</th>
+<th>
+Record ID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+05/06/2015
+</td>
+<td>
+0326
+</td>
+<td>
+023
+</td>
+<td>
+140
+</td>
+<td>
+0
+</td>
+<td>
+Ellis
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+0.0
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.785719256680785, -122.40852313194863)
+</td>
+<td>
+1380611233945
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+1 rows × 43 columns
+</p>
+</div>
+<p>But this methodology is definitely wrong since the proposed construction type description can not be 0. It should be a string instead of number. So how do we want to handle this scenarios since this is a column of strings?</p>
+<p>There is simple methodology that can also be applied. We substitute it with the majority of the column. This is particularly useful when we are searching for outliers within the dataframe.</p>
+<pre class="python"><code>test_row = mydata.iloc[0:100]
+
+test_row[&#39;Proposed Construction Type Description&#39;].fillna(test_row[&#39;Proposed Construction Type Description&#39;].value_counts()[:1].index.tolist()[0],inplace=True)
+#using fillna command while inplace = true to replace the value
+#test_row[&#39;Proposed Construction Type Description&#39;].value_counts()[:1].index.tolist()[0] returns the most frequent value appear with in the column
+test_row.head(5)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Permit Type Definition
+</th>
+<th>
+Permit Creation Date
+</th>
+<th>
+Block
+</th>
+<th>
+Lot
+</th>
+<th>
+Street Number
+</th>
+<th>
+Street Number Suffix
+</th>
+<th>
+Street Name
+</th>
+<th>
+Street Suffix
+</th>
+<th>
+…
+</th>
+<th>
+Existing Construction Type
+</th>
+<th>
+Existing Construction Type Description
+</th>
+<th>
+Proposed Construction Type
+</th>
+<th>
+Proposed Construction Type Description
+</th>
+<th>
+Site Permit
+</th>
+<th>
+Supervisor District
+</th>
+<th>
+Neighborhoods - Analysis Boundaries
+</th>
+<th>
+Zipcode
+</th>
+<th>
+Location
+</th>
+<th>
+Record ID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+05/06/2015
+</td>
+<td>
+0326
+</td>
+<td>
+023
+</td>
+<td>
+140
+</td>
+<td>
+NaN
+</td>
+<td>
+Ellis
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+NaN
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+NaN
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.785719256680785, -122.40852313194863)
+</td>
+<td>
+1380611233945
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+201604195146
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+04/19/2016
+</td>
+<td>
+0306
+</td>
+<td>
+007
+</td>
+<td>
+440
+</td>
+<td>
+NaN
+</td>
+<td>
+Geary
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+NaN
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+NaN
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.78733980600732, -122.41063199757738)
+</td>
+<td>
+1420164406718
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+201605278609
+</td>
+<td>
+3
+</td>
+<td>
+additions alterations or repairs
+</td>
+<td>
+05/27/2016
+</td>
+<td>
+0595
+</td>
+<td>
+203
+</td>
+<td>
+1647
+</td>
+<td>
+NaN
+</td>
+<td>
+Pacific
+</td>
+<td>
+Av
+</td>
+<td>
+…
+</td>
+<td>
+1.0
+</td>
+<td>
+constr type 1
+</td>
+<td>
+1.0
+</td>
+<td>
+constr type 1
+</td>
+<td>
+NaN
+</td>
+<td>
+3.0
+</td>
+<td>
+Russian Hill
+</td>
+<td>
+94109.0
+</td>
+<td>
+(37.7946573324287, -122.42232562979227)
+</td>
+<td>
+1424856504716
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+201611072166
+</td>
+<td>
+8
+</td>
+<td>
+otc alterations permit
+</td>
+<td>
+11/07/2016
+</td>
+<td>
+0156
+</td>
+<td>
+011
+</td>
+<td>
+1230
+</td>
+<td>
+NaN
+</td>
+<td>
+Pacific
+</td>
+<td>
+Av
+</td>
+<td>
+…
+</td>
+<td>
+5.0
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+5.0
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+NaN
+</td>
+<td>
+3.0
+</td>
+<td>
+Nob Hill
+</td>
+<td>
+94109.0
+</td>
+<td>
+(37.79595867909168, -122.41557405519474)
+</td>
+<td>
+1443574295566
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+201611283529
+</td>
+<td>
+6
+</td>
+<td>
+demolitions
+</td>
+<td>
+11/28/2016
+</td>
+<td>
+0342
+</td>
+<td>
+001
+</td>
+<td>
+950
+</td>
+<td>
+NaN
+</td>
+<td>
+Market
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+NaN
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+NaN
+</td>
+<td>
+6.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.78315261897309, -122.40950883997789)
+</td>
+<td>
+144548169992
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+5 rows × 43 columns
+</p>
+</div>
+<p>Then some of NAs in the proposed Construction Type Description is successfully change to wood frame(5) which is the most frequent value in the column.</p>
+</div>
+<div id="convert-string-into-floatinteger" class="section level3">
+<h3>Convert String Into Float/Integer</h3>
+<hr />
+<p>When we are doing numeric analysis(for example, get the mean value), it is possible that the system will return an error saying that you can’t apply the mathematical command to strings. So we want to make sure all numbers are “int” format number instead of string so that it is ready for further analysis.</p>
+<p>Covert String into numbers in excel can be really messy. However, in python it is really simple to acheive it. Here we introcude two simple command: float and int.</p>
+<pre class="python"><code>test_row = mydata.iloc[0:5]
+test_row[&#39;Permit Type&#39;].astype(float)</code></pre>
+<pre><code>
+
+
+    0    4.0
+    1    4.0
+    2    3.0
+    3    8.0
+    4    6.0</code></pre>
+<pre class="python"><code>test_row = mydata.iloc[0:5]
+test_row[&#39;Permit Type&#39;].astype(int)</code></pre>
+<pre><code>    0    4
+    1    4
+    2    3
+    3    8
+    4    6</code></pre>
+<p>Float command is able to convert the number appear in scientific nutation while int is able to handle non-base int values. So be flexible with two commands</p>
+</div>
+<div id="remove-unnecessary-duplicates" class="section level3">
+<h3>Remove Unnecessary Duplicates</h3>
+<hr />
+<p>Some times rows with same content will appear twice in your dataframe and you definitely don’t want it. How could we handle the unnecessary duplicates?</p>
+<pre class="python"><code># create a sample df with 2 rows and fewer columns (for demonstration)
+test_df = mydata[[&#39;Permit Number&#39;, &#39;Permit Type&#39;, &#39;Block&#39;]].iloc[0:2]
+# create a df with double info
+dup_df = pd.concat([test_df, test_df])
+dup_df.head()
+
+# just to demonstrate, see which rows have duplicates
+dup_df[&#39;Duplicate&#39;] = dup_df.duplicated()
+dup_df
+
+# or if you have a unique identifier (like permit number) you can also use it to drop duplicates
+# dup_df.drop_duplicates</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Block
+</th>
+<th>
+Duplicate
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+0326
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+201604195146
+</td>
+<td>
+4
+</td>
+<td>
+0306
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+0326
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+201604195146
+</td>
+<td>
+4
+</td>
+<td>
+0306
+</td>
+<td>
+True
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here we have the duplicated rows and we want get rid of the excess rows. We use drop duplicate command to achieve it.</p>
+<pre class="python"><code>test_df.drop_duplicates()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Block
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+0326
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+201604195146
+</td>
+<td>
+4
+</td>
+<td>
+0306
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="finding-out-potential-mismatch" class="section level3">
+<h3>Finding Out Potential Mismatch</h3>
+<hr />
+<p>The error here is not the typical error that we are getting in python. It is more refering as the logical error in the dataset. It is easier to explain with the dataset.</p>
+<pre class="python"><code>test_df1 = mydata.iloc[0:5]
+test_df1.head(1)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Permit Type Definition
+</th>
+<th>
+Permit Creation Date
+</th>
+<th>
+Block
+</th>
+<th>
+Lot
+</th>
+<th>
+Street Number
+</th>
+<th>
+Street Number Suffix
+</th>
+<th>
+Street Name
+</th>
+<th>
+Street Suffix
+</th>
+<th>
+…
+</th>
+<th>
+Existing Construction Type
+</th>
+<th>
+Existing Construction Type Description
+</th>
+<th>
+Proposed Construction Type
+</th>
+<th>
+Proposed Construction Type Description
+</th>
+<th>
+Site Permit
+</th>
+<th>
+Supervisor District
+</th>
+<th>
+Neighborhoods - Analysis Boundaries
+</th>
+<th>
+Zipcode
+</th>
+<th>
+Location
+</th>
+<th>
+Record ID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+05/06/2015
+</td>
+<td>
+0326
+</td>
+<td>
+023
+</td>
+<td>
+140
+</td>
+<td>
+0
+</td>
+<td>
+Ellis
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+0.0
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.785719256680785, -122.40852313194863)
+</td>
+<td>
+1380611233945
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+1 rows × 43 columns
+</p>
+</div>
+<p>Then what can be a potential mismatch in the dataframe?</p>
+<p>Within the dataframe we can see one column called the “Existing Construction Type” and another one called “Existing Constuction Type Description”. If we are have a type value of 3 but the the description is constr type 4, then there’s definitely some problems happens here.</p>
+<p>For a Existing Construction Type of 3, the Existing Construction Type Description would be constr type 3. There is a fixed relationship here. Any rows with different value can be considered as “error” and we need to fix them when we are cleaning the data.</p>
+<p>We can Check the mismatch occur or not first:</p>
+<pre class="python"><code>(mydata.groupby([&#39;Existing Construction Type&#39;, &#39;Existing Construction Type Description&#39;])
+    .size()
+    .reset_index()
+    .rename(columns={0:&#39;count&#39;}))</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Existing Construction Type
+</th>
+<th>
+Existing Construction Type Description
+</th>
+<th>
+count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+1.0
+</td>
+<td>
+constr type 1
+</td>
+<td>
+28072
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+2.0
+</td>
+<td>
+constr type 2
+</td>
+<td>
+4068
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+9663
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+4.0
+</td>
+<td>
+constr type 4
+</td>
+<td>
+381
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+5.0
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+113350
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Then let’s assume some problems actually happens here:</p>
+<pre class="python"><code>test_df1[&quot;Existing Construction Type&quot;].unique()
+print(&quot;There are 3 construction Types which are 1, 3 and 5&quot;)
+print()
+print(&quot;=&quot;*100)
+print()
+
+def errorcheck(a):
+    if a[&quot;Existing Construction Type&quot;] == 3.0:
+        a[&quot;Existing Construction Type Description&quot;] = &quot;constr type 3&quot;
+    if a[&quot;Existing Construction Type&quot;] == 1.0:
+        a[&quot;Existing Construction Type Description&quot;] = &quot;constr type 1&quot;
+    if a[&quot;Existing Construction Type&quot;] == 5.0:
+        a[&quot;Existing Construction Type Description&quot;] = &quot;wood frame (5)&quot;</code></pre>
+<p>There are 3 construction Types which are 1, 3 and 5</p>
+<p>====================================================================================================</p>
+<pre class="python"><code>for index, row in test_row.iterrows():
+    errorcheck(row)
+test_row.head()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Permit Type Definition
+</th>
+<th>
+Permit Creation Date
+</th>
+<th>
+Block
+</th>
+<th>
+Lot
+</th>
+<th>
+Street Number
+</th>
+<th>
+Street Number Suffix
+</th>
+<th>
+Street Name
+</th>
+<th>
+Street Suffix
+</th>
+<th>
+…
+</th>
+<th>
+Existing Construction Type
+</th>
+<th>
+Existing Construction Type Description
+</th>
+<th>
+Proposed Construction Type
+</th>
+<th>
+Proposed Construction Type Description
+</th>
+<th>
+Site Permit
+</th>
+<th>
+Supervisor District
+</th>
+<th>
+Neighborhoods - Analysis Boundaries
+</th>
+<th>
+Zipcode
+</th>
+<th>
+Location
+</th>
+<th>
+Record ID
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+05/06/2015
+</td>
+<td>
+0326
+</td>
+<td>
+023
+</td>
+<td>
+140
+</td>
+<td>
+0
+</td>
+<td>
+ellis
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+0.0
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.785719256680785, -122.40852313194863)
+</td>
+<td>
+1380611233945
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+201604195146
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+04/19/2016
+</td>
+<td>
+0306
+</td>
+<td>
+007
+</td>
+<td>
+440
+</td>
+<td>
+0
+</td>
+<td>
+geary
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+0.0
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.78733980600732, -122.41063199757738)
+</td>
+<td>
+1420164406718
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+201605278609
+</td>
+<td>
+3
+</td>
+<td>
+additions alterations or repairs
+</td>
+<td>
+05/27/2016
+</td>
+<td>
+0595
+</td>
+<td>
+203
+</td>
+<td>
+1647
+</td>
+<td>
+0
+</td>
+<td>
+pacific
+</td>
+<td>
+Av
+</td>
+<td>
+…
+</td>
+<td>
+1.0
+</td>
+<td>
+constr type 1
+</td>
+<td>
+1.0
+</td>
+<td>
+constr type 1
+</td>
+<td>
+0
+</td>
+<td>
+3.0
+</td>
+<td>
+Russian Hill
+</td>
+<td>
+94109.0
+</td>
+<td>
+(37.7946573324287, -122.42232562979227)
+</td>
+<td>
+1424856504716
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+201611072166
+</td>
+<td>
+8
+</td>
+<td>
+otc alterations permit
+</td>
+<td>
+11/07/2016
+</td>
+<td>
+0156
+</td>
+<td>
+011
+</td>
+<td>
+1230
+</td>
+<td>
+0
+</td>
+<td>
+pacific
+</td>
+<td>
+Av
+</td>
+<td>
+…
+</td>
+<td>
+5.0
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+5.0
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+0
+</td>
+<td>
+3.0
+</td>
+<td>
+Nob Hill
+</td>
+<td>
+94109.0
+</td>
+<td>
+(37.79595867909168, -122.41557405519474)
+</td>
+<td>
+1443574295566
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+201611283529
+</td>
+<td>
+6
+</td>
+<td>
+demolitions
+</td>
+<td>
+11/28/2016
+</td>
+<td>
+0342
+</td>
+<td>
+001
+</td>
+<td>
+950
+</td>
+<td>
+0
+</td>
+<td>
+market
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+3.0
+</td>
+<td>
+constr type 3
+</td>
+<td>
+0.0
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+6.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.78315261897309, -122.40950883997789)
+</td>
+<td>
+144548169992
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+5 rows × 43 columns
+</p>
+</div>
+<pre class="python"><code>#there are alternative methods for doing this cleaning
+#or use apply and lambda with a simplified function
+
+# a simpler function 
+
+def constr_type(x):
+    if x == 3.0:
+        descr = &quot;constr type 3&quot;
+    elif x == 1.0:
+        descr = &quot;constr type 1&quot;
+    elif x == 5.0:
+        descr = &quot;wood frame (5)&quot;
+    else:
+        descr = None
+    return(descr)
+
+new_df = test_df1
+new_df[&#39;New Description&#39;] = new_df[&#39;Existing Construction Type&#39;].apply(lambda x: constr_type(x))
+
+
+# or you can map a dictionary
+constr_dict = {1.0: &quot;constr type 1&quot;,
+              3.0: &quot;constr type 3&quot;,
+              5.0: &quot;wood frame (5)&quot;}
+
+new_df[&#39;New Description2&#39;] = new_df[&#39;Existing Construction Type&#39;].map(constr_dict)
+new_df</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Permit Number
+</th>
+<th>
+Permit Type
+</th>
+<th>
+Permit Type Definition
+</th>
+<th>
+Permit Creation Date
+</th>
+<th>
+Block
+</th>
+<th>
+Lot
+</th>
+<th>
+Street Number
+</th>
+<th>
+Street Number Suffix
+</th>
+<th>
+Street Name
+</th>
+<th>
+Street Suffix
+</th>
+<th>
+…
+</th>
+<th>
+Proposed Construction Type
+</th>
+<th>
+Proposed Construction Type Description
+</th>
+<th>
+Site Permit
+</th>
+<th>
+Supervisor District
+</th>
+<th>
+Neighborhoods - Analysis Boundaries
+</th>
+<th>
+Zipcode
+</th>
+<th>
+Location
+</th>
+<th>
+Record ID
+</th>
+<th>
+New Description
+</th>
+<th>
+New Description2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+201505065519
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+05/06/2015
+</td>
+<td>
+0326
+</td>
+<td>
+023
+</td>
+<td>
+140
+</td>
+<td>
+NaN
+</td>
+<td>
+Ellis
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+NaN
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.785719256680785, -122.40852313194863)
+</td>
+<td>
+1380611233945
+</td>
+<td>
+constr type 3
+</td>
+<td>
+constr type 3
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+201604195146
+</td>
+<td>
+4
+</td>
+<td>
+sign - erect
+</td>
+<td>
+04/19/2016
+</td>
+<td>
+0306
+</td>
+<td>
+007
+</td>
+<td>
+440
+</td>
+<td>
+NaN
+</td>
+<td>
+Geary
+</td>
+<td>
+St
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+wood frame (5)
+</td>
+<td>
+NaN
+</td>
+<td>
+3.0
+</td>
+<td>
+Tenderloin
+</td>
+<td>
+94102.0
+</td>
+<td>
+(37.78733980600732, -122.41063199757738)
+</td>
+<td>
+1420164406718
+</td>
+<td>
+constr type 3
+</td>
+<td>
+constr type 3
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+2 rows × 45 columns
+</p>
+</div>
+</div>
+<div id="upperlower-cases" class="section level3">
+<h3>Upper/Lower Cases</h3>
+<hr />
+<p>This might be irrelavant to the construction data set. However, there are many reasons that why Upper or Lower case should be considered in data cleaning. There might be human errors while inputing the error and some of the NLP algorithm recognized capitalized data as a facter to express strong opinion. So you want to make sure you are cautious with the case selection.</p>
+<p>One of the universal way to remove the case influence is to change everything to upper case first, then lower case again. By doing this, all the cases will be removed.</p>
+<p>For example, if we want to remove the Capital letter at the beginning of the street names:</p>
+<pre class="python"><code>test_row = mydata.iloc[0:5]
+test_row[&quot;Street Name&quot;] = test_row[&quot;Street Name&quot;].str.upper();print(test_row[&quot;Street Name&quot;] )</code></pre>
+<pre><code>    0      ELLIS
+    1      GEARY
+    2    PACIFIC
+    3    PACIFIC
+    4     MARKET</code></pre>
+<pre class="python"><code>test_row[&quot;Street Name&quot;] = test_row[&quot;Street Name&quot;].str.lower();print(test_row[&quot;Street Name&quot;] )</code></pre>
+<pre><code>    0      ellis
+    1      geary
+    2    pacific
+    3    pacific
+    4     market</code></pre>
+<p>Then there is no upper case left in the dataframe. The NLP algorithm can be applied perfectly to the dataset.</p>
+</div>
+</div>
+<div id="next-step" class="section level2">
+<h2>Next Step</h2>
+<hr />
+<p>Can you tell me which neighborhood has the most type 3 contruction project? If not, what more do we need to do?</p>
+</div>
+<div id="reference" class="section level2">
+<h2>Reference</h2>
+<hr />
+<p><a href="https://www.digitalvidya.com/blog/data-cleaning-techniques/" class="uri">https://www.digitalvidya.com/blog/data-cleaning-techniques/</a></p>
+<p><a href="https://www.kaggle.com/rtatman/data-cleaning-challenge-handling-missing-values" class="uri">https://www.kaggle.com/rtatman/data-cleaning-challenge-handling-missing-values</a></p>
+<p><a href="https://www.geeksforgeeks.org/python-pandas-dataframe-drop_duplicates/" class="uri">https://www.geeksforgeeks.org/python-pandas-dataframe-drop_duplicates/</a></p>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

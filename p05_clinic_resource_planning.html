@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Clinic Resource Planning</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Others</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Clinic Resource Planning</h1>
+
+</div>
+
+
+<p>In this notebook, we are going to explore ways that one can apply Discrete Event Simulation when making decisions for hospital resource planning. The notebook is divided into multiple scenarios, each incorporating more uncertainties than the previous one. We encourage you to create your own Jupytor notebook and follow along. <strong>If you do not have Python or Jupyter Notebook installed yet, you could also experiment with the virtual notebook by clicking “Launch Syzygy” below.</strong> On the other hand, the dowloadable Jupyter Notebook can be found <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">here</a>.</p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_05_Clinic_Resource_Planning&urlpath=tree%2FProject_05_Clinic_Resource_Planning%2F" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<hr />
+<p>Discrete Event Simulation (DES) is a useful decision making tool that can be applied to situations where resources are limited and queues exists in the process or system. Using DES, stakeholders can assess the outcomes, measured by specified Key Point Indicators (KPIs), of various scenarios (e.g. different bed capacities or staffing schedules in a clinic) without having to conduct experiments onsite (read more about DES itself <a href="https://www.sciencedirect.com/topics/engineering/discrete-event-simulation">here</a>). Nowadays, there are many softwares that enable not only simulations but also animations of systems and processes. However, in this notebook, we will take a look at a process-based discrete event simulation framework within Python called SimPy. Through this notebook, we hope to give you some basic ideas of what some of the software packages are doing behind the scene.</p>
+<p>Before we begin, please download and install the following packages (you might still need to “pip install” the <code>simpy</code> package even if you are running the notebook on Syzygy):</p>
+<pre class="python"><code>import simpy as sim
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator</code></pre>
+<p>In the package SimPy, simulations are conducted within an <code>environment</code>. Some tutorials initiate the <code>environment</code> after all the resources and processes are defined, but we have found it more intuitive to keep it at the beginning so that people know what the variable <code>env</code> refers to later on in different Python <code>functions</code> or <code>classes</code>.</p>
+<pre class="python"><code>env = sim.Environment()</code></pre>
+</div>
+<div id="scenario-one-simple-process-w-single-resource" class="section level2">
+<h2>Scenario One: Simple Process w/ Single Resource</h2>
+<hr />
+<p>In the first scenario, we want to start by building a really simple single-process simulation model with minimum uncertainties. Let’s assume the following for a walk-in clinic:</p>
+<ul>
+<li>There is only one required resource for each patient: a bed (tied to a doctor)</li>
+<li>There is only one bed (and doctor) in the clinic</li>
+<li>The clinic opens from 9am to 5pm</li>
+<li>The first patient arrives at exactly 9am</li>
+<li>After that, a new patient arrives every half an hour</li>
+<li>The last patient walks in at excatly 4:30pm</li>
+<li>Each patient uses the bed for exactly 30 minutes (for diagnosis)</li>
+</ul>
+<p>First, as you may have already imagined, we will set up the patient arrival schedule based on their interarrival time (which later on would be generated using random variables). We will also assign the diagnosis time to a variable so that our code could be more dynamic for the future:</p>
+<pre class="python"><code>arr_sche = np.arange(9.0, 17.0, 0.5) # you could also try np.linspace
+num_patients = len(arr_sche)
+diag_time = 0.5
+
+print(arr_sche)</code></pre>
+<pre><code>[ 9.   9.5 10.  10.5 11.  11.5 12.  12.5 13.  13.5 14.  14.5 15.  15.5
+ 16.  16.5]</code></pre>
+<p>After you have created the arrival schedule and diagnosis time, we can go back to the <code>environment</code> that we initiated and create withint the <code>environment</code> our <code>resource</code>: bed</p>
+<pre class="python"><code>bed = sim.Resource(env, capacity=1)</code></pre>
+<p>In more complicated discrete simulation models, one would usually need to utilize Python <code>class</code> (read more about Python <code>class</code> <a href="https://docs.python.org/3/tutorial/classes.html">here</a>). However, since we are starting simple, we can just define a <code>function</code> first, and create <code>classes</code> later when we move into scenarios with more resources and uncertainties.</p>
+<p>In the function that we define below, we want the user to pass in five arguments: the <code>environment</code> of the simulation, the patient ID (which will actually be defined later when we run the simulation, the resource needed, the arrival time of the patient (taken from our schedule), and the length that this resource is going to be used (diagnosis time). The function contains <code>yield</code> instead of <code>return</code>, which allows it to be come a <code>generator</code> (read more about Python <code>generators</code> <a href="https://wiki.python.org/moin/Generators">here</a>. Take a look at the function, and we will dive deeper into it below the next cell.</p>
+<pre class="python"><code>def pat(env, pat_id, resource, arr_time, diag_time):
+    
+    yield env.timeout(arr_time)
+    print(&quot;{} arrives at the clinic at {} o&#39;clock&quot;.format(pat_id, env.now))
+    
+    with resource.request() as req:
+        
+        yield req
+        print(&quot;{} starts using the bed at {} o&#39;clock&quot;.format(pat_id, env.now))
+        
+        yield env.timeout(diag_time)
+        print(&quot;{} leaves the clinic at {} o&#39;clock&quot;.format(pat_id, env.now))</code></pre>
+<p>In SimPy, simulation normally starts at time 0 unless specified. Time is also unit-less within SimPy, so we can define it however we want, though we do need to keep it consistent. In the function above, we first let the simulation run with no events until the time when the first patient arrives. Then we generate the first patient, who will request for the resource, our one bed. If the resource is available (it will always be available because of our current setup), the patient takes over the resource until it finishes using it; however, if the resource is not available, the patient will wait in a queue and once the resource becomes available it will be released to the next patient in line.</p>
+<p>After we set up the function that we need for the simulation, we then have to create <code>processes</code> for each of the patient using the <code>generator</code> that was created earlier (read about why <code>entities</code> are considered <code>processes</code> in SimPy <a href="https://simpy.readthedocs.io/en/latest/simpy_intro/basic_concepts.html">here</a>):</p>
+<pre class="python"><code>for i in range(num_patients):
+    
+    env.process(pat(env, &#39;Patient {}&#39;.format(i), bed, arr_sche[i], diag_time))</code></pre>
+<p>Finally, we can run our simulation, and you will see a detailed description of all the events under the cell below:</p>
+<pre class="python"><code>env.run()</code></pre>
+<pre><code>Patient 0 arrives at the clinic at 9.0 o&#39;clock
+Patient 0 starts using the bed at 9.0 o&#39;clock
+Patient 1 arrives at the clinic at 9.5 o&#39;clock
+Patient 0 leaves the clinic at 9.5 o&#39;clock
+Patient 1 starts using the bed at 9.5 o&#39;clock
+Patient 2 arrives at the clinic at 10.0 o&#39;clock
+Patient 1 leaves the clinic at 10.0 o&#39;clock
+Patient 2 starts using the bed at 10.0 o&#39;clock
+Patient 3 arrives at the clinic at 10.5 o&#39;clock
+Patient 2 leaves the clinic at 10.5 o&#39;clock
+Patient 3 starts using the bed at 10.5 o&#39;clock
+Patient 4 arrives at the clinic at 11.0 o&#39;clock
+Patient 3 leaves the clinic at 11.0 o&#39;clock
+Patient 4 starts using the bed at 11.0 o&#39;clock
+Patient 5 arrives at the clinic at 11.5 o&#39;clock
+Patient 4 leaves the clinic at 11.5 o&#39;clock
+Patient 5 starts using the bed at 11.5 o&#39;clock
+Patient 6 arrives at the clinic at 12.0 o&#39;clock
+Patient 5 leaves the clinic at 12.0 o&#39;clock
+Patient 6 starts using the bed at 12.0 o&#39;clock
+Patient 7 arrives at the clinic at 12.5 o&#39;clock
+Patient 6 leaves the clinic at 12.5 o&#39;clock
+Patient 7 starts using the bed at 12.5 o&#39;clock
+Patient 8 arrives at the clinic at 13.0 o&#39;clock
+Patient 7 leaves the clinic at 13.0 o&#39;clock
+Patient 8 starts using the bed at 13.0 o&#39;clock
+Patient 9 arrives at the clinic at 13.5 o&#39;clock
+Patient 8 leaves the clinic at 13.5 o&#39;clock
+Patient 9 starts using the bed at 13.5 o&#39;clock
+Patient 10 arrives at the clinic at 14.0 o&#39;clock
+Patient 9 leaves the clinic at 14.0 o&#39;clock
+Patient 10 starts using the bed at 14.0 o&#39;clock
+Patient 11 arrives at the clinic at 14.5 o&#39;clock
+Patient 10 leaves the clinic at 14.5 o&#39;clock
+Patient 11 starts using the bed at 14.5 o&#39;clock
+Patient 12 arrives at the clinic at 15.0 o&#39;clock
+Patient 11 leaves the clinic at 15.0 o&#39;clock
+Patient 12 starts using the bed at 15.0 o&#39;clock
+Patient 13 arrives at the clinic at 15.5 o&#39;clock
+Patient 12 leaves the clinic at 15.5 o&#39;clock
+Patient 13 starts using the bed at 15.5 o&#39;clock
+Patient 14 arrives at the clinic at 16.0 o&#39;clock
+Patient 13 leaves the clinic at 16.0 o&#39;clock
+Patient 14 starts using the bed at 16.0 o&#39;clock
+Patient 15 arrives at the clinic at 16.5 o&#39;clock
+Patient 14 leaves the clinic at 16.5 o&#39;clock
+Patient 15 starts using the bed at 16.5 o&#39;clock
+Patient 15 leaves the clinic at 17.0 o&#39;clock</code></pre>
+</div>
+<div id="scenario-two" class="section level2">
+<h2>Scenario Two:</h2>
+<hr />
+<p>Ta-da! We just ran our first SimPy simulation. However, you probably have noticed right away that:</p>
+<ol style="list-style-type: decimal">
+<li>The output is long and not very readable even though we only have 15 patients, 3 processes, and 1 resource right now</li>
+<li>Two processes—the arrival of patients and the use of resource—are modeled within the same function, which can be confusing as the model scales</li>
+</ol>
+<p>In the this scenario, we are going to use <code>classes</code> and <code>methods</code> to separate the different processes and objects/entities; we will also visualize a couple of key point indicators (KPIs) so that the simulation results are more interpretable. Before we start, let’s slightly modify the problem statement and incorporate more uncertainties:</p>
+<ul>
+<li>There is only one required resource for each patient: a bed (tied to a doctor)</li>
+<li>There is only one bed (and doctor) in the clinic</li>
+<li>The clinic officially operates from 9am to 5pm</li>
+<li>The clinic stops accepting new patients at 5pm, but will stay open until the last patient leaves</li>
+<li>The first patient arrives exactly at 9am</li>
+<li>On average, 2 patients arrive every hour (equivelant to a random inter-arrival time with a mean of 1/2 hours); the inter-arrival time can be modeled with an exponential distribution</li>
+<li>Each patient uses the bed for a random amount of time with an average of 30 minutes (0.5 hours), which can also be modeled with an exponential distribution</li>
+</ul>
+<pre class="python"><code>cap_bed = 1.0
+avg_arr = 2.0 # patients per hour
+avg_bed_use = 0.5 # hour per patient
+clnc_open = 9.0 # o&#39;clock
+clnc_close = 17.0 # o&#39;clock</code></pre>
+<p>In this scenario, we will define four <code>classes</code>: Record, Model, Patient, and Bed (Resource). The Record class…</p>
+<pre class="python"><code>class Record:
+    
+    check_interval = 0.25
+    
+    check_time = []
+    check_pat_current = []
+    check_pat_waiting = []
+    check_bed_inuse = []
+    
+    record_pat_id = []
+    record_time_in = []
+    record_wait_time = []
+    record_time_use_bed = [] 
+    record_bed_use = []
+    record_time_out = []
+    
+    count_pat = 0
+    pat_waiting = 0
+    pat_current = 0
+    
+    results = pd.DataFrame()
+    history = pd.DataFrame()
+
+    
+class Patient:
+    
+    all_patients = {}
+    
+    def __init__(self, env):
+        Record.count_pat += 1
+        self.id = Record.count_pat
+        self.bed_use = np.random.exponential(avg_bed_use)
+        self.time_in = env.now
+        self.time_queue = 0
+        self.time_use_bed = 0
+        self.time_out = 0
+        
+        
+class Bed:
+    
+    def __init__(self, env, cap_bed):
+        self.bed = sim.Resource(env, capacity=cap_bed)
+        
+        
+class Model:
+    
+    def __init__(self):
+        
+        self.env = sim.Environment()
+        
+    def run(self):
+        
+        self.resource_bed = Bed(self.env, cap_bed)
+        
+        self.env.process(self.patient_arrival())
+        self.env.process(self.check_model())
+        self.env.run(until=24.0)
+        
+        self.build_report()
+        self.plot_results()
+    
+    def use_bed(self, pat):
+        
+        with self.resource_bed.bed.request() as req:
+            
+            Record.pat_waiting += 1
+            Record.pat_current += 1
+            
+            yield req
+            pat.time_use_bed = self.env.now
+            pat.time_queue = self.env.now - pat.time_in
+            Record.pat_waiting -= 1
+            
+            yield self.env.timeout(pat.bed_use)
+            pat.time_out = self.env.now
+            Record.pat_current -= 1
+            
+            Record.record_pat_id.append(pat.id)
+            Record.record_time_in.append(pat.time_in)
+            Record.record_wait_time.append(pat.time_queue)
+            Record.record_time_use_bed.append(pat.time_use_bed)
+            Record.record_bed_use.append(pat.bed_use)
+            Record.record_time_out.append(pat.time_out)
+            
+    def patient_arrival(self):
+        
+        yield self.env.timeout(clnc_open)
+        
+        while self.env.now &lt; 17.0:
+            
+            pat = Patient(self.env)
+            pat.all_patients[pat.id] = pat
+            self.env.process(self.use_bed(pat))
+            
+            pat_arr_next = np.random.exponential(1/avg_arr)
+            yield self.env.timeout(pat_arr_next)
+    
+    def check_model(self):
+        
+        while True:
+            
+            Record.check_time.append(self.env.now)
+            Record.check_pat_waiting.append(Record.pat_waiting)
+            Record.check_pat_current.append(Record.pat_current)
+            Record.check_bed_inuse.append(self.resource_bed.bed.count)
+            yield self.env.timeout(Record.check_interval)
+    
+    def build_report(self):
+        
+        Record.results[&#39;Time&#39;] = Record.check_time
+        Record.results[&#39;Current Patients&#39;] = Record.check_pat_current
+        Record.results[&#39;Waiting Patients&#39;] = Record.check_pat_waiting
+        Record.results[&#39;Bed in Use&#39;] = Record.check_bed_inuse
+        
+        Record.history[&#39;Patient ID&#39;] = Record.record_pat_id
+        Record.history[&#39;Time In&#39;] = Record.record_time_in
+        Record.history[&#39;Wait Time&#39;] = Record.record_wait_time
+        Record.history[&#39;Bed Start&#39;] = Record.record_time_use_bed
+        Record.history[&#39;Use Time&#39;] = Record.record_bed_use
+        Record.history[&#39;Time Out&#39;] = Record.record_time_out
+        
+    def plot_results(self):
+        
+        fig = plt.figure(figsize=(12, 4.5), dpi=75)
+        
+        ax1 = fig.add_subplot(131)
+        x = Record.record_pat_id
+        y = Record.record_wait_time
+        ax1.scatter(x, y, marker=&#39;x&#39;)
+        ax1.set_xlabel(&#39;Patient ID&#39;)
+        ax1.set_ylabel(&#39;Wait Time&#39;)
+        ax1.set_title(&#39;Wait Time of Each Patient&#39;)
+        ax1.grid(True, which=&#39;both&#39;, lw=1, ls=&#39;--&#39;, c=&#39;.75&#39;)
+        ax1.xaxis.set_major_locator(MaxNLocator(integer=True))
+        
+        ax2 = fig.add_subplot(132)
+        x = Record.check_time
+        y = Record.check_pat_waiting
+        ax2.plot(x, y, marker=&#39;o&#39;)
+        ax2.set_xlabel(&#39;Time&#39;)
+        ax2.set_ylabel(&#39;Patients Waiting&#39;)
+        ax2.set_title(&#39;Patients Waiting at Each Check Point&#39;)
+        ax2.grid(True, which=&#39;both&#39;, lw=1, ls=&#39;--&#39;, c=&#39;.75&#39;)
+        
+        ax3 = fig.add_subplot(133)
+        x = Record.check_time
+        y = Record.check_bed_inuse
+        ax3.plot(x, y, marker=&#39;^&#39;)
+        ax3.set_xlabel(&#39;Time&#39;)
+        ax3.set_ylabel(&#39;Bed In Use&#39;)
+        ax3.set_title(&#39;Bed In Use at Each Check Point&#39;)
+        ax3.grid(True, which=&#39;both&#39;, lw=1, ls=&#39;--&#39;, c=&#39;.75&#39;)
+        
+        plt.tight_layout(pad=3)
+        plt.show()
+</code></pre>
+<pre class="python"><code>model = Model()</code></pre>
+<pre class="python"><code>np.random.seed(0)
+model.run()</code></pre>
+<p><img src="images/p05_01.png" /></p>
+<pre class="python"><code>display(Record.history)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Patient ID
+</th>
+<th>
+Time In
+</th>
+<th>
+Wait Time
+</th>
+<th>
+Bed Start
+</th>
+<th>
+Use Time
+</th>
+<th>
+Time Out
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+1
+</td>
+<td>
+9.000000
+</td>
+<td>
+0.000000
+</td>
+<td>
+9.000000
+</td>
+<td>
+0.397937
+</td>
+<td>
+9.397937
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+2
+</td>
+<td>
+9.627965
+</td>
+<td>
+0.000000
+</td>
+<td>
+9.627965
+</td>
+<td>
+0.461612
+</td>
+<td>
+10.089577
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+3
+</td>
+<td>
+10.021566
+</td>
+<td>
+0.068011
+</td>
+<td>
+10.089577
+</td>
+<td>
+0.275524
+</td>
+<td>
+10.365101
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+4
+</td>
+<td>
+10.540646
+</td>
+<td>
+0.000000
+</td>
+<td>
+10.540646
+</td>
+<td>
+0.287760
+</td>
+<td>
+10.828405
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+5
+</td>
+<td>
+11.652408
+</td>
+<td>
+0.000000
+</td>
+<td>
+11.652408
+</td>
+<td>
+1.657456
+</td>
+<td>
+13.309864
+</td>
+</tr>
+<tr>
+<th>
+5
+</th>
+<td>
+6
+</td>
+<td>
+11.894209
+</td>
+<td>
+1.415655
+</td>
+<td>
+13.309864
+</td>
+<td>
+0.784448
+</td>
+<td>
+14.094312
+</td>
+</tr>
+<tr>
+<th>
+6
+</th>
+<td>
+7
+</td>
+<td>
+12.270546
+</td>
+<td>
+1.823766
+</td>
+<td>
+14.094312
+</td>
+<td>
+0.419716
+</td>
+<td>
+14.514028
+</td>
+</tr>
+<tr>
+<th>
+7
+</th>
+<td>
+8
+</td>
+<td>
+13.569673
+</td>
+<td>
+0.944355
+</td>
+<td>
+14.514028
+</td>
+<td>
+0.036843
+</td>
+<td>
+14.550871
+</td>
+</tr>
+<tr>
+<th>
+8
+</th>
+<td>
+9
+</td>
+<td>
+13.615254
+</td>
+<td>
+0.935618
+</td>
+<td>
+14.550871
+</td>
+<td>
+0.010213
+</td>
+<td>
+14.561084
+</td>
+</tr>
+<tr>
+<th>
+9
+</th>
+<td>
+10
+</td>
+<td>
+14.508997
+</td>
+<td>
+0.052087
+</td>
+<td>
+14.561084
+</td>
+<td>
+0.752892
+</td>
+<td>
+15.313976
+</td>
+</tr>
+<tr>
+<th>
+10
+</th>
+<td>
+11
+</td>
+<td>
+15.529154
+</td>
+<td>
+0.000000
+</td>
+<td>
+15.529154
+</td>
+<td>
+1.922611
+</td>
+<td>
+17.451765
+</td>
+</tr>
+<tr>
+<th>
+11
+</th>
+<td>
+12
+</td>
+<td>
+16.331774
+</td>
+<td>
+1.119991
+</td>
+<td>
+17.451765
+</td>
+<td>
+0.309465
+</td>
+<td>
+17.761230
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

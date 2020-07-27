@@ -1,0 +1,82 @@
+---
+title: "Sales Forecast - Part II"
+---
+
+This is the second of a series of two notebooks, where we forecast sales for a retailers with 45 stores, each contains several departments, in multiple regions. We also want to understand the extent to which external factors, including holidays and promotions, affect sales in different departments, stores, and regions. We encourage you to create your own Jupytor notebook and follow along. **If you do not have Python or Jupyter Notebook installed yet, you could also experiment with the virtual notebook by clicking "Launch Syzygy" below.** On the other hand, the dowloadable Jupyter Notebook can be found [here](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data).
+
+<a href="" target="_blank" class="button">Launch Syzygy</a>
+
+## Background
+
+---
+
+The previous notebook provides detailed guide on the exploration and manipulation of data, whereas this one will be centered around the modeling process itself. Understanding the data is important for analytics, and we recommend you to read both notebooks in order to gain a better grasp of analytics for big and messy data. The three datasets that we are using are already included (see the "Data" folder) in the repository where this Jupyter notebook is located, but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
+
+Let's first import the libraries and data that we have used in the previous notebook:
+
+
+```python
+# basic tools for data analysis and visualization in Python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df_sales = pd.read_csv('Data/sales.csv')
+df_features = pd.read_csv('Data/features.csv')
+df_stores = pd.read_csv('Data/stores.csv')
+
+# converting the date column (initally stored as strings) to dates
+df_sales['Date'] = pd.to_datetime(df_sales['Date'], format='%d/%m/%Y')
+df_features['Date'] = pd.to_datetime(df_features['Date'], format='%d/%m/%Y')
+# Information on the SettingWithCopywarning that might occur: 
+# https://www.dataquest.io/blog/settingwithcopywarning/
+```
+
+## Modeling
+
+---
+
+### Decomposition
+
+
+```python
+
+```
+
+### ARIMA Models
+
+
+```python
+
+```
+
+### Explanatory Models
+
+
+```python
+
+```
+
+### Residual Diagnosis
+
+
+```python
+
+```
+
+### Validation
+
+
+```python
+
+```
+
+## Forecasting
+
+---
+
+
+```python
+
+```
+

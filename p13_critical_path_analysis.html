@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Project Management - Critical Path</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Others</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Project Management - Critical Path</h1>
+
+</div>
+
+
+<p>In this notebook, we are going to explore ways that one can use python to look for and visualize critical paths in projects. At the end of the notebook, there is a challenge for you to further enhance your skills. We encourage you to create your own Jupytor notebook and follow along.<strong>If you do not have Python or Jupyter Notebook installed yet, you could experiment with the virtual notebook by launching the virtual machine (Binder) above.</strong> On the other hand, the dowloadable Jupyter Notebook can be found <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">here</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_03_Project_Management_Critical_Path&urlpath=tree%2FProject_03_Project_Management_Critical_Path%2F" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<hr />
+<p>Critical path is essentially the bottleneck of a project. Typically, in Project Management, the various tasks and dependicies would first be analyzed and identified using Work Breakdown Structure (WBS) and Program Evaluation and Review Technique (PERT) before they are pipelined into Critical Path Analysis (CPA). In order to reduce the amount of time that a project takes, a manager should seek to shorten tasks along the critical path. One way of finding the critical path is by identifying the path with 0 slack (or float). Slack is a buffer where delay of task completion might not always affect the entire project, and it is calculated by subtracting the earliest finishing time (EF) from the latest finishing time (LF), or equivalently, subtracting the earliest start time (ES) from the latest start time (LS). You could read more about CPA in this <a href="https://hbr.org/1963/09/the-abcs-of-the-critical-path-method">HBR article</a>, but for now, let’s consider the following example:</p>
+<ul>
+<li>Task A requires 3 days, and it can be started at any time</li>
+<li>Task B requires 5 days, and it can also be started at any time</li>
+<li>Task C requires 2 day, and it can only be started after both Task A and B are finished</li>
+<li>Task D requires 3 days, and it can start as soon as Task A is finished</li>
+<li>Task E requires 5 days, and it start as soon as Task C and D are finished</li>
+</ul>
+<p><img src="images/p13_01.png" /></p>
+<p>By calculating the slack of each task, we can quickly identify that the critical path is <em>B -&gt; C -&gt; E</em>, since there is 0 slack along these three tasks. However, this analysis gets much more complicated when managers are presented with more tasks for each project. At the same time, when certain tasks are compressed, the critical path might change. It seems mechanical going through the same process repeatedly to look for critical paths, and we want to find ways to eliminate duplicate work. Therefore, we are going to experiment with some packages that can be used to help project managers visualize the dependencies of different projects, identify the critical path, and find out how the path changes as completion time is reduced for different tasks.</p>
+</div>
+<div id="finding-and-visualizing-critical-path-in-python" class="section level2">
+<h2>Finding and Visualizing Critical Path in Python</h2>
+<hr />
+<p>In this notebook, we are going to use two packages, <code>networkx</code> (dependent on <code>matplotlib</code>) and <code>criticalpath</code> (install using <a href="https://docs.python.org/3/installing/index.html">pip</a> if you do not have these packages yet). We encourage you to read the documentations for <a href="https://networkx.github.io/documentation/networkx-2.4/">networkx</a>, a useful package for visualizing networks, as well as <a href="https://pypi.org/project/criticalpath/">criticalpath</a>, a simple developer package specifically designed to look for the critical path in a series of processes. First, let’s import the packages:</p>
+<pre class="python"><code>import matplotlib.pyplot as plt
+import networkx as nx
+from criticalpath import Node</code></pre>
+<div id="set-up-the-tasks-and-visualize-the-dependencies" class="section level3">
+<h3>Set Up the Tasks and Visualize the Dependencies</h3>
+<p>Before we start looking for the critical path, we have to set up a task list as well as the sequence and dependencies of the tasks. We do so by creating two lists of tuples. In the task list, each tuple contains the name of the task and any attribute of the task; the attribute(s) should be presented in a dictionary. In the dependency list, each tuple contains two tasks, with the second one dependent on the first. After the task and dependency lists are setup, we could initialize a directed graph (with arrows) and import the two lists:</p>
+<pre class="python"><code># set up the tasks:
+tasks = [(&quot;A&quot;, {&quot;Duration&quot;: 3}), 
+         (&quot;B&quot;, {&quot;Duration&quot;: 5}), 
+         (&quot;C&quot;, {&quot;Duration&quot;: 2}), 
+         (&quot;D&quot;, {&quot;Duration&quot;: 3}), 
+         (&quot;E&quot;, {&quot;Duration&quot;: 5})]
+
+# set up the dependencies along all paths:
+dependencies = [(&quot;A&quot;, &quot;C&quot;), 
+                (&quot;B&quot;, &quot;C&quot;), 
+                (&quot;A&quot;, &quot;D&quot;),
+                (&quot;C&quot;, &quot;E&quot;), 
+                (&quot;D&quot;, &quot;E&quot;)]
+
+# initialize (directed) graph
+G = nx.DiGraph() 
+
+# add tasks and dependencies (edges)
+G.add_nodes_from(tasks)
+G.add_edges_from(dependencies)</code></pre>
+<p>One thing to notice is that, by default, <code>networkx</code> randomly position the nodes every time it generates a plot. This is technically not a problem as long as the orders of the tasks remain the same; however, people usually want their graphs to be a little bit more predictable, and to make the graphs easier to understand the remember, it is a good idea to specify the (x, y) coordinates of the nodes (it might be helpful for you to draw it on a piece of paper first):</p>
+<pre class="python"><code># set up the (arbitrary) positions of the tasks (nodes):
+pos_nodes = {&quot;A&quot;: (1, 3), 
+             &quot;B&quot;: (1, 1), 
+             &quot;C&quot;: (2, 2), 
+             &quot;D&quot;: (3, 3), 
+             &quot;E&quot;: (4, 2)}
+
+# draw the nodes
+nx.draw(G, with_labels=True, pos=pos_nodes, node_color=&#39;lightblue&#39;, arrowsize=20)
+
+
+# set up the (arbitrary) positions of the durations labels (attributes):
+pos_attrs = {node:(coord[0], coord[1] + 0.2) for node, coord in pos_nodes.items()}
+attrs = nx.get_node_attributes(G, &#39;Duration&#39;)
+
+# draw (write) the node attributes (duration)
+nx.draw_networkx_labels(G, pos=pos_attrs, labels=attrs)
+
+
+# set a little margin (padding) for the graph so the labels are not cut off
+plt.margins(0.1)</code></pre>
+<p><img src="images/p13_02.png" /></p>
+</div>
+<div id="searching-for-the-critical-path" class="section level3">
+<h3>Searching for the Critical Path</h3>
+<p>Now that we have the network of tasks visualized (which will be helpful later when we want to draw the critical path), we can proceed to actually looking for the critical path. This is where the <code>criticalpath</code> package comes in handy. Intead of manually calculating the possible slack of each task, we can just load the tasks, their durations, and any dependencies into an <code>object</code> (project) using the <code>criticalpath</code> package:</p>
+<pre class="python"><code># initialize a &quot;project&quot;:
+proj = Node(&#39;Project&#39;)
+
+# load the tasks and their durations:
+for t in tasks:
+    proj.add(Node(t[0], duration=t[1][&quot;Duration&quot;]))
+
+# load the dependencies (or sequence):
+for d in dependencies:
+    proj.link(d[0],d[1])
+
+# update the &quot;project&quot;:
+proj.update_all()</code></pre>
+<p>Once we update the “project” with tasks and dependencies using the <code>update_all()</code> method, we can extract the critical path and the total project duration using the following commands:</p>
+<pre class="python"><code># proj.get_critical_path() will return a list of nodes
+# however, we want to store them as strings so that they can be easily used for visualization later
+crit_path = [str(n) for n in proj.get_critical_path()]
+
+# get the current duration of the project
+proj_duration = proj.duration
+
+print(f&quot;The current critical path is: {crit_path}&quot;)
+print(&quot;&gt;&quot;*50)
+print(f&quot;The current project duration is: {proj_duration} days&quot;)</code></pre>
+<pre><code>The current critical path is: [&#39;B&#39;, &#39;C&#39;, &#39;E&#39;]
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+The current project duration is: 12 days</code></pre>
+</div>
+<div id="visualize-the-critical-path" class="section level3">
+<h3>Visualize the Critical Path</h3>
+<p>A picture is worth a thousand words (most of the time), and it would be much faster for people to understand which tasks can be crunched and the impact of reducing these tasks through a visualized network. Therefore, we bring back the graph from above, but this time we layer on top our current critical path:</p>
+<pre class="python"><code># create a list of edges using the current critical path list:
+crit_edges = [(n, crit_path[i+1]) for i, n in enumerate(crit_path[:-1])]
+
+# first, recreate the network visualization:
+nx.draw(G, with_labels=True, pos=pos_nodes, node_color=&#39;lightblue&#39;, arrowsize=20)
+nx.draw_networkx_labels(G, pos=pos_attrs, labels=attrs)
+
+# now add the critical path as an additional layer on top of the original graph:
+nx.draw_networkx_edges(G, pos=pos_nodes, edgelist=crit_edges, width=10, alpha=0.5, edge_color=&#39;r&#39;)
+
+# again, leaving some margin so the labels are not cut off
+plt.margins(0.1)</code></pre>
+<p><img src="images/p13_03.png" /></p>
+<p>Looking for the critical path can easily become a hassle in a big project with ever changing timelines of various tasks. The <code>networkx</code> and <code>criticalpath</code> packages make it so much faster and easier to find and visualize the path that can use the most improvement. Now that you know the basics, we have created a challenge for you below so that you could apply these techniques to a more complicated problem by yourself. Don’t forget to go back and read the documentations of the different packages if you want to explore different ways of solving this problem!</p>
+</div>
+</div>
+<div id="challenge-create-a-dynamic-tool" class="section level2">
+<h2>Challenge: Create A Dynamic Tool</h2>
+<hr />
+<p>To be continued…</p>
+</div>
+<div id="reference" class="section level2">
+<h2>Reference</h2>
+<hr />
+<p><a href="https://hbr.org/1963/09/the-abcs-of-the-critical-path-method" class="uri">https://hbr.org/1963/09/the-abcs-of-the-critical-path-method</a> <br> <a href="https://medium.com/@yujeshmalekushrestha/the-critical-path-analysis-in-project-management-94c75f77932f" class="uri">https://medium.com/@yujeshmalekushrestha/the-critical-path-analysis-in-project-management-94c75f77932f</a></p>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

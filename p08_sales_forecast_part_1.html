@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Sales Forecast - Part I</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Others</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Sales Forecast - Part I</h1>
+
+</div>
+
+
+<p>This is the first of a series of two notebooks, where we forecast sales for a retailers with 45 stores, each contains several departments, in multiple regions. We also want to understand the extent to which external factors, including holidays and promotions, affect sales in different departments, stores, and regions. We encourage you to create your own Jupytor notebook and follow along. <strong>If you do not have Python or Jupyter Notebook installed yet, you could also experiment with the virtual notebook by clicking “Launch Syzygy” below.</strong> On the other hand, the dowloadable Jupyter Notebook can be found <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">here</a>.</p>
+<p><a href="
+https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2F" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<hr />
+<p>In this notebook, we are going to focus on the exploration and manipulation of our data, whereas the next one would be centered around modeling itself. Understanding the data is important for analytics, and we recommend you to read both notebooks in order to gain a better grasp of analytics for big and messy data. The three datasets that we are using are already included (see the “Data” folder) in the repository where this Jupyter notebook is located, but you can also find them on <a href="https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv">this Kaggle page</a>.</p>
+<p>One of the most commonly used time series forecasting model are ARIMA models, which is what we are going to use in this notebook. However, there are also other models that you could use, such as ETS Models. At the same time, since we want to understand the relationships between sales and several other variables, including mark downs, holidays, and potentially weather (temperature), it would be benefitial for us to build a Simple or Multiple Linear Regression Model first, with sales as the response variable. Then we can build time series models to forecast the explanatory variables, such as temperature, and plug in the time-series predicted explantory variables into the SLR/MLR models to generate further forecasts for the response variable,sales. Models generated in this manner might be less accurate as we are going through multiple steps, each adding more risks for errors; however, time series models combined with explanatory models are more interpretable and provide you with more managerial insights that could help you make recommendations and decisions. Let’s go ahead and import the libraries we need and load our data:</p>
+<pre class="python"><code># basic tools for data analysis and visualization in Python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ipywidgets are used to make interactive contents in Jupyter notebooks
+from ipywidgets import interact</code></pre>
+<pre class="python"><code>df_sales = pd.read_csv(&#39;Data/sales.csv&#39;)
+df_features = pd.read_csv(&#39;Data/features.csv&#39;)
+df_stores = pd.read_csv(&#39;Data/stores.csv&#39;)
+
+# converting the date column (initally stored as strings) to dates
+df_sales[&#39;Date&#39;] = pd.to_datetime(df_sales[&#39;Date&#39;], format=&#39;%d/%m/%Y&#39;)
+df_features[&#39;Date&#39;] = pd.to_datetime(df_features[&#39;Date&#39;], format=&#39;%d/%m/%Y&#39;)
+# Information on the SettingWithCopywarning that might occur: 
+# https://www.dataquest.io/blog/settingwithcopywarning/</code></pre>
+</div>
+<div id="exploratory-data-analysis" class="section level2">
+<h2>Exploratory Data Analysis</h2>
+<hr />
+<p>Before we build a model, it is always a good idea to take a look at the data itself. Some questions that you might ask when exploring your data are:</p>
+<ul>
+<li>What information is recorded (what do different columns contain)?</li>
+<li>How frequently (since we are working with time series data) is the data recorded?</li>
+<li>How many missing values are there in each column?</li>
+<li>What are the distributions of the different columns?</li>
+<li>Are any columns highly correlated to one another?</li>
+</ul>
+<p>After exploration, if there are lots of missing values or if the distribution of a column is highly left/right skewed, which could potentially affect the accruacy of your models, you would want to think about replacing or transforming them before you build, compare, and select your models.</p>
+<div id="inspection" class="section level3">
+<h3>Inspection</h3>
+<p>First, let’s take a look at the <code>sales</code> dataframe:</p>
+<pre class="python"><code>display(df_sales.head())
+display(df_sales.info())
+display(df_sales.describe(include=&#39;all&#39;).round(2))</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Store
+</th>
+<th>
+Dept
+</th>
+<th>
+Date
+</th>
+<th>
+Weekly_Sales
+</th>
+<th>
+IsHoliday
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+2010-02-05
+</td>
+<td>
+24924.50
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+2010-02-12
+</td>
+<td>
+46039.49
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+2010-02-19
+</td>
+<td>
+41595.55
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+2010-02-26
+</td>
+<td>
+19403.54
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+2010-03-05
+</td>
+<td>
+21827.90
+</td>
+<td>
+False
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code>    &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+    RangeIndex: 421570 entries, 0 to 421569
+    Data columns (total 5 columns):
+     #   Column        Non-Null Count   Dtype         
+    ---  ------        --------------   -----         
+     0   Store         421570 non-null  int64         
+     1   Dept          421570 non-null  int64         
+     2   Date          421570 non-null  datetime64[ns]
+     3   Weekly_Sales  421570 non-null  float64       
+     4   IsHoliday     421570 non-null  bool          
+    dtypes: bool(1), datetime64[ns](1), float64(1), int64(2)
+    memory usage: 13.3 MB</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Store
+</th>
+<th>
+Dept
+</th>
+<th>
+Date
+</th>
+<th>
+Weekly_Sales
+</th>
+<th>
+IsHoliday
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+421570.00
+</td>
+<td>
+421570.00
+</td>
+<td>
+421570
+</td>
+<td>
+421570.00
+</td>
+<td>
+421570
+</td>
+</tr>
+<tr>
+<th>
+unique
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+143
+</td>
+<td>
+NaN
+</td>
+<td>
+2
+</td>
+</tr>
+<tr>
+<th>
+top
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2011-12-23 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+freq
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+3027
+</td>
+<td>
+NaN
+</td>
+<td>
+391909
+</td>
+</tr>
+<tr>
+<th>
+first
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2010-02-05 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+last
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2012-10-26 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+22.20
+</td>
+<td>
+44.26
+</td>
+<td>
+NaN
+</td>
+<td>
+15981.26
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+12.79
+</td>
+<td>
+30.49
+</td>
+<td>
+NaN
+</td>
+<td>
+22711.18
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+1.00
+</td>
+<td>
+1.00
+</td>
+<td>
+NaN
+</td>
+<td>
+-4988.94
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+11.00
+</td>
+<td>
+18.00
+</td>
+<td>
+NaN
+</td>
+<td>
+2079.65
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+22.00
+</td>
+<td>
+37.00
+</td>
+<td>
+NaN
+</td>
+<td>
+7612.03
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+33.00
+</td>
+<td>
+74.00
+</td>
+<td>
+NaN
+</td>
+<td>
+20205.85
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+45.00
+</td>
+<td>
+99.00
+</td>
+<td>
+NaN
+</td>
+<td>
+693099.36
+</td>
+<td>
+NaN
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We can see that:</p>
+<ol style="list-style-type: decimal">
+<li>There are 143 unique dates (421,570 records in total) from 2010-02-05 to 2012-10-26 in the <code>sales</code> dataframe. We should keep in mind at this point that, on each day, sales across multiple stores with several departments are recorded, even though we do not know if all stores or departments are open on each of the 143 days.</li>
+<li>There is no missing values in any column of this dataframe, which is good.</li>
+<li>However, we should notice that the <code>weekly sales</code> column is extremely right skewed, with a mean of \$15,981, but a 50th percentile (mostly the same as the median) of only \$7,612. The range of the column is also fairly large, from -\$4,989 to \$693,099.</li>
+<li>391,909 records out of 421,570 are not holidays (or with some caculations, about 7% of the records <em>are</em> holidays), which could potentially explain why the <code>weekly sales</code> records are extremely right skewed (<em>maybe</em> most of the sales happen on holidays).</li>
+</ol>
+<p>Now let’s move onto the <code>features</code> dataframe:</p>
+<pre class="python"><code>display(df_features.head())
+display(df_features.info())
+display(df_features.describe(include=&#39;all&#39;).round(2))</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Store
+</th>
+<th>
+Date
+</th>
+<th>
+Temperature
+</th>
+<th>
+Fuel_Price
+</th>
+<th>
+MarkDown1
+</th>
+<th>
+MarkDown2
+</th>
+<th>
+MarkDown3
+</th>
+<th>
+MarkDown4
+</th>
+<th>
+MarkDown5
+</th>
+<th>
+CPI
+</th>
+<th>
+Unemployment
+</th>
+<th>
+IsHoliday
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+1
+</td>
+<td>
+2010-02-05
+</td>
+<td>
+42.31
+</td>
+<td>
+2.572
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+211.096358
+</td>
+<td>
+8.106
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+1
+</td>
+<td>
+2010-02-12
+</td>
+<td>
+38.51
+</td>
+<td>
+2.548
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+211.242170
+</td>
+<td>
+8.106
+</td>
+<td>
+True
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+1
+</td>
+<td>
+2010-02-19
+</td>
+<td>
+39.93
+</td>
+<td>
+2.514
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+211.289143
+</td>
+<td>
+8.106
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+1
+</td>
+<td>
+2010-02-26
+</td>
+<td>
+46.63
+</td>
+<td>
+2.561
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+211.319643
+</td>
+<td>
+8.106
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+1
+</td>
+<td>
+2010-03-05
+</td>
+<td>
+46.50
+</td>
+<td>
+2.625
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+211.350143
+</td>
+<td>
+8.106
+</td>
+<td>
+False
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code>    &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+    RangeIndex: 8190 entries, 0 to 8189
+    Data columns (total 12 columns):
+     #   Column        Non-Null Count  Dtype         
+    ---  ------        --------------  -----         
+     0   Store         8190 non-null   int64         
+     1   Date          8190 non-null   datetime64[ns]
+     2   Temperature   8190 non-null   float64       
+     3   Fuel_Price    8190 non-null   float64       
+     4   MarkDown1     4032 non-null   float64       
+     5   MarkDown2     2921 non-null   float64       
+     6   MarkDown3     3613 non-null   float64       
+     7   MarkDown4     3464 non-null   float64       
+     8   MarkDown5     4050 non-null   float64       
+     9   CPI           7605 non-null   float64       
+     10  Unemployment  7605 non-null   float64       
+     11  IsHoliday     8190 non-null   bool          
+    dtypes: bool(1), datetime64[ns](1), float64(9), int64(1)
+    memory usage: 712.0 KB</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Store
+</th>
+<th>
+Date
+</th>
+<th>
+Temperature
+</th>
+<th>
+Fuel_Price
+</th>
+<th>
+MarkDown1
+</th>
+<th>
+MarkDown2
+</th>
+<th>
+MarkDown3
+</th>
+<th>
+MarkDown4
+</th>
+<th>
+MarkDown5
+</th>
+<th>
+CPI
+</th>
+<th>
+Unemployment
+</th>
+<th>
+IsHoliday
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+8190.00
+</td>
+<td>
+8190
+</td>
+<td>
+8190.00
+</td>
+<td>
+8190.00
+</td>
+<td>
+4032.00
+</td>
+<td>
+2921.00
+</td>
+<td>
+3613.00
+</td>
+<td>
+3464.00
+</td>
+<td>
+4050.00
+</td>
+<td>
+7605.00
+</td>
+<td>
+7605.00
+</td>
+<td>
+8190
+</td>
+</tr>
+<tr>
+<th>
+unique
+</th>
+<td>
+NaN
+</td>
+<td>
+182
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2
+</td>
+</tr>
+<tr>
+<th>
+top
+</th>
+<td>
+NaN
+</td>
+<td>
+2011-07-15 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+False
+</td>
+</tr>
+<tr>
+<th>
+freq
+</th>
+<td>
+NaN
+</td>
+<td>
+45
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+7605
+</td>
+</tr>
+<tr>
+<th>
+first
+</th>
+<td>
+NaN
+</td>
+<td>
+2010-02-05 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+last
+</th>
+<td>
+NaN
+</td>
+<td>
+2013-07-26 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+23.00
+</td>
+<td>
+NaN
+</td>
+<td>
+59.36
+</td>
+<td>
+3.41
+</td>
+<td>
+7032.37
+</td>
+<td>
+3384.18
+</td>
+<td>
+1760.10
+</td>
+<td>
+3292.94
+</td>
+<td>
+4132.22
+</td>
+<td>
+172.46
+</td>
+<td>
+7.83
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+12.99
+</td>
+<td>
+NaN
+</td>
+<td>
+18.68
+</td>
+<td>
+0.43
+</td>
+<td>
+9262.75
+</td>
+<td>
+8793.58
+</td>
+<td>
+11276.46
+</td>
+<td>
+6792.33
+</td>
+<td>
+13086.69
+</td>
+<td>
+39.74
+</td>
+<td>
+1.88
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+1.00
+</td>
+<td>
+NaN
+</td>
+<td>
+-7.29
+</td>
+<td>
+2.47
+</td>
+<td>
+-2781.45
+</td>
+<td>
+-265.76
+</td>
+<td>
+-179.26
+</td>
+<td>
+0.22
+</td>
+<td>
+-185.17
+</td>
+<td>
+126.06
+</td>
+<td>
+3.68
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+12.00
+</td>
+<td>
+NaN
+</td>
+<td>
+45.90
+</td>
+<td>
+3.04
+</td>
+<td>
+1577.53
+</td>
+<td>
+68.88
+</td>
+<td>
+6.60
+</td>
+<td>
+304.69
+</td>
+<td>
+1440.83
+</td>
+<td>
+132.36
+</td>
+<td>
+6.63
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+23.00
+</td>
+<td>
+NaN
+</td>
+<td>
+60.71
+</td>
+<td>
+3.51
+</td>
+<td>
+4743.58
+</td>
+<td>
+364.57
+</td>
+<td>
+36.26
+</td>
+<td>
+1176.42
+</td>
+<td>
+2727.14
+</td>
+<td>
+182.76
+</td>
+<td>
+7.81
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+34.00
+</td>
+<td>
+NaN
+</td>
+<td>
+73.88
+</td>
+<td>
+3.74
+</td>
+<td>
+8923.31
+</td>
+<td>
+2153.35
+</td>
+<td>
+163.15
+</td>
+<td>
+3310.01
+</td>
+<td>
+4832.56
+</td>
+<td>
+213.93
+</td>
+<td>
+8.57
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+45.00
+</td>
+<td>
+NaN
+</td>
+<td>
+101.95
+</td>
+<td>
+4.47
+</td>
+<td>
+103184.98
+</td>
+<td>
+104519.54
+</td>
+<td>
+149483.31
+</td>
+<td>
+67474.85
+</td>
+<td>
+771448.10
+</td>
+<td>
+228.98
+</td>
+<td>
+14.31
+</td>
+<td>
+NaN
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Right away, we can see that:</p>
+<ol style="list-style-type: decimal">
+<li>Compared to the <code>sales</code> dataframe, there are less records (8190) in the <code>features</code> dataframe. It makes sense because this dataframe is only detailed to store level and not department; for example, different departments in the same store <em>probably</em> experience the same weather on the same day.</li>
+<li>However, with only store level data, we might find it harder to model the effect of markdowns across different departments within the same store.</li>
+<li>The are 182 unique dates from 2010-02-05 to 2013-07-26, which is a wider range of record than the <code>sales</code> dataframe.</li>
+<li>From the first 10 rows, we can see that the dates do match up; however, it wouldn’t hurt to check the proportion of matching records (by date and store) especially if we are thinking about merging together the two dataframes</li>
+<li>The 5 mark down columns contain ‘anonymous data related to promotional mark downs’ as per Kaggle, and we might want to further inspect these columns (e.g. whether two mark downs occured at any point for the same store).</li>
+<li>Again, approximately 7% of the 8190 <code>features</code> records are holidays, which is consistent with the <code>sales</code> dataframe</li>
+</ol>
+<p>Last but not least, let’s take a look at the <code>stores</code> dataframe:</p>
+<pre class="python"><code>display(df_stores.head())
+display(df_stores.info())
+display(df_stores.describe(include=&#39;all&#39;).round(2))</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Store
+</th>
+<th>
+Type
+</th>
+<th>
+Size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+1
+</td>
+<td>
+A
+</td>
+<td>
+151315
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+2
+</td>
+<td>
+A
+</td>
+<td>
+202307
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+3
+</td>
+<td>
+B
+</td>
+<td>
+37392
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+4
+</td>
+<td>
+A
+</td>
+<td>
+205863
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+5
+</td>
+<td>
+B
+</td>
+<td>
+34875
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre><code>    &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+    RangeIndex: 45 entries, 0 to 44
+    Data columns (total 3 columns):
+     #   Column  Non-Null Count  Dtype 
+    ---  ------  --------------  ----- 
+     0   Store   45 non-null     int64 
+     1   Type    45 non-null     object
+     2   Size    45 non-null     int64 
+    dtypes: int64(2), object(1)
+    memory usage: 1.2+ KB</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Store
+</th>
+<th>
+Type
+</th>
+<th>
+Size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+45.00
+</td>
+<td>
+45
+</td>
+<td>
+45.00
+</td>
+</tr>
+<tr>
+<th>
+unique
+</th>
+<td>
+NaN
+</td>
+<td>
+3
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+top
+</th>
+<td>
+NaN
+</td>
+<td>
+A
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+freq
+</th>
+<td>
+NaN
+</td>
+<td>
+22
+</td>
+<td>
+NaN
+</td>
+</tr>
+<tr>
+<th>
+mean
+</th>
+<td>
+23.00
+</td>
+<td>
+NaN
+</td>
+<td>
+130287.60
+</td>
+</tr>
+<tr>
+<th>
+std
+</th>
+<td>
+13.13
+</td>
+<td>
+NaN
+</td>
+<td>
+63825.27
+</td>
+</tr>
+<tr>
+<th>
+min
+</th>
+<td>
+1.00
+</td>
+<td>
+NaN
+</td>
+<td>
+34875.00
+</td>
+</tr>
+<tr>
+<th>
+25%
+</th>
+<td>
+12.00
+</td>
+<td>
+NaN
+</td>
+<td>
+70713.00
+</td>
+</tr>
+<tr>
+<th>
+50%
+</th>
+<td>
+23.00
+</td>
+<td>
+NaN
+</td>
+<td>
+126512.00
+</td>
+</tr>
+<tr>
+<th>
+75%
+</th>
+<td>
+34.00
+</td>
+<td>
+NaN
+</td>
+<td>
+202307.00
+</td>
+</tr>
+<tr>
+<th>
+max
+</th>
+<td>
+45.00
+</td>
+<td>
+NaN
+</td>
+<td>
+219622.00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code>stores</code> dataframe appear to be smaller and simper. We can see that:</p>
+<ol style="list-style-type: decimal">
+<li>Almost half of the stores are type A stores; we might want to explore later whether there is any correlation between <code>store type</code> and other variables in the three dataframes</li>
+<li><code>Sizes</code> of the stores are not extremely skewed, with its mean close to its 50th percentile. However, we might want to check if they are light or heavy tailed.</li>
+</ol>
+</div>
+<div id="visualization" class="section level3">
+<h3>Visualization</h3>
+<p>Now that we have taken a look at the aggregated data, we want to look at the sales of each store and department on an individual level. However, it is not the most efficient to print or plot the subsets one by one. Luckily, the <code>interact()</code> function from the <a href="https://ipywidgets.readthedocs.io/en/latest/">ipywidgets</a> package allow us to create an interactive “dashboard” in Jupyter notebooks:</p>
+<p>(Note that currently the following chunk is displayed with <a href="https://www.nbinteract.com/">nbinteract</a> and <a href="https://mybinder.org/">binder</a> which may lead to different formatting that will be fixed later)</p>
+<iframe src="https://charlieqcao.github.io/sales_forecast_widget/sales_forecast_widget_01.html" style="height: 1520px;">
+</iframe>
+<p>At a glance (by randomly inspecting different combinations), seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales throughout time, while some others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments.</p>
+<p>Even though is nice to be able to see detailed sales performance for each individual department in every store, we also want to inspect whether there are shared patterns in our sales data. Thus, let’s aggregate the data a little bit so that we could visualize and compare sales across different stores for the same department and then across different departments in the same store.</p>
+<iframe src="https://charlieqcao.github.io/sales_forecast_widget/sales_forecast_widget_02.html" style="height: 1450px;">
+</iframe>
+</div>
+<div id="replacement-and-transformation" class="section level3">
+<h3>Replacement and Transformation</h3>
+<pre class="python"><code></code></pre>
+</div>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

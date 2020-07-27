@@ -1,0 +1,18 @@
+---
+title: "Get Involved"
+output:
+  html_document:
+    toc: false
+---
+
+### Suggestions for the Current Notebooks
+
+If you discover more efficient algorithms or methods to solve the existing problems that we have in the notebooks, feel free to [create an issue](https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue) within the corresponding [repository](https://github.com/Master-of-Business-Analytics).
+
+### Develop and Contribute Your Own Notebooks
+
+If you have a notebook that you would like to share with us, please email it to mban@sauder.ubc.ca
+
+### Resources
+
+If you are not familiar with Git or GitHub, the [COE Tool Box](http://blogs.ubc.ca/coetoolbox/2017/04/21/getting-started-with-git-and-github/) provides a very detailed tutorial. We also encourage you to utilize [GitHub Learning Lab](https://lab.github.com/) to familiarize yourself with the version control system; GitHub also provides [additional resources](https://try.github.io/) for you to learn Git itself.

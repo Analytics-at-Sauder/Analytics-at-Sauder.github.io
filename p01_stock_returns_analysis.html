@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Stock Return Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Others</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Stock Return Analysis</h1>
+
+</div>
+
+
+<p>In this project, we focused on using Python and Pandas to retrieve historical stock prices from Yahoo finance to:</p>
+<ol style="list-style-type: decimal">
+<li>Perform primary analysis of stock returns</li>
+<li>Calculate key financial statistics or moments</li>
+</ol>
+<p>All of the graphs and code can be found in the MBAN <a href="https://github.com/Master-of-Business-Analytics/Project_01_Financial_Analysis">GitHub repository</a>, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the executable environment Syzygy.</p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_01_Financial_Analysis&urlpath=tree%2FProject_01_Financial_Analysis%2F" target="_blank" class="button">Launch Syzygy</a></p>
+<p>To start, we load all relevant packages into the python workspace</p>
+<pre class="python"><code>import pandas as pd
+from pandas_datareader import data as pdr
+import yfinance as yf
+import datetime
+import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+from scipy.stats import pearsonr
+from pandas.util.testing import assert_frame_equal
+
+yf.pdr_override()
+pd.core.common.is_list_like = pd.api.types.is_list_like 
+#The following line seems to be necessary due to a newer version of pandas</code></pre>
+<div id="business-problem" class="section level2">
+<h2>Business Problem</h2>
+<p>Stock markets play an important role in spurring economic growth and development through diversification opportunities. Investors can look at several different measures to gauge stock performance. In this project we would examine stocks from 4 technology corporations. The table below shows the companies and their corresponding tickers in Yahoo finance website.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">YAHOO_TICKER</th>
+<th>Company Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GOOG</td>
+<td>Google</td>
+</tr>
+<tr class="even">
+<td align="left">AAPL</td>
+<td>Apple</td>
+</tr>
+<tr class="odd">
+<td align="left">AMZN</td>
+<td>Amazon</td>
+</tr>
+<tr class="even">
+<td align="left">MSFT</td>
+<td>Microsoft.</td>
+</tr>
+</tbody>
+</table>
+<pre class="python"><code>tickers = [&#39;MSFT&#39;,&#39;AAPL&#39;,&#39;GOOG&#39;,&#39;AMZN&#39;]</code></pre>
+<p>The stock adjusted prices are then retrieved from yahoo finance for the time frame 31 Dec 2018 - 31 Dec 2019.</p>
+<pre class="python"><code>#set start and end date of the analysis
+start = datetime.datetime(2018, 12, 31)
+end = datetime.datetime(2020, 1, 1)</code></pre>
+<p>Extract data from yahoo finance</p>
+<pre class="python"><code>#Retrieve data from yahoo finance
+f2AAPL = pdr.get_data_yahoo(&quot;AAPL&quot;, start, end)
+
+#Intiate the dictionnary that will store all the downloaded tick data
+d = pd.DataFrame()
+#Loop over each tickers to load the data to be stored in the dictionnary d
+for tick in tickers:
+    print(&#39;Downloading &#39;+tick)
+    try:
+        f = pdr.get_data_yahoo(tick,start,end,threads=False,progress=False)
+        d[tick] = f[&#39;Adj Close&#39;]  # select the adjusted close price
+    except ValueError:
+        print(&#39; No data found&#39;)
+        </code></pre>
+<pre><code>[*********************100%***********************]  1 of 1 completed
+Downloading MSFT
+Downloading AAPL
+Downloading GOOG
+Downloading AMZN</code></pre>
+</div>
+<div id="stock-price-timeline" class="section level2">
+<h2>Stock Price Timeline</h2>
+<p>The graph below is useful when comparing price trends. Microsoft and Apple have experienced relatively constant trends over the past year, however Google and Amazon have some variation in stock price over the one-year period observed.</p>
+<pre class="python"><code>#plot the stock price evolution
+
+#set size of plot
+plt.figure(figsize=(25,8))
+
+for i, col in enumerate(d.columns):
+    d[col].plot()
+
+plt.title(&#39;Price Evolution Comparison&#39;)
+plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
+plt.show()</code></pre>
+<p><img src="images/p01_01.png" /></p>
+</div>
+<div id="stock-return" class="section level2">
+<h2>Stock Return</h2>
+<p>A stock return is the change in price on an asset or stock ,which may be represented in terms of price change or percentage change. In order to compare the stocks on a level playing field , the returns of the stocks is calculated. The daily returns is defined as the amount of percentage change in the value of a stock over a single day of trading.</p>
+<pre class="python"><code># Create table with daily returns
+ret = d.pct_change()
+
+print(ret.head())
+
+#create table with monthly returns
+</code></pre>
+<pre><code>                MSFT      AAPL      GOOG      AMZN
+Date                                              
+2018-12-31       NaN       NaN       NaN       NaN
+2019-01-02 -0.004430  0.001141  0.009888  0.024741
+2019-01-03 -0.036788 -0.099607 -0.028484 -0.025242
+2019-01-04  0.046509  0.042689  0.053786  0.050064
+2019-01-07  0.001275 -0.002226 -0.002167  0.034353</code></pre>
+<p><b> Monthly and Quarterly return calculation </b> The monthly and quarterly returns can be calculated to get a more consolidated view of the stock returns.</p>
+<pre class="python"><code># Resample `aapl` to business months, take last observation as value 
+monthly = d.resample(&#39;BM&#39;).apply(lambda x: x[-1])
+
+# Calculate the monthly percentage change
+month_ret = monthly.pct_change()
+print(month_ret)</code></pre>
+<pre><code>                MSFT      AAPL      GOOG      AMZN
+Date                                              
+2018-12-31       NaN       NaN       NaN       NaN
+2019-01-31  0.028158  0.055154  0.077983  0.144317
+2019-02-28  0.077358  0.044777  0.003180 -0.045906
+2019-03-29  0.052754  0.097026  0.047673  0.085936
+2019-04-30  0.107343  0.056436  0.012929  0.081859
+2019-05-31 -0.049481 -0.124213 -0.071394 -0.078613
+2019-06-28  0.083118  0.130519 -0.020587  0.066792
+2019-07-31  0.017244  0.076395  0.125607 -0.014179
+2019-08-30  0.015037 -0.016461 -0.023490 -0.048474
+2019-09-30  0.008487  0.072962  0.026008 -0.022733
+2019-10-31  0.031216  0.110684  0.033724  0.023475
+2019-11-29  0.059462  0.077554  0.035592  0.013587
+2019-12-31  0.041749  0.098784  0.024568  0.026122</code></pre>
+<pre class="python"><code># Resample `aapl` to quarters, take the mean as value per quarter
+quarter = d.resample(&quot;4M&quot;).mean()
+
+# Calculate the quarterly percentage change
+quat_ret = quarter.pct_change()
+print(quat_ret)</code></pre>
+<pre><code>                MSFT      AAPL      GOOG      AMZN
+Date                                              
+2018-12-31       NaN       NaN       NaN       NaN
+2019-04-30  0.111647  0.129152  0.109303  0.142524
+2019-08-31  0.189548  0.125347 -0.005438  0.090177
+2019-12-31  0.091723  0.253746  0.115010 -0.050098</code></pre>
+<div id="stock-return-analysis" class="section level3">
+<h3>Stock Return Analysis</h3>
+<p>In this project , we will focus on daily returns. We can visualize the data in order to obtain interesting insights about the data.</p>
+<pre class="python"><code># Line plot of the returns
+ret.plot()
+plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
+plt.show()</code></pre>
+<p><img src="images/p01_02.png" /></p>
+<p>The line plot does not tell us much about the difference in variation across the stocks. The return distributions below enables us to quickly determine the differences in stock behavior over the last year.</p>
+<pre class="python"><code># Plot the distributions
+ret.hist(bins=50, sharex=True, figsize=(12,8))
+# Show the resulting plot
+plt.show()</code></pre>
+<p><img src="images/p01_03.png" /></p>
+<p>The volatility of a stock is a measurement of the change in variance in the returns of a stock over a specific period of time. It is common to compare the volatility of a stock with another stock to get a feel for which may have less risk or to a market index to examine the stock’s volatility in the overall market. Generally, the higher the volatility, the riskier the investment in that stock, which results in investing in one over another stock.</p>
+<p>The distribution looks very symmetrical and normally distributed: the daily changes center around the bin 0.00. The returns of most of the stocks above, are between -0.05 and 0.05 ,however most Google shows a right skewed distribution and most of bars extend farther to the right when compared to the other stocks. Based on this distribution plots, Google has performed better than Amazon, Microsoft and Apple, most of the time.</p>
+<p>Another interesting plot is finding the relationship between the stocks, this analysis is useful in stocks in the same industry. The returns of a stock may be dependent on another stock. The plot below shows the scatter plots for each pair of stocks.</p>
+<pre class="python"><code># Import matplotlib
+import matplotlib.pyplot as plt
+
+from pandas.plotting import scatter_matrix
+
+# Plot a scatter matrix with the `daily_pct_change` data 
+scatter_matrix(ret, diagonal=&#39;kde&#39;, alpha=0.8,figsize=(12,12))
+
+# Show the plot
+plt.show()</code></pre>
+<p><img src="images/p01_04.png" /></p>
+<p>A scatter plot is a visual representation of the correlation between two items. It ties in with the correlation coefficient as it is used for indicating whether a linear relationship exists or not between two variables. The plot above shows that there is a positive relationship between each pair of stock return. To check if any of the stocks we are analyzing are correlated, a correlation matrix is created.</p>
+<pre class="python"><code>mask = np.tril(ret.corr())
+sns.heatmap(ret.corr(), vmin=-1,cmap=sns.diverging_palette(20, 220, n=200), vmax=1, center= 0,mask=mask)
+plt.show()</code></pre>
+<p><img src="images/p01_05.png" /></p>
+<p>Based on the correlation matrix, the returns of all the stocks are correlated with Amazon and Microsoft having the most correlation.</p>
+</div>
+</div>
+<div id="stock-evaluation" class="section level2">
+<h2>Stock Evaluation</h2>
+<p>When making a decision on what stock to invest in, there are five important statistics that are considered. These statistics are also called five moments of stock returns.</p>
+<ul>
+<li>Mean</li>
+<li>Standard deviation</li>
+<li>Skewness</li>
+<li>kurtosis</li>
+<li>Autocorrelation</li>
+</ul>
+<div id="mean-and-standard-deviation" class="section level3">
+<h3>Mean and standard deviation</h3>
+<p>The standard deviation tells you how much the portfolio’s return can deviate from the mean historical return. All of stocks have standard deviation that are greater than the mean, meaning that there is a higher risk, however this could be in an investor’s favor as there is a possibility of above average returns.</p>
+<pre class="python"><code>#calculate mean
+ret_mean=ret.mean()
+
+#variance
+ret_var=ret.var()
+
+# calculate standard deviation
+ret_std = ret.std()
+ret_std2 = pd.DataFrame(ret.std())
+
+#create dataframe of mean
+out1 = pd.DataFrame(ret_mean)
+out2 = out1.rename(columns={0: &#39;mean&#39;})
+
+#Add std as new column 
+out3 = out2.join(ret_std2)
+out4 = out3.rename(columns={0: &#39;std&#39;})
+
+print(out4.head())</code></pre>
+<pre><code>          mean       std
+MSFT  0.001883  0.012491
+AAPL  0.002665  0.016466
+GOOG  0.001129  0.015208
+AMZN  0.000926  0.014432</code></pre>
+</div>
+<div id="skewness-and-kurtosis" class="section level3">
+<h3>Skewness and Kurtosis</h3>
+<p><b> Skewness</b> is used as an risk measurement tool when the data is exhibits asymmetrical distribution. Skewness can either be negative or positive. A stock with negative skewness is one that generates frequent small gains and few extreme or significant losses in the time period considered. On the other hand, a stock with positive skewness is one that generates frequent small losses and few extreme gains.</p>
+<p><b>Kurtosis</b> serves to measure risk, as the abnormal returns on some instances could go beyond 3-times the standard deviation limit, according to the theory of normal distribution. Ignoring such extreme observations can create risks that are not captured by financial models based on normal distribution. When data follows normal distribution, the kurtosis has a value of three. Value greater than three means higher instances of abnormal returns, whereas low value of kurtosis (less than three).</p>
+<pre class="python"><code># calculate skewness
+ret_skew=ret.skew()
+# calculate Kurtosis
+ret_kurt=ret.kurt()
+
+#add as new column
+out4[&#39;skew&#39;] = ret_skew.values
+out4[&#39;kurt&#39;] = ret_kurt.values
+print(out4.head())</code></pre>
+<pre><code>          mean       std      skew       kurt
+MSFT  0.001883  0.012491 -0.194007   1.143430
+AAPL  0.002665  0.016466 -0.921614   7.240603
+GOOG  0.001129  0.015208  0.559534  11.537096
+AMZN  0.000926  0.014432 -0.058477   1.858702</code></pre>
+<p>The table above shows that Google and Apple have higher instances of abnormal returns. Generally, Stocks with high positive skewness and low kurtosis outperform the stocks that display negative skewness and high kurtosis</p>
+</div>
+<div id="autocorrelation" class="section level3">
+<h3>Autocorrelation</h3>
+<p>Autocorrelation measures the relationship between a variable’s current value and its past values. An autocorrelation of +1 represents a perfect positive correlation, while an autocorrelation of negative 1 represents a perfect negative correlation. Autocorrelation is used to see how much of an impact past returns for a stock have on its future returns.</p>
+<pre class="python"><code>#create empty list to put autocorrelation values
+autocorr_res = []
+
+from scipy.stats import pearsonr
+# For-loop to calculate autocorrelation 
+for i in ret.columns:
+    data0 = ret[i]
+    data = data0.dropna()
+    corr, pval = pearsonr(data[:-1], data[1:])
+    autocorr_res.append(corr)
+    
+#Add autocorrelation as a column
+out4[&#39;autocorr&#39;] = autocorr_res
+print(out4.head())</code></pre>
+<pre><code>          mean       std      skew       kurt  autocorr
+MSFT  0.001883  0.012491 -0.194007   1.143430 -0.125887
+AAPL  0.002665  0.016466 -0.921614   7.240603 -0.092361
+GOOG  0.001129  0.015208  0.559534  11.537096 -0.033810
+AMZN  0.000926  0.014432 -0.058477   1.858702 -0.004840</code></pre>
+<p>With low autocorrelations of -0.12 to 0, the degree of similarity between a given time series and a lagged version of itself over successive time intervals is minimal thus past returns do not seem to influence future returns.</p>
+</div>
+</div>
+<div id="final-conclusion" class="section level2">
+<h2>Final Conclusion</h2>
+<p>The project begun with the endeavor to a retrieve financial stock prices from yahoo finance and basic data manipulation to retrieve the stock returns. A basic analysis of financial stock returns by reviewing the key statistics is reviewed. Further work might involve stock portfolio return analysis under different investment strategies.</p>
+</div>
+<div id="reference" class="section level2">
+<h2>Reference</h2>
+<ol style="list-style-type: decimal">
+<li>Bhardwaj, S. (2018, December 10). Use these two tools to look for less risky, promising stocks. Retrieved July 16, 2020, from <a href="https://economictimes.indiatimes.com/wealth/invest/use-these-two-tools-to-look-for-less-risky-promising-stocks/articleshow/66997140.cms" class="uri">https://economictimes.indiatimes.com/wealth/invest/use-these-two-tools-to-look-for-less-risky-promising-stocks/articleshow/66997140.cms</a></li>
+<li>Unknown. (2019). Scipy.stats.pearsonr¶. Retrieved July 16, 2020, from <a href="http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.pearsonr.html" class="uri">http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.pearsonr.html</a></li>
+</ol>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+---
+title: "About This Project"
+output:
+  html_document:
+    toc: false
+---
+
+The goal of this repository is to create an open Business Analytics Learning Resources to enhance students’ data analysis and meta-skills. The Business Analytics Learning Resource will provide various hands-on experiences and experimentation activities grounded in ‘real-life’ data and business problems through open source and cloud-based tools (e.g. Interactive Computing Environment, Jupyter notebooks).  This resource  allows students to enhance their meta-skills (including technical skills such as being able to deploy the results of their analyses) that are in high demand in the industry. 
+
+This repository contains real world problems, where business analytics programming skills are used in providing solutions. These resources will benefit not only MBAN students (including alumni and prospective students), but also other students at Sauder (e.g. MBA, BCOM, MM). 
+
+This website is also linked to a [Github repository](https://github.com/Master-of-Business-Analytics/Code_repository) that hosts the actual Python and R notebooks, for download and modification. 
+ 
