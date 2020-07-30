@@ -549,7 +549,7 @@ print(demand.head())</code></pre>
 demand[1].hist()
 plt.title(&#39;Histogram of past product sales &#39;)
 plt.show()</code></pre>
-<p><img src="dec_01.png" /></p>
+<p><img src="images/p12_01.png" /></p>
 <pre class="python"><code>demand[1].std()</code></pre>
 <pre><code>
 
@@ -849,7 +849,7 @@ plt.ylabel(&quot;Inventory Status&quot;)
 plt.axhline(2170, linewidth=1, color=&quot;red&quot;, linestyle=&quot;:&quot;)
 plt.title(&#39;Periodic Review: Inventory level for one simulation &#39;)
 plt.show()</code></pre>
-<p><img src="dec_02.png" /></p>
+<p><img src="images/p12_02.png" /></p>
 </div>
 <div id="operational-cost" class="section level3">
 <h3>Operational Cost</h3>
@@ -913,7 +913,7 @@ plt.xlabel(&quot;Profits&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
-<p><img src="dec_03.png" /></p>
+<p><img src="images/p12_03.png" /></p>
 <pre class="python"><code>sns.distplot(
     o_list,
     kde=False
@@ -923,7 +923,7 @@ plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Mean percentage of orders lost &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
-<p><img src="dec_04.png" /></p>
+<p><img src="images/p12_04.png" /></p>
 </div>
 </div>
 <div id="profit-optimization-in-periodic-review-model" class="section level2">
@@ -955,7 +955,7 @@ plt.xlabel(&quot;Ware house capacity&quot;)
 plt.ylabel(&quot;Expected Profit&quot;)
 plt.plot(xx, yy)
 plt.show()</code></pre>
-<p><img src="dec_05.png" /></p>
+<p><img src="images/p12_05.png" /></p>
 <p>This gave an optimum expected profit of $93,883 for the order up-to point of 2600.</p>
 <pre class="python"><code># creating a dataframe with all the results
 idx = [&#39;Order-point M&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
@@ -1094,7 +1094,7 @@ plt.xlabel(&quot;Days&quot;)
 plt.ylabel(&quot;Inventory Status&quot;)
 plt.axhline(3000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()</code></pre>
-<p><img src="dec_06.png" /></p>
+<p><img src="images/p12_06.png" /></p>
 <pre class="python"><code>def cc_mc_simulation(q, r, num_simulations,summary,days=365):
     profit_list = []
     orders_lost_list = []
@@ -1120,7 +1120,7 @@ plt.xlabel(&quot;Profits&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
-<p><img src="dec_07.png" /></p>
+<p><img src="images/p12_07.png" /></p>
 <pre class="python"><code>sns.distplot(
     o_list2,
     kde=False
@@ -1130,7 +1130,7 @@ plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Orders Lost &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
-<p><img src="dec_08.png" /></p>
+<p><img src="images/p12_08.png" /></p>
 </div>
 </div>
 <div id="profit-optimization-in-continuous-review-model" class="section level2">
@@ -1170,7 +1170,7 @@ ax.set_ylabel(&#39;Reorder Point&#39;)
 ax.set_zlabel(&#39;Profit&#39;)
 
 plt.show()</code></pre>
-<p><img src="dec_09.png" /></p>
+<p><img src="images/p12_09.png" /></p>
 <p>Based on the simulations, a maximum profit of $145,331 for the order quantity of 2100 and the re-order point of 950 was derived.Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits and the proportion of orders lost over the period of the year for each of the products.</p>
 <pre class="python"><code>idx = [&#39;Order Quantity&#39;, &#39;Reorder Point&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
 
