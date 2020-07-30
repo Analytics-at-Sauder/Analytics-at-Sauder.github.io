@@ -615,6 +615,155 @@ nx.draw_networkx_edges(G, pos=pos_nodes, edgelist=crit_edges, width=10, alpha=0.
 plt.margins(0.1)</code></pre>
 <p><img src="images/p13_03.png" /></p>
 <p>Looking for the critical path can easily become a hassle in a big project with ever changing timelines of various tasks. The <code>networkx</code> and <code>criticalpath</code> packages make it so much faster and easier to find and visualize the path that can use the most improvement. Now that you know the basics, we have created a challenge for you below so that you could apply these techniques to a more complicated problem by yourself. Don’t forget to go back and read the documentations of the different packages if you want to explore different ways of solving this problem!</p>
+<div id="gantt-charts" class="section level4">
+<h4>Gantt Charts</h4>
+<p>Another way of visualizing critical path is by plotting out the Gantt Chart</p>
+<pre class="python"><code>proj_startdate = date.today()
+
+proj_schedule = pd.DataFrame([dict(Task = key, 
+                                   Start = datetime.date.today(), 
+                                   Finish = datetime.date.today() + datetime.timedelta(val[&#39;Duration&#39;]), 
+                                   Status = &#39;NA&#39;)
+                              for key, val in dict(tasks).items()])
+
+for key, val in dict(tasks).items():
+    dep = [d for d in dependencies if d[1] == key]
+    prev_tasks = [t[0] for t in dep]
+    if prev_tasks:
+        prev_finish = proj_schedule[proj_schedule.Task.isin(prev_tasks)][&#39;Finish&#39;].max()
+        proj_schedule.loc[proj_schedule.Task == key, &#39;Start&#39;] = prev_finish
+        proj_schedule.loc[proj_schedule.Task == key, &#39;Finish&#39;] = prev_finish + datetime.timedelta(val[&#39;Duration&#39;])
+        
+proj_schedule.loc[proj_schedule.Task.isin(crit_path), &#39;Status&#39;] = &#39;Critical Path&#39;
+        
+display(proj_schedule)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Task
+</th>
+<th>
+Start
+</th>
+<th>
+Finish
+</th>
+<th>
+Status
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+A
+</td>
+<td>
+2020-07-29
+</td>
+<td>
+2020-08-01
+</td>
+<td>
+NA
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+B
+</td>
+<td>
+2020-07-29
+</td>
+<td>
+2020-08-03
+</td>
+<td>
+Critical Path
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+C
+</td>
+<td>
+2020-08-03
+</td>
+<td>
+2020-08-05
+</td>
+<td>
+Critical Path
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+D
+</td>
+<td>
+2020-08-01
+</td>
+<td>
+2020-08-04
+</td>
+<td>
+NA
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+E
+</td>
+<td>
+2020-08-05
+</td>
+<td>
+2020-08-10
+</td>
+<td>
+Critical Path
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code>fig = px.timeline(proj_schedule, x_start=&quot;Start&quot;, x_end=&quot;Finish&quot;, y=&quot;Task&quot;, color=&quot;Status&quot;)
+fig.update_yaxes(autorange=&quot;reversed&quot;) # otherwise tasks are listed from the bottom up
+Image(fig.to_image(format=&quot;png&quot;))</code></pre>
+<p><img src="images/p13_04.png" /></p>
+</div>
 </div>
 </div>
 <div id="challenge-create-a-dynamic-tool" class="section level2">
