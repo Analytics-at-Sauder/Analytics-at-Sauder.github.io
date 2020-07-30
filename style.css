@@ -21,7 +21,7 @@ a:hover, a:focus {
     color: #427800;
 }
 body {
-  font-size: 16px;
+  font-size: 18px;
   color: #3e3e3e;
   background: #ffffff;
   padding: 40px 20px;
@@ -122,6 +122,7 @@ iframe {
 }
 .navbar-default {
   background: #f0f0f0;
+  font-size: 16px;
 }
 .navbar-default .navbar-toggle {
   border: 0;
@@ -219,7 +220,6 @@ iframe {
   }
 }
 p {
-  font-size: 18px;
   margin-top: 30px;
   margin-bottom: 30px;
   line-height: 2;
