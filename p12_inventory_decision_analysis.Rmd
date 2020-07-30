@@ -71,7 +71,7 @@ plt.show()
 ```
 
 
-![](dec_01.png)
+![](images/p12_01.png)
 
 
 
@@ -335,7 +335,7 @@ plt.show()
 ```
 
 
-![](dec_02.png)
+![](images/p12_02.png)
 
 
 ### Operational Cost 
@@ -422,7 +422,7 @@ plt.show()
 ```
 
 
-![](dec_03.png)
+![](images/p12_03.png)
 
 
 
@@ -439,7 +439,7 @@ plt.show()
 ```
 
 
-![](dec_04.png)
+![](images/p12_04.png)
 
 
 ## Profit Optimization in Periodic Review Model
@@ -481,7 +481,7 @@ plt.show()
 ```
 
 
-![](dec_05.png)
+![](images/p12_05.png)
 
 
 This gave an optimum expected profit of $93,883 for the order up-to point of 2600.
@@ -628,7 +628,7 @@ plt.show()
 ```
 
 
-![](dec_06.png)
+![](images/p12_06.png)
 
 
 
@@ -666,7 +666,7 @@ plt.show()
 ```
 
 
-![](dec_07.png)
+![](images/p12_07.png)
 
 
 
@@ -683,7 +683,7 @@ plt.show()
 ```
 
 
-![](dec_08.png)
+![](images/p12_08.png)
 
 
 ## Profit Optimization in Continuous Review Model
@@ -738,7 +738,7 @@ plt.show()
 ```
 
 
-![](dec_09.png)
+![](images/p12_09.png)
 
 
 Based on the simulations, a maximum profit of $145,331 for the order quantity of 2100 and the re-order point of 950 was derived.Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits and the proportion of orders lost over the period of the year for each of the products.
