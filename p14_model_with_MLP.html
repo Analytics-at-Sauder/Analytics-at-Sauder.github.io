@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Hao" />
 
 
-<title>Versioning</title>
+<title>Untitled</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -495,222 +496,758 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Versioning</h1>
+<h1 class="title toc-ignore">Untitled</h1>
+<h4 class="author">Hao</h4>
+<h4 class="date">8/5/2020</h4>
 
 </div>
 
 
-<p>The Versioning is a business practice in which a company produces different models of essentially the same product and then charges different prices for each model. In this way, the business is attempting to attract higher prices based on the value a customer perceives.</p>
-<p>In this project, we will lead you through examples to talk about why creating different version can bring more profits to the companies while the customers are still willing to pay for it.</p>
-<p>All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the syzygy.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_02_Versioning&urlpath=tree%2FProject_02_Versioning%2F" target="_blank" class="button">Launch Syzygy</a></p>
-<div id="business-problems" class="section level2">
-<h2>Business Problems</h2>
-<p>In real world, it is common for the companies to see that different type of customers will have different price in their heart for the same product. For example, for the same bottle of mineral water, customers who care about their own health might pay 5 dollar for it. Because they thinkit is good for their health while the majority of customers only wills to pay less than 1 dollar for it because it is just regular water in their mind. Due to moral restriction and legislation issue, one product(SKU) can only have 1 price, so the company might have to sell the bottle water for less than $1 in order to reach to the majority of customers.</p>
-<p>So is there a way to gain the extra 4 dollar from some of the customer? Here’s where versioning will come to place. By providing different values and setting price appropriately, the company can possibly get more from their high value customers. We will show it in the following example.</p>
-<p>In the following examples, we make two major assumptions:</p>
-<p>For a single product offering, we assume that customers choose the product as long as the WTP(Willingness To Pay)is greater than the price.</p>
-<p>For a multiple product offering, we assume that consumers choose the product that gives them the highest surplus.</p>
-<div id="single-version" class="section level3">
-<h3>Single Version</h3>
-<hr />
-<pre class="python"><code>import pandas as pd
+<p>Regression is among one the most common used method when analyst is trying to describe the result of an event - like the house price, which is what we are going to focus on in this notebook. The</p>
+<pre class="python"><code>import numpy as np
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+import matplotlib as plot</code></pre>
+<p>First let look at the data first to see what’s inside it.</p>
+<pre class="python"><code>raw_df = pd.read_csv(&quot;data/train.csv&quot;)
+raw_df.head()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-from bokeh.io import output_notebook, show,output_file
-from bokeh.plotting import figure
-from bokeh.embed import file_html</code></pre>
-<pre class="python"><code>lst_name = [&#39;Abby&#39;,&quot;Bob&quot;,&#39;Cindy&#39;,&#39;Desmond&#39;,&#39;Eva&#39;]
-lst_WTP = [8,9,10,19,20]
-df = pd.DataFrame(list(zip(lst_name,lst_WTP)), columns = [&#39;Cluster Names&#39;,&#39;WTP&#39;])
-print(df.to_string(index=False))
-df_1 = df</code></pre>
-<pre><code>Cluster Names  WTP
-         Abby    8
-          Bob    9
-        Cindy   10
-      Desmond   19
-          Eva   20</code></pre>
-<p>Here we suppose we have five cluster of customers who have different WTP for the same movie ticket. These are the potential customers who can buy the movie tickets. As the manager of the cinema, you have to set a price to make the most out of the movie.</p>
-<p>There are five possible points to set the price which are the WTPs of each cluster because the customers will buy the movie ticket as long as the WTP is greater than the price.</p>
-<pre class="python"><code>total_profit_lst = []
-for i in lst_WTP:
-    profit = 0
-    for k in lst_WTP:
-        if int(i) &lt;= int(k):
-            profit = profit + int(i)          
-    total_profit_lst.append(profit)
-df_single = pd.DataFrame(list(zip(lst_WTP,total_profit_lst)), columns = [&#39;Ticket Price&#39;,&#39;Total Profit&#39;])
-print(df_single.to_string(index=False))</code></pre>
-<pre><code> Ticket Price  Total Profit
-            8            40
-            9            36
-           10            30
-           19            38
-           20            20</code></pre>
-<p>We can see that the maximum profit that can be gained is $40 by setting the price to 8 dollar so that all the clusters will buy the moview ticket. However, is there a way to gain more profit from these customers?</p>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Id
+</th>
+<th>
+MSSubClass
+</th>
+<th>
+MSZoning
+</th>
+<th>
+LotFrontage
+</th>
+<th>
+LotArea
+</th>
+<th>
+Street
+</th>
+<th>
+Alley
+</th>
+<th>
+LotShape
+</th>
+<th>
+LandContour
+</th>
+<th>
+Utilities
+</th>
+<th>
+…
+</th>
+<th>
+PoolArea
+</th>
+<th>
+PoolQC
+</th>
+<th>
+Fence
+</th>
+<th>
+MiscFeature
+</th>
+<th>
+MiscVal
+</th>
+<th>
+MoSold
+</th>
+<th>
+YrSold
+</th>
+<th>
+SaleType
+</th>
+<th>
+SaleCondition
+</th>
+<th>
+SalePrice
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+1
+</td>
+<td>
+60
+</td>
+<td>
+RL
+</td>
+<td>
+65.0
+</td>
+<td>
+8450
+</td>
+<td>
+Pave
+</td>
+<td>
+NaN
+</td>
+<td>
+Reg
+</td>
+<td>
+Lvl
+</td>
+<td>
+AllPub
+</td>
+<td>
+…
+</td>
+<td>
+0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+0
+</td>
+<td>
+2
+</td>
+<td>
+2008
+</td>
+<td>
+WD
+</td>
+<td>
+Normal
+</td>
+<td>
+208500
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+2
+</td>
+<td>
+20
+</td>
+<td>
+RL
+</td>
+<td>
+80.0
+</td>
+<td>
+9600
+</td>
+<td>
+Pave
+</td>
+<td>
+NaN
+</td>
+<td>
+Reg
+</td>
+<td>
+Lvl
+</td>
+<td>
+AllPub
+</td>
+<td>
+…
+</td>
+<td>
+0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+0
+</td>
+<td>
+5
+</td>
+<td>
+2007
+</td>
+<td>
+WD
+</td>
+<td>
+Normal
+</td>
+<td>
+181500
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+3
+</td>
+<td>
+60
+</td>
+<td>
+RL
+</td>
+<td>
+68.0
+</td>
+<td>
+11250
+</td>
+<td>
+Pave
+</td>
+<td>
+NaN
+</td>
+<td>
+IR1
+</td>
+<td>
+Lvl
+</td>
+<td>
+AllPub
+</td>
+<td>
+…
+</td>
+<td>
+0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+0
+</td>
+<td>
+9
+</td>
+<td>
+2008
+</td>
+<td>
+WD
+</td>
+<td>
+Normal
+</td>
+<td>
+223500
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+4
+</td>
+<td>
+70
+</td>
+<td>
+RL
+</td>
+<td>
+60.0
+</td>
+<td>
+9550
+</td>
+<td>
+Pave
+</td>
+<td>
+NaN
+</td>
+<td>
+IR1
+</td>
+<td>
+Lvl
+</td>
+<td>
+AllPub
+</td>
+<td>
+…
+</td>
+<td>
+0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+0
+</td>
+<td>
+2
+</td>
+<td>
+2006
+</td>
+<td>
+WD
+</td>
+<td>
+Abnorml
+</td>
+<td>
+140000
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+5
+</td>
+<td>
+60
+</td>
+<td>
+RL
+</td>
+<td>
+84.0
+</td>
+<td>
+14260
+</td>
+<td>
+Pave
+</td>
+<td>
+NaN
+</td>
+<td>
+IR1
+</td>
+<td>
+Lvl
+</td>
+<td>
+AllPub
+</td>
+<td>
+…
+</td>
+<td>
+0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+0
+</td>
+<td>
+12
+</td>
+<td>
+2008
+</td>
+<td>
+WD
+</td>
+<td>
+Normal
+</td>
+<td>
+250000
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+5 rows × 81 columns
+</p>
 </div>
-<div id="multiple-version" class="section level3">
-<h3>Multiple Version</h3>
-<hr />
-<p>We can try to provide a different version to customers with higher WTP. We can sell the ticket a higher price by providing the customers premium seating which incur almost no additional cost, but increase the profit. Let’s try to apply this methodology here into these five customers.</p>
-<pre class="python"><code>lst_WTP_high = [8,9,10,40,50]
-df[&#39;WTP_high&#39;] = lst_WTP_high
-df.columns = [&#39;Cluster Names&#39;, &quot;WTP_low&quot;,&quot;WTP_high&quot;]
-print(df.to_string(index=False))
-df_2 = df</code></pre>
-<pre><code>Cluster Names  WTP_low  WTP_high
-         Abby        8         8
-          Bob        9         9
-        Cindy       10        10
-      Desmond       19        40
-          Eva       20        50</code></pre>
-<p>Cluster of customers might have different WTP for two different versions because some of them want to enjoy premium services.</p>
-<pre class="python"><code>price_Low = 8
-price_High = 28.99</code></pre>
-<p>Here we test the total profit if we set the low end version ticket price to 8 and high end version ticket price to 28.99.</p>
-<pre class="python"><code>surplus = [(8-8,8-28.99),
-           (9-8,9-28.99),
-           (10-8,10-28.99),
-           (19-8,40-28.99),
-           (20-8,50-28.99)]
+<pre class="python"><code>#Number of columns in the dataframe(-2 due to sales price and id feature in the column)
+num_feature = len(raw_df.columns) -2</code></pre>
+<pre class="python"><code>#check the uniqueness of each variable so that we can further select the feature in the dataframe
+info = raw_df.agg([&#39;count&#39;, &#39;size&#39;, &#39;nunique&#39;)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-df_surplus = pd.DataFrame(surplus,columns = [&#39;surplus for low end ticket&#39;,&#39;surplus for high end ticket&#39;],index = lst_name)
-print(df_surplus)
-print(&quot;=&quot;*20)
-Desmond_data = df_surplus.loc[&#39;Desmond&#39;,:]; print(Desmond_data)</code></pre>
-<pre><code>         surplus for low end ticket  surplus for high end ticket
-Abby                              0                       -20.99
-Bob                               1                       -19.99
-Cindy                             2                       -18.99
-Desmond                          11                        11.01
-Eva                              12                        21.01
-====================
-surplus for low end ticket     11.00
-surplus for high end ticket    11.01
-Name: Desmond, dtype: float64</code></pre>
-<p>Here we can see the corresponding surplus for each of the cluster. Here we want to focus on Desmond’s surplus. Desmond’s surplus for high end ticket is 0.01 more than his surplus for low end ticket which means he will pick the high end ticket for the additional surplus. We successfully attract Desmond to buy the high end ticket.</p>
-<hr />
-<pre class="python"><code>profit = 0
-for index, row in df_surplus.iterrows():
-    if row[&#39;surplus for low end ticket&#39;] &gt;= row[&#39;surplus for high end ticket&#39;]:
-        profit = profit + price_Low
-    else:
-        profit = profit + price_High
-print(&quot;The new profit is $&quot;+ str(round(profit,2)))</code></pre>
-<pre><code>The new profit is $81.98</code></pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Id
+</th>
+<th>
+MSSubClass
+</th>
+<th>
+MSZoning
+</th>
+<th>
+LotFrontage
+</th>
+<th>
+LotArea
+</th>
+<th>
+Street
+</th>
+<th>
+Alley
+</th>
+<th>
+LotShape
+</th>
+<th>
+LandContour
+</th>
+<th>
+Utilities
+</th>
+<th>
+…
+</th>
+<th>
+PoolArea
+</th>
+<th>
+PoolQC
+</th>
+<th>
+Fence
+</th>
+<th>
+MiscFeature
+</th>
+<th>
+MiscVal
+</th>
+<th>
+MoSold
+</th>
+<th>
+YrSold
+</th>
+<th>
+SaleType
+</th>
+<th>
+SaleCondition
+</th>
+<th>
+SalePrice
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+count
+</th>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1201
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+91
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+…
+</td>
+<td>
+1460
+</td>
+<td>
+7
+</td>
+<td>
+281
+</td>
+<td>
+54
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+</tr>
+<tr>
+<th>
+size
+</th>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+…
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+<td>
+1460
+</td>
+</tr>
+<tr>
+<th>
+nunique
+</th>
+<td>
+1460
+</td>
+<td>
+15
+</td>
+<td>
+5
+</td>
+<td>
+110
+</td>
+<td>
+1073
+</td>
+<td>
+2
+</td>
+<td>
+2
+</td>
+<td>
+4
+</td>
+<td>
+4
+</td>
+<td>
+2
+</td>
+<td>
+…
+</td>
+<td>
+8
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+4
+</td>
+<td>
+21
+</td>
+<td>
+12
+</td>
+<td>
+5
+</td>
+<td>
+9
+</td>
+<td>
+6
+</td>
+<td>
+663
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+3 rows × 81 columns
+</p>
 </div>
-</div>
-<div id="practice-case-with-different-options" class="section level2">
-<h2>Practice Case with different options</h2>
-<p>Here we have the final scenario, where you will be having more than 2 versions. In this scenario, you can use the optimization tools that we would introduce in other projects to find out the best solution based on different number of versions you choose to provide, here we provide an interactive case for you to play around.</p>
-<pre class="python"><code>lst_WTP_medium = [8,9,10,25,30]
-df[&#39;WTP_medium&#39;] = lst_WTP_medium
-df.columns = [&#39;Cluster Names&#39;, &quot;WTP_low&quot;,&quot;WTP_high&quot;,&quot;WTP_medium&quot;]
-new_order = [0,1,3,2] #switching columns order
-new_df = df[df.columns[new_order]]
-print(new_df.to_string(index=False))</code></pre>
-<pre><code>Cluster Names  WTP_low  WTP_medium  WTP_high
-         Abby        8           8         8
-          Bob        9           9         9
-        Cindy       10          10        10
-      Desmond       19          25        40
-          Eva       20          30        50</code></pre>
-<pre class="python"><code>def ver_opt(val,price):
-    if val == 1:
-        selection_lst = []
-        revenue = 0
-        for i in lst_WTP:
-            if int(i) &gt;= int(price[0]):
-                selection_lst.append(1)
-                revenue = revenue + price[0]
-            else:
-                selection_lst.append(0)
-        return selection_lst, revenue
-    if val == 2:
-        selection_lst = []
-        revenue = 0
-        surplus_high = df_2[&#39;WTP_high&#39;] -price[1]
-        surplus_low = df_2[&#39;WTP_low&#39;] - price[0]
-        for i in range(len(df_2.index)):
-            if surplus_high[i] &gt;= surplus_low[i]:
-                revenue = revenue + price[1]
-                selection_lst.append(1)
-            else:
-                revenue = revenue + price[0]
-                selection_lst.append(0)
-        return selection_lst,revenue
-    if val == 3:
-        selection_lst = []
-        revenue = 0
-        surplus_high = new_df[&#39;WTP_high&#39;] -price[2]
-        surplus_medium = new_df[&#39;WTP_medium&#39;] - price[1]
-        surplus_low = df_2[&#39;WTP_low&#39;] - price[0]
-        for i in range(len(new_df.index)):
-            if surplus_high[i] == max(surplus_high[i],surplus_medium[i], surplus_low[i]):
-                # It&#39;s rational that people go for the best service 
-                # if they are indifferent from different types of service
-                revenue = revenue + price[2]
-                selection_lst.append(2)
-            elif surplus_medium[i] == max(surplus_high[i],surplus_medium[i], surplus_low[i]):
-                revenue = revenue + price[1]
-                selection_lst.append(1)
-            elif surplus_low[i] == max(surplus_high[i],surplus_medium[i], surplus_low[i]):
-                revenue = revenue + price[0]
-                selection_lst.append(0)
-        return selection_lst,revenue</code></pre>
-<pre class="python"><code>version = input(&quot;how many version? /1-3: &quot;)
-if int(version) == 1:
-    price = [int(x) for x in input(&quot;Enter one price: &quot;).split()] 
-    print(&quot;The only Price is: $&quot;, price[0]) 
-elif int(version) == 2:
-    price = [int(x) for x in input(&quot;Enter two prices: &quot;).split()] 
-    print(&quot;First Price is: $&quot;, price[0]) 
-    print(&quot;Second Price is: $&quot;, price[1]) 
-elif int(version) == 3:
-    price = [int(x) for x in input(&quot;Enter three prices: &quot;).split()] 
-    print(&quot;First Price is: $&quot;, price[0]) 
-    print(&quot;Second Price is: $&quot;, price[1])
-    print(&quot;Third Price is: $&quot;, price[2])
-
-selection_lst, revenue = ver_opt(int(version),price)
-</code></pre>
-<pre><code>how many version? /1-3: 3
-Enter three prices: 10 20 40
-First Price is: $ 10
-Second Price is: $ 20
-Third Price is: $ 40
-The total revenue is: $ 80</code></pre>
-<p>In the following plot, V1 indicates the single version scenario:</p>
-<pre class="python"><code>print(&quot;The total revenue is: $&quot;,revenue)
-output_notebook()
-p = figure(plot_width=450, plot_height=450,title = &quot;version result&quot;,toolbar_location=&quot;below&quot;,x_range=(-0.5, 2.5))
-nonselection_color=&quot;blue&quot;
-p.title.text_color = &quot;olive&quot;
-p.title.text_font = &quot;times&quot;
-p.title.text_font_size = &quot;14pt&quot;
-p.title.text_font_style = &quot;italic&quot;
-p.yaxis.ticker = [1, 2, 3, 4, 5]
-p.yaxis.major_label_overrides = {1: &#39;Abby&#39;, 2: &#39;Bob&#39;, 3: &#39;Cindy&#39;,4: &#39;Desmond&#39;, 5: &#39;Eva&#39;}
-p.xaxis.ticker = [0, 1, 2 , 3]
-p.xaxis.major_label_overrides = {0: &#39;Low/no purchase(V1)&#39;, 1: &#39;Medium/purchase(V1)&#39;, 2: &#39;High Version&#39;}
-p.x(selection_lst, [1, 2, 3, 4, 5],size =10, color=&quot;firebrick&quot;, alpha=0.6, line_width = 2)
-show(p)</code></pre>
-<pre><code>The total revenue is: $ 80
-
-
-
-
-&lt;div class=&quot;bk-root&quot;&gt;
-    &lt;a href=&quot;https://bokeh.pydata.org&quot; target=&quot;_blank&quot; class=&quot;bk-logo bk-logo-small bk-logo-notebook&quot;&gt;&lt;/a&gt;
-    &lt;span id=&quot;10464&quot;&gt;Loading BokehJS ...&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-<div id="4ed79cd6-3f7e-4979-99c2-6e95a94c0a0f" class="bk-root" data-root-id="10465">
-
-</div>
-</div>
-<div id="conclusion" class="section level2">
-<h2>Conclusion</h2>
-<p>It is worth noticing that the model we are using is lacking several important factor that we should take into consideration like the cost of service. However, you can freely adjust the model based on your preference. The true important point here is that with the help of versioning, we are able to evaluate the sales options more wisely and generate more revenue out from the same group of customers.</p>
+<div id="step-1-include-all-the-features-within-the-dataframe" class="section level3">
+<h3>Step 1: Include all the features within the dataframe</h3>
+<pre class="python"><code># Include all features as x values, include SalePrice as y value
+x = raw_df.iloc[:,1:num_feature+1].values.tolist()
+y = raw_df[&quot;SalePrice&quot;].tolist()
+x, y = np.array(x), np.array(y)</code></pre>
+<pre class="python"><code>model = LinearRegression().fit(x, y)</code></pre>
 </div>
 
 &nbsp;
