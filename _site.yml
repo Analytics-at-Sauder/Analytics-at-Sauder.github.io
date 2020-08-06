@@ -40,6 +40,8 @@ navbar:
           href: p06_rfm_analysis.html
         - text: "Modeling with MLP"
           href: "p14_model_with_MLP.html"
+        - text: "Conjoint Analysis"
+          href: p15_conjoint_analysis.html
         - text: "---------"
         - text: "Project Management"
         - text: "Critical Path Analysis"
@@ -91,3 +93,7 @@ navbar:
           href: p04_inventory_management.html
         - text: "Project Risk Assessment"
           href: p03_project_risk_assessment.html
+        - text: "---------"
+        - text: "Linear Regression"
+        - text: "Conjoint Analysis"
+          href: p15_conjoint_analysis.html
