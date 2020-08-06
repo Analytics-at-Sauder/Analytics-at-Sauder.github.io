@@ -30,6 +30,8 @@ navbar:
           href: p05_clinic_resource_planning.html
         - text: "---------"
         - text: "Marketing"
+        - text: "Conjoint Analysis"
+          href: p15_conjoint_analysis.html
         - text: "Customer Segmentation"
           href: p10_customer_segmentation.html
         - text: "Price Versioning"
@@ -40,8 +42,6 @@ navbar:
           href: p06_rfm_analysis.html
         - text: "Modeling with MLP"
           href: "p14_model_with_MLP.html"
-        - text: "Conjoint Analysis"
-          href: p15_conjoint_analysis.html
         - text: "---------"
         - text: "Project Management"
         - text: "Critical Path Analysis"
@@ -84,6 +84,10 @@ navbar:
         - text: "Price Versioning"
           href: p02_price_versioning.html
         - text: "---------"
+        - text: "Linear Regression"
+        - text: "Conjoint Analysis"
+          href: p15_conjoint_analysis.html
+        - text: "---------"
         - text: "Machine Learning"
         - text: "Recommender System"
           href: p11_recommender_system.html
@@ -93,7 +97,5 @@ navbar:
           href: p04_inventory_management.html
         - text: "Project Risk Assessment"
           href: p03_project_risk_assessment.html
-        - text: "---------"
-        - text: "Linear Regression"
-        - text: "Conjoint Analysis"
-          href: p15_conjoint_analysis.html
+        
+
