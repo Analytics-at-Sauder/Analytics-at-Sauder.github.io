@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Conjoint Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-171418385-1');
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li>
+      <a href="p14_model_with_MLP.html">Modeling with MLP</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Conjoint Analysis</h1>
+
+</div>
+
+
+<p>In this project, we would review conjoint Analysis and its application when introducing a new product into the market. Rank-based conjoint analysis is carried out in this project using multiple linear regression. All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the executable environment Syzygy.</p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_analysis&urlpath=tree%2FProject_15_Conjoint_analysis%2FTraditional%2520Conjoint%2520Analyse.ipynb&branch=master" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="business-problem" class="section level2">
+<h2>Business Problem</h2>
+<p>The following project focuses on the evaluation of market research for a new brand of beer. The simulated data set is described by 3 attributes that describe a part of the beer to be introduced in the market: Price point, After Taste, Calorie level. All attributes but After taste have levels. Rank-based conjoint analysis answers the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>How important are certain features of a product are to consumers</li>
+<li>Identify the trade-offs consumers are willing to make, with regards to the product features</li>
+</ol>
+<div id="rank-based-conjoint-analysis" class="section level3">
+<h3>Rank Based Conjoint Analysis</h3>
+<p>There are various ways to perform conjoint analysis, however, in this project, we would focus on rank-based conjoint analysis. A Rank-Based Conjoint (RBC) model consists of exposing respondents to a set of product profiles described in terms of the same attributes (with varying levels) and ask them to rank the product profiles from the best to the worst.</p>
+</div>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>The dataset is an aggregated response from several survey responders. There are two columns, Rank and Stimulus. The rank column shows how each of the 18 combinations is ranked and the stimulus is product combinations.</p>
+<p><b> Attribute/Levels </b></p>
+<ul>
+<li>A is Price with 3 levels:
+<ol style="list-style-type: decimal">
+<li>6 Dollars</li>
+<li>5 Dollars</li>
+<li>4 Dollars</li>
+</ol></li>
+<li>B is After-Taste with 2 levels:
+<ol style="list-style-type: decimal">
+<li>Strong</li>
+<li>Mild<br />
+</li>
+</ol></li>
+<li>C is Calories with 3 levels:
+<ol style="list-style-type: decimal">
+<li>Full</li>
+<li>Regular</li>
+<li>Low</li>
+</ol></li>
+</ul>
+<pre class="python"><code>import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+Data = pd.read_csv(&quot;ConjointInput.csv&quot;, sep = &quot;;&quot;)
+Data.head(4)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Stimulus
+</th>
+<th>
+Rank
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+A1B1C1
+</td>
+<td>
+2
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+A1B1C2
+</td>
+<td>
+3
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+A1B1C3
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+A1B2C1
+</td>
+<td>
+5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="data-manipulation" class="section level2">
+<h2>Data Manipulation</h2>
+<p>The stimulus column is a bit cryptic, so some data manipulation is done here. There are in total 8 different product features, and 18 different combinations.</p>
+<pre class="python"><code>#create an 18 row by 9 column dataframe of zeros
+
+ConjointDummyDF = pd.DataFrame(np.zeros((18,9)), columns=[&quot;Rank&quot;,&quot;A1&quot;, &quot;A2&quot;, &quot;A3&quot;,
+                                                    &quot;B1&quot;,&quot;B2&quot;, 
+                                                    &quot;C1&quot;, &quot;C2&quot;,
+                                                    &quot;C3&quot;])
+#converting data table to dataframe with dumnmy variables
+# transfer rank column
+ConjointDummyDF.Rank = Data.Rank
+# For loop that inserts 1 if column name is present
+for index, row in Data.iterrows(): 
+    stimuli1, stimuli2, stimuli3 = Data[&quot;Stimulus&quot;].loc[index][:2], \
+    Data[&quot;Stimulus&quot;].loc[index][2:4], Data[&quot;Stimulus&quot;].loc[index][4:6]
+    
+    
+    ConjointDummyDF.loc[index, [stimuli1,stimuli2,stimuli3]] = 1
+
+ConjointDummyDF.head()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Rank
+</th>
+<th>
+A1
+</th>
+<th>
+A2
+</th>
+<th>
+A3
+</th>
+<th>
+B1
+</th>
+<th>
+B2
+</th>
+<th>
+C1
+</th>
+<th>
+C2
+</th>
+<th>
+C3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+2
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+3
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+1
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+5
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+6
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="python"><code>fullNames = {&quot;Rank&quot;:&quot;Rank&quot;, \
+           &quot;A1&quot;: &quot;$6&quot;,&quot;A2&quot;: &quot;$5&quot;,&quot;A3&quot;: &quot;$4&quot;, \
+          &quot;B1&quot;: &quot;Strong After Taste&quot;, &quot;B2&quot;:&quot;Mild After Taste&quot;, \
+           &quot;C1&quot;:&quot;Full Calories&quot;, &quot;C2&quot;:&quot;Regular Calories&quot;, &quot;C3&quot;: &quot;Low Calories&quot;,\
+          }
+#assign names to column names
+ConjointDummyDF.rename(columns=fullNames, inplace=True)
+#confirm that the names of the columns have changed
+ConjointDummyDF.head()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+Rank
+</th>
+<th>
+$6
+</th>
+<th>
+$5
+</th>
+<th>
+$4
+</th>
+<th>
+Strong After Taste
+</th>
+<th>
+Mild After Taste
+</th>
+<th>
+Full Calories
+</th>
+<th>
+Regular Calories
+</th>
+<th>
+Low Calories
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+2
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+3
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+1
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+5
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+6
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+<td>
+1.0
+</td>
+<td>
+0.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="linear-regression" class="section level2">
+<h2>Linear Regression</h2>
+<p>Conjoint analysis works by observing how respondents preferences change as one systematically varies the product features. It examines how they trade-off different aspects of the product, weighing options that have a mix of more desirable and less desirable qualities. The observations allow one to statistically deduce through linear regression, the part-worth of all of the levels across the product attributes. Multiple linear regression attempts to model the relationship between multiple explanatory variables such as the product features and a response variable, which is the product rank by fitting a linear equation to observed data.</p>
+<pre class="python"><code>#assign all columns apart from rank is assigned to variable X, which represents x axis
+X = ConjointDummyDF[[&quot;$6&quot;, &quot;$5&quot;,&quot;$4&quot;, &quot;Strong After Taste&quot;,&quot;Mild After Taste&quot;,
+&quot;Full Calories&quot;,&quot;Regular Calories&quot;, &quot;Low Calories&quot;]]
+
+#assign a constant to be defined as a benchmark
+X = sm.add_constant(X)
+#assign rank to Y variable
+Y = ConjointDummyDF.Rank
+#generate Linear regression model
+linearRegression = sm.OLS(Y, X). fit()
+
+#output of regression
+df_res = pd.DataFrame({
+    &#39;feature&#39;: linearRegression.params.keys()
+    , &#39;part_worth&#39;: linearRegression.params.values
+    , &#39;pval&#39;: linearRegression.pvalues
+})
+df_res</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>
+</th>
+<th>
+feature
+</th>
+<th>
+part_worth
+</th>
+<th>
+pval
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+const
+</th>
+<td>
+const
+</td>
+<td>
+4.384615
+</td>
+<td>
+1.931004e-185
+</td>
+</tr>
+<tr>
+<th>
+$6
+</th>
+<td>
+$6
+</td>
+<td>
+-4.538462
+</td>
+<td>
+9.384234e-180
+</td>
+</tr>
+<tr>
+<th>
+$5
+</th>
+<td>
+$5
+</td>
+<td>
+1.461538
+</td>
+<td>
+7.543620e-174
+</td>
+</tr>
+<tr>
+<th>
+$4
+</th>
+<td>
+$4
+</td>
+<td>
+7.461538
+</td>
+<td>
+2.406369e-182
+</td>
+</tr>
+<tr>
+<th>
+Strong After Taste
+</th>
+<td>
+Strong After Taste
+</td>
+<td>
+0.692308
+</td>
+<td>
+1.175104e-171
+</td>
+</tr>
+<tr>
+<th>
+Mild After Taste
+</th>
+<td>
+Mild After Taste
+</td>
+<td>
+3.692308
+</td>
+<td>
+2.218664e-180
+</td>
+</tr>
+<tr>
+<th>
+Full Calories
+</th>
+<td>
+Full Calories
+</td>
+<td>
+1.461538
+</td>
+<td>
+7.543620e-174
+</td>
+</tr>
+<tr>
+<th>
+Regular Calories
+</th>
+<td>
+Regular Calories
+</td>
+<td>
+2.461538
+</td>
+<td>
+1.448182e-176
+</td>
+</tr>
+<tr>
+<th>
+Low Calories
+</th>
+<td>
+Low Calories
+</td>
+<td>
+0.461538
+</td>
+<td>
+7.670223e-168
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="part-worth-or-relative-utility" class="section level2">
+<h2>Part Worth or Relative utility</h2>
+<p>Central to the theory of conjoint analysis is the concept of product utility. Utility is a latent variable that reflects how desirable or valuable an object is in the mind of the respondent. The utility of a product is assessed from the value of its parts (part-worth). Conjoint analysis examines consumers’ responses to product ratings, rankings or choices, to estimate the part-worth of the various levels of each attribute of a product. Utility is not an absolute unit of measure; only relative values or differences in utilities matter.</p>
+<p>We therefore focus on the coefficients in the regression output because this represents the average part-worth or relative utility score across all attribute. The higher the coefficient of a product attribute, the higher the relative utility. There are three different attributes in the eight different levels. The cost $4 ranks highest, at a 7.46. And mild after taste ranks next in line at a 3.69 with regular calories coming in third at 2.46.</p>
+<p><b> What would be the optimal product bundle? </b></p>
+<pre class="python"><code># Normalize values for each feature for the pie chart
+raw = [7.46,3.69,2.46]
+norm = [float(i)/sum(raw) for i in raw]
+norm</code></pre>
+<p>[0.548, 0.271, 0.181]</p>
+<pre class="python"><code># Graph our winning product features
+
+labels = &#39;4$ Price&#39;, &#39;Mild After taste&#39;, &#39;Regular Calories&#39;
+#using values above
+sizes = [54.8, 27.1, 18.1]
+colors = [&#39;yellowgreen&#39;, &#39;mediumpurple&#39;, &#39;lightskyblue&#39;] 
+explode = (0.1, 0, 0)    
+plt.pie(sizes,              
+        explode=explode,   
+        labels=labels,      
+        colors=colors,      
+        autopct=&#39;%1.1f%%&#39;,  
+        shadow=True,        
+        startangle=70       
+        )
+
+plt.axis(&#39;equal&#39;)
+plt.title(&#39;Ideal product Based on Responses&#39;)
+plt.show()</code></pre>
+<p><img src="images/p15_01.png" /></p>
+</div>
+<div id="relative-importance-of-the-product-attributes" class="section level2">
+<h2>Relative importance of the product attributes</h2>
+<p>The part worth is used to derive the importance and the relative importance of an attribute of the product. Attribute importance is the difference between the highest and lowest utility level of the attribute. Relative importance of an attribute is essentially its share of importance.</p>
+<p>If the distance between the utility levels of an attribute is large, then that attribute will have a larger bearing on the respondents choice of product than another attribute where the distance is not as large. The distance therefore is a reflection of the importance of the attribute in determining consumer preferences.</p>
+<ul>
+<li>Distance = Max(part-worth) - Min(part-worth)</li>
+<li>Weight of attribute/importance = attribute distance / Sum(attribute distance)</li>
+</ul>
+<pre class="python"><code>#Attribute importances
+
+price= [&#39;$4&#39;, &#39;$5&#39;, &#39;$6&#39;]
+Taste = [&#39;Strong After Taste&#39;, &#39;Mild After Taste&#39;]
+Calories = [&#39;Full Calories&#39;, &#39;Regular Calories&#39;, &#39;Low Calories&#39;]
+#function to calculate distance
+def distance_cal(lista):
+    newlist =[]
+    for item in lista:
+        x= df_res.part_worth[(df_res[&#39;feature&#39;] == item)][0]
+        newlist.append(x)
+    return max(newlist) - min(newlist)
+  </code></pre>
+<pre class="python"><code>#create list of lists to be used in calculating the attribute importance and weight
+attributes= [price,Taste,Calories]
+
+#Create list attribute names
+attributename = [&#39;Price&#39;,&#39;Taste&#39;,&#39;Calories&#39;]
+#Sum of attribute distance 
+sum_dist = distance_cal(price) + distance_cal(Taste) + distance_cal(Calories)
+i=0
+#For loop to print values of distance and weight for each variable
+for item in attributes : 
+    print(&quot;\n Attribute : &quot; , attributename[i])
+    print (&quot;\n Distance : &quot; , distance_cal(item))
+    print (&quot;\n Importance %: &quot; , distance_cal(item)/sum_dist)
+    print(&quot;-----------------------&quot;)
+    i=i+1
+</code></pre>
+<pre><code>    
+     Attribute :  Price
+    
+     Distance :  11.999999999999993
+    
+     Importance %:  0.7058823529411763
+    -----------------------
+    
+     Attribute :  Taste
+    
+     Distance :  3.0000000000000013
+    
+     Importance %:  0.17647058823529427
+    -----------------------
+    
+     Attribute :  Calories
+    
+     Distance :  1.9999999999999987
+    
+     Importance %:  0.11764705882352938
+    -----------------------
+</code></pre>
+<pre class="python"><code>#Ploting the importance
+sizes = [distance_cal(price)/sum_dist, distance_cal(Taste)/sum_dist, distance_cal(Calories)/sum_dist]
+colors = [&#39;yellowgreen&#39;, &#39;mediumpurple&#39;, &#39;lightskyblue&#39;] 
+explode = (0.1, 0, 0)    
+plt.pie(sizes,              
+        explode=explode,   
+        labels=attributename,      
+        colors=colors,      
+        autopct=&#39;%1.1f%%&#39;,          
+        startangle=70       
+        )
+
+plt.axis(&#39;equal&#39;)
+plt.title(&#39;Attribute Importance&#39;)
+plt.show()</code></pre>
+<p><img src="images/p15_02.png" /></p>
+</div>
+<div id="trade-off-analysis" class="section level2">
+<h2>Trade off analysis</h2>
+<p>Product developers are constantly faced with trade-offs. For instance, changing the taste of the beer from a strong after taste to a mild after taste would result in an increase in price as the beer requires more additional resources. Whether this could result in an increase in demand could be determined by examining the trade-offs that consumers are willing to make.The figure below provides an illustration of attribute part-worth that is considered in the trade-off analysis.</p>
+<pre class="python"><code>f, ax = plt.subplots(figsize=(14, 8))
+plt.title(&#39;Attribute Part Worth&#39;)
+pwu = df_res[&#39;part_worth&#39;]
+
+xbar = np.arange(len(pwu))
+my_colors = [&#39;black&#39;,&#39;blue&#39;,&#39;blue&#39;,&#39;blue&#39;,&#39;red&#39;,&#39;red&#39;,&#39;yellow&#39;,&#39;yellow&#39;,&#39;yellow&#39;]
+plt.barh(xbar, pwu,color=my_colors)
+plt.yticks(xbar, labels=df_res[&#39;feature&#39;])
+plt.show()
+</code></pre>
+<p><img src="images/p15_03.png" /></p>
+<p>Knowledge of the relative importance of various attributes can assist in marketing and advertising decisions. Other factors being equal, one would devote greater attention and resource to improving a product, on attributes that are of greatest importance to target consumers.</p>
+</div>
+<div id="final-conclusion" class="section level2">
+<h2>Final Conclusion</h2>
+<p>Conjoint analysis is a marketing research technique designed to help managers determine the preferences of customers and potential customers. In particular, it seeks to determine how consumers value the different attributes that make up a product and the trade-offs they are willing to make among the different attributes or features that compose the product. As such, conjoint analysis is best suited for products that have very tangible attributes that can be easily described or quantified.</p>
+</div>
+<div id="reference" class="section level2">
+<h2>Reference</h2>
+<ol style="list-style-type: decimal">
+<li>Conjoint Analysis. (n.d.). Retrieved from <a href="https://www.ashokcharan.com/Marketing-Analytics/~pd-conjoint-analysis.php" class="uri">https://www.ashokcharan.com/Marketing-Analytics/~pd-conjoint-analysis.php</a></li>
+<li>Herka. (2020). Traditional-Conjoint-Analysis-with-Python. Retrieved from <a href="https://github.com/Herka/Traditional-Conjoint-Analysis-with-Python/blob/master/Traditional" class="uri">https://github.com/Herka/Traditional-Conjoint-Analysis-with-Python/blob/master/Traditional</a> Conjoint Analyse.ipynb</li>
+<li>Pratama, A. (2018, December 04). How to Do Conjoint Analysis in python. Retrieved August 5, 2020, from <a href="https://ariepratama.github.io/How-to-do-conjoint-analysis-in-python/" class="uri">https://ariepratama.github.io/How-to-do-conjoint-analysis-in-python/</a></li>
+<li>Sreenivas, P., &amp; Follow. (2019). Conjoint Analysis: A simple python implementation. Retrieved from <a href="https://www.linkedin.com/pulse/conjoint-analysis-simple-python-implementation-prajwal-sreenivas" class="uri">https://www.linkedin.com/pulse/conjoint-analysis-simple-python-implementation-prajwal-sreenivas</a></li>
+<li>Wilcox, Ronald T., A Practical Guide to Conjoint Analysis. Darden Case No. UVA-M-0675, Available at SSRN: <a href="https://ssrn.com/abstract=910102" class="uri">https://ssrn.com/abstract=910102</a></li>
+</ol>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
