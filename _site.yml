@@ -38,6 +38,8 @@ navbar:
           href: p11_recommender_system.html
         - text: "RFM Analysis"
           href: p06_rfm_analysis.html
+        - text: "Modeling with MLP"
+          href: "p14_model_with_MLP.html"
         - text: "---------"
         - text: "Project Management"
         - text: "Critical Path Analysis"
