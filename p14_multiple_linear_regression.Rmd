@@ -330,18 +330,31 @@ info = raw_df.agg(['count', 'size', 'nunique')
 
 ### Step 1: Include all the features within the dataframe
 
-
 ```python
-# Include all features as x values, include SalePrice as y value
-x = raw_df.iloc[:,1:num_feature+1].values.tolist()
-y = raw_df["SalePrice"].tolist()
+# Include the lot area and the year of sales features as x values, include SalePrice as y value
+x = raw_df.loc[:,['LotArea','YrSold']].values.tolist()
+y = list(map(int,raw_df["SalePrice"].tolist()))
 x, y = np.array(x), np.array(y)
 ```
 
 
 ```python
 model = LinearRegression().fit(x, y)
+# Get r squared value
+r_sq = model.score(x, y)
+print('coefficient of determination:', r_sq)
+
+# Get intercept
+print('intercept:', model.intercept_)
+
+# Get coefficients
+print('coefficients:', model.coef_)
+
+```
+```
+    coefficient of determination: 0.07024646007626767
+    intercept: 3181205.713858099
+    coefficients: [    2.09711551 -1505.28728351]
 ```
 
-    
-
+The coefficient indicates that there is something wrong here in the model. The coefficient associated with the year is negative. But in real life we are witnessing a huge increase in house price every year. So we need to further look search for the appropriate features to include in the model.
