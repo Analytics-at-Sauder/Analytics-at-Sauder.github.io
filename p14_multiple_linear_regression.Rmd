@@ -1,8 +1,5 @@
 ---
 title: "Untitled"
-author: "Hao"
-date: "8/5/2020"
-output: html_document
 ---
 
 Regression is among one the most common used method when analyst is trying to describe the result of an event - like the house price, which is what we are going to focus on in this notebook. The 

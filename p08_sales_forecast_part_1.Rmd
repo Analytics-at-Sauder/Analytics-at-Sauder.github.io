@@ -2,22 +2,20 @@
 title: "Sales Forecast - Part I"
 ---
 
-This is the first of a series of two notebooks, where we forecast sales for a retailers with 45 stores, each contains several departments, in multiple regions. We also want to understand the extent to which external factors, including holidays and promotions, affect sales in different departments, stores, and regions. We encourage you to create your own Jupytor notebook and follow along. **If you do not have Python or Jupyter Notebook installed yet, you could also experiment with the virtual notebook by clicking "Launch Syzygy" below.** On the other hand, the dowloadable Jupyter Notebook can be found [here](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data).
+This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. Alternatively, you can download the entire notebook together with all the data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) repository. If you do not have Python or Jupyter Notebook installed yet, you could also experiment with the virtual notebook by clicking "Launch Syzygy" below.
 
-<a href="
-https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2F" target="_blank" class="button">Launch Syzygy</a>
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2F" target="_blank" class="button">Launch Syzygy</a>
 
 ## Background
 
 ---
 
-In this notebook, we are going to focus on the exploration and manipulation of our data, whereas the next one would be centered around modeling itself. Understanding the data is important for analytics, and we recommend you to read both notebooks in order to gain a better grasp of analytics for big and messy data. The three datasets that we are using are already included (see the "Data" folder) in the repository where this Jupyter notebook is located, but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
+In this first notebook, we are going to focus on the exploration and manipulation of our data, whereas the next one would be centered around modeling itself. Understanding the data is important for analytics, and we recommend you to read this notebook before diving into modeling in order to gain a better grasp of this big and messy dataset. The datasets that we are using contain sales records for a retailers with 45 stores, each containing several departments. They already included in the repository where this Jupyter notebook is located (see the "Data" folder), but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
 
-One of the most commonly used time series forecasting model are ARIMA models, which is what we are going to use in this notebook. However, there are also other models that you could use, such as ETS Models. At the same time, since we want to understand the relationships between sales and several other variables, including mark downs, holidays, and potentially weather (temperature), it would be benefitial for us to build a Simple or Multiple Linear Regression Model first, with sales as the response variable. Then we can build time series models to forecast the explanatory variables, such as temperature, and plug in the time-series predicted explantory variables into the SLR/MLR models to generate further forecasts for the response variable,sales. Models generated in this manner might be less accurate as we are going through multiple steps, each adding more risks for errors; however, time series models combined with explanatory models are more interpretable and provide you with more managerial insights that could help you make recommendations and decisions. Let's go ahead and import the libraries we need and load our data:
+Let's go ahead and import the libraries we need and load our data:
 
 
 ```python
-# basic tools for data analysis and visualization in Python
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -26,10 +24,7 @@ import seaborn as sns
 
 # ipywidgets are used to make interactive contents in Jupyter notebooks
 from ipywidgets import interact
-```
 
-
-```python
 df_sales = pd.read_csv('Data/sales.csv')
 df_features = pd.read_csv('Data/features.csv')
 df_stores = pd.read_csv('Data/stores.csv')
@@ -60,19 +55,16 @@ Before we build a model, it is always a good idea to take a look at the data its
 - What are the distributions of the different columns? 
 - Are any columns highly correlated to one another?
 
-After exploration, if there are lots of missing values or if the distribution of a column is highly left/right skewed, which could potentially affect the accruacy of your models, you would want to think about replacing or transforming them before you build, compare, and select your models.
+After exploration, if there are lots of missing values or if the distribution of a column is highly left/right skewed, which could potentially affect the accruacy of your models, you would want to think about replacing or transforming them before you build, compare, and select your models. Since we have a big dataset containing multiple stores and departments, we can create an interactive (and basic) widget usign `ipywidgets` (please read its [documentation](https://ipywidgets.readthedocs.io/en/latest/) for more information or tutorials):
 
 
-<iframe src="https://charlieqcao.github.io/sales_forecast_widget/sales_forecast_widget_01.html" style="height: 1000px"></iframe>
-
-
-
+<iframe src="https://analytics-at-sauder.github.io/Project_08_Sales_Forecast/sales_forecast_widget_01.html" style="height: 1000px;"></iframe>
 
 ### Inspection
 
 #### `Sales`
 
-First, let's take a look at the `sales` dataframe:
+First, let's take a look at the `sales` dataframe, which has 5 fields (columns) and 421,570 observations (rows). Note that we had mannually changed the data types in the 'Store', 'Dept', and 'Date' columns when we imported the data
 
 
 ```python
@@ -103,9 +95,11 @@ print("CAUTION: {:.2%} of the `Weekly_Sales` column is negative."
               len(df_sales['Weekly_Sales'])))
 
 fig, axes = plt.subplots(1,3, figsize=(20,4))
+
 df_sales['Weekly_Sales'].hist(bins=100, ax=axes[0])
 sns.boxplot(x='Store', y='Weekly_Sales', whis=100, data=df_sales, ax=axes[1])
 sns.boxplot(x='Dept', y='Weekly_Sales', whis=100, data=df_sales, ax=axes[2])
+
 plt.show()
 ```
 
@@ -159,16 +153,18 @@ plt.show()
     
 
 
-![](images/p08_03.png)
+![](images/p08_01.png)
 
 
 
 ```python
 display(df_sales.drop('Weekly_Sales', axis=1).describe().transpose())
+
 fig, axes = plt.subplots(1,3, figsize=(20,4))
 sns.countplot(x='IsHoliday', data=df_sales, ax=axes[0])
 sns.countplot(x='Store', data=df_sales, ax=axes[1])
 sns.countplot(x='Dept', data=df_sales, ax=axes[2])
+
 plt.show()
 ```
 
@@ -242,23 +238,22 @@ plt.show()
 
 
 
-![](images/p08_04.png)
+![](images/p08_02.png)
 
-
-99.68% of the `Weekly_Sales` column is positive. We could probably just drop the negative values so that we could take logarithms of the rest in order to make our data less skewed.
-
-Now that we have taken a look at the aggregated data, we want to look at the sales of each store and department on an individual level. However, it is not the most efficient to print or plot the subsets one by one. Luckily, the `interact()` function from the [ipywidgets](https://ipywidgets.readthedocs.io/en/latest/) package allow us to create an interactive "dashboard" in Jupyter notebooks:
 
 We can see that:
 
-1. There are 143 unique dates (421,570 records in total) from 2010-02-05 to 2012-10-26 in the `sales` dataframe. We should keep in mind at this point that, on each day, sales across multiple stores with several departments are recorded, even though we do not know if all stores or departments are open on each of the 143 days. 
-2. There is no missing values in any column of this dataframe, which is good.
-3. However, we should notice that the `weekly sales` column is extremely right skewed, with a mean of \\$15,981, but a 50th percentile (mostly the same as the median) of only \\$7,612. The range of the column is also fairly large, from -\\$4,989 to \\$693,099.
-4. 391,909 records out of 421,570 are not holidays (or about 7% of the records *are* holidays), which could potentially explain why the `weekly sales` records are extremely right skewed (*maybe* most of the sales happen on holidays).
+1. There are 143 unique dates (421,570 records in total) from 2010-02-05 to 2012-10-26 in the `sales` dataframe.
+2. There is no missing values in any column of this dataframe, which is good
+3. However, we should notice that the `weekly sales` column is extremely right skewed, with a mean of \\$15,981, but a 50th percentile (mostly the same as the median) of only \\$7,612. The range of the column is also fairly large, from -\\$4,989 to \\$693,099
+4. When grouped by stores and departments respectively, it seems that a smaller proportion of departments are affecting the overall skew across stores
+5. 391,909 records out of 421,570 are not holidays (or about 7% of the records *are* holidays), which could potentially explain why the `Weekly Sales` records are extremely right skewed (*maybe* most of the sales happen on holidays)
+6. 99.68% of the `Weekly_Sales` column is positive, which means that we could potentially drop the negative values so that we could take logarithms of the rest in order to make our data less skewed, without significantly affecting the integraty of our data
+7. There seems to be less records for certain stores and departments than others
 
 #### `Features`
 
-Now let's move onto the `features` dataframe:
+Now let's move onto the `features` dataframe, which has 12 fields (columns) and 8190 observations (rows). Note that we had mannual changed the data types for the 'Store' and 'Date' columns when we imported the data.
 
 
 ```python
@@ -713,6 +708,7 @@ for i in range(5):
                   len(df_features['MarkDown'+str(i+1)].dropna()), i+1))
 
 df_features.drop(['Store', 'Date', 'IsHoliday'], axis=1).hist(figsize=(15,10), bins=100)
+
 plt.show()
 ```
 
@@ -847,25 +843,41 @@ plt.show()
 </table>
 </div>
 
-```
+
     CAUTION: 0.10% of MarkDown1 (non-null) is negative.
     CAUTION: 0.86% of MarkDown2 (non-null) is negative.
     CAUTION: 0.36% of MarkDown3 (non-null) is negative.
     CAUTION: 0.00% of MarkDown4 (non-null) is negative.
     CAUTION: 0.05% of MarkDown5 (non-null) is negative.
-```    
+    
 
 
-![](images/p08_05.png)
+![](images/p08_03.png)
+
+
+
+```python
+fig, axes = plt.subplots(1,2,figsize=(15,5))
+
+sns.lineplot(x='Date', y='CPI', data=df_features[df_features.Store==1], ax=axes[0], label='Store 1')
+sns.lineplot(x="Date", y="CPI", hue="Store", data=df_features, legend=False, ax=axes[1])
+fig.autofmt_xdate(rotation=-30, ha='left')
+
+plt.show()
+```
+
+
+![](images/p08_04.png)
 
 
 
 ```python
 display(df_features[['Store', 'Date', 'IsHoliday']].describe().transpose())
 
-fig, axes = plt.subplots(1,2, figsize=(10,3))
+fig, axes = plt.subplots(1,2, figsize=(15,5))
 sns.countplot(x='IsHoliday', data=df_features, ax=axes[0])
 sns.countplot(x='Store', data=df_features, ax=axes[1])
+
 plt.show()
 ```
 
@@ -930,21 +942,23 @@ plt.show()
 
 
 
-![](images/p08_06.png)
+![](images/p08_05.png)
 
 
-Right away, we can see that:
+We can see from the above tables and plots that:
 
-1. Compared to the `sales` dataframe, there are less records (8190) in the `features` dataframe. It makes sense because this dataframe is only detailed to store level and not department; for example, different departments in the same store *probably* experience the same weather on the same day. 
-2. However, with only store level data, we might find it harder to model the effect of markdowns across different departments within the same store. 
-3. The are 182 unique dates from 2010-02-05 to 2013-07-26, which is a wider range of record than the `sales` dataframe.
+1. Compared to the `sales` dataframe, there are less records (8190) in the `features` dataframe. It makes sense because this dataframe is only detailed to store level and not department; for example, different departments in the same store *probably* experience the same weather on the same day.
+2. The are 182 unique dates from 2010-02-05 to 2013-07-26, which is a wider range of record than the `sales` dataframe.
+3. The missing values in the 'CPI' and 'Unemployment' columns do not have corresponding observations in the `sales` dataframe (outside of date range), which is good
 4. From the first 10 rows, we can see that the dates do match up; however, it wouldn't hurt to check the proportion of matching records (by date and store) especially if we are thinking about merging together the two dataframes
 5. The 5 mark down columns contain 'anonymous data related to promotional mark downs' as per Kaggle, and we might want to further inspect these columns (e.g. whether two mark downs occured at any point for the same store); at the same time, these 5 columns are also extremely right skewed
-6. Again, approximately 7% of the 8190 `features` records are holidays, which is consistent with the `sales` dataframe
+6. CPI is steadily increasing for all stores, but different stores have different levels of CPIs. There also seems to be a bimodal distribution in the CPIs amongst all the stores
+7. Approximately 7% of the 8190 `features` records are holidays, which is consistent with the `sales` dataframe
+8. Less than 1% of each of the markdowns contains negative values, and we could consider dropping these observations if we need to take the logarithms of this field to make it less right skewed
 
 #### `Stores`
 
-Last but not least, let's take a look at the `stores` dataframe:
+Last but not least, let's take a look at the `stores` dataframe, which only has 3 fields (columns) and 45 observations (rows). Again, note that we had mannually changed the data types for the 'Store' and 'Type' columns when we imported the data.
 
 
 ```python
@@ -954,23 +968,28 @@ display(df_stores.info())
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 45 entries, 0 to 44
     Data columns (total 3 columns):
-     #   Column  Non-Null Count  Dtype 
-    ---  ------  --------------  ----- 
-     0   Store   45 non-null     int64 
-     1   Type    45 non-null     object
-     2   Size    45 non-null     int64 
-    dtypes: int64(2), object(1)
-    memory usage: 1.2+ KB
+     #   Column  Non-Null Count  Dtype   
+    ---  ------  --------------  -----   
+     0   Store   45 non-null     category
+     1   Type    45 non-null     category
+     2   Size    45 non-null     int64   
+    dtypes: category(2), int64(1)
+    memory usage: 2.3 KB
+    
+
+
+    None
 ```
 
 
 ```python
 display(pd.DataFrame(df_stores.drop('Store', axis=1).describe(include='all')).transpose().round(2))
 
-fig, axes = plt.subplots(1,3, figsize=(15,3))
+fig, axes = plt.subplots(1,3, figsize=(20,4))
 sns.stripplot(x='Type', y='Size', data=df_stores, ax=axes[0])
 sns.countplot(x='Type', data=df_stores, ax=axes[1])
 sns.distplot(df_stores['Size'], bins=15, kde=False, ax=axes[2])
+
 plt.show()
 ```
 
@@ -1041,23 +1060,207 @@ plt.show()
 
 
 
-![](images/p08_07.png)
+![](images/p08_06.png)
 
 
 The `stores` dataframe appear to be smaller and simper. We can see that:
 
-1. Almost half of the stores are type A stores; we might want to explore later whether there is any correlation between `store type` and other variables in the three dataframes
-2. `Sizes` of the stores are not extremely skewed, with its mean close to its 50th percentile. However, we might want to check if they are light or heavy tailed.
+1. Almost half of the stores are type A stores; and there is a correlation between store size and store type, with A being the largest and C being the smallest on average
+2. `Sizes` of the stores are not extremely skewed, with its mean close to its 50th percentile. However, the sizes of the stores seem to belong to a trimodel distribution, with the left and right peaks being higher than the middle one
 
 ### Aggregation
 
-At a glance (by randomly inspecting different combinations), seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales throughout time, while some others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments. 
-
-Even though is nice to be able to see detailed sales performance for each individual department in every store, we also want to inspect whether there are shared patterns in our sales data. Thus, let's aggregate the data a little bit so that we could visualize and compare sales across different stores for the same department and then across different departments in the same store.
+After exploring each dataset by itself, it is also a good idea to merge the different datasets so that you could visualize any possible relationships that might exist between two or more variables. In our case, we are going to left join the `features` and `stores` dataframe to the `sales` dataframe, because we want to preserve all the sales data (since we are analyzing sales).
 
 
 ```python
-fig, ax = plt.subplots(9, 5, sharex='col', sharey='row', figsize=(15, 20), dpi=100)
+df_merge = df_sales.merge(df_features, on=['Date', 'Store'], how='left').merge(df_stores, on='Store', how='left')
+
+df_merge.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Store</th>
+      <th>Dept</th>
+      <th>Date</th>
+      <th>Weekly_Sales</th>
+      <th>IsHoliday_x</th>
+      <th>Temperature</th>
+      <th>Fuel_Price</th>
+      <th>MarkDown1</th>
+      <th>MarkDown2</th>
+      <th>MarkDown3</th>
+      <th>MarkDown4</th>
+      <th>MarkDown5</th>
+      <th>CPI</th>
+      <th>Unemployment</th>
+      <th>IsHoliday_y</th>
+      <th>Type</th>
+      <th>Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2010-02-05</td>
+      <td>24924.50</td>
+      <td>False</td>
+      <td>42.31</td>
+      <td>2.572</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>211.096358</td>
+      <td>8.106</td>
+      <td>False</td>
+      <td>A</td>
+      <td>151315</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2010-02-12</td>
+      <td>46039.49</td>
+      <td>True</td>
+      <td>38.51</td>
+      <td>2.548</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>211.242170</td>
+      <td>8.106</td>
+      <td>True</td>
+      <td>A</td>
+      <td>151315</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2010-02-19</td>
+      <td>41595.55</td>
+      <td>False</td>
+      <td>39.93</td>
+      <td>2.514</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>211.289143</td>
+      <td>8.106</td>
+      <td>False</td>
+      <td>A</td>
+      <td>151315</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2010-02-26</td>
+      <td>19403.54</td>
+      <td>False</td>
+      <td>46.63</td>
+      <td>2.561</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>211.319643</td>
+      <td>8.106</td>
+      <td>False</td>
+      <td>A</td>
+      <td>151315</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2010-03-05</td>
+      <td>21827.90</td>
+      <td>False</td>
+      <td>46.50</td>
+      <td>2.625</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>211.350143</td>
+      <td>8.106</td>
+      <td>False</td>
+      <td>A</td>
+      <td>151315</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+Scatter plots are helpful visualizing any linear or non-linear relationships between two variables. In our case, we suspect that CPI, Store Size, Unemployment Rate, and Store Type can have an impact on sales (besides time). After plotting each of them against Weekly Sales below, we can see that:
+
+1. There seems to be a `slightly` negative relationship betweeen CPI and Sales
+2. There also seems to be a `slightly` positive relationship between Size and Sales
+3. Unemployment, on the other hand, does not seem to affect sales much
+4. Type A stores seem to have the highest sales, whereas Type C storees seem to have the lowest.
+
+Some of these information might provide little to no help in the end; some of them might be repetitive, for example, Store Type, Size, and Sales seem to all have correlation with one another. However, it is important to keep these information in mind when we move on to building our models.
+
+
+```python
+fig, axes = plt.subplots(2, 2, figsize=(15,10))
+
+sns.scatterplot(x='CPI', y='Weekly_Sales', alpha=0.2, data=df_merge, ax=axes[0,0])
+sns.scatterplot(x='Size', y='Weekly_Sales', alpha=0.2, data=df_merge, ax=axes[0,1])
+sns.scatterplot(x='Unemployment', y='Weekly_Sales', alpha=0.2, data=df_merge, ax=axes[1,0])
+sns.stripplot(x='Type', y='Weekly_Sales', jitter=0.4, alpha=0.1, data=df_merge, ax=axes[1,1])
+
+plt.show()
+```
+
+
+![](images/p08_07.png)
+
+
+At the beginning of this notebook, we saw that (by randomly inspecting different combinations) seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales throughout time, while some others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments. 
+
+Even though is nice to be able to see detailed sales performance for each individual department in every store, we also want to inspect whether there are shared patterns in our sales data. Therefore, let's aggregate the data a little bit so that we could visualize and compare sales across different stores for the same department and then across different departments in the same store. From the two visualizations below, we can see that when we aggregate by department, the data looks a lot cleaner and organized than when we aggregate by stores. This again, echoes with our previous finding that certain departments are significantly skewing the sales for the entire store.
+
+
+```python
+fig, ax = plt.subplots(9, 5, sharex='col', sharey='row', figsize=(20, 25), dpi=100)
+plt.setp(ax, ylim=(min(df_sales['Weekly_Sales']), max(df_sales['Weekly_Sales'])))
+fig.autofmt_xdate(rotation=-30, ha='left')
+
 store_num = pd.Series(range(1,46), dtype='category')
 store_index = 0
 for i in range(9):
@@ -1065,7 +1268,11 @@ for i in range(9):
         sales_temp = df_sales[df_sales.Store==store_num[store_index]][['Date', 'Dept', 'Weekly_Sales']]
         sales_temp['Dept'] = sales_temp['Dept'].astype('category')
         sns.lineplot(x='Date', y='Weekly_Sales', hue='Dept', data=sales_temp, legend=False, ax=ax[i,j])
+        ax[i,j].text(min(sales_temp['Date']), max(df_sales['Weekly_Sales'])-100000, 
+                     'Store {}'.format(store_index+1), fontsize=12)
         store_index += 1
+        
+plt.show()
 ```
 
 
@@ -1074,391 +1281,26 @@ for i in range(9):
 
 
 ```python
-fig, ax = plt.subplots(20, 5, sharex='col', sharey='row', figsize=(15, 40), dpi=100)
+fig, ax = plt.subplots(20, 5, sharex='col', sharey='row', figsize=(20, 50), dpi=100)
+plt.setp(ax, ylim=(min(df_sales['Weekly_Sales']), max(df_sales['Weekly_Sales'])))
+fig.autofmt_xdate(rotation=-30, ha='left')
+
 dept_num = pd.Series(range(1,101), dtype='category')
 dept_index = 0
 for i in range(20):
     for j in range(5):
-        sales_temp = df_sales[df_sales.Dept==dept_num[dept_index]][['Date', 'Store', 'Weekly_Sales']]
-        sales_temp['Store'] = sales_temp['Store'].astype('category')
-        sns.lineplot(x='Date', y='Weekly_Sales', hue='Store', data=sales_temp, legend=False, ax=ax[i,j])
-        dept_index += 1
+        try: 
+            sales_temp = df_sales[df_sales.Dept==dept_num[dept_index]][['Date', 'Store', 'Weekly_Sales']]
+            sales_temp['Store'] = sales_temp['Store'].astype('category')
+            sns.lineplot(x='Date', y='Weekly_Sales', hue='Store', data=sales_temp, legend=False, ax=ax[i,j])
+            ax[i,j].text(min(sales_temp['Date']), max(df_sales['Weekly_Sales'])-100000,
+                         'Department {}'.format(dept_index+1), fontsize=12)
+            dept_index += 1
+        except:
+            dept_index += 1
+plt.show()
 ```
 
 
 ![](images/p08_09.png)
 
-
-#### Merging
-
-
-```python
-df_all = df_sales.merge(df_features, 
-                        on=['Store', 'Date', 'IsHoliday'], 
-                        how='left').merge(df_stores, 
-                                          on='Store', 
-                                          how='left')
-
-print(df_all.info())
-```
-```
-    <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 421570 entries, 0 to 421569
-    Data columns (total 16 columns):
-     #   Column        Non-Null Count   Dtype         
-    ---  ------        --------------   -----         
-     0   Store         421570 non-null  category      
-     1   Dept          421570 non-null  category      
-     2   Date          421570 non-null  datetime64[ns]
-     3   Weekly_Sales  421570 non-null  float64       
-     4   IsHoliday     421570 non-null  bool          
-     5   Temperature   421570 non-null  float64       
-     6   Fuel_Price    421570 non-null  float64       
-     7   MarkDown1     150681 non-null  float64       
-     8   MarkDown2     111248 non-null  float64       
-     9   MarkDown3     137091 non-null  float64       
-     10  MarkDown4     134967 non-null  float64       
-     11  MarkDown5     151432 non-null  float64       
-     12  CPI           421570 non-null  float64       
-     13  Unemployment  421570 non-null  float64       
-     14  Type          421570 non-null  category      
-     15  Size          421570 non-null  int64         
-    dtypes: bool(1), category(3), datetime64[ns](1), float64(10), int64(1)
-    memory usage: 43.4 MB
-    None
-```    
-
-### Manipulation
-
-#### Adjustment
-
-
-```python
-mon_val = ['Weekly_Sales', 'Fuel_Price', 'MarkDown1', 'MarkDown2', 'MarkDown3', 'MarkDown4', 'MarkDown5']
-
-df_adj = pd.concat([df_all.drop(mon_val, axis=1), 
-                    (df_all[mon_val]*100).div(df_all.CPI, axis=0).add_prefix('AdjCPI_')], axis=1)
-```
-
-
-```python
-adj_val = ['AdjCPI_' + s for s in mon_val if s != 'Fuel_Price']
-
-display(df_adj[adj_val].describe().transpose())
-
-df_adj[adj_val].hist(bins=100, figsize=(13,10))
-plt.show()
-```
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AdjCPI_Weekly_Sales</th>
-      <td>421570.0</td>
-      <td>9908.548942</td>
-      <td>14602.240095</td>
-      <td>-3950.722934</td>
-      <td>1195.198183</td>
-      <td>4512.777475</td>
-      <td>12421.081272</td>
-      <td>547172.473684</td>
-    </tr>
-    <tr>
-      <th>AdjCPI_MarkDown1</th>
-      <td>150681.0</td>
-      <td>4430.042457</td>
-      <td>5348.301090</td>
-      <td>0.206549</td>
-      <td>1222.675566</td>
-      <td>3045.650515</td>
-      <td>5572.308352</td>
-      <td>62862.823404</td>
-    </tr>
-    <tr>
-      <th>AdjCPI_MarkDown2</th>
-      <td>111248.0</td>
-      <td>2059.609593</td>
-      <td>6003.485424</td>
-      <td>-192.610230</td>
-      <td>24.452601</td>
-      <td>110.381028</td>
-      <td>1120.970072</td>
-      <td>80355.739592</td>
-    </tr>
-    <tr>
-      <th>AdjCPI_MarkDown3</th>
-      <td>137091.0</td>
-      <td>899.232310</td>
-      <td>6284.294887</td>
-      <td>-22.232464</td>
-      <td>2.904313</td>
-      <td>14.296407</td>
-      <td>64.518748</td>
-      <td>109083.900971</td>
-    </tr>
-    <tr>
-      <th>AdjCPI_MarkDown4</th>
-      <td>134967.0</td>
-      <td>2083.455218</td>
-      <td>4089.637783</td>
-      <td>0.167800</td>
-      <td>288.936331</td>
-      <td>856.134875</td>
-      <td>2034.683587</td>
-      <td>47849.008580</td>
-    </tr>
-    <tr>
-      <th>AdjCPI_MarkDown5</th>
-      <td>151432.0</td>
-      <td>2747.854633</td>
-      <td>3245.911013</td>
-      <td>60.910013</td>
-      <td>1098.292765</td>
-      <td>1949.324313</td>
-      <td>3324.396470</td>
-      <td>49200.118284</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-![](images/p08_10.png)
-
-
-#### Remove Negative Values
-
-
-```python
-df_pos = df_adj[((df_adj[adj_val]>0)|(df_adj[adj_val].isnull())).all(1)]
-
-print(df_adj.shape)
-print(df_pos.shape)
-```
-
-    (421570, 16)
-    (418380, 16)
-    
-
-#### Transformation
-
-
-```python
-df_trans = pd.concat([df_pos.drop(adj_val, axis=1), 
-                     df_pos[adj_val].apply(lambda x: np.log(x)).add_prefix('TransLog_')], axis=1)
-df_trans.info()
-```
-```
-    <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 418380 entries, 0 to 421569
-    Data columns (total 16 columns):
-     #   Column                        Non-Null Count   Dtype         
-    ---  ------                        --------------   -----         
-     0   Store                         418380 non-null  category      
-     1   Dept                          418380 non-null  category      
-     2   Date                          418380 non-null  datetime64[ns]
-     3   IsHoliday                     418380 non-null  bool          
-     4   Temperature                   418380 non-null  float64       
-     5   CPI                           418380 non-null  float64       
-     6   Unemployment                  418380 non-null  float64       
-     7   Type                          418380 non-null  category      
-     8   Size                          418380 non-null  int64         
-     9   AdjCPI_Fuel_Price             418380 non-null  float64       
-     10  TransLog_AdjCPI_Weekly_Sales  418380 non-null  float64       
-     11  TransLog_AdjCPI_MarkDown1     148395 non-null  float64       
-     12  TransLog_AdjCPI_MarkDown2     109186 non-null  float64       
-     13  TransLog_AdjCPI_MarkDown3     134955 non-null  float64       
-     14  TransLog_AdjCPI_MarkDown4     132732 non-null  float64       
-     15  TransLog_AdjCPI_MarkDown5     149097 non-null  float64       
-    dtypes: bool(1), category(3), datetime64[ns](1), float64(10), int64(1)
-    memory usage: 43.1 MB
-```    
-
-
-```python
-trans_val = ['TransLog_' + s for s in adj_val]
-
-display(df_trans[trans_val].describe().transpose())
-
-df_trans[trans_val].hist(bins=100, figsize=(13,10))
-plt.show()
-```
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>TransLog_AdjCPI_Weekly_Sales</th>
-      <td>418380.0</td>
-      <td>8.009177</td>
-      <td>2.065827</td>
-      <td>-5.425113</td>
-      <td>7.104933</td>
-      <td>8.422070</td>
-      <td>9.430193</td>
-      <td>13.212519</td>
-    </tr>
-    <tr>
-      <th>TransLog_AdjCPI_MarkDown1</th>
-      <td>148395.0</td>
-      <td>7.635139</td>
-      <td>1.603340</td>
-      <td>-1.577218</td>
-      <td>7.099678</td>
-      <td>8.020444</td>
-      <td>8.626376</td>
-      <td>11.048710</td>
-    </tr>
-    <tr>
-      <th>TransLog_AdjCPI_MarkDown2</th>
-      <td>109186.0</td>
-      <td>4.965551</td>
-      <td>2.688230</td>
-      <td>-4.702690</td>
-      <td>3.264481</td>
-      <td>4.749675</td>
-      <td>7.072172</td>
-      <td>11.294219</td>
-    </tr>
-    <tr>
-      <th>TransLog_AdjCPI_MarkDown3</th>
-      <td>134955.0</td>
-      <td>2.712321</td>
-      <td>2.410671</td>
-      <td>-5.410087</td>
-      <td>1.078231</td>
-      <td>2.672555</td>
-      <td>4.168216</td>
-      <td>11.599873</td>
-    </tr>
-    <tr>
-      <th>TransLog_AdjCPI_MarkDown4</th>
-      <td>132732.0</td>
-      <td>6.496274</td>
-      <td>1.815088</td>
-      <td>-1.784981</td>
-      <td>5.666128</td>
-      <td>6.748512</td>
-      <td>7.606688</td>
-      <td>10.775806</td>
-    </tr>
-    <tr>
-      <th>TransLog_AdjCPI_MarkDown5</th>
-      <td>149097.0</td>
-      <td>7.533416</td>
-      <td>0.884697</td>
-      <td>4.109398</td>
-      <td>7.003998</td>
-      <td>7.575858</td>
-      <td>8.109043</td>
-      <td>10.803651</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-![](images/p08_11.png)
-
-
-#### Replace Missing Values
-
-
-```python
-df_full = pd.concat([df_trans.drop(trans_val, axis=1), df_trans[trans_val].fillna(0.0)], axis=1)
-df_full.info()
-```
-```
-    <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 418380 entries, 0 to 421569
-    Data columns (total 16 columns):
-     #   Column                        Non-Null Count   Dtype         
-    ---  ------                        --------------   -----         
-     0   Store                         418380 non-null  category      
-     1   Dept                          418380 non-null  category      
-     2   Date                          418380 non-null  datetime64[ns]
-     3   IsHoliday                     418380 non-null  bool          
-     4   Temperature                   418380 non-null  float64       
-     5   CPI                           418380 non-null  float64       
-     6   Unemployment                  418380 non-null  float64       
-     7   Type                          418380 non-null  category      
-     8   Size                          418380 non-null  int64         
-     9   AdjCPI_Fuel_Price             418380 non-null  float64       
-     10  TransLog_AdjCPI_Weekly_Sales  418380 non-null  float64       
-     11  TransLog_AdjCPI_MarkDown1     418380 non-null  float64       
-     12  TransLog_AdjCPI_MarkDown2     418380 non-null  float64       
-     13  TransLog_AdjCPI_MarkDown3     418380 non-null  float64       
-     14  TransLog_AdjCPI_MarkDown4     418380 non-null  float64       
-     15  TransLog_AdjCPI_MarkDown5     418380 non-null  float64       
-    dtypes: bool(1), category(3), datetime64[ns](1), float64(10), int64(1)
-    memory usage: 43.1 MB
-```    
-
-
-```python
-sns.pairplot(df_full.drop(['Store', 'Dept', 'Date', 'IsHoliday', 'Size', 
-                           'CPI', 'AdjCPI_Fuel_Price', 'Unemployment'], axis=1), hue='Type')
-```
-
-
-
-
-
-![](images/p08_12.png)
