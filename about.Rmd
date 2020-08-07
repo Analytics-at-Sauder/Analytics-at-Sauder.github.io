@@ -12,19 +12,20 @@ This repository contains real world problems, where business analytics programmi
 This website is also linked to a [Github repository](https://github.com/Master-of-Business-Analytics/Code_repository) that hosts the actual Python and R notebooks, for download and modification. 
 
 ## Team 
- ------
+
+---
 
 ### Charlie Cao
 
 
-![](images/charlie.jpeg){width=250px}
+![](images/contribute_charlie_cao.jpeg){width=250px}
 
 Charlie Cao  is an Masters of Business Analytics 2020 candidate at University of British Columbia and a Supply chain professional with over five years experience solving business and process problems using data analytics and continious improvement tools.
 
 ### Kemjika Ananaba
 
 
-![](images/kem_ananaba.jpeg){width=250px}
+![](images/contribute_kem_ananaba.jpeg){width=250px}
 
 Kemjika Ananaba is an Masters of Business Analytics 2020 candidate at University of British Columbia and a Supply chain professional with over five years experience solving business and process problems using data analytics and continious improvement tools.
 
@@ -32,6 +33,6 @@ Kemjika Ananaba is an Masters of Business Analytics 2020 candidate at University
 ### Hao Zheng
 
 
-![](images/Hao.jpeg){width=250px}
+![](images/contribute_hao_zheng.jpeg){width=250px}
 
 Hao Zheng is an Masters of Business Analytics 2020 candidate at University of British Columbia and a Supply chain professional with over five years experience solving business and process problems using data analytics and continious improvement tools.

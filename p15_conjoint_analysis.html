@@ -393,6 +393,9 @@ div.tocify {
     <li class="divider"></li>
     <li class="dropdown-header">Marketing</li>
     <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li>
       <a href="p10_customer_segmentation.html">Customer Segmentation</a>
     </li>
     <li>
@@ -403,9 +406,6 @@ div.tocify {
     </li>
     <li>
       <a href="p06_rfm_analysis.html">RFM Analysis</a>
-    </li>
-    <li>
-      <a href="p14_model_with_MLP.html">Modeling with MLP</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Project Management</li>
@@ -467,6 +467,14 @@ div.tocify {
     <li class="dropdown-header">Linear Programming/Optimization</li>
     <li>
       <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Regression</li>
+    <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li>
+      <a href="p14_multiple_linear_regression.html">Multiple Linear Regression</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Machine Learning</li>
@@ -1462,7 +1470,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

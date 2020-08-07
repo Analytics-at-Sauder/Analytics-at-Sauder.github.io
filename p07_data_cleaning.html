@@ -393,6 +393,9 @@ div.tocify {
     <li class="divider"></li>
     <li class="dropdown-header">Marketing</li>
     <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li>
       <a href="p10_customer_segmentation.html">Customer Segmentation</a>
     </li>
     <li>
@@ -403,9 +406,6 @@ div.tocify {
     </li>
     <li>
       <a href="p06_rfm_analysis.html">RFM Analysis</a>
-    </li>
-    <li>
-      <a href="p14_model_with_MLP.html">Modeling with MLP</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Project Management</li>
@@ -467,6 +467,14 @@ div.tocify {
     <li class="dropdown-header">Linear Programming/Optimization</li>
     <li>
       <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Regression</li>
+    <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li>
+      <a href="p14_multiple_linear_regression.html">Multiple Linear Regression</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Machine Learning</li>
@@ -681,7 +689,7 @@ Tenderloin
 1 rows × 43 columns
 </p>
 </div>
-<p>Before moving into data cleaning, we need to understand what is happening in the dataset so that we can know in which way the data set is “sick:. It is obvious that there are lots of NaN values existing in the dataset. We definitely don’t want NA values here otherwise we will be having”security concerning customer&quot; issue. That extra space and and NA value would be what we want to look at first.</p>
+<p>Before moving into data cleaning, we need to understand what is happening in the dataset so that we can know in which way the data set is “sick:. It is obvious that there are lots of NaN values existing in the dataset. We definitely don’t want NA values here otherwise we will be having”security concerning customer" issue. That extra space and and NA value would be what we want to look at first.</p>
 <pre class="python"><code># get info about all columns
 mydata.info()
 
@@ -707,7 +715,7 @@ print(fresh_string)</code></pre>
     hello world
 </code></pre>
 <p>The simple example here show that when there are unneeded spaces before the string and after the string, we want to make sure we can get rid of them.</p>
-<p>Then we can apply the same methodology to the entire data set. The major reason why we want to do this is because the extra spaces will lead to both analytical and formatting issue. It is not nice to have extra sapces in front of strings. More importantly, while doing logistic regression analysis,&quot; hello&quot; and “hello” in system means two different factors while they are the same in real life.</p>
+<p>Then we can apply the same methodology to the entire data set. The major reason why we want to do this is because the extra spaces will lead to both analytical and formatting issue. It is not nice to have extra sapces in front of strings. More importantly, while doing logistic regression analysis," hello" and “hello” in system means two different factors while they are the same in real life.</p>
 </div>
 <div id="replacing-all-na-values" class="section level3">
 <h3>Replacing All NA Values</h3>

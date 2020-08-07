@@ -40,8 +40,6 @@ navbar:
           href: p11_recommender_system.html
         - text: "RFM Analysis"
           href: p06_rfm_analysis.html
-        - text: "Modeling with MLP"
-          href: "p14_model_with_MLP.html"
         - text: "---------"
         - text: "Project Management"
         - text: "Critical Path Analysis"
@@ -84,9 +82,11 @@ navbar:
         - text: "Price Versioning"
           href: p02_price_versioning.html
         - text: "---------"
-        - text: "Linear Regression"
+        - text: "Regression"
         - text: "Conjoint Analysis"
           href: p15_conjoint_analysis.html
+        - text: "Multiple Linear Regression"
+          href: "p14_multiple_linear_regression.html"
         - text: "---------"
         - text: "Machine Learning"
         - text: "Recommender System"
