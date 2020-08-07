@@ -1,5 +1,5 @@
 ---
-title: "Clinic Resource Planning"
+title: "Emergency Room Resource Planning"
 ---
 
 In this notebook, we are going to explore ways that one can apply Discrete Event Simulation when making decisions for hospital (ER) resource planning. We encourage you to create your own Jupytor notebook and follow along. You can download this Jupyter notebook in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, **you could also experiment with a virtual notebook by clicking "Launch Syzygy" below.**
