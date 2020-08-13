@@ -1,4 +1,5 @@
 ---
+title: "About This Project"
 output:
   html_document:
     includes:
