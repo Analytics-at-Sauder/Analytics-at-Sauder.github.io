@@ -1248,11 +1248,25 @@ nunique
 </div>
 <div id="step-1-include-all-the-features-within-the-dataframe" class="section level3">
 <h3>Step 1: Include all the features within the dataframe</h3>
-<pre class="python"><code># Include all features as x values, include SalePrice as y value
-x = raw_df.iloc[:,1:num_feature+1].values.tolist()
-y = raw_df[&quot;SalePrice&quot;].tolist()
+<pre class="python"><code># Include the lot area and the year of sales features as x values, include SalePrice as y value
+x = raw_df.loc[:,[&#39;LotArea&#39;,&#39;YrSold&#39;]].values.tolist()
+y = list(map(int,raw_df[&quot;SalePrice&quot;].tolist()))
 x, y = np.array(x), np.array(y)</code></pre>
-<pre class="python"><code>model = LinearRegression().fit(x, y)</code></pre>
+<pre class="python"><code>model = LinearRegression().fit(x, y)
+# Get r squared value
+r_sq = model.score(x, y)
+print(&#39;coefficient of determination:&#39;, r_sq)
+
+# Get intercept
+print(&#39;intercept:&#39;, model.intercept_)
+
+# Get coefficients
+print(&#39;coefficients:&#39;, model.coef_)
+</code></pre>
+<pre><code>    coefficient of determination: 0.07024646007626767
+    intercept: 3181205.713858099
+    coefficients: [    2.09711551 -1505.28728351]</code></pre>
+<p>The coefficient indicates that there is something wrong here in the model. The coefficient associated with the year is negative. But in real life we are witnessing a huge increase in house price every year. So we need to further look search for the appropriate features to include in the model.</p>
 </div>
 
 &nbsp;
