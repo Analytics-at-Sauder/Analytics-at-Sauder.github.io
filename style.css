@@ -50,7 +50,9 @@ code {
     padding-right: 0;
     }
 }
-
+div[role="navigation"]{
+  transition: all 0.25s ease-in-out;
+}
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
     color: #000000;
     background-color: #f0fae6;
@@ -126,6 +128,9 @@ iframe {
   padding: 25px;
   border-width: 0;
   }
+.navbar-scroll-down {
+  top: -100px !important;
+}
 .navbar {
     -webkit-box-shadow: 0 8px 8px -8px #999;
     -moz-box-shadow: 0 8px 8px -8px #999;

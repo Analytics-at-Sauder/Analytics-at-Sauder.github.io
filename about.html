@@ -22,16 +22,57 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag('js', new Date());
 
   gtag('config', 'UA-171418385-1');
+</script>
+
+<!-- script hiding navbar when scrolling down -->
+
+<script>
+  var didScroll;
+  var lastScrollTop = 0;
+  var delta = 1;
+  var navbarHeight = $('[role="navigation"]').outerHeight();
+
+  $(window).scroll(function(event) {
+    didScroll = true;
+  });
+
+  setInterval(function() {
+    if (didScroll) {
+      hasScrolled();
+      didScroll = false;
+    }
+  }, 250);
+
+  function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    if (Math.abs(lastScrollTop - st) <= delta)
+      return;
+
+    if (st > lastScrollTop && st > navbarHeight) {
+      // Scroll Down
+      $('[role="navigation"]').addClass('navbar-scroll-down');
+    } else {
+      // Scroll Up
+      if (st + $(window).height() < $(document).height()) {
+        $('[role="navigation"]').removeClass('navbar-scroll-down');
+      }
+    }
+
+    lastScrollTop = st;
+  }
 </script>
 
 <style type="text/css">code{white-space: pre;}</style>
