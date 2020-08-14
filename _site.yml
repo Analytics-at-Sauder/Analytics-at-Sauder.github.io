@@ -19,83 +19,12 @@ navbar:
       href: about.html
     - text: "Contribute"
       href: contribute.html
-    - text: "Browse by Topics"
-      menu:
-        - text: "Finance"
-        - text: "Stock Returns Analysis"
-          href: p01_stock_returns_analysis.html
-        - text: "---------"
-        - text: "Healthcare"
-        - text: "ER Resource Planning"
-          href: p05_er_resource_planning.html
-        - text: "---------"
-        - text: "Marketing"
-        - text: "Conjoint Analysis"
-          href: p15_conjoint_analysis.html
-        - text: "Customer Segmentation"
-          href: p10_customer_segmentation.html
-        - text: "Price Versioning"
-          href: p02_price_versioning.html
-        - text: "Recommender System"
-          href: p11_recommender_system.html
-        - text: "RFM Analysis"
-          href: p06_rfm_analysis.html
-        - text: "---------"
-        - text: "Project Management"
-        - text: "Critical Path Analysis"
-          href: p13_critical_path_analysis.html
-        - text: "Project Risk Assessment"
-          href: p03_project_risk_assessment.html
-        - text: "---------"
-        - text: "Supply Chain Management"
-        - text: "Inventory Decision Analysis"
-          href: p12_inventory_decision_analysis.html
-        - text: "Inventory Management"
-          href: p04_inventory_management.html
-        - text: "Sales Forecast - Part I"
-          href: p08_sales_forecast_part_1.html
-        - text: "Sales Forecast - Part II"
-          href: p08_sales_forecast_part_2.html
-    - text: "Browse by Skills"
-      menu:
-        - text: "Data Collection"
-        - text: "Web Scraping"
-          href: p09_web_scraping.html
-        - text: "---------"
-        - text: "Data Manipulation"
-        - text: "Data Cleaning"
-          href: p07_data_cleaning.html
-        - text: "RFM Analysis"
-          href: p06_rfm_analysis.html
-        - text: "---------"
-        - text: "Discrete Event Simulation"
-        - text: "ER Resource Planning"
-          href: p05_er_resource_planning.html
-        - text: "---------"
-        - text: "Forecasting"
-        - text: "Sales Forecast - Part I"
-          href: p08_sales_forecast_part_1.html
-        - text: "Sales Forecast - Part II"
-          href: p08_sales_forecast_part_2.html
-        - text: "---------"
-        - text: "Linear Programming/Optimization"
-        - text: "Price Versioning"
-          href: p02_price_versioning.html
-        - text: "---------"
-        - text: "Regression"
-        - text: "Conjoint Analysis"
-          href: p15_conjoint_analysis.html
-        - text: "Multiple Linear Regression"
-          href: "p14_multiple_linear_regression.html"
-        - text: "---------"
-        - text: "Machine Learning"
-        - text: "Recommender System"
-          href: p11_recommender_system.html
-        - text: "---------"
-        - text: "Monte Carlo Simulation"
-        - text: "Inventory Management"
-          href: p04_inventory_management.html
-        - text: "Project Risk Assessment"
-          href: p03_project_risk_assessment.html
+    - text: "Blog"
+      href: https://blogs.ubc.ca/businessanalytics
+    - text: "Projects"
+      href: projects.html
+    - text: "Help"
+      href: help.html
+      
         
 
