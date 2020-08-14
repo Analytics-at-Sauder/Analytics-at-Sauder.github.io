@@ -11,7 +11,7 @@
 
 
 
-<title>Recommender System</title>
+<title>Help</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -304,75 +301,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -380,16 +308,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -436,35 +354,12 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Recommender System</h1>
+<h1 class="title toc-ignore">Help</h1>
 
 </div>
 
 
-<p>While we talk about marketing, most of us will think about the diverse ads on the television; While we talk about machine learning, most of us will think about the robot science. However, in real world, marketing and machine learning is everywhere. And sometimes, two concepts that seems to be from two totally different realm can combine to help business. For example, personizing the replying message so that customers feel connected.</p>
-<p>In this project, we will lead you through a combination of machine learning and marketing that mainly focus on the content optimization aspect: the recommender system and let you understand how the system actually works.</p>
-<p>All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the syzygy.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/user/qingkangcao/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2F" target="_blank" class="button">Launch Syzygy</a></p>
-<div id="business-problem" class="section level2">
-<h2>Business Problem</h2>
-<p>Here we can use the movie industry as an example to illustrate how the recommender system can actually be applied into a business context. The traditional movie content provider systems don’t care about the general taste of the customers because how they get their revenue is irrelevant to their ability to tell their customers’ taste. On the other words, the traditional movie seller only focus on the most welcomed movie and try to sell as many as possible. However, with the introduction of the age of internet, how current movie sellers makes money actually changes. Their income is now highly correlated with how long custoemrs spend on the site to watch the movie. So here the recommender system is required to make sure customers got the best recommendation and spend more time on the website.</p>
-<p>We will use the movie rating dataset to try to duplicate that process</p>
-</div>
-<div id="recommender-system-and-machine-learning" class="section level2">
-<h2>Recommender System and Machine Learning</h2>
-<pre class="python"><code>import pandas as pd 
-import numpy as np 
-df1=pd.read_csv(&#39;../input/tmdb-movie-metadata/tmdb_5000_credits.csv&#39;)
-df2=pd.read_csv(&#39;../input/tmdb-movie-metadata/tmdb_5000_movies.csv&#39;)
 
-df1.columns = [&#39;id&#39;,&#39;tittle&#39;,&#39;cast&#39;,&#39;crew&#39;]
-df2= df2.merge(df1,on=&#39;id&#39;)
-
-df2.head(5)</code></pre>
-<pre><code>WIP</code></pre>
-<pre class="python"><code>A= df2[&#39;vote_average&#39;].mean()
-B= df2[&#39;vote_count&#39;].quantile(0.9)</code></pre>
-</div>
 
 <div class="footer">
   <p style="text-align: center;">
@@ -485,8 +380,6 @@ B= df2[&#39;vote_count&#39;].quantile(0.9)</code></pre>
 </div>
 
 
-</div>
-</div>
 
 </div>
 
@@ -519,32 +412,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
