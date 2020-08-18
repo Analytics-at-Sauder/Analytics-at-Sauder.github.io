@@ -11,7 +11,7 @@
 
 
 
-<title>Projects</title>
+<title>Browse Projects by Topics</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -336,8 +336,20 @@ $(document).ready(function () {
 <li>
   <a href="https://blogs.ubc.ca/businessanalytics">Blog</a>
 </li>
-<li>
-  <a href="projects.html">Projects</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Projects
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="projects_bytopics.html">Browse by Topics</a>
+    </li>
+    <li>
+      <a href="projects_byskills.html">Browse by Skills</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="help.html">Help</a>
@@ -356,75 +368,149 @@ $(document).ready(function () {
 </style>
 
 <div class="fluid-row" id="header">
+  <h1 class="title-replacement toc-ignore">Browse Projects by Topics</h1>
+</div>
+
+<div class="container">
+  <h3>Finance</h3>
+  <div id="finance" class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p01_stock_returns_analysis.html">
+          <img src="images/p01_02.png" />
+          <div class="caption">Stock Return Analysis</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h3>Healthcare</h3>
+  <div id="healthcare" class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p05_er_resource_planning.html">
+          <img src="images/p05_01.png" />
+          <div class="caption">ER Resource Planning</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h3>Marketing</h3>
+  <div id="marketing" class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p15_conjoint_analysis.html">
+          <img src="images/p15_02.png" />
+          <div class="caption">Conjoint Analysis</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p10_customer_segmentation.html">
+          <img src="images/p10_02.png" />
+          <div class="caption">Customer Segmentation</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p02_price_versioning.html">
+          <img src="images/na.png" />
+          <div class="caption">Price Versioning</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p11_recommender_system.html">
+          <img src="images/na.png" />
+          <div class="caption">Recommender System</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p06_rfm_analysis.html">
+          <img src="images/p06_01.png" />
+          <div class="caption">RFM Analysis</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h3>Project Management</h3>
+  <div id="project-management" class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p13_critical_path_analysis.html">
+          <img src="images/p13_04.png" />
+          <div class="caption">Critical Path Analysis</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p03_project_risk_assessment.html">
+          <img src="images/p03_05.png" />
+          <div class="caption">Project Risk Assessment</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h3>Supply Chain Management</h3>
+  <div id="supply-chain-management" class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p12_inventory_decision_analysis.html">
+          <img src="images/p12_05.png" />
+          <div class="caption">Inventory Decision Analysis</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p04_inventory_management.html">
+          <img src="images/p04_04.png" />
+          <div class="caption">Inventory Management</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p08_sales_forecast_part_1.html">
+          <img src="images/p08_07.png" />
+          <div class="caption">Sales Forecast Part I</div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 text-center project-item">
+      <div class="project-item-container">
+        <a href="p08_sales_forecast_part_2.html">
+          <img src="images/p08_14.png" />
+          <div class="caption">Sales Forecast - Part II</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="fluid-row" id="header">
 
 
 
-<h1 class="title toc-ignore">Projects</h1>
+<h1 class="title toc-ignore">Browse Projects by Topics</h1>
 
 </div>
 
 
-<div id="browse-projects" class="section level2 tabset tabset-fade tabset-pills">
-<h2>Browse Projects</h2>
-<div id="by-topic" class="section level3">
-<h3>By Topic</h3>
-<div id="finance" class="section level4">
-<h4>Finance</h4>
-<p><a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a><br/></p>
-</div>
-<div id="healthcare" class="section level4">
-<h4>Healthcare</h4>
-<p><a href="p05_er_resource_planning.html">ER Resource Planning</a><br/></p>
-</div>
-<div id="marketing" class="section level4">
-<h4>Marketing</h4>
-<p><a href="p15_conjoint_analysis.html">Conjoint Analysis</a><br/> <a href="p10_customer_segmentation.html">Customer Segmentation</a><br/> <a href="p02_price_versioning.html">Price Versioning</a><br/> <a href="p11_recommender_system.html">Recommender System</a><br/> <a href="p06_rfm_analysis.html">RFM Analysis</a><br/></p>
-</div>
-<div id="project-management" class="section level4">
-<h4>Project Management</h4>
-<p><a href="p13_critical_path_analysis.html">Critical Path Analysis</a><br/> <a href="p03_project_risk_assessment.html">Project Risk Assessment</a><br/></p>
-</div>
-<div id="supply-chain-management" class="section level4">
-<h4>Supply Chain Management</h4>
-<p><a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a><br/> <a href="p04_inventory_management.html">Inventory Management</a><br/> <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a><br/> <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a><br/></p>
-</div>
-</div>
-<div id="by-skills" class="section level3">
-<h3>By Skills</h3>
-<div id="data-collection" class="section level4">
-<h4>Data Collection</h4>
-<p><a href="p09_web_scraping.html">Web Scraping</a><br/></p>
-</div>
-<div id="data-manipulation" class="section level4">
-<h4>Data Manipulation</h4>
-<p><a href="p07_data_cleaning.html">Data Cleaning</a><br/> <a href="p06_rfm_analysis.html">RFM Analysis</a><br/></p>
-</div>
-<div id="discrete-event-simulation" class="section level4">
-<h4>Discrete Event Simulation</h4>
-<p><a href="p05_er_resource_planning.html">ER Resource Planning</a><br/></p>
-</div>
-<div id="forecasting" class="section level4">
-<h4>Forecasting</h4>
-<p><a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a><br/> <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a><br/></p>
-</div>
-<div id="linear-programmingoptimization" class="section level4">
-<h4>Linear Programming/Optimization</h4>
-<p><a href="p02_price_versioning.html">Price Versioning</a><br/></p>
-</div>
-<div id="regression" class="section level4">
-<h4>Regression</h4>
-<p><a href="p15_conjoint_analysis.html">Conjoint Analysis</a><br/> <a href="%5Dp14_multiple_linear_regression.html">Multiple Linear Regression</a><br/>]</p>
-</div>
-<div id="machine-learning" class="section level4">
-<h4>Machine Learning</h4>
-<p><a href="p11_recommender_system.html">Recommender System</a><br/></p>
-</div>
-<div id="monte-carlo-simulation" class="section level4">
-<h4>Monte Carlo Simulation</h4>
-<p><a href="p04_inventory_management.html">Inventory Management</a><br/> <a href="p03_project_risk_assessment.html">Project Risk Assessment</a><br/></p>
-</div>
-</div>
-</div>
+
 
 <div class="footer">
   <p style="text-align: center;">

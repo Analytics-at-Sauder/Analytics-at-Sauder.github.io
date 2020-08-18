@@ -1,0 +1,41 @@
+---
+title: "Browse Projects by Skills"
+output: 
+  html_document:
+    toc: false
+---
+#### Data Collection
+
+[Web Scraping](p09_web_scraping.html)<br/>
+
+#### Data Manipulation
+
+[Data Cleaning](p07_data_cleaning.html)<br/>
+[RFM Analysis](p06_rfm_analysis.html)<br/>
+
+#### Discrete Event Simulation
+
+[ER Resource Planning](p05_er_resource_planning.html)<br/>
+
+#### Forecasting
+
+[Sales Forecast - Part I](p08_sales_forecast_part_1.html)<br/>
+[Sales Forecast - Part II](p08_sales_forecast_part_2.html)<br/>
+
+#### Linear Programming/Optimization
+
+[Price Versioning](p02_price_versioning.html)<br/>
+
+#### Regression
+
+[Conjoint Analysis](p15_conjoint_analysis.html)<br/>
+[Multiple Linear Regression](p14_multiple_linear_regression.html)<br/>
+
+#### Machine Learning
+
+[Recommender System](p11_recommender_system.html)<br/>
+
+#### Monte Carlo Simulation
+
+[Inventory Management](p04_inventory_management.html)<br/>
+[Project Risk Assessment](p03_project_risk_assessment.html)<br/>
