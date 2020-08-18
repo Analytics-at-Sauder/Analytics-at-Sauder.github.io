@@ -1,7 +1,0 @@
----
-title: "Help"
-output: 
-  html_document:
-    toc: false
----
-

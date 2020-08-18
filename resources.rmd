@@ -1,0 +1,49 @@
+---
+title: "Resources"
+output: html_document
+---
+
+## Tools
+
+
+#### Jupyter Notebook
+
+#### NBViewer
+
+#### Binder
+
+#### Syzygy
+
+#### GitHub
+
+If you are not familiar with Git or GitHub, the [COE Tool Box](http://blogs.ubc.ca/coetoolbox/2017/04/21/getting-started-with-git-and-github/) provides a very detailed tutorial. We also encourage you to utilize [GitHub Learning Lab](https://lab.github.com/) to familiarize yourself with the version control system; GitHub also provides [additional resources](https://try.github.io/) for you to learn Git itself.
+
+#### ReviewNB
+
+#### RStudio
+
+#### WordPress
+
+#### Google Analytics
+
+#### Qualtrics
+
+
+## Cheat Sheets
+
+
+
+
+## Data Resource
+
+
+#### Kaggle
+
+#### UCI Machine Learning Repository
+
+#### Instacart Orders
+
+#### Mergent Online
+
+Opportunity Insights Economic Tracker:
+
