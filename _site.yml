@@ -3,7 +3,7 @@ output_dir: "."
 output:
   html_document:
     includes:
-      in_header: ga-script.html
+      in_header: script.html
       after_body: footer.html
     theme: simplex
     css: style.css
@@ -27,8 +27,8 @@ navbar:
           href: projects_bytopics.html
         - text: "Browse by Skills"
           href: projects_byskills.html
-    - text: "Help"
-      href: help.html
+    - text: "Resources"
+      href: resources.html
       
         
 

@@ -11,7 +11,7 @@
 
 
 
-<title>Recommender System</title>
+<title>Resources</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -448,34 +448,132 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Recommender System</h1>
+<h1 class="title toc-ignore">Resources</h1>
 
 </div>
 
 
-<p>While we talk about marketing, most of us will think about the diverse ads on the television; While we talk about machine learning, most of us will think about the robot science. However, in real world, marketing and machine learning is everywhere. And sometimes, two concepts that seems to be from two totally different realm can combine to help business. For example, personizing the replying message so that customers feel connected.</p>
-<p>In this project, we will lead you through a combination of machine learning and marketing that mainly focus on the content optimization aspect: the recommender system and let you understand how the system actually works.</p>
-<p>All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the syzygy.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/user/qingkangcao/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2F" target="_blank" class="button">Launch Syzygy</a></p>
-<div id="business-problem" class="section level2">
-<h2>Business Problem</h2>
-<p>Here we can use the movie industry as an example to illustrate how the recommender system can actually be applied into a business context. The traditional movie content provider systems don’t care about the general taste of the customers because how they get their revenue is irrelevant to their ability to tell their customers’ taste. On the other words, the traditional movie seller only focus on the most welcomed movie and try to sell as many as possible. However, with the introduction of the age of internet, how current movie sellers makes money actually changes. Their income is now highly correlated with how long custoemrs spend on the site to watch the movie. So here the recommender system is required to make sure customers got the best recommendation and spend more time on the website.</p>
-<p>We will use the movie rating dataset to try to duplicate that process</p>
+<div id="tools-cheat-sheets-and-data-sources" class="section level5">
+<h5>Tools, cheat sheets, and data sources</h5>
 </div>
-<div id="recommender-system-and-machine-learning" class="section level2">
-<h2>Recommender System and Machine Learning</h2>
-<pre class="python"><code>import pandas as pd 
-import numpy as np 
-df1=pd.read_csv(&#39;../input/tmdb-movie-metadata/tmdb_5000_credits.csv&#39;)
-df2=pd.read_csv(&#39;../input/tmdb-movie-metadata/tmdb_5000_movies.csv&#39;)
-
-df1.columns = [&#39;id&#39;,&#39;tittle&#39;,&#39;cast&#39;,&#39;crew&#39;]
-df2= df2.merge(df1,on=&#39;id&#39;)
-
-df2.head(5)</code></pre>
-<pre><code>WIP</code></pre>
-<pre class="python"><code>A= df2[&#39;vote_average&#39;].mean()
-B= df2[&#39;vote_count&#39;].quantile(0.9)</code></pre>
+<div id="tools" class="section level2">
+<h2>Tools</h2>
+<p>Various interactive computing and collaboration tools are used throughout this project. The tools and their respective learning resources are listed here for the convenience of users, contributers, and administrators. In this project, Jupyter Notebook, NBViewer, Binder, and Syzygy are used to create the interactive content; GitHub and ReviewNB enable collaboration and keep track of project history; RStudio and WordPress, combined with custom CSS and Javascript, are used to build this website and the blog; finally, Google Analytics and Qualtrics help with user research and content evaluation.</p>
+<div id="interactive-computing" class="section level3">
+<h3>Interactive Computing</h3>
+<div id="jupyter-notebook" class="section level4">
+<h4><a href="https://jupyter.org/about">Jupyter Notebook</a></h4>
+<div id="it-is-recommended-that-users-download-jupyter-notebook-using-anaconda" class="section level6">
+<h6>It is recommended that users download Jupyter Notebook using <a href="https://www.anaconda.com/products/individual">Anaconda</a></h6>
+<p>Jupyter Notebook is an open-source interactive computing tool that enables <a href="https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58">computational narratives</a>. With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R.</p>
+</div>
+</div>
+<div id="nbviewer" class="section level4">
+<h4><a href="https://nbviewer.jupyter.org/">NBViewer</a></h4>
+<p>NBViewer allows users to browse static versions of Jupyter Notebooks in public GitHub respositories (read more on GitHub below).</p>
+</div>
+<div id="binder" class="section level4">
+<h4><a href="https://mybinder.org/">Binder</a></h4>
+<p>Binder, in contrary to NBViewer, hosts interactive Jupyter Notebook images. Users can edit and execute notebooks hosted on Binder, but changes will be saved or stored.</p>
+</div>
+<div id="syzygy" class="section level4">
+<h4><a href="https://intro.syzygy.ca/">Syzygy</a></h4>
+<p>Syzygy hosts virtual Hubs that allow users to create, execute, and save Jupyter Notebooks in a cloud server. Users can log into Syzygy using both Google accounts and UBC accounts when pulling Jupyter Notebooks from <strong><a href="analytics-at-sauder.github.io">Analytics@Sauder</a></strong>.</p>
+</div>
+</div>
+<div id="collaboration" class="section level3">
+<h3>Collaboration</h3>
+<div id="git-and-github" class="section level4 tabset tabset-fade">
+<h4>Git and GitHub</h4>
+<p><em>Note: for users who are new to the <a href="https://tutorial.djangogirls.org/en/intro_to_command_line/">command-line interface</a>, it might be more intuitive to learn GitHub first before diving into Git itself</em></p>
+<div id="git" class="section level5">
+<h5>Git</h5>
+<p><a href="(https://git-scm.com/)">Git</a> is an open-source Source Code Management (SCM) or Version Control System (VSC) that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.</p>
+<ul>
+<li>This <a href="https://learngitbranching.js.org/">interactive tutorial</a> on Git is a great place to start learning Git</li>
+<li>Once you finish the interactive tutorial, set up Git on your local machine following this <a href="https://github.com/Analytics-at-Sauder/Introduction-to-Git">guide</a> created by Will Jenden, a Sauder alumni (make sure to go through the “README.md” file first and then the “INSTRUCTIONS.md” file)</li>
+</ul>
+<hr />
+</div>
+<div id="github" class="section level5">
+<h5>GitHub</h5>
+<p><a href="https://github.com/">GitHub</a> is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.</p>
+<ul>
+<li>This <a href="https://guides.github.com/activities/hello-world/">short activity</a> is a great place to start learning GitHub</li>
+<li>To reinforce your memory, complete this <a href="https://lab.github.com/githubtraining/introduction-to-github">interactive course</a> on GitHub</li>
+<li>More interative courses on GitHub can be found in the <a href="https://lab.github.com/">GitHub Learning Lab</a></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="reviewnb" class="section level4">
+<h4>ReviewNB</h4>
+</div>
+</div>
+<div id="web-development" class="section level3">
+<h3>Web Development</h3>
+<div id="rstudio" class="section level4">
+<h4>RStudio</h4>
+</div>
+<div id="wordpress" class="section level4">
+<h4>WordPress</h4>
+</div>
+</div>
+<div id="research-and-evaluation" class="section level3">
+<h3>Research and Evaluation</h3>
+<div id="google-analytics" class="section level4">
+<h4>Google Analytics</h4>
+</div>
+<div id="qualtrics" class="section level4">
+<h4>Qualtrics</h4>
+</div>
+</div>
+</div>
+<div id="cheat-sheets" class="section level2">
+<h2>Cheat Sheets</h2>
+<div id="git-1" class="section level3">
+<h3>Git</h3>
+<ul>
+<li><a href="https://github.github.com/training-kit/downloads/github-git-cheat-sheet/">GitHub Git Cheat Sheet</a> (quick cheat sheet for Git created by GitHub)</li>
+<li><a href="https://ndpsoftware.com/git-cheatsheet.html">Visual Git Cheat Sheet</a></li>
+<li><a href="https://git-scm.com/docs">Official Git Reference</a> (complete documentation of git commands)</li>
+</ul>
+</div>
+<div id="markdown" class="section level3">
+<h3>Markdown</h3>
+<p><a href="https://www.markdownguide.org/getting-started/">Markdown</a> is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub</p>
+<ul>
+<li><a href="https://www.markdownguide.org/cheat-sheet/">Markdown Cheat Sheet</a> by Markdown Guide</li>
+<li><a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">GitHub Flavored Markdown</a></li>
+</ul>
+</div>
+</div>
+<div id="data-resource" class="section level2">
+<h2>Data Resource</h2>
+<div id="databases" class="section level3">
+<h3>Databases</h3>
+<div id="mergent-online" class="section level4">
+<h4><a href="https://www.mergentonline.com/login.php">Mergent Online</a></h4>
+<div id="access-through-ubc-library" class="section level6">
+<h6>Access through <a href="http://resources.library.ubc.ca/page.php?id=477">UBC Library</a></h6>
+</div>
+</div>
+<div id="kaggle" class="section level4">
+<h4><a href="https://www.kaggle.com/datasets">Kaggle</a></h4>
+</div>
+</div>
+<div id="others" class="section level3">
+<h3>Others</h3>
+<div id="uci-machine-learning-repository" class="section level4">
+<h4><a href="https://archive.ics.uci.edu/ml/datasets.php">UCI Machine Learning Repository</a></h4>
+</div>
+<div id="million-instacart-orders" class="section level4">
+<h4><a href="https://www.instacart.com/datasets/grocery-shopping-2017">3 Million Instacart Orders</a></h4>
+</div>
+<div id="opportunity-insights-economic-tracker" class="section level4">
+<h4><a href="https://github.com/OpportunityInsights/EconomicTracker">Opportunity Insights Economic Tracker</a></h4>
+</div>
+</div>
 </div>
 
 <div class="footer">
