@@ -3,26 +3,60 @@ title: "Resources"
 output: html_document
 ---
 
+##### Tools, cheat sheets, and data sources
+
 ## Tools
 
+Various interactive computing and collaboration tools are used throughout this project. The tools and their respective learning resources are listed here for the convenience of users, contributers, and administrators. In this project, Jupyter Notebook, NBViewer, Binder, and Syzygy are used to create the interactive content; GitHub and ReviewNB enable collaboration and keep track of project history; RStudio and WordPress, combined with custom CSS and Javascript, are used to build this website and the blog; finally, Google Analytics and Qualtrics help with user research and content evaluation.
 
-#### Jupyter Notebook
+### Interactive Computing
 
-#### NBViewer
+#### [Jupyter Notebook](https://jupyter.org/about)
+###### It is recommended that users download Jupyter Notebook using [Anaconda](https://www.anaconda.com/products/individual)
+Jupyter Notebook is an open-source interactive computing tool that enables [computational narratives](https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58). With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R.
 
-#### Binder
+#### [NBViewer](https://nbviewer.jupyter.org/)
+NBViewer allows users to browse static versions of Jupyter Notebooks in public GitHub respositories (read more on GitHub below).
 
-#### Syzygy
+#### [Binder](https://mybinder.org/)
+Binder, in contrary to NBViewer, hosts interactive Jupyter Notebook images. Users can edit and execute notebooks hosted on Binder, but changes will be saved or stored.
 
-#### GitHub
+#### [Syzygy](https://intro.syzygy.ca/)
+Syzygy hosts virtual Hubs that allow users to create, execute, and save Jupyter Notebooks in a cloud server. Users can log into Syzygy using both Google accounts and UBC accounts when pulling Jupyter Notebooks from **[Analytics@Sauder](analytics-at-sauder.github.io)**.
 
-If you are not familiar with Git or GitHub, the [COE Tool Box](http://blogs.ubc.ca/coetoolbox/2017/04/21/getting-started-with-git-and-github/) provides a very detailed tutorial. We also encourage you to utilize [GitHub Learning Lab](https://lab.github.com/) to familiarize yourself with the version control system; GitHub also provides [additional resources](https://try.github.io/) for you to learn Git itself.
+### Collaboration
+
+#### Git and GitHub {.tabset .tabset-fade}
+
+*Note: for users who are new to the [command-line interface](https://tutorial.djangogirls.org/en/intro_to_command_line/), it might be more intuitive to learn GitHub first before diving into Git itself*
+
+##### Git
+[Git]((https://git-scm.com/)) is an open-source Source Code Management (SCM) or Version Control System (VSC) that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.
+
+- This [interactive tutorial](https://learngitbranching.js.org/) on Git is a great place to start learning Git
+- Once you finish the interactive tutorial, set up Git on your local machine following this [guide](https://github.com/Analytics-at-Sauder/Introduction-to-Git) created by Will Jenden, a Sauder alumni (make sure to go through the "README.md" file first and then the "INSTRUCTIONS.md" file)
+
+---
+
+##### GitHub
+
+[GitHub](https://github.com/) is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field. 
+
+- This [short activity](https://guides.github.com/activities/hello-world/) is a great place to start learning GitHub
+- To reinforce your memory, complete this [interactive course](https://lab.github.com/githubtraining/introduction-to-github) on GitHub
+- More interative courses on GitHub can be found in the [GitHub Learning Lab](https://lab.github.com/)
+
+---
 
 #### ReviewNB
+
+### Web Development
 
 #### RStudio
 
 #### WordPress
+
+### Research and Evaluation
 
 #### Google Analytics
 
@@ -31,19 +65,31 @@ If you are not familiar with Git or GitHub, the [COE Tool Box](http://blogs.ubc.
 
 ## Cheat Sheets
 
+### Git
+- [GitHub Git Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet/) (quick cheat sheet for Git created by GitHub)
+- [Visual Git Cheat Sheet](https://ndpsoftware.com/git-cheatsheet.html)
+- [Official Git Reference](https://git-scm.com/docs) (complete documentation of git commands)
 
+### Markdown
+[Markdown](https://www.markdownguide.org/getting-started/) is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub
 
+- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/) by Markdown Guide
+- [GitHub Flavored Markdown](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
 
 ## Data Resource
 
+### Databases
 
-#### Kaggle
+#### [Mergent Online](https://www.mergentonline.com/login.php)
+###### Access through [UBC Library](http://resources.library.ubc.ca/page.php?id=477)
 
-#### UCI Machine Learning Repository
+#### [Kaggle](https://www.kaggle.com/datasets)
 
-#### Instacart Orders
+### Others
 
-#### Mergent Online
+#### [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.php)
 
-Opportunity Insights Economic Tracker:
+#### [3 Million Instacart Orders](https://www.instacart.com/datasets/grocery-shopping-2017)
+
+#### [Opportunity Insights Economic Tracker](https://github.com/OpportunityInsights/EconomicTracker)
 
