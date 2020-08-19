@@ -458,13 +458,14 @@ div.tocify {
 </div>
 <div id="tools" class="section level2">
 <h2>Tools</h2>
+<hr />
 <p>Various interactive computing and collaboration tools are used throughout this project. The tools and their respective learning resources are listed here for the convenience of users, contributers, and administrators. In this project, Jupyter Notebook, NBViewer, Binder, and Syzygy are used to create the interactive content; GitHub and ReviewNB enable collaboration and keep track of project history; RStudio and WordPress, combined with custom CSS and Javascript, are used to build this website and the blog; finally, Google Analytics and Qualtrics help with user research and content evaluation.</p>
 <div id="interactive-computing" class="section level3">
 <h3>Interactive Computing</h3>
 <div id="jupyter-notebook" class="section level4">
 <h4><a href="https://jupyter.org/about">Jupyter Notebook</a></h4>
-<div id="it-is-recommended-that-users-download-jupyter-notebook-using-anaconda" class="section level6">
-<h6>It is recommended that users download Jupyter Notebook using <a href="https://www.anaconda.com/products/individual">Anaconda</a></h6>
+<div id="download-jupyter-notebook-using-anaconda" class="section level6">
+<h6>Download Jupyter Notebook using <a href="https://www.anaconda.com/products/individual">Anaconda</a></h6>
 <p>Jupyter Notebook is an open-source interactive computing tool that enables <a href="https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58">computational narratives</a>. With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R.</p>
 </div>
 </div>
@@ -484,11 +485,11 @@ div.tocify {
 <div id="collaboration" class="section level3">
 <h3>Collaboration</h3>
 <div id="git-and-github" class="section level4 tabset tabset-fade">
-<h4>Git and GitHub</h4>
+<h4><a href="(https://git-scm.com/)">Git</a> and <a href="https://github.com/">GitHub</a></h4>
 <p><em>Note: for users who are new to the <a href="https://tutorial.djangogirls.org/en/intro_to_command_line/">command-line interface</a>, it might be more intuitive to learn GitHub first before diving into Git itself</em></p>
 <div id="git" class="section level5">
 <h5>Git</h5>
-<p><a href="(https://git-scm.com/)">Git</a> is an open-source Source Code Management (SCM) or Version Control System (VSC) that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.</p>
+<p>Git is an open-source Version Control System (VSC) or Source Code Management (SCM) tool that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.</p>
 <ul>
 <li>This <a href="https://learngitbranching.js.org/">interactive tutorial</a> on Git is a great place to start learning Git</li>
 <li>Once you finish the interactive tutorial, set up Git on your local machine following this <a href="https://github.com/Analytics-at-Sauder/Introduction-to-Git">guide</a> created by Will Jenden, a Sauder alumni (make sure to go through the “README.md” file first and then the “INSTRUCTIONS.md” file)</li>
@@ -497,59 +498,70 @@ div.tocify {
 </div>
 <div id="github" class="section level5">
 <h5>GitHub</h5>
-<p><a href="https://github.com/">GitHub</a> is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.</p>
-<ul>
-<li>This <a href="https://guides.github.com/activities/hello-world/">short activity</a> is a great place to start learning GitHub</li>
-<li>To reinforce your memory, complete this <a href="https://lab.github.com/githubtraining/introduction-to-github">interactive course</a> on GitHub</li>
-<li>More interative courses on GitHub can be found in the <a href="https://lab.github.com/">GitHub Learning Lab</a></li>
-</ul>
+<p>GitHub is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field. - This <a href="https://guides.github.com/activities/hello-world/">short activity</a> is a great place to start learning GitHub - To reinforce your memory, complete this <a href="https://lab.github.com/githubtraining/introduction-to-github">interactive course</a> on GitHub - More interative courses on GitHub can be found in the <a href="https://lab.github.com/">GitHub Learning Lab</a></p>
 <hr />
 </div>
 </div>
 <div id="reviewnb" class="section level4">
-<h4>ReviewNB</h4>
+<h4><a href="https://github.com/marketplace/review-notebook-app">ReviewNB</a></h4>
+<p>ReviewNB is a GitHub (marketplace) application that enables comprehensible comparisons and reviews of Jupyter notebooks. GitHub automatically shows differences for plain text files between branches and commits whenever they are compared with one another (here’s an <a href="https://github.com/octocat/linguist/compare/master...octocat:an-example-comparison-for-docs">example</a>), where addition is hightlighted in green and deletion in red. However, Jupyter Notebooks are normally presented as rich media rendering of <a href="https://nbformat.readthedocs.io/en/latest/format_description.html#notebook-file-format">JSON files</a>, which are not very interpretable when shown in plain text. With the help of ReviewNB, users can see the differences between two Jupyter Notebooks after they are rendered in a new window. At the same time, any edits or comments made in ReviewNB would be synced back to the GitHub.</p>
 </div>
 </div>
 <div id="web-development" class="section level3">
 <h3>Web Development</h3>
-<div id="rstudio" class="section level4">
-<h4>RStudio</h4>
+<p>This website is currently generated using the built in site-generater for RStudio, styled using external CSS and Javascript, while the affiliated blog is created using UBC Blog, which is powered by WordPress. However, in the foreseeable future, alternative web development tools might be applied to either or both of the website and the blog.</p>
+<div id="rstudio-and-rmarkdown" class="section level4">
+<h4><a href="https://rstudio.com/products/rstudio/">RStudio</a> and <a href="https://rmarkdown.rstudio.com/lesson-1.html">RMarkdown</a></h4>
+<p>RStudio is an Integrated Development Environment (IDE) for R, a statistical computing programming language. RMarkdown on the other hand is a package that comes with a built-in site generater that is useful for analysts and researchers who want to create HTML-formatted content using RMarkdown files (similar to Jupyter notebooks)</p>
+<ul>
+<li>Follow this <a href="https://resources.github.com/whitepapers/github-and-rstudio/">guide</a> to create your first website using rmarkdown’s site generater and publish it through GitHub Pages</li>
+<li>Go through this <a href="https://bookdown.org/yihui/rmarkdown/html-document.html">section</a> of the RMarkdown Guidebook to further customize your site</li>
+</ul>
 </div>
-<div id="wordpress" class="section level4">
-<h4>WordPress</h4>
+<div id="ubc-blog-and-wordpress" class="section level4">
+<h4><a href="https://blogs.ubc.ca/about/">UBC Blog</a> and <a href="https://wordpress.com/support/">WordPress</a></h4>
+<p>The affiliated blog is still at its early stage of development. Here is a collection of <a href="https://blogs.ubc.ca/blogsandbox/faq/">video tutorials</a> created by Blogging Sandbox on how to use UBC Blog and WordPress.</p>
 </div>
 </div>
 <div id="research-and-evaluation" class="section level3">
 <h3>Research and Evaluation</h3>
 <div id="google-analytics" class="section level4">
-<h4>Google Analytics</h4>
+<h4><a href="https://marketingplatform.google.com/about/analytics/">Google Analytics</a></h4>
+<p>Google Analytics is embedded into this website and can be used to analyze website traffic and user interactions. This <a href="https://analytics.google.com/analytics/academy/course/6">beginner course</a> is a great place to start learning.</p>
 </div>
 <div id="qualtrics" class="section level4">
-<h4>Qualtrics</h4>
+<h4><a href="https://www.qualtrics.com/core-xm/survey-software/">Qualtrics</a></h4>
+<div id="access-through-ubc-it-services" class="section level6">
+<h6>Access through <a href="https://it.ubc.ca/services/teaching-learning-tools/survey-tool">UBC IT Services</a></h6>
+<p>Qualtrics is a survey and research tool with many functions. Here is a list of <a href="https://it.ubc.ca/services/teaching-learning-tools/survey-tool/qualtrics-training">tutorials</a> to get you started</p>
+</div>
 </div>
 </div>
 </div>
 <div id="cheat-sheets" class="section level2">
 <h2>Cheat Sheets</h2>
-<div id="git-1" class="section level3">
-<h3>Git</h3>
+<hr />
+<div id="git-1" class="section level4">
+<h4>Git</h4>
 <ul>
 <li><a href="https://github.github.com/training-kit/downloads/github-git-cheat-sheet/">GitHub Git Cheat Sheet</a> (quick cheat sheet for Git created by GitHub)</li>
 <li><a href="https://ndpsoftware.com/git-cheatsheet.html">Visual Git Cheat Sheet</a></li>
 <li><a href="https://git-scm.com/docs">Official Git Reference</a> (complete documentation of git commands)</li>
 </ul>
 </div>
-<div id="markdown" class="section level3">
-<h3>Markdown</h3>
-<p><a href="https://www.markdownguide.org/getting-started/">Markdown</a> is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub</p>
+<div id="markdown" class="section level4">
+<h4><a href="https://www.markdownguide.org/getting-started/">Markdown</a></h4>
+<p>Markdown is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub</p>
 <ul>
 <li><a href="https://www.markdownguide.org/cheat-sheet/">Markdown Cheat Sheet</a> by Markdown Guide</li>
 <li><a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">GitHub Flavored Markdown</a></li>
+<li><a href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting%20Equations.html">Math Equations in Markdown</a></li>
 </ul>
 </div>
 </div>
-<div id="data-resource" class="section level2">
-<h2>Data Resource</h2>
+<div id="data-sources" class="section level2">
+<h2>Data Sources</h2>
+<hr />
 <div id="databases" class="section level3">
 <h3>Databases</h3>
 <div id="mergent-online" class="section level4">

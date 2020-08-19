@@ -7,12 +7,14 @@ output: html_document
 
 ## Tools
 
+---
+
 Various interactive computing and collaboration tools are used throughout this project. The tools and their respective learning resources are listed here for the convenience of users, contributers, and administrators. In this project, Jupyter Notebook, NBViewer, Binder, and Syzygy are used to create the interactive content; GitHub and ReviewNB enable collaboration and keep track of project history; RStudio and WordPress, combined with custom CSS and Javascript, are used to build this website and the blog; finally, Google Analytics and Qualtrics help with user research and content evaluation.
 
 ### Interactive Computing
 
 #### [Jupyter Notebook](https://jupyter.org/about)
-###### It is recommended that users download Jupyter Notebook using [Anaconda](https://www.anaconda.com/products/individual)
+###### Download Jupyter Notebook using [Anaconda](https://www.anaconda.com/products/individual)
 Jupyter Notebook is an open-source interactive computing tool that enables [computational narratives](https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58). With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R.
 
 #### [NBViewer](https://nbviewer.jupyter.org/)
@@ -26,12 +28,11 @@ Syzygy hosts virtual Hubs that allow users to create, execute, and save Jupyter 
 
 ### Collaboration
 
-#### Git and GitHub {.tabset .tabset-fade}
-
+#### [Git]((https://git-scm.com/)) and [GitHub](https://github.com/) {.tabset .tabset-fade}
 *Note: for users who are new to the [command-line interface](https://tutorial.djangogirls.org/en/intro_to_command_line/), it might be more intuitive to learn GitHub first before diving into Git itself*
 
 ##### Git
-[Git]((https://git-scm.com/)) is an open-source Source Code Management (SCM) or Version Control System (VSC) that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.
+Git is an open-source Version Control System (VSC) or Source Code Management (SCM) tool that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.
 
 - This [interactive tutorial](https://learngitbranching.js.org/) on Git is a great place to start learning Git
 - Once you finish the interactive tutorial, set up Git on your local machine following this [guide](https://github.com/Analytics-at-Sauder/Introduction-to-Git) created by Will Jenden, a Sauder alumni (make sure to go through the "README.md" file first and then the "INSTRUCTIONS.md" file)
@@ -39,44 +40,58 @@ Syzygy hosts virtual Hubs that allow users to create, execute, and save Jupyter 
 ---
 
 ##### GitHub
-
-[GitHub](https://github.com/) is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field. 
-
+GitHub is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field. 
 - This [short activity](https://guides.github.com/activities/hello-world/) is a great place to start learning GitHub
 - To reinforce your memory, complete this [interactive course](https://lab.github.com/githubtraining/introduction-to-github) on GitHub
 - More interative courses on GitHub can be found in the [GitHub Learning Lab](https://lab.github.com/)
 
 ---
 
-#### ReviewNB
+#### [ReviewNB](https://github.com/marketplace/review-notebook-app)
+ReviewNB is a GitHub (marketplace) application that enables comprehensible comparisons and reviews of Jupyter notebooks. GitHub automatically shows differences for plain text files between branches and commits whenever they are compared with one another (here's an [example](https://github.com/octocat/linguist/compare/master...octocat:an-example-comparison-for-docs)), where addition is hightlighted in green and deletion in red. However, Jupyter Notebooks are normally presented as rich media rendering of [JSON files](https://nbformat.readthedocs.io/en/latest/format_description.html#notebook-file-format), which are not very interpretable when shown in plain text. With the help of ReviewNB, users can see the differences between two Jupyter Notebooks after they are rendered in a new window. At the same time, any edits or comments made in ReviewNB would be synced back to the GitHub.
 
 ### Web Development
 
-#### RStudio
+This website is currently generated using the built in site-generater for RStudio, styled using external CSS and Javascript, while the affiliated blog is created using UBC Blog, which is powered by WordPress. However, in the foreseeable future, alternative web development tools might be applied to either or both of the website and the blog.
 
-#### WordPress
+#### [RStudio](https://rstudio.com/products/rstudio/) and [RMarkdown](https://rmarkdown.rstudio.com/lesson-1.html)
+RStudio is an Integrated Development Environment (IDE) for R, a statistical computing programming language. RMarkdown on the other hand is a package that comes with a built-in site generater that is useful for analysts and researchers who want to create HTML-formatted content using RMarkdown files (similar to Jupyter notebooks)
+
+- Follow this [guide](https://resources.github.com/whitepapers/github-and-rstudio/) to create your first website using rmarkdown's site generater and publish it through GitHub Pages
+- Go through this [section](https://bookdown.org/yihui/rmarkdown/html-document.html) of the RMarkdown Guidebook to further customize your site
+
+#### [UBC Blog](https://blogs.ubc.ca/about/) and [WordPress](https://wordpress.com/support/)
+The affiliated blog is still at its early stage of development. Here is a collection of [video tutorials](https://blogs.ubc.ca/blogsandbox/faq/) created by Blogging Sandbox on how to use UBC Blog and WordPress.
 
 ### Research and Evaluation
 
-#### Google Analytics
+#### [Google Analytics](https://marketingplatform.google.com/about/analytics/)
+Google Analytics is embedded into this website and can be used to analyze website traffic and user interactions. This [beginner course](https://analytics.google.com/analytics/academy/course/6) is a great place to start learning. 
 
-#### Qualtrics
-
+#### [Qualtrics](https://www.qualtrics.com/core-xm/survey-software/)
+###### Access through [UBC IT Services](https://it.ubc.ca/services/teaching-learning-tools/survey-tool)
+Qualtrics is a survey and research tool with many functions. Here is a list of [tutorials](https://it.ubc.ca/services/teaching-learning-tools/survey-tool/qualtrics-training) to get you started
 
 ## Cheat Sheets
 
-### Git
+---
+
+#### Git
 - [GitHub Git Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet/) (quick cheat sheet for Git created by GitHub)
 - [Visual Git Cheat Sheet](https://ndpsoftware.com/git-cheatsheet.html)
 - [Official Git Reference](https://git-scm.com/docs) (complete documentation of git commands)
 
-### Markdown
-[Markdown](https://www.markdownguide.org/getting-started/) is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub
+#### [Markdown](https://www.markdownguide.org/getting-started/)
+Markdown is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub
 
 - [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/) by Markdown Guide
 - [GitHub Flavored Markdown](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
+- [Math Equations in Markdown](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting%20Equations.html)
 
-## Data Resource
+
+## Data Sources
+
+---
 
 ### Databases
 
