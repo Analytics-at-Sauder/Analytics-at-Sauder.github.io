@@ -26,7 +26,7 @@ Binder, in contrary to NBViewer, hosts interactive Jupyter Notebook images. User
 #### [Syzygy](https://intro.syzygy.ca/)
 Syzygy hosts virtual Hubs that allow users to create, execute, and save Jupyter Notebooks in a cloud server. Users can log into Syzygy using both Google accounts and UBC accounts when pulling Jupyter Notebooks from **[Analytics@Sauder](analytics-at-sauder.github.io)**.
 
-### Collaboration
+### Collaboration {#collaboration}
 
 #### [Git]((https://git-scm.com/)) and [GitHub](https://github.com/) {.tabset .tabset-fade}
 *Note: for users who are new to the [command-line interface](https://tutorial.djangogirls.org/en/intro_to_command_line/), it might be more intuitive to learn GitHub first before diving into Git itself*
