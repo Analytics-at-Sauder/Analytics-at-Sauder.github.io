@@ -41,6 +41,7 @@ Git is an open-source Version Control System (VSC) or Source Code Management (SC
 
 ##### GitHub
 GitHub is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.
+
 - This [short activity](https://guides.github.com/activities/hello-world/) is a great place to start learning GitHub
 - To reinforce your memory, complete this [interactive course](https://lab.github.com/githubtraining/introduction-to-github) on GitHub
 - More interative courses on GitHub can be found in the [GitHub Learning Lab](https://lab.github.com/)
