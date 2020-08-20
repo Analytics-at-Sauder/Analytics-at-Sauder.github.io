@@ -40,7 +40,7 @@ Git is an open-source Version Control System (VSC) or Source Code Management (SC
 ---
 
 ##### GitHub
-GitHub is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field. 
+GitHub is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.
 - This [short activity](https://guides.github.com/activities/hello-world/) is a great place to start learning GitHub
 - To reinforce your memory, complete this [interactive course](https://lab.github.com/githubtraining/introduction-to-github) on GitHub
 - More interative courses on GitHub can be found in the [GitHub Learning Lab](https://lab.github.com/)
@@ -66,7 +66,7 @@ The affiliated blog is still at its early stage of development. Here is a collec
 ### Research and Evaluation
 
 #### [Google Analytics](https://marketingplatform.google.com/about/analytics/)
-Google Analytics is embedded into this website and can be used to analyze website traffic and user interactions. This [beginner course](https://analytics.google.com/analytics/academy/course/6) is a great place to start learning. 
+Google Analytics is embedded into this website and can be used to analyze website traffic and user interactions. This [beginner course](https://analytics.google.com/analytics/academy/course/6) is a great place to start learning.
 
 #### [Qualtrics](https://www.qualtrics.com/core-xm/survey-software/)
 ###### Access through [UBC IT Services](https://it.ubc.ca/services/teaching-learning-tools/survey-tool)
@@ -104,7 +104,6 @@ Markdown is a lightweight markup language that can be used to format plain text 
 
 #### [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.php)
 
-#### [3 Million Instacart Orders](https://www.instacart.com/datasets/grocery-shopping-2017)
+#### [Three Million Instacart Orders](https://www.instacart.com/datasets/grocery-shopping-2017)
 
 #### [Opportunity Insights Economic Tracker](https://github.com/OpportunityInsights/EconomicTracker)
-
