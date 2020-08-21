@@ -5,9 +5,9 @@ output:
     toc: false
 ---
 
-This project started as a foundation to what we hope is the beginning of an ever growing repository of reproducible projects that can be used to build one's business analytics tool box. Your input would be much appreciated, and together, we can build a community where analytics professionals can learn from one another through exchanges of ideas and algorithms. 
+This project started as a foundation to what we hope is the beginning of an ever growing repository of reproducible projects that can be used to build one's business analytics tool box. We welcome submission of articles and high quality code to Analytics at sauder on all topics in Business Analytics.Your input would be much appreciated, and together, we can build a community where analytics professionals can learn from one another through exchanges of ideas and algorithms. 
 
-Here, we will walk you through several ways that you can contribute; however, it is strongly recommended that you first take a look at the list of tools that are implemented in this project on the [Resources](resources.html) page, especially [Git and GitHub](resources.html#collaboration), to better understand the current structure of this platform.
+There are several ways that you can contribute; however, it is strongly recommended that you first take a look at the list of tools that are implemented in this project on the [Resources](resources.html) page, especially [Git and GitHub](resources.html#collaboration), to better understand the current structure of this platform.
 
 ### Share Your Own Notebooks
 
