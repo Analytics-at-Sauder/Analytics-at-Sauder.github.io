@@ -2,109 +2,92 @@
 title: "Resources"
 output: html_document
 ---
-
-##### Tools, cheat sheets, and data sources
+If you’re new to open source development, here is some information to help you get started.
 
 ## Tools
-
----
 
 Various interactive computing and collaboration tools are used throughout this project. The tools and their respective learning resources are listed here for the convenience of users, contributers, and administrators. In this project, Jupyter Notebook, NBViewer, Binder, and Syzygy are used to create the interactive content; GitHub and ReviewNB enable collaboration and keep track of project history; RStudio and WordPress, combined with custom CSS and Javascript, are used to build this website and the blog; finally, Google Analytics and Qualtrics help with user research and content evaluation.
 
 ### Interactive Computing
 
-#### [Jupyter Notebook](https://jupyter.org/about)
-###### Download Jupyter Notebook using [Anaconda](https://www.anaconda.com/products/individual)
-Jupyter Notebook is an open-source interactive computing tool that enables [computational narratives](https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58). With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R.
+#### Jupyter Notebook
+
+[Jupyter Notebook](https://jupyter.org/about) is an open-source interactive computing tool that enables [computational narratives](https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58). With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R. Juper Notebook can be downloaded using [Anaconda](https://www.anaconda.com/products/individual)
 
 #### [NBViewer](https://nbviewer.jupyter.org/)
 NBViewer allows users to browse static versions of Jupyter Notebooks in public GitHub respositories (read more on GitHub below).
 
-#### [Binder](https://mybinder.org/)
-Binder, in contrary to NBViewer, hosts interactive Jupyter Notebook images. Users can edit and execute notebooks hosted on Binder, but changes will be saved or stored.
+#### Binder
+[Binder](https://mybinder.org/) in contrary to NBViewer, hosts interactive Jupyter Notebook images. Users can edit and execute notebooks hosted on Binder, but changes will not be saved or stored.
 
-#### [Syzygy](https://intro.syzygy.ca/)
-Syzygy hosts virtual Hubs that allow users to create, execute, and save Jupyter Notebooks in a cloud server. Users can log into Syzygy using both Google accounts and UBC accounts when pulling Jupyter Notebooks from **[Analytics@Sauder](analytics-at-sauder.github.io)**.
+#### Syzygy 
+[Syzygy](https://intro.syzygy.ca/) hosts virtual Hubs that allow users to create, execute, and save Jupyter Notebooks in a cloud server. Users can log into Syzygy using both Google accounts and UBC accounts when pulling Jupyter Notebooks from **[Analytics@Sauder](analytics-at-sauder.github.io)**.
 
-### Collaboration {#collaboration}
+### Collaboration
 
-#### [Git]((https://git-scm.com/)) and [GitHub](https://github.com/) {.tabset .tabset-fade}
-*Note: for users who are new to the [command-line interface](https://tutorial.djangogirls.org/en/intro_to_command_line/), it might be more intuitive to learn GitHub first before diving into Git itself*
-
-##### Git
+#### Git
 Git is an open-source Version Control System (VSC) or Source Code Management (SCM) tool that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.
+This [interactive tutorial](https://learngitbranching.js.org/) on Git is a great place to start learning Git. Once the interactive tutorial is done, set up Git on your local machine following this [guide](https://github.com/Analytics-at-Sauder/Introduction-to-Git) created by Will Jenden, a Sauder alumni (Read the "README.md" file first and then the "INSTRUCTIONS.md" file). For users who are new to the [command-line interface](https://tutorial.djangogirls.org/en/intro_to_command_line/), it might be more intuitive to learn GitHub first before diving into Git itself
 
-- This [interactive tutorial](https://learngitbranching.js.org/) on Git is a great place to start learning Git
-- Once you finish the interactive tutorial, set up Git on your local machine following this [guide](https://github.com/Analytics-at-Sauder/Introduction-to-Git) created by Will Jenden, a Sauder alumni (make sure to go through the "README.md" file first and then the "INSTRUCTIONS.md" file)
-
----
-
-##### GitHub
+#### GitHub
 GitHub is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.
 
-- This [short activity](https://guides.github.com/activities/hello-world/) is a great place to start learning GitHub
-- To reinforce your memory, complete this [interactive course](https://lab.github.com/githubtraining/introduction-to-github) on GitHub
-- More interative courses on GitHub can be found in the [GitHub Learning Lab](https://lab.github.com/)
+This [short activity](https://guides.github.com/activities/hello-world/) is a great place to start learning GitHub. To reinforce your GitHub learning, complete this [interactive course](https://lab.github.com/githubtraining/introduction-to-github) on GitHub. More interative courses on GitHub can be found in the [GitHub Learning Lab](https://lab.github.com/)
 
----
+ ---
 
-#### [ReviewNB](https://github.com/marketplace/review-notebook-app)
-ReviewNB is a GitHub (marketplace) application that enables comprehensible comparisons and reviews of Jupyter notebooks. GitHub automatically shows differences for plain text files between branches and commits whenever they are compared with one another (here's an [example](https://github.com/octocat/linguist/compare/master...octocat:an-example-comparison-for-docs)), where addition is hightlighted in green and deletion in red. However, Jupyter Notebooks are normally presented as rich media rendering of [JSON files](https://nbformat.readthedocs.io/en/latest/format_description.html#notebook-file-format), which are not very interpretable when shown in plain text. With the help of ReviewNB, users can see the differences between two Jupyter Notebooks after they are rendered in a new window. At the same time, any edits or comments made in ReviewNB would be synced back to the GitHub.
+#### ReviewNB
+[ReviewNB](https://github.com/marketplace/review-notebook-app) is a GitHub (marketplace) application that enables comprehensible comparisons and reviews of Jupyter notebooks. GitHub automatically shows differences for plain text files between branches and commits whenever they are compared with one another (here's an [example](https://github.com/octocat/linguist/compare/master...octocat:an-example-comparison-for-docs)), where addition is hightlighted in green and deletion in red. However, Jupyter Notebooks are normally presented as rich media rendering of [JSON files](https://nbformat.readthedocs.io/en/latest/format_description.html#notebook-file-format), which are not very interpretable when shown in plain text. With the help of ReviewNB, users can see the differences between two Jupyter Notebooks after they are rendered in a new window. At the same time, any edits or comments made in ReviewNB would be synced back to the GitHub.
 
 ### Web Development
 
 This website is currently generated using the built in site-generater for RStudio, styled using external CSS and Javascript, while the affiliated blog is created using UBC Blog, which is powered by WordPress. However, in the foreseeable future, alternative web development tools might be applied to either or both of the website and the blog.
 
-#### [RStudio](https://rstudio.com/products/rstudio/) and [RMarkdown](https://rmarkdown.rstudio.com/lesson-1.html)
-RStudio is an Integrated Development Environment (IDE) for R, a statistical computing programming language. RMarkdown on the other hand is a package that comes with a built-in site generater that is useful for analysts and researchers who want to create HTML-formatted content using RMarkdown files (similar to Jupyter notebooks)
+#### RStudio 
+[RStudio](https://rstudio.com/products/rstudio/) and [RMarkdown](https://rmarkdown.rstudio.com/lesson-1.html) is an Integrated Development Environment (IDE) for R, a statistical computing programming language. RMarkdown on the other hand is a package that comes with a built-in site generater that is useful for analysts and researchers who want to create HTML-formatted content using RMarkdown files (similar to Jupyter notebooks)
 
-- Follow this [guide](https://resources.github.com/whitepapers/github-and-rstudio/) to create your first website using rmarkdown's site generater and publish it through GitHub Pages
-- Go through this [section](https://bookdown.org/yihui/rmarkdown/html-document.html) of the RMarkdown Guidebook to further customize your site
+The [r-mark down guide](https://resources.github.com/whitepapers/github-and-rstudio/) provides a clear guide on how to create a simple website using rmarkdown's site generater and publish it through GitHub Pages. For more complex customization, the [RMarkdown Guidebook](https://bookdown.org/yihui/rmarkdown/html-document.html) provides more tips.
 
-#### [UBC Blog](https://blogs.ubc.ca/about/) and [WordPress](https://wordpress.com/support/)
-The affiliated blog is still at its early stage of development. Here is a collection of [video tutorials](https://blogs.ubc.ca/blogsandbox/faq/) created by Blogging Sandbox on how to use UBC Blog and WordPress.
+####  UBC Blog and WordPress
+The affiliated blog is still at its early stage of development. Here is a collection of [video tutorials](https://blogs.ubc.ca/blogsandbox/faq/) created by Blogging Sandbox on how to use [UBC Blog](https://blogs.ubc.ca/about/) and [WordPress](https://wordpress.com/support/).
 
 ### Research and Evaluation
 
-#### [Google Analytics](https://marketingplatform.google.com/about/analytics/)
-Google Analytics is embedded into this website and can be used to analyze website traffic and user interactions. This [beginner course](https://analytics.google.com/analytics/academy/course/6) is a great place to start learning.
+<b> Google Analytics </b>
+[Google Analytics](https://marketingplatform.google.com/about/analytics/) is embedded into this website and can be used to analyze website traffic and user interactions. This [beginner course](https://analytics.google.com/analytics/academy/course/6) is a great place to start learning.
 
-#### [Qualtrics](https://www.qualtrics.com/core-xm/survey-software/)
-###### Access through [UBC IT Services](https://it.ubc.ca/services/teaching-learning-tools/survey-tool)
-Qualtrics is a survey and research tool with many functions. Here is a list of [tutorials](https://it.ubc.ca/services/teaching-learning-tools/survey-tool/qualtrics-training) to get you started
+<b>Qualtrics </b>
+[Qualtrics](https://www.qualtrics.com/core-xm/survey-software/) is a survey and research tool with many functions. Here is a list of [tutorials](https://it.ubc.ca/services/teaching-learning-tools/survey-tool/qualtrics-training) to get you started. This service can be accessed through [UBC IT Services](https://it.ubc.ca/services/teaching-learning-tools/survey-tool)
 
 ## Cheat Sheets
+ ---
 
----
+### Git
+Git (/ɡɪt/) is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.
 
-#### Git
-- [GitHub Git Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet/) (quick cheat sheet for Git created by GitHub)
-- [Visual Git Cheat Sheet](https://ndpsoftware.com/git-cheatsheet.html)
-- [Official Git Reference](https://git-scm.com/docs) (complete documentation of git commands)
+1.  [GitHub Git Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet/) (quick cheat sheet for Git created by GitHub)
+2. [Visual Git Cheat Sheet](https://ndpsoftware.com/git-cheatsheet.html)
+3. [Official Git Reference](https://git-scm.com/docs) (complete documentation of git commands)
+4. [IBM Git Tutorial](https://developer.ibm.com/technologies/web-development/tutorials/d-learn-workings-git/)
 
-#### [Markdown](https://www.markdownguide.org/getting-started/)
-Markdown is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub
+### Markdown 
+[Markdown](https://www.markdownguide.org/getting-started/) is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub
 
-- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/) by Markdown Guide
-- [GitHub Flavored Markdown](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
-- [Math Equations in Markdown](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting%20Equations.html)
+1. [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/) by Markdown Guide
+2. [GitHub Flavored Markdown](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
+3. [Math Equations in Markdown](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting%20Equations.html)
 
 
 ## Data Sources
 
----
-
 ### Databases
 
-#### [Mergent Online](https://www.mergentonline.com/login.php)
-###### Access through [UBC Library](http://resources.library.ubc.ca/page.php?id=477)
+1. [Mergent Online](https://www.mergentonline.com/login.php)
+2. [UBC Library Database](http://resources.library.ubc.ca/page.php?id=477)
+3. [Kaggle](https://www.kaggle.com/datasets)
 
-#### [Kaggle](https://www.kaggle.com/datasets)
+### Other Data sources
 
-### Others
-
-#### [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.php)
-
-#### [Three Million Instacart Orders](https://www.instacart.com/datasets/grocery-shopping-2017)
-
-#### [Opportunity Insights Economic Tracker](https://github.com/OpportunityInsights/EconomicTracker)
+1. [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets.php)
+2. [Three Million Instacart Orders](https://www.instacart.com/datasets/grocery-shopping-2017)
+3. [Opportunity Insights Economic Tracker](https://github.com/OpportunityInsights/EconomicTracker)
