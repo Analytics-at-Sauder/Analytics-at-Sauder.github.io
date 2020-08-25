@@ -28,7 +28,7 @@ navbar:
         - text: "Browse by Skills"
           href: projects_byskills.html
     - text: "Resources"
-      href: resources.html
+      href: resource.html
       
         
 
