@@ -1,16 +1,17 @@
----
-title: "Project Management - Critical Path"
----
+# Critical Path Analysis
 
-In this notebook, we are going to explore ways that one can use python to look for and visualize critical paths in projects. At the end of the notebook, there is a challenge for you to further enhance your skills. We encourage you to create your own Jupytor notebook and follow along.**If you do not have Python or Jupyter Notebook installed yet, you could experiment with the virtual notebook by launching the virtual machine (Binder) above.**  On the other hand, the dowloadable Jupyter Notebook can be found [here](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data)
+In this notebook, we are going to explore ways that one can use python to look for and visualize critical paths in projects. We encourage you to create your own Jupytor notebook and follow along. You can also download this Jupyter Notebook in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
 <a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_03_Project_Management_Critical_Path&urlpath=tree%2FProject_03_Project_Management_Critical_Path%2F" target="_blank" class="button">Launch Syzygy</a>
+<a href="#" class="button">Launch Binder</a>
 
 ## Background
 
 ---
 
-Critical path is essentially the bottleneck of a project. Typically, in Project Management, the various tasks and dependicies would first be analyzed and identified using Work Breakdown Structure (WBS) and Program Evaluation and Review Technique (PERT) before they are pipelined into Critical Path Analysis (CPA). In order to reduce the amount of time that a project takes, a manager should seek to shorten tasks along the critical path. One way of finding the critical path is by identifying the path with 0 slack (or float). Slack is a buffer where delay of task completion might not always affect the entire project, and it is calculated by subtracting the earliest finishing time (EF) from the latest finishing time (LF), or equivalently, subtracting the earliest start time (ES) from the latest start time (LS). You could read more about CPA in this [HBR article](https://hbr.org/1963/09/the-abcs-of-the-critical-path-method), but for now, let's consider the following example:
+Critical path is essentially the bottleneck of a project. Typically, in Project Management, the various tasks and dependicies would first be analyzed and identified using Work Breakdown Structure (WBS) and Program Evaluation and Review Technique (PERT) before they are pipelined into Critical Path Analysis (CPA). In order to reduce the amount of time that a project takes, a manager should seek to shorten tasks along the critical path. One way of finding the critical path is by identifying the path with 0 slack (or float). Slack is a buffer where delay of task completion might not always affect the entire project, and it is calculated by subtracting the earliest finishing time (EF) from the latest finishing time (LF), or equivalently, subtracting the earliest start time (ES) from the latest start time (LS). You could read more about CPA in this [HBR article](https://hbr.org/1963/09/the-abcs-of-the-critical-path-method)
+
+Let's consider the following example:
 
 - Task A requires 3 days, and it can be started at any time
 - Task B requires 5 days, and it can also be started at any time
@@ -30,9 +31,14 @@ In this notebook, we are going to use two packages, `networkx` (dependent on `ma
 
 
 ```python
+import pandas as pd
+import datetime
+
 import matplotlib.pyplot as plt
 import networkx as nx
 from criticalpath import Node
+import plotly.express as px
+from IPython.display import Image
 ```
 
 ### Set Up the Tasks and Visualize the Dependencies

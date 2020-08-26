@@ -22,11 +22,7 @@ navbar:
     - text: "Blog"
       href: https://blogs.ubc.ca/businessanalytics
     - text: "Projects"
-      menu:
-        - text: "Browse by Topics"
-          href: projects_bytopics.html
-        - text: "Browse by Skills"
-          href: projects_byskills.html
+      href: projects.html
     - text: "Resources"
       href: resource.html
       
