@@ -11,7 +11,7 @@
 
 
 
-<title>Versioning</title>
+<title>p02_price_versioning.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -422,7 +422,7 @@ div.tocify {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="resource.html">Resources</a>
+  <a href="resource.html">Resource</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -436,17 +436,24 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Versioning</h1>
 
 </div>
 
 
+<div id="price-versioning" class="section level2">
+<h2>Price Versioning</h2>
+<div id="author-hao-zheng" class="section level4">
+<h4>Author: Hao Zheng</h4>
 <p>The Versioning is a business practice in which a company produces different models of essentially the same product and then charges different prices for each model. In this way, the business is attempting to attract higher prices based on the value a customer perceives.</p>
-<p>In this project, we will lead you through examples to talk about why creating different version can bring more profits to the companies while the customers are still willing to pay for it.</p>
-<p>All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the syzygy.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_02_Versioning&urlpath=tree%2FProject_02_Versioning%2F" target="_blank" class="button">Launch Syzygy</a></p>
+<p>In this project, we will lead you through examples to talk about why creating different version can bring more profits to the companies while the customers are still willing to pay for it. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_02_Price_Versioning&urlpath=tree%2FProject_02_Price_Versioning%2Fp02_price_versioning.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_02_Price_Versioning&urlpath=tree%2FProject_02_Price_Versioning%2Fp02_price_versioning.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_02_Price_Versioning/master?filepath=p02_price_versioning.ipynb" target="_blank" class="button">Launch Binder</a></p>
+</div>
+</div>
 <div id="business-problems" class="section level2">
 <h2>Business Problems</h2>
+<hr />
 <p>In real world, it is common for the companies to see that different type of customers will have different price in their heart for the same product. For example, for the same bottle of mineral water, customers who care about their own health might pay 5 dollar for it. Because they thinkit is good for their health while the majority of customers only wills to pay less than 1 dollar for it because it is just regular water in their mind. Due to moral restriction and legislation issue, one product(SKU) can only have 1 price, so the company might have to sell the bottle water for less than $1 in order to reach to the majority of customers.</p>
 <p>So is there a way to gain the extra 4 dollar from some of the customer? Here’s where versioning will come to place. By providing different values and setting price appropriately, the company can possibly get more from their high value customers. We will show it in the following example.</p>
 <p>In the following examples, we make two major assumptions:</p>
@@ -454,7 +461,6 @@ div.tocify {
 <p>For a multiple product offering, we assume that consumers choose the product that gives them the highest surplus.</p>
 <div id="single-version" class="section level3">
 <h3>Single Version</h3>
-<hr />
 <pre class="python"><code>import pandas as pd
 
 from bokeh.io import output_notebook, show,output_file
@@ -492,7 +498,6 @@ print(df_single.to_string(index=False))</code></pre>
 </div>
 <div id="multiple-version" class="section level3">
 <h3>Multiple Version</h3>
-<hr />
 <p>We can try to provide a different version to customers with higher WTP. We can sell the ticket a higher price by providing the customers premium seating which incur almost no additional cost, but increase the profit. Let’s try to apply this methodology here into these five customers.</p>
 <pre class="python"><code>lst_WTP_high = [8,9,10,40,50]
 df[&#39;WTP_high&#39;] = lst_WTP_high
@@ -543,6 +548,7 @@ print(&quot;The new profit is $&quot;+ str(round(profit,2)))</code></pre>
 </div>
 <div id="practice-case-with-different-options" class="section level2">
 <h2>Practice Case with different options</h2>
+<hr />
 <p>Here we have the final scenario, where you will be having more than 2 versions. In this scenario, you can use the optimization tools that we would introduce in other projects to find out the best solution based on different number of versions you choose to provide, here we provide an interactive case for you to play around.</p>
 <pre class="python"><code>lst_WTP_medium = [8,9,10,25,30]
 df[&#39;WTP_medium&#39;] = lst_WTP_medium
@@ -615,12 +621,10 @@ elif int(version) == 3:
 
 selection_lst, revenue = ver_opt(int(version),price)
 </code></pre>
-<pre><code>how many version? /1-3: 3
-Enter three prices: 10 20 40
+<pre><code>how many version? /1-3: 2
+Enter two prices: 10 30
 First Price is: $ 10
-Second Price is: $ 20
-Third Price is: $ 40
-The total revenue is: $ 80</code></pre>
+Second Price is: $ 30</code></pre>
 <p>In the following plot, V1 indicates the single version scenario:</p>
 <pre class="python"><code>print(&quot;The total revenue is: $&quot;,revenue)
 output_notebook()
@@ -636,21 +640,24 @@ p.xaxis.ticker = [0, 1, 2 , 3]
 p.xaxis.major_label_overrides = {0: &#39;Low/no purchase(V1)&#39;, 1: &#39;Medium/purchase(V1)&#39;, 2: &#39;High Version&#39;}
 p.x(selection_lst, [1, 2, 3, 4, 5],size =10, color=&quot;firebrick&quot;, alpha=0.6, line_width = 2)
 show(p)</code></pre>
-<pre><code>The total revenue is: $ 80
-
-
-
-
-&lt;div class=&quot;bk-root&quot;&gt;
-    &lt;a href=&quot;https://bokeh.pydata.org&quot; target=&quot;_blank&quot; class=&quot;bk-logo bk-logo-small bk-logo-notebook&quot;&gt;&lt;/a&gt;
-    &lt;span id=&quot;10464&quot;&gt;Loading BokehJS ...&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-<div id="4ed79cd6-3f7e-4979-99c2-6e95a94c0a0f" class="bk-root" data-root-id="10465">
+<pre><code>The total revenue is: $ 90</code></pre>
+<div class="bk-root">
+<pre><code>&lt;a href=&quot;https://bokeh.pydata.org&quot; target=&quot;_blank&quot; class=&quot;bk-logo bk-logo-small bk-logo-notebook&quot;&gt;&lt;/a&gt;
+&lt;span id=&quot;11868&quot;&gt;Loading BokehJS ...&lt;/span&gt;</code></pre>
+</div>
+<div id="dbfde975-e7b2-4759-a582-c92dfdb4b226" class="bk-root" data-root-id="11869">
 
 </div>
+<pre class="python"><code># If you want to show the picture in html
+#from bokeh.embed import file_html
+#from bokeh.resources import CDN
+
+#html = file_html(p,CDN,&quot;MY PLOT&quot;)
+#print(html)</code></pre>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
+<hr />
 <p>It is worth noticing that the model we are using is lacking several important factor that we should take into consideration like the cost of service. However, you can freely adjust the model based on your preference. The true important point here is that with the help of versioning, we are able to evaluate the sales options more wisely and generate more revenue out from the same group of customers.</p>
 </div>
 

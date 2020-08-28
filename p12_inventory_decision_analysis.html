@@ -11,7 +11,7 @@
 
 
 
-<title>Decision Analysis</title>
+<title>p12_inventory_decision_analysis.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -422,7 +422,7 @@ div.tocify {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="resource.html">Resources</a>
+  <a href="resource.html">Resource</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -436,14 +436,20 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Decision Analysis</h1>
 
 </div>
 
 
-<p>In this project, we use Monte Carlo simulation and optimization tools to determine the optimal expected profits under different scenarios. In the <a href="https://analytics-at-sauder.github.io/Website/inv_mangt.html">inventory management project page</a>, we looked at two inventory management policies: continuous review policy and periodic review policy. This project compares the optimal expected profits across these two policies.</p>
-<p>All of the graphs and code can be found in the <a href="https://github.com/Master-of-Business-Analytics/Code_repository/tree/master/Inventory%20managment">MBAN GitHub repository</a>, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the executable environment Syzygy.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_12_Decision_Analysis&urlpath=tree%2FProject_12_Decision_Analysis%2Fdecision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="inventory-decision-analysis" class="section level2">
+<h2>Inventory Decision Analysis</h2>
+<div id="author-kemjika-ananaba" class="section level4">
+<h4>Author: Kemjika Ananaba</h4>
+<p>In this project, we use Monte Carlo simulation and optimization tools to determine the optimal expected profits under different scenarios. In the <strong>inventory management page</strong>, we looked at two inventory management policies: continuous review policy and periodic review policy. This project compares the optimal expected profits across these two policies. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_12_Inventory_Decision_Analysis&urlpath=tree%2FProject_12_Inventory_Decision_Analysis%2Fp12_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_12_Inventory_Decision_Analysis&urlpath=tree%2FProject_12_Inventory_Decision_Analysis%2Fp12_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_12_Inventory_Decision_Analysis/master?filepath=p12_inventory_decision_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
+</div>
+</div>
 <div id="business-background" class="section level2">
 <h2>Business Background</h2>
 <hr />
@@ -460,9 +466,7 @@ sns.set_style(&#39;whitegrid&#39;)
 import operator
 import warnings
 warnings.simplefilter(action=&#39;ignore&#39;, category=FutureWarning)
-from mpl_toolkits.mplot3d import Axes3D
-
-</code></pre>
+from mpl_toolkits.mplot3d import Axes3D</code></pre>
 </div>
 <div id="data-entry-and-manipulation" class="section level2">
 <h2>Data Entry and Manipulation</h2>
@@ -479,26 +483,27 @@ from mpl_toolkits.mplot3d import Axes3D
 <li>Product Size</li>
 </ul>
 <pre class="python"><code>#Read in the product demand information
+
 df = pd.read_excel(&#39;XYZ-1.xlsx&#39;, &#39;Data&#39;)
-demand = df[6:]
-print(demand.head())</code></pre>
-<pre><code>       Product    1
-    6        0   90
-    7        1   94
-    8        2    0
-    9        3  110
-    10       4  106
+demand = df[3:11]
+print(demand.head())
 </code></pre>
+<pre><code>   Product    1
+6        0   90
+7        1   94
+8        2    0
+9        3  110
+10       4  106</code></pre>
 <pre class="python"><code>#Visualize distribution of demand
 demand[1].hist()
 plt.title(&#39;Histogram of past product sales &#39;)
 plt.show()</code></pre>
-<p><img src="images/p12_01.png" /></p>
+<div class="figure">
+<img src="output_4_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>demand[1].std()</code></pre>
-<pre><code>
-
-    55.07999993367887
-</code></pre>
+<pre><code>55.07999993367887</code></pre>
 <pre class="python"><code>#Product information
 summary = pd.read_csv(&#39;summary_stats.csv&#39;)
 summary.head()</code></pre>
@@ -793,7 +798,10 @@ plt.ylabel(&quot;Inventory Status&quot;)
 plt.axhline(2170, linewidth=1, color=&quot;red&quot;, linestyle=&quot;:&quot;)
 plt.title(&#39;Periodic Review: Inventory level for one simulation &#39;)
 plt.show()</code></pre>
-<p><img src="images/p12_02.png" /></p>
+<div class="figure">
+<img src="output_15_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 </div>
 <div id="operational-cost" class="section level3">
 <h3>Operational Cost</h3>
@@ -846,8 +854,7 @@ def mc_simulation( M, num_simulations,summary,days=365):
 p_list, o_list = mc_simulation(2170,100,summary)        
 #mean profit and percentage of orders lost
 print([np.mean(p_list),np.mean(o_list)])</code></pre>
-<pre><code>    [87361.3, 0.10891022806232062]
-</code></pre>
+<p>[87361.3, 0.10891022806232062]</p>
 <pre class="python"><code>sns.distplot(
     p_list,
     kde=False,
@@ -857,7 +864,10 @@ plt.xlabel(&quot;Profits&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
-<p><img src="images/p12_03.png" /></p>
+<div class="figure">
+<img src="output_22_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>sns.distplot(
     o_list,
     kde=False
@@ -867,16 +877,15 @@ plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Mean percentage of orders lost &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
-<p><img src="images/p12_04.png" /></p>
+<div class="figure">
+<img src="output_23_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 </div>
 </div>
 <div id="profit-optimization-in-periodic-review-model" class="section level2">
 <h2>Profit Optimization in Periodic Review Model</h2>
-<p>The model provides answers to the following question:</p>
-<ol style="list-style-type: decimal">
-<li>What is the expected profits and whats expected percentage of lost sales?</li>
-<li>What should be the Warehouse Capacity to ensure the highest expected profit?</li>
-</ol>
+<p>The model provides answers to the following question, 1. What is the expected profits and whats expected percentage of lost sales? 2. What should the Warehouse Capacity (M) be to ensure the highest expected profit?</p>
 <p>The second question can be answered by repeating this exercise for a range of values of M to determine the value that gives us the highest expected profit. In the the model below, we simulated the expected profits for warehouse capacity range 1800 to 4000.</p>
 <pre class="python"><code>#Function to vary M to calculate mean profit and percentage of orders lost
 def periodic_review(low, high,summary,step=100):
@@ -899,7 +908,10 @@ plt.xlabel(&quot;Ware house capacity&quot;)
 plt.ylabel(&quot;Expected Profit&quot;)
 plt.plot(xx, yy)
 plt.show()</code></pre>
-<p><img src="images/p12_05.png" /></p>
+<div class="figure">
+<img src="output_27_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <p>This gave an optimum expected profit of $93,883 for the order up-to point of 2600.</p>
 <pre class="python"><code># creating a dataframe with all the results
 idx = [&#39;Order-point M&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
@@ -1038,7 +1050,13 @@ plt.xlabel(&quot;Days&quot;)
 plt.ylabel(&quot;Inventory Status&quot;)
 plt.axhline(3000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()</code></pre>
-<p><img src="images/p12_06.png" /></p>
+<div class="figure">
+<img src="output_33_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<pre class="python"><code>#Number of orders
+len(data[&#39;orders&#39;])</code></pre>
+<p>12</p>
 <pre class="python"><code>def cc_mc_simulation(q, r, num_simulations,summary,days=365):
     profit_list = []
     orders_lost_list = []
@@ -1064,7 +1082,10 @@ plt.xlabel(&quot;Profits&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
-<p><img src="images/p12_07.png" /></p>
+<div class="figure">
+<img src="output_37_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>sns.distplot(
     o_list2,
     kde=False
@@ -1072,9 +1093,12 @@ plt.show()</code></pre>
 
 plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
-plt.title(&quot;Orders Lost &quot;, y=1.02, fontsize=18)
+plt.title(&quot;Orders Lost: Mean = 0.13 &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
-<p><img src="images/p12_08.png" /></p>
+<div class="figure">
+<img src="output_38_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 </div>
 </div>
 <div id="profit-optimization-in-continuous-review-model" class="section level2">
@@ -1114,7 +1138,10 @@ ax.set_ylabel(&#39;Reorder Point&#39;)
 ax.set_zlabel(&#39;Profit&#39;)
 
 plt.show()</code></pre>
-<p><img src="images/p12_09.png" /></p>
+<div class="figure">
+<img src="output_42_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <p>Based on the simulations, a maximum profit of $145,331 for the order quantity of 2100 and the re-order point of 950 was derived.Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits and the proportion of orders lost over the period of the year for each of the products.</p>
 <pre class="python"><code>idx = [&#39;Order Quantity&#39;, &#39;Reorder Point&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
 

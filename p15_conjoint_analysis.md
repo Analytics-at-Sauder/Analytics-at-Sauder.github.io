@@ -1,13 +1,20 @@
----
-title: "Conjoint Analysis"
----
-In this project, we would review conjoint Analysis and its application when introducing a new product into the market. Rank-based conjoint analysis is carried out in this project using multiple linear regression. All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case.
-The Jupyter notebook can be opened in the executable environment Syzygy.
+## Conjoint Analysis
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_analysis&urlpath=tree%2FProject_15_Conjoint_analysis%2FTraditional%2520Conjoint%2520Analyse.ipynb&branch=master" target="_blank" class="button">Launch Syzygy</a>
+#### Author: Kemjika Ananaba
+
+In this project, we would review conjoint Analysis and its application when introducing a new product into the market. Rank-based conjoint analysis is carried out in this project using multiple linear regression. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_Analysis&urlpath=tree%2FProject_15_Conjoint_Analysis%2Fp15_conjoint_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_Analysis&urlpath=tree%2FProject_15_Conjoint_Analysis%2Fp15_conjoint_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_15_Conjoint_Analysis/master?filepath=p15_conjoint_analysis.ipynb" target="_blank" class="button">Launch Binder</a>
+
 
 ## Business Problem
-The following project focuses on the evaluation of market research for a new brand of beer. The simulated data set is described by 3 attributes that describe a part of the beer to be introduced in the market: Price point, After Taste, Calorie level. All attributes but After taste have levels. Rank-based conjoint analysis answers the following questions:
+---
+
+In this project, we would review conjoint Analysis and its application when introducing a new product into the market. The project focuses on the evaluation of market research for a new brand of beer. The simulated data set is described by 3 attributes that describe a part of the beer to be introduced in the market: Price point, After Taste, Calorie level. All attributes but the After taste attribute have levels. Rank-based conjoint analysis answers the following questions:
 
 1. How important are certain features of a product are to consumers 
 2. Identify the trade-offs consumers are willing to make, with regards to the product features
@@ -41,7 +48,10 @@ import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 %matplotlib inline
+```
 
+
+```python
 Data = pd.read_csv("ConjointInput.csv", sep = ";")
 Data.head(4)
 ```
@@ -465,7 +475,7 @@ norm
 
 
 
-    [0.548, 0.271, 0.181]
+    [0.5481263776634827, 0.27112417340191036, 0.1807494489346069]
 
 
 
@@ -493,7 +503,7 @@ plt.show()
 ```
 
 
-![](images/p15_01.png)
+![png](output_11_0.png)
 
 
 ## Relative importance of the product attributes
@@ -540,7 +550,7 @@ for item in attributes :
     i=i+1
 
 ```
-```
+
     
      Attribute :  Price
     
@@ -562,8 +572,8 @@ for item in attributes :
     
      Importance %:  0.11764705882352938
     -----------------------
+    
 
-```
 
 ```python
 #Ploting the importance
@@ -584,7 +594,7 @@ plt.show()
 ```
 
 
-![](images/p15_02.png)
+![png](output_15_0.png)
 
 
 
@@ -606,7 +616,7 @@ plt.show()
 ```
 
 
-![](images/p15_03.png)
+![png](output_17_0.png)
 
 
 Knowledge of the relative importance of various attributes can assist in marketing and advertising decisions. Other factors being equal, one would devote greater attention and resource to improving a product, on attributes that are of greatest importance to target consumers.

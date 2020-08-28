@@ -1,25 +1,20 @@
----
-title: "Project Management Risk Assessment"
----
+## Project Risk Assessment
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_03_Project_Management_Risk_Assessment&urlpath=tree%2FProject_03_Project_Management_Risk_Assessment%2F" target="_blank" class="button">Launch Syzygy</a>
+#### Author: Charlie Cao
+
+In this notebook, we are going to explore ways that one can apply Monte Carlo Simulation in predictiong project completion date and assess project risk. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_03_Project_Risk_Assessment&urlpath=tree%2FProject_03_Project_Risk_Assessment%2Fp03_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_03_Project_Risk_Assessment&urlpath=tree%2FProject_03_Project_Risk_Assessment%2Fp03_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_03_Project_Risk_Assessment/master?filepath=p03_project_risk_assessment.ipynb" target="_blank" class="button">Launch Binder</a>
 
 ## Background
 
 ---
 
-In this notebook, we are going to explore ways that one can apply Monte Carlo Simulation in predictiong project completion date and assess project risk. The workbook is divided into multiple scenarios, each one incorporating more uncertainty or elements than the one prior. We encourage you to create your own Jupytor notebook and follow along.**If you do not have Python or Jupyter Notebook installed yet, you could experiment with the virtual notebook by launching the virtual machine (Binder) above.**  On the other hand, the dowloadable Jupyter Notebook can be found [here](https://github.com/Master-of-Business-Analytics/Code_repository)
-
 Monte Carlo Simulation is a great tool for business decision making under uncertainty, and it is well known in the Project Management domain. Instead of providing a simple predicted average project completion time, one could find a range of possible dates for completion. When you give an average completion prediction, there is a chance as high as 50% that one is going miss the deadline; however, no one likes to hear pessimistic estimates which would likely lead to the project bid won by a different team with a lower estimate (whether that is realistic or not). Monte Carlo Simulation in this case, could give you an idea of the possible distribution of the project completion time, which would then allow you to quote and make decisions that incorporates uncertainty.
-
-Before we begin, please first download and import the following packages:
-
-
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-```
 
 ## Scenario One: Sequential Tasks
 
@@ -33,7 +28,14 @@ A construction project involves three tasks:
 
 ![Sequential Tasks](images/p03_01.png)
 
-Each task is dependent on the task before it, meaning that the three tasks must be executed in sequence. Your task is to provide information to the project manager concerning the expected completion time of the project and possible delays.
+Each task is dependent on the task before it, meaning that the three tasks must be executed in sequence. Your task is to provide information to the project manager concerning the expected completion time of the project and possible delays. Before we begin, install and import the following packages:
+
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+```
 
 One simple method is to calculate the expected completion date of each task and then sumthem up, which would lead to the following:
 
@@ -188,7 +190,7 @@ plt.bar(range(10,18),proj_df['Project'].groupby(proj_df['Project']).count())
 
 
 
-![Parallel Tasks](images/p03_03.png)
+![png](output_14_1.png)
 
 
 Combining the distribution (the graph above) and the sample statistics of the project completion dates over the 1000 replications (output of the next cell), we can also see that the project completion time is right skewed, and that the worst case scenario is further away from the median than the best case scenario. In order to have a 95% chance of meeting the deadline, the quote should actually be around 15 as calculated below.
@@ -223,7 +225,7 @@ print(np.percentile(proj_record,95))
 
 Now we have received new information that Task 2 and 3 can actually be conducted at the same time. 
 
-![](images/p03_02.png)
+![Parallel Tasks](images/p03_02.png)
 
 With this update, the project completion time is now dependent on the task that gets completed later: `proj_time = t1_time + max(t2_time, t3_time)`. Therefore, we slightly modify our simulation to the following:
 
@@ -288,7 +290,7 @@ plt.bar(range(min(proj_record),max(proj_record)+1),proj_df['Project'].groupby(pr
 
 
 
-![](images/p03_04.png)
+![png](output_20_1.png)
 
 
 
@@ -309,7 +311,7 @@ print(np.percentile(proj_record,95))
 
 One would probably first think of correlation of coefficients when they first see correlated tasks. However, the number of correlation coefficients increases exponentially as the number of tasks increases, just like the possible combination of tasks (you can learn more about [combinations](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinations/v/combination-formula) and [permutations](https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinatorics-precalc/v/permutation-formula) on Khan Academy), not to mention the amount of work that has to first go into deciding the relationships between thoses tasks. At the same time, correlation coefficients are mathematical concepts which do not carry the most meaningful real-world interpretations, especially when a project manager tries to understand why the correlation in risks exist or how it could be managed. Therefore, more frequently, one would specify a risk event that could potentially immpact multiple tasks and the probability of the risk event; one could also speicify a risk factor, which would again affect multiple tasks. For now, let's go back to the assumption that the three tasks are sequential.
 
-![](images/p03_01.png)
+![Sequential Tasks](images/p03_01.png)
 
 
 In this scenario, the weather would have an impact on all three tasks, while internal communication would affect Task 2 and 3. Let's say that there is a 40% chance of bad weather, in which case the project is going to be delayed for 2 days. Communication factor varies, on the other hand, in a way that is similar to a normal distribution with a mean of 1 and a standard deviation of 0.1: when the communication between team members is efficient, the communication factor is smaller than 1 and reduces project completion time; otherwise it is larger than 1 and increases completion time. By modeling the probability of risk events and factors, we would get the following equation:
@@ -413,7 +415,7 @@ plt.hist(proj_df['Project']) # note how the distribution is continuous now and n
 
 
 
-![](images/p03_05.png)
+![png](output_26_1.png)
 
 
 
@@ -430,3 +432,8 @@ print(np.percentile(proj_record,95))
 
 https://risk-engineering.org/notebook/monte-carlo-project-risk.html <br>
 https://www.vosesoftware.com/riskwiki/Correlationwithprojectscheduleriskanalysis.php
+
+
+```python
+
+```

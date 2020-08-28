@@ -1,12 +1,14 @@
----
-title: "Decision Analysis "
----
-In this project, we use Monte Carlo simulation and optimization tools to determine the optimal expected profits under different scenarios. In the [inventory management project page](https://analytics-at-sauder.github.io/Website/inv_mangt.html), we looked at two inventory management policies: continuous review policy and periodic review policy. This project compares the optimal expected profits across these two policies.
+## Inventory Decision Analysis
 
-All of the graphs and code can be found in the [MBAN GitHub repository](https://github.com/Master-of-Business-Analytics/Code_repository/tree/master/Inventory%20managment), feel free to download it and modify the numbers for your use case. 
-The Jupyter notebook can be opened in the executable environment Syzygy.
+#### Author: Kemjika Ananaba
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_12_Decision_Analysis&urlpath=tree%2FProject_12_Decision_Analysis%2Fdecision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy</a>
+In this project, we use Monte Carlo simulation and optimization tools to determine the optimal expected profits under different scenarios. In the **inventory management page**, we looked at two inventory management policies: continuous review policy and periodic review policy. This project compares the optimal expected profits across these two policies. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab).
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_12_Inventory_Decision_Analysis&urlpath=tree%2FProject_12_Inventory_Decision_Analysis%2Fp12_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_12_Inventory_Decision_Analysis&urlpath=tree%2FProject_12_Inventory_Decision_Analysis%2Fp12_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_12_Inventory_Decision_Analysis/master?filepath=p12_inventory_decision_analysis.ipynb" target="_blank" class="button">Launch Binder</a>
 
 ## Business Background
   ----
@@ -29,13 +31,12 @@ import operator
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 from mpl_toolkits.mplot3d import Axes3D
-
-
 ```
 
 ## Data Entry and Manipulation 
 
 ### Operational and Demand data
+
 For this project, we start with one product. To mathematically model customers demand, the annual demand of the product is captured. The demand dataset, demand is the daily demand for 366 days.The summary dataset, Summary provides information on the product operations and associated costs such as:
 
 * Purchase Cost
@@ -49,19 +50,21 @@ For this project, we start with one product. To mathematically model customers d
 
 ```python
 #Read in the product demand information
+
 df = pd.read_excel('XYZ-1.xlsx', 'Data')
-demand = df[6:]
+demand = df[3:11]
 print(demand.head())
+
 ```
-```
+
        Product    1
     6        0   90
     7        1   94
     8        2    0
     9        3  110
     10       4  106
+    
 
-```
 
 ```python
 #Visualize distribution of demand
@@ -71,7 +74,7 @@ plt.show()
 ```
 
 
-![](images/p12_01.png)
+![png](output_4_0.png)
 
 
 
@@ -79,12 +82,12 @@ plt.show()
 demand[1].std()
 ```
 
-```
+
 
 
     55.07999993367887
 
-```
+
 
 
 ```python
@@ -335,7 +338,7 @@ plt.show()
 ```
 
 
-![](images/p12_02.png)
+![png](output_15_0.png)
 
 
 ### Operational Cost 
@@ -404,10 +407,10 @@ p_list, o_list = mc_simulation(2170,100,summary)
 #mean profit and percentage of orders lost
 print([np.mean(p_list),np.mean(o_list)])
 ```
-```
-    [87361.3, 0.10891022806232062]
 
-```
+    [87361.3, 0.10891022806232062]
+    
+
 
 ```python
 sns.distplot(
@@ -422,7 +425,7 @@ plt.show()
 ```
 
 
-![](images/p12_03.png)
+![png](output_22_0.png)
 
 
 
@@ -439,15 +442,14 @@ plt.show()
 ```
 
 
-![](images/p12_04.png)
+![png](output_23_0.png)
 
 
 ## Profit Optimization in Periodic Review Model
 
-The model provides answers to the following question:
-
+The model provides answers to the following question,
 1. What is the expected profits and whats expected percentage of lost sales? 
-2. What should be the Warehouse Capacity to ensure the highest expected profit?
+2. What should the Warehouse Capacity (M) be to ensure the highest expected profit?
 
 The second question can be answered by repeating this exercise for a range of values of M to determine the value that gives us the highest expected profit. In the the model below, we simulated the expected profits for warehouse capacity range 1800 to 4000. 
 
@@ -481,7 +483,7 @@ plt.show()
 ```
 
 
-![](images/p12_05.png)
+![png](output_27_0.png)
 
 
 This gave an optimum expected profit of $93,883 for the order up-to point of 2600.
@@ -628,7 +630,20 @@ plt.show()
 ```
 
 
-![](images/p12_06.png)
+![png](output_33_0.png)
+
+
+
+```python
+#Number of orders
+len(data['orders'])
+```
+
+
+
+
+    12
+
 
 
 
@@ -666,7 +681,7 @@ plt.show()
 ```
 
 
-![](images/p12_07.png)
+![png](output_37_0.png)
 
 
 
@@ -678,12 +693,12 @@ sns.distplot(
 
 plt.xlabel("Proportion of lost orders", labelpad=15)
 plt.ylabel("Number of simulations", labelpad=15)
-plt.title("Orders Lost ", y=1.02, fontsize=18)
+plt.title("Orders Lost: Mean = 0.13 ", y=1.02, fontsize=18)
 plt.show()
 ```
 
 
-![](images/p12_08.png)
+![png](output_38_0.png)
 
 
 ## Profit Optimization in Continuous Review Model
@@ -738,7 +753,7 @@ plt.show()
 ```
 
 
-![](images/p12_09.png)
+![png](output_42_0.png)
 
 
 Based on the simulations, a maximum profit of $145,331 for the order quantity of 2100 and the re-order point of 950 was derived.Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits and the proportion of orders lost over the period of the year for each of the products.

@@ -11,7 +11,7 @@
 
 
 
-<title>Customer Segmentation</title>
+<title>p10_customer_segmentation.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -422,7 +422,7 @@ div.tocify {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="resource.html">Resources</a>
+  <a href="resource.html">Resource</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -436,16 +436,22 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Customer Segmentation</h1>
 
 </div>
 
 
-<p>In this project, we would focus on combining RFM (Recency Frequency Monetary) Analysis with Clustering analysis to to identify different market segments . All of the graphs and code can be found in the MBAN <a href="https://github.com/Master-of-Business-Analytics/Project_10_Cluster_analysis">GitHub repository</a>, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the executable environment binder.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_10_Cluster_analysis&urlpath=tree%2FProject_10_Cluster_analysis%2FCluster_Analysis.ipynb" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="customer-segmentation" class="section level2">
+<h2>Customer Segmentation</h2>
+<div id="author-kemjika-ananaba" class="section level4">
+<h4>Author: Kemjika Ananaba</h4>
+<p>In this project, we would focus on combining RFM (Recency Frequency Monetary) Analysis with Clustering analysis to to identify different market segments. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_10_Customer_Segmentation&urlpath=tree%2FProject_10_Customer_Segmentation%2Fp10_customer_segmentation.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_10_Customer_Segmentation&urlpath=tree%2FProject_10_Customer_Segmentation%2Fp10_customer_segmentation.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_10_Customer_Segmentation/master?filepath=p10_customer_segmentation.ipynb" target="_blank" class="button">Launch Binder</a></p>
+</div>
+</div>
 <div id="business-problem" class="section level2">
-<h2>Business Problem</h2>
-<hr />
+<h2>## Business Problem</h2>
 <p>Customer Analytics is important to run a successful business. Sales and marketing resources are finite and expensive, therefore it is important to answer these questions when developing a marketing strategy.</p>
 <ul>
 <li>Who are our most/least valuable customers?</li>
@@ -458,8 +464,9 @@ div.tocify {
 <li>Apply k-means clustering algorithm on these parameters to group similar customers.</li>
 </ul>
 <p>K-means is a popular approach for classification because of simplicity of implementation and been widely used in market segmentation. The number of clusters can be determined by using the elbow method</p>
-<div id="data-set" class="section level3">
-<h3>Data Set</h3>
+</div>
+<div id="data-set" class="section level2">
+<h2>Data Set</h2>
 <p>There are eight variables in the data set:</p>
 <ol style="list-style-type: decimal">
 <li>InvoiceNo: Invoice number, A 6-digit integral number uniquely assigned to each transaction.</li>
@@ -475,7 +482,6 @@ div.tocify {
 import numpy as np
 import seaborn as sns
 from datetime import timedelta
-import numpy as np
 import matplotlib.pyplot as plt
 import warnings
 from sklearn.cluster import KMeans
@@ -487,9 +493,8 @@ pd.set_option(&quot;display.max_rows&quot;,None);
 
 #load data
 url = &#39;https://raw.githubusercontent.com/Master-of-Business-Analytics/Project_06_RFM_Analysis/master/data_1.csv&#39;
-df = pd.read_csv(url, error_bad_lines=False,encoding= &#39;unicode_escape&#39;)
-
-#summary of dataset
+df = pd.read_csv(url, error_bad_lines=False,encoding= &#39;unicode_escape&#39;)</code></pre>
+<pre class="python"><code>#summary of dataset
 df.head(5)</code></pre>
 <div>
 <style scoped>
@@ -686,33 +691,25 @@ United Kingdom
 </table>
 </div>
 </div>
-</div>
-<div id="data-cleaning" class="section level2">
-<h2>Data cleaning</h2>
+<div id="data-cleaning" class="section level1">
+<h1>Data cleaning</h1>
 <p>The dataset seemed relatively clean at first glance, but it was riddled with errors. There were quite a number of these positive/negative offsetting entries throughout the dataset, plus other apparent errors such as customers with negative transactions. More information on data cleaning can be found on the <a href="https://master-of-business-analytics.github.io/Website/Data_Cleaning.html">data cleaning project</a>.</p>
 <p>The first step in cleaning the dataset is to check if there are any missing values and where the missing values are located.</p>
 <pre class="python"><code>
 #Visualize the number of null values in the dataframe for each column
 df.isnull().sum().plot(kind=&#39;bar&#39;)</code></pre>
-<p><img src="images/p10_01.png" /></p>
+<p>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a26fd03d0&gt;</p>
+<div class="figure">
+<img src="output_5_1.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <p>The bar chart above shows that NaN values are located at the description and customer ID column. The purpose of this evaluating is current customer segmentation therefore transactions without customer ID do not provide any value and are dropped from the data frame below.</p>
 <pre class="python"><code>#Eliminating rows with NA
 df=df.dropna(subset=[&#39;CustomerID&#39;])
 
 #NA status across columns
 df.isnull().sum()</code></pre>
-<pre><code>
-
-    InvoiceNo      0
-    StockCode      0
-    Description    0
-    Quantity       0
-    InvoiceDate    0
-    UnitPrice      0
-    CustomerID     0
-    Country        0
-    dtype: int64
-</code></pre>
+<p>InvoiceNo 0 StockCode 0 Description 0 Quantity 0 InvoiceDate 0 UnitPrice 0 CustomerID 0 Country 0 dtype: int64</p>
 <pre class="python"><code>df.describe()</code></pre>
 <div>
 <style scoped>
@@ -1239,7 +1236,7 @@ max
 </tbody>
 </table>
 </div>
-<p><b> Note that the Minimum quantity and Maximum quantity do not have the same absolute values. However, if this was not the case, the above step is repeated.</b></p>
+<p><b> Note that the Minimum quantity and Maximum quantity do not have the same absolute values. However, if this was not the case, the above step is repeated</b></p>
 <p>The next step is to convert the date column to a date format and add the total sales column</p>
 <pre class="python"><code># Convert InvoiceDate from object to datetime format
 df2[&#39;InvoiceDate&#39;] = pd.to_datetime(df2[&#39;InvoiceDate&#39;])
@@ -1417,12 +1414,10 @@ print(&#39;{:,} transactions don\&#39;t have a customer id&#39;
       .format(df2[df2.CustomerID.isnull()].shape[0]))
 print(&#39;Transactions timeframe from {} to {}&#39;.format(df2[&#39;InvoiceDate&#39;].min(),
                                     df2[&#39;InvoiceDate&#39;].max()))</code></pre>
-<pre><code>    60,424 rows; 6 columns
-    0 transactions don&#39;t have a customer id
-    Transactions timeframe from 2011-01-04 to 2011-03-30</code></pre>
+<p>60,424 rows; 6 columns 0 transactions don’t have a customer id Transactions timeframe from 2011-01-04 to 2011-03-30</p>
 </div>
-<div id="rfm-model" class="section level2">
-<h2>RFM model</h2>
+<div id="rfm-model" class="section level1">
+<h1>RFM model</h1>
 <p>The RFM model describes current customers historical purchase behavior using 3 feature:</p>
 <ul>
 <li>When did the customer make their last purchase?</li>
@@ -1431,12 +1426,17 @@ print(&#39;Transactions timeframe from {} to {}&#39;.format(df2[&#39;InvoiceDate
 </ul>
 <p>The general assumption with the RFM model is that Customers that purchase in shorter time intervals in greater volumes at higher prices are more like to respond positively to future engagement and product offers.<br />
 The customer records are grouped by recency of their purchase, the frequency by their quantity, and the monetary value of the purchases.</p>
-<pre class="python"><code># create a table that aggregates the transactions by customer id to obtain recency score, frequency of purchase and monetary value
+<pre class="python"><code># create a table that aggregates the transactions by customer id to 
+# obtain recency score, frequency of purchase and monetary value
+
+
+# set current date as most recent date plus one day
+#df2[&#39;snapshot&#39;] = df2[&#39;InvoiceDate&#39;] + timedelta(days=1)  
 
 #group customers by their most recent purchase
 snapshot_date = df2[&#39;InvoiceDate&#39;].max() + timedelta(days=1)  
 
-#create recency table by comparing most recent transaction to snapshot date by customer ID
+#creat recency table by comparing most recent transaction to snapshot date by customer ID
 rec_df = snapshot_date-df2.groupby(&quot;CustomerID&quot;).agg({&quot;InvoiceDate&quot;:max}) 
 
 #renaming column names
@@ -1444,9 +1444,12 @@ rec_df.rename(columns={&quot;InvoiceDate&quot;: &quot;Recency&quot;}, inplace=Tr
 rec_df=rec_df[&quot;Recency&quot;].apply(lambda x: x.days) #extracting number of days only
 
 #creating frequency and monetary table by grouping number of purchases and total money spent by customer ID
-fmTable = df2.groupby(&#39;CustomerID&#39;).agg({&#39;CustomerID&#39;: lambda x: len(x),&#39;Totalsum&#39;: lambda x: x.sum()})     
+fmTable = df2.groupby(&#39;CustomerID&#39;).agg({&#39;CustomerID&#39;: lambda x: len(x),               # Frequency
+                                        &#39;Totalsum&#39;: lambda x: x.sum()})          # Monetary Value
 #renaming column names
-fmTable.rename(columns={&#39;CustomerID&#39;: &#39;Frequency&#39;, &#39;Totalsum&#39;: &#39;Monetary&#39;}, inplace=True)
+fmTable.rename(columns={
+                         &#39;CustomerID&#39;: &#39;Frequency&#39;, 
+                         &#39;Totalsum&#39;: &#39;Monetary&#39;}, inplace=True)
 
 #combining the fm table and the recency table
 
@@ -1569,20 +1572,45 @@ CustomerID
 </table>
 </div>
 </div>
-<div id="cluster-analysis" class="section level2">
-<h2>Cluster Analysis</h2>
+<div id="cluster-analysis" class="section level1">
+<h1>Cluster Analysis</h1>
 <p>Clustering is the process of dividing the entire data into groups (also known as clusters) based on the patterns in the data. The k-means clustering technique is an algorithm that tries to minimize the distance of the points in a cluster with their centroid. There are two steps in cluster analysis:</p>
 <ol style="list-style-type: decimal">
-<li>Finding the optimal number of clusters.</li>
-<li>Fit to kmeans model.</li>
+<li><p>Finding the optimal number of clusters: the number of cluster values where this decrease in inertia value becomes constant can be chosen as the right number of clusters for our data.</p></li>
+<li><p>Fit to kmeans model</p></li>
 </ol>
 <p>Looking at the rfm data table above, there is a lot of variation in the magnitude of the data. Since K-Means is a distance-based algorithm, this difference of magnitude can create a problem, therefore all the variables are standardized to the same magnitude using the scaler function.</p>
+<pre class="python"><code>
+
+# --Calculate R and F groups--
+rfm_df1= rfm_df.copy()
+
+# Create labels for Recency and Frequency and MonetaryValue
+r_labels = range(4, 0, -1) #[4,3,2,1] 
+f_labels = range(1, 5)   #[1,2,3,4]
+#m_labels = range(1, 5)
+
+# Assign these labels to 4 equal percentile groups 
+r_groups = pd.qcut(rfm_df1[&#39;Recency&#39;], q=4, labels=r_labels)
+# Assign these labels to1111 4 equal percentile groups 
+f_groups = pd.qcut(rfm_df1[&#39;Frequency&#39;], q=4, labels=f_labels)
+
+# Assign these labels to three equal percentile groups 
+#m_groups = pd.qcut(rfm_df1[&#39;Monetary&#39;], q=4, labels=m_labels)
+
+
+
+# Create new columns R_score, M_score and F_score  
+#rfm_df1 = rfm_df1.assign(R_score = r_groups.values, F_score = f_groups.values, M_score = m_groups.values)
+#rfm_df1 = rfm_df1.assign(R_score = r_groups.values, F_score = f_groups.values)
+#rfm_df1 = rfm_df1[[&#39;R_score&#39;,&#39;F_score&#39;,&#39;M_score&#39;]]
+#rfm_df1 = rfm_df1[[&#39;R_score&#39;,&#39;F_score&#39;]]
+#rfm_df1.head()</code></pre>
 <pre class="python"><code># standardizing the data
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 data_scaled = scaler.fit_transform(rfm_df)
 </code></pre>
-<p>The optimal number of clusters is determined using the elbow plot. The elbow plot is a plot showing the explained variation (inertia) as a function of the number of clusters, and picking the elbow of the curve as the number of clusters to use.</p>
 <pre class="python"><code># fitting multiple k-means algorithms and storing the values in an empty list
 SSE = []
 for cluster in range(1,20):
@@ -1597,9 +1625,11 @@ plt.plot(frame[&#39;Cluster&#39;], frame[&#39;SSE&#39;], marker=&#39;o&#39;)
 plt.xlabel(&#39;Number of Clusters&#39;)
 plt.ylabel(&#39;Inertia&#39;)
 plt.title(&#39;Elbow Curve&#39;)</code></pre>
-<p><img src="images/p10_02.png" /></p>
-<p>Above is a plot of sum of squared distances for k in the range specified above. If the plot looks like an arm, then the elbow on the arm is optimal k. Looking at the above elbow curve, we can choose any number of clusters between 4 to 6. The number of clusters is set as 5 and fit the model.</p>
-<p>One must also look at the computation cost while deciding the number of clusters. If a higher number of clusters is selected, the computation cost would increase.</p>
+<p>Text(0.5, 1.0, ‘Elbow Curve’)</p>
+<div class="figure">
+<img src="output_21_1.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>kmeans = KMeans(n_jobs = -1, n_clusters = 4, init=&#39;k-means++&#39;)
 kmeans.fit(data_scaled)
 pred = kmeans.predict(data_scaled)
@@ -1742,31 +1772,38 @@ CustomerID
 </div>
 <pre class="python"><code>#Cluster number
 rfm_df.cluster.value_counts()</code></pre>
-<pre><code>    0    568
-    1    934
-    2     96
-    3      9
-    </code></pre>
+<p>1 934 0 568 2 96 3 9 Name: cluster, dtype: int64</p>
+<p><b>The cluster value where this decrease in inertia value becomes constant can be chosen as the right cluster value for our data. Looking at the above elbow curve, we can choose any number of clusters between 4 to 6. The number of clusters is set as 5 and fit the model.</b></p>
+<p>One must also look at the computation cost while deciding the number of clusters. If a higher number of clusters is selected, the computation cost would increase.</p>
 <pre class="python"><code>#Recency plot
 sns.boxplot(rfm_df.cluster,rfm_df.Recency)
 plt.title(&#39;Recency&#39;)
 plt.show()</code></pre>
-<p><img src="images/p10_03.png" /></p>
+<div class="figure">
+<img src="output_25_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>sns.boxplot(rfm_df.cluster,rfm_df.Frequency)
 plt.title(&#39;Frequency&#39;)
 plt.show()</code></pre>
-<p><img src="images/p10_04.png" /></p>
+<div class="figure">
+<img src="output_26_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>sns.boxplot(rfm_df.cluster,rfm_df.Monetary)
 plt.title(&#39;Monetary&#39;)
 plt.show()</code></pre>
-<p><img src="images/p10_05.png" /></p>
+<div class="figure">
+<img src="output_27_0.png" alt="png" />
+<p class="caption">png</p>
 </div>
-<div id="final-conclusion" class="section level2">
-<h2>Final Conclusion</h2>
+</div>
+<div id="final-conclusion" class="section level1">
+<h1>Final Conclusion</h1>
 <p>The box plots above show that the customers in Cluster 2 and Cluster 3 are the most recent and frequent customers of the company. However we can see that these clusters account for less than 10 percent of the total number of customers. This project provides a brief example of how cluster analysis can enhance results from RFM analysis. An RFM model can be used in conjunction with certain predictive models such as K-means clustering, Logistic Regression and Recommendation to gain even further insight into customer behavior.</p>
 </div>
-<div id="reference" class="section level2">
-<h2>Reference</h2>
+<div id="reference" class="section level1">
+<h1>Reference</h1>
 <ol style="list-style-type: decimal">
 <li>Aditya,A. (2020, March 20). Predictive Segments using RFM Analysis: An In-Depth Guide. Retrieved July 03, 2020, from <a href="https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/" class="uri">https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/</a></li>
 <li>Yexi Yuan. (2019, Aug 17). Recency, Frequency, Monetary Model with Python — and how Sephora uses it to optimize their Google and Facebook Ads. Retrieved July 03, 2020, from <a href="https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17" class="uri">https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17</a></li>

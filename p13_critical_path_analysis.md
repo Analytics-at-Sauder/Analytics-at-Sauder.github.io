@@ -1,9 +1,14 @@
-# Critical Path Analysis
+## Critical Path Analysis
 
-In this notebook, we are going to explore ways that one can use python to look for and visualize critical paths in projects. We encourage you to create your own Jupytor notebook and follow along. You can also download this Jupyter Notebook in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+#### Author: Charlie Cao
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_03_Project_Management_Critical_Path&urlpath=tree%2FProject_03_Project_Management_Critical_Path%2F" target="_blank" class="button">Launch Syzygy</a>
-<a href="#" class="button">Launch Binder</a>
+In this notebook, we are going to explore ways that one can use python to look for and visualize critical paths in projects. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_13_Critical_Path_Analysis&urlpath=tree%2FProject_13_Critical_Path_Analysis%2Fp13_critical_path_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_13_Critical_Path_Analysis&urlpath=tree%2FProject_13_Critical_Path_Analysis%2Fp13_critical_path_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_13_Critical_Path_Analysis/master?filepath=p13_critical_path_analysis.ipynb" target="_blank" class="button">Launch Binder</a>
 
 ## Background
 
@@ -19,7 +24,7 @@ Let's consider the following example:
 - Task D requires 3 days, and it can start as soon as Task A is finished
 - Task E requires 5 days, and it start as soon as Task C and D are finished
 
-![](images/p13_01.png)
+![Critical Path](images/p13_01.png)
 
 By calculating the slack of each task, we can quickly identify that the critical path is *B -> C -> E*, since there is 0 slack along these three tasks. However, this analysis gets much more complicated when managers are presented with more tasks for each project. At the same time, when certain tasks are compressed, the critical path might change. It seems mechanical going through the same process repeatedly to look for critical paths, and we want to find ways to eliminate duplicate work. Therefore, we are going to experiment with some packages that can be used to help project managers visualize the dependencies of different projects, identify the critical path, and find out how the path changes as completion time is reduced for different tasks.
 
@@ -97,7 +102,7 @@ plt.margins(0.1)
 ```
 
 
-![](images/p13_02.png)
+![png](output_5_0.png)
 
 
 ### Searching for the Critical Path
@@ -163,7 +168,7 @@ plt.margins(0.1)
 ```
 
 
-![](images/p13_03.png)
+![png](output_11_0.png)
 
 
 Looking for the critical path can easily become a hassle in a big project with ever changing timelines of various tasks. The `networkx` and `criticalpath` packages make it so much faster and easier to find and visualize the path that can use the most improvement. Now that you know the basics, we have created a challenge for you below so that you could apply these techniques to a more complicated problem by yourself. Don't forget to go back and read the documentations of the different packages if you want to explore different ways of solving this problem!
@@ -271,15 +276,9 @@ Image(fig.to_image(format="png"))
 
 
 
-![](images/p13_04.png)
+![png](output_14_0.png)
 
 
-
-## Challenge: Create A Dynamic Tool
-
----
-
-To be continued...
 
 ## Reference
 

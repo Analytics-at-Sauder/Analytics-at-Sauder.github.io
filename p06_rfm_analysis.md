@@ -1,28 +1,42 @@
----
-title: "RFM Analysis"
----
+## RFM Analysis
 
+#### Author: Kemjika Ananaba
 
 Customer Analytics is important to run a successful business. Sales and marketing resources are finite and expensive, therefore it is important to answer these questions when developing a marketing strategy.
 
 * Who are our most/least valuable customers?
 * How can we acquire new customers that resemble our most valuable?
 
-In this project, we focus on RFM analysis. This type of analysis is used when historical data for existing customers is available. RFM Analysis identifies existing customers who are most likely to remain loyal to a company or respond to a new product. RFM analysis allows you to create customized and personalized messaging, and this can be used to streamline the various messages you send to a specific customer and continue sending messages of only a particular type, thereby reducing the chance of dissatisfaction or annoyance, and create higher customer satisfaction. RFM is a model based on historical data and helps forecast future behavior based on past interactions. 
+In this project, we focus on RFM analysis. This type of analysis is used when historical data for existing customers is available. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
-All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case.
-The Jupyter notebook can be opened in the executable environment Syzygy.
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_06_RFM_Analysis&urlpath=tree%2FProject_06_RFM_Analysis%2Fp06_rfm_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
-<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_06_RFM_Analysis&urlpath=tree%2FProject_06_RFM_Analysis%2FRFM_Analysis.ipynb" target="_blank" class="button">Launch Syzygy</a>
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_06_RFM_Analysis&urlpath=tree%2FProject_06_RFM_Analysis%2Fp06_rfm_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_06_RFM_Analysis/master?filepath=p06_rfm_analysis.ipynb" target="_blank" class="button">Launch Binder</a>
+
+## Background
+
+RFM Analysis identifies existing customers who are most likely to remain loyal to a company or respond to a new product. RFM analysis allows you to create customized and personalized messaging, and this can be used to streamline the various messages you send to a specific customer and continue sending messages of only a particular type, thereby reducing the chance of dissatisfaction or annoyance, and create higher customer satisfaction. RFM is a model based on historical data and helps forecast future behavior based on past interactions. The RFM Model of customer value uses proven marketing principles to help businesses differentiate between marketing to existing and new users and helps them create relevantly and personalized messaging by understanding user behavior. The model allows the business to segment its users based on three criteria based on an existing customer’s transaction history, namely:
+
+1. The recency of Customer's Last purchase 
+2. Frequency of purchases 
+3. Total amount spent, which is referred to as monetary
+
+The RFM model, when used in conjunction with traditional models of segmentation, can help businesses visualize new and existing customers differently, and create favorable conditions to maximize customer lifetime value.
+
+## Business Problem 
 
 
-# Business Problem 
 How do we segment our customers to reach them effectively through target marketing?
+
 By applying the paraeto principle to a customer database,  80% of a company's revenue comes from 20% of the customers. RFM helps determine who the top 20% of customers are and groups the remaining customers into other segments such as price-sensitive, potentially loyal, brand sensitive, etc. This ensures that each customer is better targeted and convert the other segments into the higher value segments and increase customer lifetime value. 
+
 In this project, the customer sales data from January 2011 to May 2011 of an E-commerce store is analyzed to group customers from the United Kingdom into segments using the RFM model. The relevant libraries and the dataset is imported into the python environment. 
 
 
-## Data Set
+### Data Set
+
 There are  eight variables in the data set:
 
 1. InvoiceNo: Invoice number,  A 6-digit integral number uniquely assigned to each transaction.
@@ -34,12 +48,12 @@ There are  eight variables in the data set:
 7. CustomerID: Customer number, a 5-digit integral number uniquely assigned to each customer.
 8. Country 
 
+
 ```python
 import pandas as pd
 import numpy as np
 import seaborn as sns
 from datetime import timedelta
-import numpy as np
 import matplotlib.pyplot as plt
 
 pd.set_option("display.max_columns",None);
@@ -48,7 +62,6 @@ pd.set_option("display.max_rows",None);
 #load data
 url = 'https://raw.githubusercontent.com/Master-of-Business-Analytics/Project_06_RFM_Analysis/master/data.csv'
 df = pd.read_csv(url, error_bad_lines=False,encoding= 'unicode_escape')
-
 ```
 
 
@@ -148,9 +161,14 @@ df.head(5)
 </table>
 </div>
 
-#Data cleaning 
+
+
+## Data cleaning 
+
 The dataset seemed relatively clean at first glance, but it was actually riddled with Null values. The code chunk below creates a new column that calculates the total purchase for each transaction. The NA values are also identified and the rows containing these NA values are removed. 
+
 There are several methods of removing NA values from a dataset; replacing with another value or deleting the entire row. The choice of removal is dependent on the what data is been manipulated and how much data is available.
+
 
 ```python
 df.describe()
@@ -253,27 +271,29 @@ print('Transactions timeframe from {} to {}'.format(df['InvoiceDate'].min(),
 
 df=df[df.notnull().all(axis=1)] #eliminating NA
 ```
-```
+
     290,603 rows; 8 columns
     76,064 transactions don't have a customer id
     Transactions timeframe from 1/10/2011 10:04 to 5/20/2011 14:06
-```
+    
 
 
 ```python
 print('{:,} rows; {:,} columns'
       .format(df.shape[0], df.shape[1]))
 ```
-```
-    214,539 rows; 8 columns
 
-```
+    214,539 rows; 8 columns
+    
+
 
 ```python
 #remove mi
 df.drop(index=[df['Quantity'].idxmax(), df['Quantity'].idxmin()], inplace=True)
 df.describe()
 ```
+
+
 
 
 <div>
@@ -446,8 +466,16 @@ Note that the Minimum quantity and Maximum quantity have different absolute valu
 
 
 ```python
+df = df[df['UnitPrice']>0]
+```
+
+
+```python
 df.describe()
 ```
+
+
+
 
 <div>
 <style scoped>
@@ -869,6 +897,8 @@ df[df.CustomerID==15749].sort_values('Totalsum').head(10)
 
 ```python
 # removing cancelled orders
+#index 257377,257778, 257375, 257373,2142,2205,2143,257374,257376,2204 - all calcellations
+
 df.drop(index=[257377,257778, 257375, 257373,2142,2205,2143,257374,257376,2204], inplace=True)
 ```
 
@@ -1039,14 +1069,19 @@ df[df.CustomerID==16029].sort_values('InvoiceDate').head(10)
 
 
 ```python
-# deleting more cancelled orders
+# removing rows with the large equal absolute values
 df.drop(index=[35090,35080,35074,83508,35077,83505,35075,35084,35076,83502,35089,35071,35072,35032,35088,35026,83471,35082,35079,35073,83469,35087], inplace=True)
 
+
 ```
+
 
 ```python
 df.describe()
 ```
+
+
+
 
 <div>
 <style scoped>
@@ -1133,19 +1168,14 @@ df.describe()
 </table>
 </div>
 
-# RFM analysis 
-The RFM Model of customer value uses proven marketing principles to help businesses differentiate between marketing to existing and helps them create relevantly and personalized messaging by understanding user behavior. The model allows the business to segment its users based on three criteria based on an existing customer’s transaction history, namely:
 
-1. The recency of Customer's Last purchase 
-2. Frequency of purchases 
-3. Total amount spent, which is referred to as monetary
-
-The RFM model, when used in conjunction with traditional models of segmentation, can help businesses visualize existing customers differently.
 
 The customer records are grouped by recency of their purchase, the frequency by their quantity, and the monetary value of the purchases. 
 
-## Recency Score
+### Recency Scores
+
 To calculate recency, a snapshot date is created. This date is one day after the most recent invoice date of the data set. The date difference is used to show the recency of the purchase.
+
 
 ```python
 # Create snapshot date
@@ -1157,7 +1187,9 @@ rec_df.rename(columns={"InvoiceDate": "Recency"}, inplace=True)#rename column
 rec_df=rec_df["Recency"].apply(lambda x: x.days) #extracting number of days only
 rec_df.head(5)
 ```
-```
+
+
+
 
     CustomerID
     12747.0      2
@@ -1167,16 +1199,20 @@ rec_df.head(5)
     12823.0    255
     Name: Recency, dtype: int64
 
-```
 
-## Frequency Score
+
+### Frequency
+
 To calculate the frequency, the number of invoices per customer is calculated.
+
 
 ```python
 freq_df = df.groupby("CustomerID").agg({'InvoiceNo': 'count'})
 freq_df.rename(columns={"InvoiceNo": "Frequency"}, inplace=True)#rename column
 freq_df.head()
 ```
+
+
 
 
 <div>
@@ -1231,7 +1267,7 @@ freq_df.head()
 
 
 
-## Monetary Score
+### Monetary 
 
 To calculated the monetary score, the total value of the purchases made by each customer is calculated.
 
@@ -1297,7 +1333,7 @@ mon_df.head(5)
 
 
 
-## RFM Score
+### RFM model
 
 
 ```python
@@ -1386,7 +1422,7 @@ rfm.head(7)
 
 
 
-<b>Creating Rank scores </b>
+### Creating Rank scores
     
 The customers are ranked in each criteria. Each criteria is broken into 5 buckets. Scores are assigned based on the relative percentile to the RFM features. This approach of scaling customers from 1-5 will result in, at the most, 125 different RFM scores (5x5x5), ranging from 111(lowest) to 555(highest) 
 
@@ -1406,6 +1442,8 @@ f_groups = pd.qcut(rfm['Frequency'], q=5, labels=f_labels)
 
 # Assign these labels to three equal percentile groups 
 m_groups = pd.qcut(rfm['Monetary'], q=5, labels=m_labels)
+
+
 
 # Create new columns R_score, M_score and F_score  
 rfm = rfm.assign(R_score = r_groups.values, F_score = f_groups.values, M_score = m_groups.values)
@@ -1502,7 +1540,7 @@ rfm.head()
 
 
 
-## RFM Score 
+### RFM Score 
 
 There are many ways to calculate the aggregate RFM score. Most companies allocate different weights to each criteria. For example, a customer of R_score =1, F_score =2 , M_score =3 could either have a RFM score of:
 
@@ -1524,6 +1562,8 @@ rfm['RFM score'] = rfm.R_score.astype(str) \
 rfm.head()
 
 ```
+
+
 
 
 <div>
@@ -1550,9 +1590,150 @@ rfm.head()
       <th>R_score</th>
       <th>F_score</th>
       <th>M_score</th>
-      <th>Ave_RFM_Score</th>
-      <th>RFM score</th>
       <th>Ave_Score</th>
+      <th>RFM score</th>
+    </tr>
+    <tr>
+      <th>CustomerID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>12747.0</th>
+      <td>2</td>
+      <td>50</td>
+      <td>2040.43</td>
+      <td>5</td>
+      <td>4</td>
+      <td>5</td>
+      <td>4.666667</td>
+      <td>545</td>
+    </tr>
+    <tr>
+      <th>12748.0</th>
+      <td>1</td>
+      <td>2729</td>
+      <td>15727.57</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5.000000</td>
+      <td>555</td>
+    </tr>
+    <tr>
+      <th>12749.0</th>
+      <td>4</td>
+      <td>114</td>
+      <td>2194.75</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5.000000</td>
+      <td>555</td>
+    </tr>
+    <tr>
+      <th>12820.0</th>
+      <td>3</td>
+      <td>45</td>
+      <td>724.57</td>
+      <td>5</td>
+      <td>3</td>
+      <td>4</td>
+      <td>4.000000</td>
+      <td>534</td>
+    </tr>
+    <tr>
+      <th>12823.0</th>
+      <td>255</td>
+      <td>3</td>
+      <td>994.50</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>2.000000</td>
+      <td>114</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+# Customer Classification based on RFM Analysis
+
+There are many ways we can use the RFM scores to create customer segments. The method used depends on the objective of the analysis. One way of using classifying customers is creating segments based on the average RFM score. Here, we take inspiration from some common segment names. 
+
+Customer Segment | Average Score
+-----------|----
+Can't lose them | 5
+Champions | 4-5
+Loyal | 3-4
+Needs Attention | 2-3
+Require Activation | 0-2
+  
+
+
+
+
+```python
+# Define rfm_level function
+def rfm_level(df):
+    if df['Ave_Score'] >= 5:
+        return 'Can\'t Loose Them'
+    elif ((df['Ave_Score'] >= 4) and (df['Ave_Score'] < 5)):
+        return 'Champions'
+    elif ((df['Ave_Score'] >= 3) and (df['Ave_Score'] < 4)):
+        return 'Loyal'
+    elif ((df['Ave_Score'] >= 2) and (df['Ave_Score'] < 3)):
+        return 'Needs Attention'
+    else:
+        return 'Require Activation'
+    
+# Create a new variable RFM_Level by applying function to table
+
+rfm['RFM_Level'] = rfm.apply(rfm_level, axis=1)
+# Print the header with top 5 rows to the console
+rfm.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Recency</th>
+      <th>Frequency</th>
+      <th>Monetary</th>
+      <th>R_score</th>
+      <th>F_score</th>
+      <th>M_score</th>
+      <th>Ave_Score</th>
+      <th>RFM score</th>
+      <th>RFM_Level</th>
     </tr>
     <tr>
       <th>CustomerID</th>
@@ -1578,7 +1759,7 @@ rfm.head()
       <td>5</td>
       <td>4.666667</td>
       <td>545</td>
-      <td>4.666667</td>
+      <td>Champions</td>
     </tr>
     <tr>
       <th>12748.0</th>
@@ -1590,7 +1771,7 @@ rfm.head()
       <td>5</td>
       <td>5.000000</td>
       <td>555</td>
-      <td>5.000000</td>
+      <td>Can't Loose Them</td>
     </tr>
     <tr>
       <th>12749.0</th>
@@ -1602,7 +1783,7 @@ rfm.head()
       <td>5</td>
       <td>5.000000</td>
       <td>555</td>
-      <td>5.000000</td>
+      <td>Can't Loose Them</td>
     </tr>
     <tr>
       <th>12820.0</th>
@@ -1614,7 +1795,7 @@ rfm.head()
       <td>4</td>
       <td>4.000000</td>
       <td>534</td>
-      <td>4.000000</td>
+      <td>Champions</td>
     </tr>
     <tr>
       <th>12823.0</th>
@@ -1626,7 +1807,7 @@ rfm.head()
       <td>4</td>
       <td>2.000000</td>
       <td>114</td>
-      <td>2.000000</td>
+      <td>Needs Attention</td>
     </tr>
   </tbody>
 </table>
@@ -1634,39 +1815,8 @@ rfm.head()
 
 
 
-# Customer Classification
-There are many ways we can use the RFM scores to create customer segments. The method used depends on the objective of the analysis. One way of using classifying customers is creating segments based on the average RFM score. Here, we take inspiration from some common segment names. 
-
-Customer Segment | Average Score
------------|----
-Can't lose them | 5
-Champions | 4-5
-Loyal | 3-4
-Needs Attention | 2-3
-Require Activation | 0-2
-
-```python
-# Define rfm_level function
-def rfm_level(df):
-    if df['Ave_Score'] >= 5:
-        return 'Can\'t Loose Them'
-    elif ((df['Ave_Score'] >= 4) and (df['Ave_Score'] < 5)):
-        return 'Champions'
-    elif ((df['Ave_Score'] >= 3) and (df['Ave_Score'] < 4)):
-        return 'Loyal'
-    elif ((df['Ave_Score'] >= 2) and (df['Ave_Score'] < 3)):
-        return 'Needs Attention'
-    else:
-        return 'Require Activation'
-    
-# Create a new variable RFM_Level by applying function to table
-
-rfm['RFM_Level'] = rfm.apply(rfm_level, axis=1)
-# Print the header with top 5 rows to the console
-rfm.head()
-```
-
 <b> Calculating the size of each segment</b>
+
 
 ```python
 # Calculate average values for each RFM_Level, and return a size of each segment 
@@ -1681,18 +1831,135 @@ rfm_level_agg
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Recency</th>
+      <th>Frequency</th>
+      <th colspan="2" halign="left">Monetary</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>mean</th>
+      <th>mean</th>
+      <th>mean</th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>RFM_Level</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Can't Loose Them</th>
+      <td>4.0</td>
+      <td>290.7</td>
+      <td>6228.5</td>
+      <td>220</td>
+    </tr>
+    <tr>
+      <th>Champions</th>
+      <td>19.1</td>
+      <td>119.3</td>
+      <td>1954.5</td>
+      <td>691</td>
+    </tr>
+    <tr>
+      <th>Loyal</th>
+      <td>58.6</td>
+      <td>50.8</td>
+      <td>784.6</td>
+      <td>810</td>
+    </tr>
+    <tr>
+      <th>Needs Attention</th>
+      <td>113.1</td>
+      <td>22.5</td>
+      <td>388.5</td>
+      <td>918</td>
+    </tr>
+    <tr>
+      <th>Require Activation</th>
+      <td>215.4</td>
+      <td>9.9</td>
+      <td>163.1</td>
+      <td>634</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 #visualizing customer segments based on average scores
-rfm_level_agg['Count'].plot(kind="barh", use_index=True, color=['red', 'orange', 'yellow', 'green', 'gold'])
-
+rfm_level_agg['Monetary']['count'].plot(kind="barh", use_index=True, color=['red', 'orange', 'yellow', 'green', 'gold'])
+#rfm['Count'].plot(kind="barh", use_index=True, color=['red', 'orange', 'yellow', 'green', 'gold'])
 plt.title("Customer Segments based on average scores")
 plt.xlabel("Segments")
 plt.ylabel("Number of customers")
+plt.show()
 ```
 
 
-![](images/p06_01.png)
+![png](output_37_0.png)
 
+
+
+```python
+rfm_level_agg['Monetary']['count']
+```
+
+
+
+
+    RFM_Level
+    Can't Loose Them      220
+    Champions             691
+    Loyal                 810
+    Needs Attention       918
+    Require Activation    634
+    Name: count, dtype: int64
+
+
+
+The customer segmentation above assigns equal weighs to recency, frequency and monetary scores. This method of segmentation is usually 
+
+An alternative way is to select groups of customers to whom specific types of communications or promotions will be sent, based on the RFM segments in which they appear.
+
+1. Best Customers: This group consists of those customers who are found in R-score-1, F-score-1 and M-Score-1, meaning that they transacted recently, do so often and spend more than other customers. A shortened notation for this segment is 1-1-1.
+
+2. High-spending New Customers: This group consists of those customers in 1-4-1 and 1-4-2. These are customers who transacted only once, but very recently and they spent a lot.
+
+3. Lowest-Spending Active Loyal Customers: This group consists of those customers in segments 1-1-3 and 1-1-4 (they transacted recently and do so often, but spend the least).
+
+4.Churned Best Customers: This segment consists of those customers in groups 4-1-1, 4-1-2, 4-2-1 and 4-2-2 (they transacted frequently and spent a lot, but it been a long time since they have transacted).
 
 # Final Conclusion
 
@@ -1704,9 +1971,27 @@ RFM is relatively simple technique that could drastically improve your marketing
 * Which of your customers can be retained?
 * Which of your customers are most likely to respond to engagement campaigns?
 
+However there is some problems with traditional RFM analysis, it is: 
+* Computationally awkward and labor intensive. 
+* Ignores within quintile variance.
+* Ordering of variables is arbitrary. Which do you sort by first? 
+* Some variables may have too few levels.
+* Correlations between variables create problems. E.g., first recency quintile may have more high frequency customers.
+* Does not generalize well to new customers. (e.g. How do new customers get assigned to a quintile?) 
+
+As a result, Logistic Regression usually is preferred to RFM analysis when predicting the behavior of the customer.
+
+
 # Reference 
 
 1. Aditya,A. (2020, March 20). Predictive Segments using RFM Analysis: An In-Depth Guide. Retrieved July 03, 2020, from https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/
 
 2. Yuan, Y. (2019, August 19). Recency, Frequency, Monetary Model with Python - and how Sephora uses it to optimize their Google... Retrieved July 03, 2020, from https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17
 
+3. https://www.putler.com/rfm-analysis/
+4. https://www.optimove.com/resources/learning-center/rfm-segmentation
+
+
+```python
+
+```

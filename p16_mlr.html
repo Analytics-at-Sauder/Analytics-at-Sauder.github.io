@@ -11,7 +11,7 @@
 
 
 
-<title>Untitled</title>
+<title>p16_mlr.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -422,7 +422,7 @@ div.tocify {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="resource.html">Resources</a>
+  <a href="resource.html">Resource</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -436,12 +436,18 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Untitled</h1>
 
 </div>
 
 
-<p>Regression is among one the most common used method when analyst is trying to describe the result of an event - like the house price, which is what we are going to focus on in this notebook. The</p>
+<div id="multiple-linear-regression" class="section level2">
+<h2>Multiple Linear Regression</h2>
+<div id="author-hao-zheng" class="section level4">
+<h4>Author: Hao Zheng</h4>
+<p>Regression is among one the most common used method when analyst is trying to describe the result of an event - like the house price, which is what we are going to focus on in this notebook. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_16_MLR&urlpath=tree%2FProject_16_MLR%2Fp16_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_16_MLR&urlpath=tree%2FProject_16_MLR%2Fp16_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_16_MLR/master?filepath=p16_mlr.ipynb" target="_blank" class="button">Launch Binder</a></p>
 <pre class="python"><code>import numpy as np
 from sklearn.linear_model import LinearRegression
 import pandas as pd
@@ -1179,8 +1185,9 @@ nunique
 3 rows × 81 columns
 </p>
 </div>
-<div id="step-1-include-all-the-features-within-the-dataframe" class="section level3">
-<h3>Step 1: Include all the features within the dataframe</h3>
+</div>
+<div id="step-1-include-two-sample-features-within-the-dataframe" class="section level3">
+<h3>Step 1: Include two sample features within the dataframe</h3>
 <pre class="python"><code># Include the lot area and the year of sales features as x values, include SalePrice as y value
 x = raw_df.loc[:,[&#39;LotArea&#39;,&#39;YrSold&#39;]].values.tolist()
 y = list(map(int,raw_df[&quot;SalePrice&quot;].tolist()))
@@ -1196,10 +1203,9 @@ print(&#39;intercept:&#39;, model.intercept_)
 # Get coefficients
 print(&#39;coefficients:&#39;, model.coef_)
 </code></pre>
-<pre><code>    coefficient of determination: 0.07024646007626767
-    intercept: 3181205.713858099
-    coefficients: [    2.09711551 -1505.28728351]</code></pre>
+<p>coefficient of determination: 0.07024646007626767 intercept: 3181205.713858099 coefficients: [ 2.09711551 -1505.28728351]</p>
 <p>The coefficient indicates that there is something wrong here in the model. The coefficient associated with the year is negative. But in real life we are witnessing a huge increase in house price every year. So we need to further look search for the appropriate features to include in the model.</p>
+</div>
 </div>
 
 <div class="footer">

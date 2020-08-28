@@ -1,25 +1,27 @@
----
-title: "Sales Forecast - Part II"
----
+## Sales Forecaset (Part 2)
 
-This is the second of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. Alternatively, you can download the entire notebook together with all the data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) repository. If you do not have Python or Jupyter Notebook installed yet, you could also experiment with the virtual notebook by clicking "Launch Syzygy" below.
+#### Author: Charlie Cao
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2F" target="_blank" class="button">Launch Syzygy</a>
+This is the second of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_08_Sales_Forecast/master?filepath=p08_sales_forecast_part_2.ipynb" target="_blank" class="button">Launch Binder</a>
 
 ## Background
-
 ---
 
-The previous notebook provides detailed guide on the exploration and manipulation of data, whereas this one will be centered around the modeling process itself. Understanding the data is important for analytics, and we recommend you to read the first notebook prior to diving into modeling in order to gain a better grasp of our big and messy data. The datasets that we are using contain sales records for a retailers with 45 stores, each containing several departments. They already included in the repository where this Jupyter notebook is located (see the "Data" folder), but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
+The previous Notebook provides a detailed guide on the exploration and manipulation of data, while this Notebook will be centered around the modeling process itself. Understanding the data is important for analytics, and we recommend that you read the first Notebook (Part 1) prior to diving into modeling in order to gain a better grasp of our large and messy data. The datasets that we are using consist of sales records for a retailer with 45 stores, each containing several departments. They are already included in the GitHub Repository where this Jupyter Notebook is located (please see the "Data" folder), but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
 
-Let's first import the libraries and datasets:
+Let's first start by importing the libraries we need and loading our data:
 
 
 ```python
 import pandas as pd
 import numpy as np
 import datetime
-import itertools
 import matplotlib.pyplot as plt
 import seaborn as sns
 from statsmodels.tsa.seasonal import STL
@@ -30,12 +32,9 @@ from fbprophet import Prophet
 from ipywidgets import interact
 
 # There are multiple SettingWithCopyWarnings in this notebook
-# which we will choose to ignore
 # Read more here:
 # https://www.dataquest.io/blog/settingwithcopywarning/
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-import warnings
-warnings.filterwarnings('ignore')
 
 # import data
 df_sales = pd.read_csv('Data/sales.csv')
@@ -58,21 +57,48 @@ df_stores['Type'] = df_stores['Type'].astype('category')
 
 ---
 
-In this notebook, we will be using the `Prophet` forecasting package developed by Facebook. However, there are many other methods of forecasting, such as ARIMA models, ETS models, a combination of explanatory models (linear regression) and time series models, as well as several machine learning models. After reading this notebook, we encourage you to experiment with different forecasting packages in Python (or R) so that you can find the best fit for your data.
+In this Notebook, we will be using the `Prophet` forecasting package developed by Facebook. However, there are many other forecasting methods and packages, such as ARIMA models, ETS models, or a combination of explanatory models (linear regression) and time series models; some machine learning models can also be used to predict time series. After reading this Notebook, we encourage you to experiment with different forecasting packages in Python (or R) so that you can find the best fit for your data.
 
 ### STL Decomposition
 
-Time series data can usually be described with Trend, Cycle, and Seasonality. The book, "Forecasting: Principles and Practice", does a great job defining these three components in [Chapter 2.3](https://otexts.com/fpp2/tspatterns.html). Often times, identifying these components in our data (and understanding our data in general) can help us select the most appropriate model(s). Just like forecasting, there are many different ways to decompose time series as well. STL decomposition (short for Seasonal and Trend decomposition using Loess) is helpful in our case because we have weekly data, while a lot of other decomposition methods are only applicable to monthly or quarterly data. Here, we utilize `ipywidgets` again ((please read its [documentation](https://ipywidgets.readthedocs.io/en/latest/) for more information or tutorials), together with the `STL` function from `statsmodels`, to inspect the different trends and seasonalities across stores and departments:
+Time series data can usually be described with Trend, Cycle, and Seasonality. The book, "Forecasting: Principles and Practice", does a great job defining these three components in [Chapter 2.3](https://otexts.com/fpp2/tspatterns.html). Oftentimes, identifying these components in our data (and understanding our data in general) can help us select the most appropriate model(s). There are many different ways to decompose time series data. STL decomposition (short for Seasonal and Trend decomposition using Loess) is helpful in our case because we have weekly data, while a lot of other decomposition methods are only applicable to monthly or quarterly data. Here, we utilize `ipywidgets` again (please read its [documentation](https://ipywidgets.readthedocs.io/en/latest/) for more information or for tutorials), together with the `STL` function from `statsmodels`, to inspect the different trends and seasonalities across stores and departments:
 
 
-<iframe src="https://analytics-at-sauder.github.io/Project_08_Sales_Forecast/sales_forecast_widget_02.html" style="height: 1250px;"></iframe>
+```python
+def stl_viz(store_num, dept_num):
+    try:
+        # Subsetting data according to store and department number
+        sales_temp = df_sales[(df_sales.Store==store_num)&(df_sales.Dept==dept_num)]
+        # Transform dataframe into time series
+        sales_temp_ts = sales_temp.set_index('Date')['Weekly_Sales']
+        # Decompose the data
+        stl_temp = STL(sales_temp_ts).fit()
+        # Set up plot
+        plt.rc('figure',figsize=(12,8))
+        plot_temp = stl_temp.plot()
+        plt.show()
+        return 
+    except:
+        # Error message for when store-department combination doesn't exist
+        print("ERROR: There is no Department {} in Store {}".format(store_num, dept_num))
+        return
+
+display(interact(stl_viz, store_num={n:n for n in range(1,46)}, dept_num={n:n for n in range(1,100)}))
+```
+
+
+    interactive(children=(Dropdown(description='store_num', options={1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: …
+
+
+
+    <function __main__.stl_viz(store_num, dept_num)>
 
 
 ### Prophet
 
-Prophet is a package developed by Facebook. It is fast and fully automatic, which might not always be the best but surely is convenient, and it is compatible with weekly data, which is one of the biggest reasons we are using it in this case since a lot of other models, such as ARIMA and ETS models, only takes in integer seasonalities (12 for example) whereas the number of weeks in a year is usually not an integer (52.14). Prophet also allows users to specify holidays in the model, so that unusual observations caused by holidays can also be modeled. Let's start by building a model for Store 1 Department 1. 
+Prophet is a package developed by Facebook. It is fast and fully automatic, which might not always be the best, but it surely is convenient. Prophet is also compatible with weekly data, which is one of the main reasons for why we are using it in this case; many other models, such as ARIMA and ETS models, only take in integer seasonalities (for example: 12), whereas the number of weeks in a year is usually not an integer (approximately 52.14). Prophet allows users to specify holidays in the model, as well, so that unusual observations caused by holidays can also be modeled. Let's start by building a model for Department 1 in Store 1. 
 
-First we will subset the `sales` dataframe for rows where the `Store` and the `Dept` column both are equal to 1:
+First, we will create a subset of the `sales` dataframe for rows where the `Store` and the `Dept` columns are both equal to 1:
 
 
 ```python
@@ -167,7 +193,7 @@ sales_s1d1_df.head()
 
 #### Train/Test Split
 
-Just like a lot of machine learning models, we want to split our data into training and testing sets (commonly 80% and 20%) before we build our models, so that we can evaluate the performance of these models. In our case, even though we do not have a lot of data to work with (2 years of data with yearly seasonality), we still would want to have at least an entire year of data in our testing set so that we could evaluate the performance of our model across seasons. From the first notebook, we know that the last date in our dataset is '2012-10-26', so we will set the cut off line exactly a year before that date (note that you must use a date that exists in the data to keep the weekly intervals consistent). Prophet is very particular about the data that it uses: the date column has to be named `ds` while the dependent variable should be named `y`; we will format our dataframe accordingly.
+Just like a lot of machine learning models, we want to split our data into training and testing sets (commonly 80% and 20%, respectively) before we build our models so that we can evaluate the performance of these models. In our case, even though we do not have a lot of data to work with (two years of data with yearly seasonality), we still want to have at least an entire year of data in our test set so that we can evaluate the performance of our model across seasons. From the first Notebook, we know that the last date in our dataset is '2012-10-26', so we will set the cutoff line exactly a year before that date. Note that you must use a date that exists in the data to keep the weekly intervals consistent. Prophet is very particular about the data that it uses: the date column has to be named `ds` while the dependent variable should be named `y`, and we will format our dataframe accordingly.
 
 
 ```python
@@ -322,12 +348,12 @@ ax.set(title='Weekly Sales', ylabel='');
 ```
 
 
-![](images/p08_10.png)
+![png](output_8_0.png)
 
 
 #### Holidays
 
-To model holidays in Prophet, we have to create a similar time series dataframe, with the name of the holidays as column `holiday` and the date again as `ds`. Here we create this dataframe accordingly:
+To model holidays in Prophet, we have to create a similar time series dataframe, with the names of the holidays in the `holiday` column and the date, again, in the `ds` column. Here, we create this dataframe accordingly:
 
 
 ```python
@@ -394,7 +420,7 @@ display(holidays_s1d1.head())
 
 #### Fitting
 
-Now we have our datasets ready, we can finally fit the model. One of the parameters of the model is called `mcmc_samples`, which sepcifies the number of samples to create using the [Markov Chain Monte Carlo](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) method; this parameter has an impact on the confidence interval of our model, but for the sake of this project, we will not get into further details.
+Now that we have our datasets ready, we can finally fit the model. One of the parameters of the model is called `mcmc_samples`, which sepcifies the number of samples to draw using the [Markov Chain Monte Carlo](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) method; this parameter has an impact on the confidence interval of our model, but for simplicity, we will not get into further details for the purposes of this Notebook.
 
 
 ```python
@@ -410,13 +436,24 @@ model.fit(sales_s1d1_train)
 # Warning messages might appear in our case because of limited data
 ```
 
+    WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
+    WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
+    WARNING:pystan:10 of 200 iterations saturated the maximum tree depth of 10 (5 %)
+    WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation
+    
+
+
+
+
+    <fbprophet.forecaster.Prophet at 0x1e5ad4e1d88>
+
 
 
 ## Testing the Model
 
 ---
 
-Now with the model fitted using our training set, we can forecast our test set and compare it with the observed data. In this step, we will be able to analyze the errors of our forecast and calculate some useful metrics for the model, which can later be used to compare with other plausible models. Note that Prophet also generates retrospective predictions for past data, but we will only be using the 'future' data, which is our test set.
+Now with the model fitted using our training set, we can forecast our test set and compare it with the observed data. In this step, we will be able to analyze the errors of our forecasts and calculate some useful metrics for the model, which can be later used to compare with other models. Note that Prophet also generates retrospective predictions for past data, but we will only be using 'future' data, which is our test set.
 
 
 ```python
@@ -635,10 +672,10 @@ ax.set(title='Weekly Sales', ylabel='');
 ```
 
 
-![](images/p08_11.png)
+![png](output_15_0.png)
 
 
-We can see right away that our forecast is consistently underestimating the observations, even though the observations are all within the 95% confidence interval of predictions. Combined with the component plots below (log scale), we can also see that the model includes a decreasing trend, and there is a large amount of uncertainty in the trend component as time goes on and the confidence interval expands. Holidays, on the other hand, does not seem to affect sales in Store 1 Department 1.
+We can see right away that our forecast (green line) is consistently underestimating the observations (orange line), even though the observations are all within the 95% confidence interval of predictions. Combined with the component plots below (log scale), we can also see that the model includes a decreasing trend, and there is a large amount of uncertainty in the trend component as time goes on, as illustrated by the expanding confidence interval (shaded area). Holidays, on the other hand, do not seem to affect weekly sales for Department 1 in Store 1.
 
 
 ```python
@@ -646,12 +683,12 @@ model.plot_components(forecast, figsize=(13,7));
 ```
 
 
-![](images/p08_12.png)
+![png](output_17_0.png)
 
 
 ### Residual Diagnosis
 
-Residuals are the differences between predicted values and observed values (for a lot of models but not all), and they are useful in checking whether the model has captured an adequate amount of information from the data. In a good model, the residuals should be uncorrelated and have a mean that is close to 0: correlated residuals signal that there is information left in the errors that can be further modeled, whereas a mean far away from 0 means that the predictions are biased.
+For many models, but not all, residuals are the differences between the predicted values and the observed values, and they are useful in checking whether the model has captured a sufficient amount of information from the data. In a good model, the residuals should be uncorrelated and have a mean that is close to 0. Correlated residuals signal that there is information left in the errors that can be further modeled, and a mean far away from 0 suggests that the predictions are biased.
 
 
 ```python
@@ -666,10 +703,10 @@ errors_std = forecast_test['errors'].std()
 print('Residual mean: {:.2f}'.format(errors_mean))
 print('Residual standard deviation: {:.2f}'.format(errors_std))
 ```
-```
+
     Residual mean: -6369.44
     Residual standard deviation: 5974.84
-```
+    
 
 
 ```python
@@ -706,7 +743,7 @@ plt.show()
 ```
 
 
-![](images/p08_13.png)
+![png](output_21_0.png)
 
 
 
@@ -761,13 +798,15 @@ display(pd.DataFrame({'MAE': mean_abs_err,
 </div>
 
 
-We can see that the mean of our residuals is smaller than 0, and our predictions were frequently underestimation of the observed data. The distribution of the residuals is skewed by some extremely negative forecasting errors (underestimation) as well. The plots above also show that the variance of our residuals is *not* constant overtime&mdash;it decreases from the beginning to the end of the year. Luckily, there is not much significant auto correlation in the residuals. In short, our forecast is very biased, but there is not really much more information or pattern that is not captured in our model. However, this is not to say that we cannot find a better model (*or more importantly, collect more data*). In our case, we make use of the Prophet package as it is compatible with weekly data; there are perhaps other parameters that we can fine tune, or potentially other models that should be fitted to our data, before we make the final decision on which model to use. For the sake of simplicity, we will go ahead with this model and forecast future sales.
+We can see that the mean of our residuals is smaller than 0, and our predictions were frequently underestimating the observed data. The distribution of the residuals is also skewed by some extremely negative forecasting errors (underestimation). At the same time, the plots above show that the variance of our residuals is *not* constant over time; it decreases from the beginning to the end of the year. Luckily, there is not much significant autocorrelation in the residuals.
+
+In short, our forecast is very biased, but our model is effectively capturing most of the information and patterns. However, this is not to say that we cannot find a better model (*or more importantly, collect more data*). In our case, we employ Prophet because it is compatible with weekly data. Perhaps there are other parameters that we can fine-tune, or even other models that should be fitted to our data, before we make the final decision on which model to use. Again, for the sake of simplicity, we will go ahead and forecast future sales with this current model.
 
 ## Forecasting
 
 ---
 
-Now that we have an understanding of the prediction errors of our model, we can move on to build a full model using all the existing data. Please be careful not to test the model with data that are used to create the model.
+Now that we have an understanding of the prediction errors in our model, we can move on to build a full model using all the existing data. However, please be careful not to test the model with the data that are used to create the model itself.
 
 
 ```python
@@ -855,6 +894,12 @@ forecast.loc[:,'exp_yhat_lower'] = np.exp(forecast.loc[:,'yhat_lower'])
 display(forecast.tail())
 # Scroll to the right for back-transformed forecasts
 ```
+
+    WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
+    WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
+    WARNING:pystan:8 of 200 iterations saturated the maximum tree depth of 10 (4 %)
+    WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation
+    
 
 
 <div>
@@ -1051,16 +1096,15 @@ ax.set(title='Weekly Sales', ylabel='');
 ```
 
 
-![](images/p08_14.png)
+![png](output_27_0.png)
 
 
 ## Next Steps
 
 ---
 
-Now that you have a basic understanding of our data as well as forecasting for a single time series in Python using `Prophet`, we encourage you to:
+Now that you have a basic understanding of our data, as well as forecasting for a single time series in Python using `Prophet`, we encourage you to:
 
-1. Read through the [documentation for Prophet](https://facebook.github.io/prophet/docs/quick_start.html) and fine tune any additional parameters that you think could improve our model
-2. Create your own Prophet model, with a different dataset (try to find a time series that is much longer than what we used in this notebook)
-3. Come up with a strategy to efficiently forecast for multiple stores and departments
-
+1. Read through the [documentation for Prophet](https://facebook.github.io/prophet/docs/quick_start.html) and fine-tune any additional parameters that you think could improve our model.
+2. Create your own Prophet model with a different dataset. Try to find a time series that is much longer than what we used in this Notebook so that you have more data to work with.
+3. Come up with a strategy to efficiently forecast for multiple stores and departments.

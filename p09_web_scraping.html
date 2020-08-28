@@ -11,7 +11,7 @@
 
 
 
-<title>Web Scraping</title>
+<title>p09_web_scraping.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -422,7 +422,7 @@ div.tocify {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="resource.html">Resources</a>
+  <a href="resource.html">Resource</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -436,68 +436,72 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Web Scraping</h1>
 
 </div>
 
 
-<p>In this project, we would review the web data extraction and see an example of its application on a weather website. Scraping of websites is a very useful activity especially to achieve recruiting or marketing tasks. All of the code can be found in the MBAN GitHub repository, feel free to download it and modify for your use case.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/user/qingkangcao/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2F" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="web-scraping" class="section level2">
+<h2>Web Scraping</h2>
+<div id="author-kemjika-ananaba" class="section level4">
+<h4>Author: Kemjika Ananaba</h4>
+<p>Scraping of websites is a very useful activity especially to achieve recruiting or marketing tasks. Using Python you can make this process smoother, using your time to focus on those profiles that have critical peculiarities. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2Fp09_web_scraping.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2Fp09_web_scraping.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_09_Web_Scraping/master?filepath=p09_web_scraping.ipynb" target="_blank" class="button">Launch Binder</a></p>
+</div>
+</div>
 <div id="what-is-web-scraping" class="section level2">
 <h2>What is Web Scraping?</h2>
 <p>Web Scraping is a technique used to extract data from websites. A prerequisite to web scraping is knowing a little bit about HTML code to know where the data to be captured is located in the HTML code. If you have ever copy and pasted information from a website, you have performed the same function as any web scraper, only on a smaller, manual scale.</p>
 <p>One way to scrape data is through Direct HTTP Requests. Websites are just a rendering of the HTML and CSS code that the web server returns as a result of a GET request of your browser. As a result, a simple script can send automatically HTTP requests and parse the answer, scraping the content. The python-requests package is used to make this request and enable data scraping.</p>
 <p>Sometimes websites load the content asynchronously. This means that the information to be scraped may not be contained in the first HTTP response, but are loaded only as a consequence of a page scrolling or after the click of a button. To overcome this barrier a Web Browser Driver, Selenium Web Driver, is used. The Web Browser drivers let you run a real web browser enabling your Python script to emulate user behavior on the page.</p>
 <p>Web scraping is a complicated process because all web pages do not follow the same format. Therefore, the code used to scrape data from a particular website can not be reapplied to another website. Therefore the python code has to customize the web-site’s HTML structure. However, websites can not be scraped multiple times as this can overload the server hosting the website, especially smaller websites.</p>
-</div>
-<div id="basic-project" class="section level2">
-<h2>Basic project</h2>
-<p>In this project, we will scrap a seven-day weather forecast for Houston from a static weather forecast website.</p>
+<div id="basic-project" class="section level3">
+<h3>Basic project</h3>
+<p>In this project, we will scrap a seven-day weather forecast from a static weather forecast website, forecast.weather.gov for Houston.</p>
 <p>First of all, load the required packages. The requests package is used to make a request to the website and enable us to download web pages that are loaded into the python environment</p>
 <pre class="python"><code>import requests
 from bs4 import BeautifulSoup
 import pandas as pd</code></pre>
 <p><b> Request URL</b></p>
-<pre class="python"><code>#link of website to be scraped
+<pre class="python"><code>
 url = &quot;https://forecast.weather.gov/MapClick.php?lat=29.685271900000032&amp;lon=-95.43426899999997#.XvL4ti-z1ZJ&quot;
-
+#link of website
 page = requests.get(url)
 soup = BeautifulSoup(page.content, &#39;html.parser&#39;)</code></pre>
-<p>The BeautifulSoup constructor parses raw HTML strings and produces an object that mirrors the HTML document’s structure. This makes web scraping very easy as you are able to find all the HTML tags. The output is the source code of the website.</p>
-<p>For example, the code below extracts all the a tag in the web page. The a tag defines a hyperlink, which is used to link from one page to another.</p>
+<p>The BeautifulSoup constructor parses raw HTML strings and produces an object that mirrors the HTML document’s structure. This makes web scraping very easy as you are able to find all the HTML tags. The output is the source code of the website. For example, the code below extracts all the a tag in the web page. The a tag defines a hyper-link, which is used to link from one page to another.</p>
 <pre class="python"><code>#To find all the links in the web page (a-tags in the output)
 print(soup.find_all(&#39;a&#39;)[0])
 
 </code></pre>
-<pre><code>&lt;a class=&quot;pull-left&quot; href=&quot;http://www.noaa.gov&quot; id=&quot;header-noaa&quot;&gt;&lt;img alt=&quot;National Oceanic and Atmospheric Administration&quot; src=&quot;/css/images/header_noaa.png&quot;/&gt;&lt;/a&gt;
-</code></pre>
+<pre><code>&lt;a class=&quot;pull-left&quot; href=&quot;http://www.noaa.gov&quot; id=&quot;header-noaa&quot;&gt;&lt;img alt=&quot;National Oceanic and Atmospheric Administration&quot; src=&quot;/css/images/header_noaa.png&quot;/&gt;&lt;/a&gt;</code></pre>
 <p>To identify the section that hosts tag the information that is needed, the source code of the web page can be checked by using the browser developer tools. The diagram below shows the web page and its corresponding source code. This is useful when identifying the tag id containing the information to be scraped from the web page.</p>
-<p><img src="images/p09_01.png" /></p>
+<div class="figure">
+<img src="attachment:image.png" alt="image.png" />
+<p class="caption">image.png</p>
+</div>
 <p>The developer source code shows that the tag id is seven-day-forecast-container.</p>
 <pre class="python"><code>#component of the html code contacting weather information
 week = soup.find(id=&#39;seven-day-forecast-body&#39;)
 </code></pre>
 <p>This shows every information contained in that tag id. To access all the items in this object week (weekdays), the information in the class tag “tombstone-container” is captured.</p>
-<pre class="python"><code>#Extracting information for the week
+<pre class="python"><code>#each day
 items = week.find_all(class_= &quot;tombstone-container&quot;)
-#extracting the first item in the items list - day 1 
+#first day
 day1=items[0] 
 day1</code></pre>
 <pre><code>&lt;div class=&quot;tombstone-container&quot;&gt;
 &lt;p class=&quot;period-name&quot;&gt;Overnight&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt=&quot;Overnight: A 30 percent chance of showers and thunderstorms.  Mostly cloudy, with a low around 78. Calm wind becoming east around 5 mph. &quot; class=&quot;forecast-icon&quot; src=&quot;newimages/medium/nscttsra30.png&quot; title=&quot;Overnight: A 30 percent chance of showers and thunderstorms.  Mostly cloudy, with a low around 78. Calm wind becoming east around 5 mph. &quot;/&gt;&lt;/p&gt;&lt;p class=&quot;short-desc&quot;&gt;Chance&lt;br/&gt;T-storms&lt;/p&gt;&lt;p class=&quot;temp temp-low&quot;&gt;Low: 78 °F&lt;/p&gt;&lt;/div&gt;</code></pre>
-<p>Each item contains all coding and image relating to one day. The information in each item in the item list is broken into columns: Day, weather description, and temperature. A for-loop is used to extract all relevant weather information.</p>
-<pre class="python"><code># extracting day from first item in list &#39;items&#39;
-print(day1.find(class_= &quot;period-name&quot;).get_text())  #day</code></pre>
+<p>Each item contains all coding and image relating to one day. The information in each item in the item list is broken into columns: Day, weather description, and temperature.</p>
+<pre class="python"><code>print(day1.find(class_= &quot;period-name&quot;).get_text())  #day</code></pre>
 <pre><code>NOW until7:00am Wed</code></pre>
 <pre class="python"><code>print(day1.find(class_= &quot;short-desc&quot;).get_text()) #weather</code></pre>
 <pre><code>Flash Flood Watch</code></pre>
 <pre class="python"><code>items[1].find(class_= &quot;temp&quot;).get_text()</code></pre>
 <pre><code>&#39;Low: 75 °F&#39;</code></pre>
 <p>A for-loop is used to loop through the items list to get the column information for each day.</p>
-<pre class="python"><code># For-loop to days for the week
-
-period_name=[]
+<pre class="python"><code>period_name=[]
 for day in items:
     name=day.find(class_= &quot;period-name&quot;).get_text()
     period_name.append(name)
@@ -511,8 +515,7 @@ period_name #period</code></pre>
  &#39;Friday&#39;,
  &#39;FridayNight&#39;,
  &#39;Saturday&#39;]</code></pre>
-<pre class="python"><code># For-loop to extract weather description for each day
-short_description = []
+<pre class="python"><code>short_description = []
 for day in items:
     name=day.find(class_= &quot;short-desc&quot;).get_text()
     short_description.append(name)
@@ -526,8 +529,7 @@ short_description #period</code></pre>
  &#39;ChanceT-storms&#39;,
  &#39;ChanceT-storms&#39;,
  &#39;ChanceT-storms&#39;]</code></pre>
-<pre class="python"><code># For-loop to extract temperature for each day
-temperature = []
+<pre class="python"><code>temperature = []
 for day in items:
     try:
         name=day.find(class_= &quot;temp&quot;).get_text()
@@ -545,8 +547,7 @@ temperature</code></pre>
  &#39;Low: 78 °F&#39;,
  &#39;High: 92 °F&#39;]</code></pre>
 <p>The panda package is used to merge all output lists into a table.</p>
-<pre class="python"><code>#combine lists into data table
-weather_table = pd.DataFrame({&#39;Period&#39;:period_name,
+<pre class="python"><code>weather_table = pd.DataFrame({&#39;Period&#39;:period_name,
                              &#39;Short description&#39;:short_description,
                              &#39;Temperature&#39;:temperature})
 
@@ -713,10 +714,12 @@ High: 92 °F
 </div>
 <p>This Table can be converted to a CSV file and used for data manipulation and analysis. This web scraping code can be used for different locations on the same website. Web scraping is an essential tool that almost every data analyst needs.</p>
 </div>
+</div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>The incredible amount of data on the Internet is a rich resource for any field of research or personal interest. To effectively harvest that data, web scraping is a necessary skill. The Python library’s requests and Beautiful Soup are powerful tools for the job. However, there are some challenges in web Scraping. Each website is unique and will need a customized treatment to extract the relevant information.Additionally, websites constantly change therefore once the site’s structure has changed, the scraper might not be able to find the relevant information.</p>
-<p>Web scraping can be used for social media analysis, product analysis, or financial analysis. An alternative way of accessing web data is requesting access through an API. An API (Application Programming Interface) is a set of procedures and communication protocols that provide access to the data of an application, operating system, or other services. <a href="https://opensource.com/article/20/5/web-scraping-python">OpenSource</a> provides a valuable learning resource regarding web scraping using Python.</p>
+<p>Web scraping can be used for social media analysis, product analysis, or financial analysis. An alternative way of accessing web data is requesting access through an API. An API (Application Programming Interface) is a set of procedures and communication protocols that provide access to the data of an application, operating system, or other services. This <a href="https://learn.datacamp.com/courses/importing-data-in-python-part-2">link</a> provides a valuable learning resource regarding API data Extraction.</p>
+<pre class="python"><code></code></pre>
 </div>
 
 <div class="footer">

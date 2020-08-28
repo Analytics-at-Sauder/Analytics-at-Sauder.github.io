@@ -72,7 +72,7 @@ output:
 #### Regression
 
 [Conjoint Analysis](p15_conjoint_analysis.html)<br/>
-[Multiple Linear Regression](]p14_multiple_linear_regression.html)<br/>
+[Multiple Linear Regression](p16_mlr.html)<br/>
 
 #### Machine Learning
 

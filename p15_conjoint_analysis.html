@@ -11,7 +11,7 @@
 
 
 
-<title>Conjoint Analysis</title>
+<title>p15_conjoint_analysis.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -422,7 +422,7 @@ div.tocify {
   <a href="projects.html">Projects</a>
 </li>
 <li>
-  <a href="resource.html">Resources</a>
+  <a href="resource.html">Resource</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -436,16 +436,23 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Conjoint Analysis</h1>
 
 </div>
 
 
-<p>In this project, we would review conjoint Analysis and its application when introducing a new product into the market. Rank-based conjoint analysis is carried out in this project using multiple linear regression. All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case. The Jupyter notebook can be opened in the executable environment Syzygy.</p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_analysis&urlpath=tree%2FProject_15_Conjoint_analysis%2FTraditional%2520Conjoint%2520Analyse.ipynb&branch=master" target="_blank" class="button">Launch Syzygy</a></p>
+<div id="conjoint-analysis" class="section level2">
+<h2>Conjoint Analysis</h2>
+<div id="author-kemjika-ananaba" class="section level4">
+<h4>Author: Kemjika Ananaba</h4>
+<p>In this project, we would review conjoint Analysis and its application when introducing a new product into the market. Rank-based conjoint analysis is carried out in this project using multiple linear regression. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_Analysis&urlpath=tree%2FProject_15_Conjoint_Analysis%2Fp15_conjoint_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_Analysis&urlpath=tree%2FProject_15_Conjoint_Analysis%2Fp15_conjoint_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_15_Conjoint_Analysis/master?filepath=p15_conjoint_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
+</div>
+</div>
 <div id="business-problem" class="section level2">
-<h2>Business Problem</h2>
-<p>The following project focuses on the evaluation of market research for a new brand of beer. The simulated data set is described by 3 attributes that describe a part of the beer to be introduced in the market: Price point, After Taste, Calorie level. All attributes but After taste have levels. Rank-based conjoint analysis answers the following questions:</p>
+<h2>## Business Problem</h2>
+<p>In this project, we would review conjoint Analysis and its application when introducing a new product into the market. The project focuses on the evaluation of market research for a new brand of beer. The simulated data set is described by 3 attributes that describe a part of the beer to be introduced in the market: Price point, After Taste, Calorie level. All attributes but the After taste attribute have levels. Rank-based conjoint analysis answers the following questions:</p>
 <ol style="list-style-type: decimal">
 <li>How important are certain features of a product are to consumers</li>
 <li>Identify the trade-offs consumers are willing to make, with regards to the product features</li>
@@ -482,9 +489,8 @@ div.tocify {
 import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
-%matplotlib inline
-
-Data = pd.read_csv(&quot;ConjointInput.csv&quot;, sep = &quot;;&quot;)
+%matplotlib inline</code></pre>
+<pre class="python"><code>Data = pd.read_csv(&quot;ConjointInput.csv&quot;, sep = &quot;;&quot;)
 Data.head(4)</code></pre>
 <div>
 <style scoped>
@@ -1209,7 +1215,7 @@ Low Calories
 raw = [7.46,3.69,2.46]
 norm = [float(i)/sum(raw) for i in raw]
 norm</code></pre>
-<p>[0.548, 0.271, 0.181]</p>
+<p>[0.5481263776634827, 0.27112417340191036, 0.1807494489346069]</p>
 <pre class="python"><code># Graph our winning product features
 
 labels = &#39;4$ Price&#39;, &#39;Mild After taste&#39;, &#39;Regular Calories&#39;
@@ -1229,7 +1235,10 @@ plt.pie(sizes,
 plt.axis(&#39;equal&#39;)
 plt.title(&#39;Ideal product Based on Responses&#39;)
 plt.show()</code></pre>
-<p><img src="images/p15_01.png" /></p>
+<div class="figure">
+<img src="output_11_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 </div>
 <div id="relative-importance-of-the-product-attributes" class="section level2">
 <h2>Relative importance of the product attributes</h2>
@@ -1268,28 +1277,15 @@ for item in attributes :
     print(&quot;-----------------------&quot;)
     i=i+1
 </code></pre>
-<pre><code>    
-     Attribute :  Price
-    
-     Distance :  11.999999999999993
-    
-     Importance %:  0.7058823529411763
-    -----------------------
-    
-     Attribute :  Taste
-    
-     Distance :  3.0000000000000013
-    
-     Importance %:  0.17647058823529427
-    -----------------------
-    
-     Attribute :  Calories
-    
-     Distance :  1.9999999999999987
-    
-     Importance %:  0.11764705882352938
-    -----------------------
-</code></pre>
+<p>Attribute : Price</p>
+<p>Distance : 11.999999999999993</p>
+<p>Importance %: 0.7058823529411763 ———————–</p>
+<p>Attribute : Taste</p>
+<p>Distance : 3.0000000000000013</p>
+<p>Importance %: 0.17647058823529427 ———————–</p>
+<p>Attribute : Calories</p>
+<p>Distance : 1.9999999999999987</p>
+<p>Importance %: 0.11764705882352938 ———————–</p>
 <pre class="python"><code>#Ploting the importance
 sizes = [distance_cal(price)/sum_dist, distance_cal(Taste)/sum_dist, distance_cal(Calories)/sum_dist]
 colors = [&#39;yellowgreen&#39;, &#39;mediumpurple&#39;, &#39;lightskyblue&#39;] 
@@ -1305,7 +1301,10 @@ plt.pie(sizes,
 plt.axis(&#39;equal&#39;)
 plt.title(&#39;Attribute Importance&#39;)
 plt.show()</code></pre>
-<p><img src="images/p15_02.png" /></p>
+<div class="figure">
+<img src="output_15_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 </div>
 <div id="trade-off-analysis" class="section level2">
 <h2>Trade off analysis</h2>
@@ -1320,7 +1319,10 @@ plt.barh(xbar, pwu,color=my_colors)
 plt.yticks(xbar, labels=df_res[&#39;feature&#39;])
 plt.show()
 </code></pre>
-<p><img src="images/p15_03.png" /></p>
+<div class="figure">
+<img src="output_17_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <p>Knowledge of the relative importance of various attributes can assist in marketing and advertising decisions. Other factors being equal, one would devote greater attention and resource to improving a product, on attributes that are of greatest importance to target consumers.</p>
 </div>
 <div id="final-conclusion" class="section level2">
