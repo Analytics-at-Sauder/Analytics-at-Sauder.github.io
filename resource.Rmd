@@ -1,10 +1,7 @@
 ---
 title: "Resource"
 ---
----
-title: "Resources"
-output: html_document
----
+
 If you’re new to cloud computing and version control, upon which this platform is built, here is some information to help you get started.
 
 ## Tools
