@@ -1,21 +1,21 @@
+## Inventory Management
+
+#### Author: Kemjika Ananaba
+
+In this project, we would review the EOQ model and its application when demand uncertainty is introduced. The periodic review model and continuous review model is also introduced using Monte Carlo simulation tools. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_04_Inventory_Management&urlpath=tree%2FProject_04_Inventory_Management%2Fp04_inventory_management.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_04_Inventory_Management&urlpath=tree%2FProject_04_Inventory_Management%2Fp04_inventory_management.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_04_Inventory_Management/master?filepath=p04_inventory_management.ipynb" target="_blank" class="button">Launch Binder</a>
+
+
+## Background
 ---
-title: "Inventory Management"
+In the modern business environment, the company needs more significant efforts to reduce the operating cost and also increase customer satisfaction. Inventory has a significant role to satisfy the customer demand hence, it becomes an important asset for any organization. Therefore, it should be managed effectively and efficiently to minimize total cost and to satisfy the customer’s requirement. In any real condition, inventory management faces barriers in the form of a tradeoff between minimizing total cost and maximizing service level. Therefore, choosing the correct inventory policy that can be applied in the industry now becomes essential to management.
 
----
-
-In this project, we would review the EOQ model and its application when demand uncertainty is introduced. The periodic review model and continuous review model is also introduced using Monte Carlo simulation tools.
-All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case.
-
-The Jupyter notebook can be opened in the executable environment Syzygy.
-
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_04_Inventory_Management&urlpath=tree%2FProject_04_Inventory_Management%2F
-" target="_blank" class="button">Launch Syzygy</a>
-
-# Business Background
- ------
-In the modern business environment, the company needs more significant efforts to reduce the operating cost and also increase customer satisfaction. Inventory has a significant role to satisfy the customer demand hence, it becomes an important asset for any organization. Therefore, it should be managed effectively and efficiently to minimize total cost and to satisfy the customer’s requirement. In any real condition, inventory management faces barriers in the form of a tradeoff between minimizing total cost and maximizing service level. Therefore, choosing the correct inventory policy that can be applied in the industry now becomes essential to management
-
-# Economic Order Quantity (EOQ) Policy
+## Economic Order Quantity (EOQ) Policy
 
 The simplest Policy to answer the question “How much product should I order this time?”, is the EOQ model. This policy assumes a constant demand and ignores the lost sales costs. However, in the EOQ model, the tradeoff between the fixed ordering cost (or, if you’re making the item, a fixed setup cost) and the inventory carrying cost is evaluated to calculate the optimal order quantity
 
@@ -26,18 +26,20 @@ The simplest Policy to answer the question “How much product should I order th
 <b> 3. Total Cost = (Qo* holding cost / 2) + (Annual demand * Setup cost)/Qo </b>
 
 
-As a quick background, the EOQ model is meant to answer the question “How much product should I order this time?” That is when you order (or make) a widget, should you order just one unit, a hundred units, a thousand units, or more? To answer that question, you need to understand the trade-off between the fixed ordering cost (or, if you’re making the item, a fixed setup cost) and the inventory carrying cost. 
-If there is a relatively high fixed cost, you want many units in order. If the inventory carrying cost is relatively high, you probably only want to order a few.
+As a quick background, the EOQ model is meant to answer the question “How much product should I order this time?” That is when you order (or make) a widget, should you order just one unit, a hundred units, a thousand units, or more? To answer that question, you need to understand the trade-off between the fixed ordering cost (or, if you’re making the item, a fixed setup cost) and the inventory carrying cost. If there is a relatively high fixed cost, you want many units in order. If the inventory carrying cost is relatively high, you probably only want to order a few.
 
-<b>EOQ  Model Example</b>
+### EOQ  Model Example
 
 Manufacturer’s demand = 120,000units/year  
 
 Manufacturer’scosts:
 
 1. Fixed Cost per shipment (ordering cost) = $500/shipment
+
 2. Purchase cost = $1/unit
+
 3. Cost of holding one unit in inventory for one year = $0.3
+
 4. Selling Price = $7/unit
 
 
@@ -51,6 +53,8 @@ import matplotlib.pyplot as plt
 sns.set_style('whitegrid')
 import operator
 ```
+
+
 
 
 
@@ -97,9 +101,10 @@ review_period_eoq
 
 
 
-## Simulation Model
+### Simulation Model
 
-The EOQ Quantity and cycle time is applied in a simulation that tries to replicate a market with uncertain demand. We assume that the review period is 60 days and the order quantity of 20,000 units and a lead time of 0 days is assumed. The inventory status is recorded in the simulation.
+The EOQ Quantity and cycle time is applied in a simulation that tries to replicate a market with uncertain demand.
+We assume that the review period is 60 days and the order quantity of  20,000 units and a lead time of 0 days is assumed. The inventory status is recorded in the simulation.
 
 <b> Creating a function to simulate the daily demand</b>
 
@@ -189,10 +194,9 @@ def calculate_profit(data,days,unit_cost,holding_cost,order_cost,selling_p):
     return profit[0]
 ```
 
-## Application of EOQ Model on constant demand
+### Application of EOQ Model on constant demand
 
 This scenario assumes no uncertainty therefore a constant demand and a purchase probability of 1. Therefore the demand standard deviation is assumed to be zero and the EOQ quantity and review period are used.
- 
 
 
 ```python
@@ -210,7 +214,7 @@ plt.show()
 ```
 
 
-![](images/p04_01.png)
+![png](output_18_0.png)
 
 
 
@@ -226,9 +230,9 @@ cost
 
 
 
-### Applying EOQ model to an uncertain demand
+### Scenario 1: Applying EOQ model to an uncertain demand
 
- The scenario below assumes that uncertainty in demand for a product any given day and uncertainty in the quantity of products demanded. 
+The scenario below assumes that uncertainty in demand for a product any given day and uncertainty in the number of products demanded.
 
 1. Probability of demand in a given day = 0.9
 
@@ -262,7 +266,7 @@ plt.show()
 ```
 
 
-![](images/p04_02.png)
+![png](output_23_0.png)
 
 
 
@@ -293,7 +297,7 @@ revenue2
 
 The uncertainty in demand has caused an increase in costs due to an increase in the cycle inventory.
 
-# Continous Review model
+### Scenario 2:  Continous Review model
 
 To combat the holding costs that can accumulate due to demand uncertainty, the reorder point is determined by the inventory level. This policy is called the continuous review model.
 
@@ -356,7 +360,7 @@ plt.show()
 ```
 
 
-![](images/p04_03.png)
+![png](output_29_0.png)
 
 
 
@@ -387,7 +391,7 @@ revenue3
 
 The costs using this model are slightly lower than those of the EOQ model, and consequently, the expected profits from the continuous review model are higher than the EOQ model.
 
-# Periodic Review model
+### Scenario 3: Periodic Review model
 
 Another policy to consider is the periodic review policy. Here the reorder point is the same as the EOQ model, however, the quantity ordered is varied according to the maximum order point. The order up-to quantity M is 20,000.
 
@@ -448,7 +452,7 @@ plt.show()
 ```
 
 
-![](images/p04_04.png)
+![png](output_35_0.png)
 
 
 
@@ -528,7 +532,9 @@ summ_table
 </table>
 </div>
 
-# Final Conclusion
+
+
+## Final Conclusion
 
 As seen from the tables above we can see in this case the Continuous Review policy outperforms the Periodic Review policy and the EOQ model in terms of the expected profits for each product and proportion of lost orders.
 
@@ -536,18 +542,8 @@ However, both the continuous and periodic review policy have their advantages. P
 
 The expected profits is dependent on different costs (holding, ordering and other costs) that are different for every product and organization. The right inventory management model depends on the impact of these cost and and the demand distribution of the product.
 
-## [GitHub Link](https://github.com/Master-of-Business-Analytics/Code_repository/tree/master/EOQ)
-All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case.
 
-
-
-# References
+## References
 [1] Anderson, Sweeney, Williams, Camm, Cochran, Fry, Ohlmann. An Introduction to Management Science: Quantitative approaches to Decision Making. 14th Edition, 2015. Cengage Learning. pp. 457–478.
 
 [2] Nagpurkar, M. (2020, April 2). Inventory Management using Python. Retrieved June 3, 2020, from https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314
-
-
-
-
-
-

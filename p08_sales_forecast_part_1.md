@@ -1,18 +1,22 @@
----
-title: "Sales Forecast - Part I"
----
+## Sales Forecast (Part 1)
 
-This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. Alternatively, you can download the entire notebook together with all the data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) repository. If you do not have Python or Jupyter Notebook installed yet, you could also experiment with the virtual notebook by clicking "Launch Syzygy" below.
+#### Author: Charlie Cao
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2F" target="_blank" class="button">Launch Syzygy</a>
+This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_08_Sales_Forecast/master?filepath=p08_sales_forecast_part_1.ipynb" target="_blank" class="button">Launch Binder</a>
 
 ## Background
 
 ---
 
-In this first notebook, we are going to focus on the exploration and manipulation of our data, whereas the next one would be centered around modeling itself. Understanding the data is important for analytics, and we recommend you to read this notebook before diving into modeling in order to gain a better grasp of this big and messy dataset. The datasets that we are using contain sales records for a retailers with 45 stores, each containing several departments. They already included in the repository where this Jupyter notebook is located (see the "Data" folder), but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
+In this first Notebook, we will focus on explorating and manipulating our data, while the second Notebook will focus on modeling the data. Understanding the data is important for analytics, and we recommend that you read this Notebook before diving into modeling (Part 2) in order to gain a better grasp of our large and messy datasets. The datasets that we are using consist of sales records for a retailer with 45 stores, each containing several departments. They are already included in the GitHub Repository where this Jupyter Notebook is located (please see the "Data" folder), but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
 
-Let's go ahead and import the libraries we need and load our data:
+Let's first start by importing the libraries we need and loading our data:
 
 
 ```python
@@ -47,30 +51,52 @@ df_stores['Type'] = df_stores['Type'].astype('category')
 
 ---
 
-Before we build a model, it is always a good idea to take a look at the data itself. Some questions that you might ask when exploring your data are:
+Before we build a model, it is always a good idea to take a look at the dataset itself. Here are some questions that we might want to ask ourselves when exploring our data:
 
-- What information is recorded (what do different columns contain)?
-- How frequently (since we are working with time series data) is the data recorded?
+- What information is recorded? What do the different columns contain?
+- Since we are working with time series data, how frequently are the data recorded?
 - How many missing values are there in each column? 
 - What are the distributions of the different columns? 
-- Are any columns highly correlated to one another?
+- Are there any columns that are highly correlated with another?
 
-After exploration, if there are lots of missing values or if the distribution of a column is highly left/right skewed, which could potentially affect the accruacy of your models, you would want to think about replacing or transforming them before you build, compare, and select your models. Since we have a big dataset containing multiple stores and departments, we can create an interactive (and basic) widget usign `ipywidgets` (please read its [documentation](https://ipywidgets.readthedocs.io/en/latest/) for more information or tutorials):
+After a preliminary exploration of the data, if there are several missing values or if the distribution of a column is highly left/right skewed, both of which could potentially affect the accruacy of our models, then we would want to first think about replacing or transforming the data before building, comparing, and selecting our models. Since we have a big dataset containing data from multiple stores and multiple departments, we can create an interactive (and basic) widget using `ipywidgets` for a preliminary inspection of the sales record at each store and department (please read its [documentation](https://ipywidgets.readthedocs.io/en/latest/) for more information or for tutorials).
 
 
-<iframe src="https://analytics-at-sauder.github.io/Project_08_Sales_Forecast/sales_forecast_widget_01.html" style="height: 1000px;"></iframe>
+```python
+def sales_viz(store_num, dept_num):
+    fig, axes = plt.subplots(1,2, figsize=(10,3), dpi=100)
+    # Subset the data based on store and department numbers
+    sales_temp = df_sales[(df_sales.Store==store_num) & (df_sales.Dept==dept_num)][['Date', 'Weekly_Sales']]
+    # Create time series dataframe by using date as index
+    ts_sales_temp = sales_temp.set_index('Date')
+    ts_sales_temp.plot(ax=axes[0], legend=False)
+    ts_sales_temp.hist(ax=axes[1], bins=100)
+    display(ts_sales_temp.describe().transpose().round(2))
+    plt.show()
+    return
+
+display(interact(sales_viz, store_num={n:n for n in range(1,46)}, dept_num={n:n for n in range(1,100)}))
+```
+
+
+    interactive(children=(Dropdown(description='store_num', options={1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: …
+
+
+
+    <function __main__.sales_viz(store_num, dept_num)>
+
 
 ### Inspection
 
 #### `Sales`
 
-First, let's take a look at the `sales` dataframe, which has 5 fields (columns) and 421,570 observations (rows). Note that we had mannually changed the data types in the 'Store', 'Dept', and 'Date' columns when we imported the data
+Now we can take a look at the `sales` dataframe, which has 5 fields (columns) and 421,570 observations (rows). Note that we had mannually changed the data types in the 'Store', 'Dept', and 'Date' columns when we imported the data.
 
 
 ```python
 print(df_sales.info())
 ```
-```
+
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 421570 entries, 0 to 421569
     Data columns (total 5 columns):
@@ -84,7 +110,7 @@ print(df_sales.info())
     dtypes: bool(1), category(2), datetime64[ns](1), float64(1)
     memory usage: 7.6 MB
     None
-```    
+    
 
 
 ```python
@@ -153,7 +179,7 @@ plt.show()
     
 
 
-![](images/p08_01.png)
+![png](output_6_2.png)
 
 
 
@@ -238,28 +264,28 @@ plt.show()
 
 
 
-![](images/p08_02.png)
+![png](output_7_1.png)
 
 
-We can see that:
+From the above charts, we can see that:
 
 1. There are 143 unique dates (421,570 records in total) from 2010-02-05 to 2012-10-26 in the `sales` dataframe.
-2. There is no missing values in any column of this dataframe, which is good
-3. However, we should notice that the `weekly sales` column is extremely right skewed, with a mean of \\$15,981, but a 50th percentile (mostly the same as the median) of only \\$7,612. The range of the column is also fairly large, from -\\$4,989 to \\$693,099
-4. When grouped by stores and departments respectively, it seems that a smaller proportion of departments are affecting the overall skew across stores
-5. 391,909 records out of 421,570 are not holidays (or about 7% of the records *are* holidays), which could potentially explain why the `Weekly Sales` records are extremely right skewed (*maybe* most of the sales happen on holidays)
-6. 99.68% of the `Weekly_Sales` column is positive, which means that we could potentially drop the negative values so that we could take logarithms of the rest in order to make our data less skewed, without significantly affecting the integraty of our data
-7. There seems to be less records for certain stores and departments than others
+2. There are no missing values in any of the columns in this dataframe, which is good.
+3. However, we should notice that the `weekly sales` column is extremely right skewed, with a mean of \\$15,981, but a 50th percentile (which is essentially the same as the median) of only \\$7,612. The range of the column is also fairly wide, from -\\$4,989 to \\$693,099
+4. When grouped by stores and departments, respectively, it seems that a smaller proportion of departments are affecting the overall skew across stores.
+5. 391,909 records out of the 421,570 are not holidays (or about 7% of the records *are* holidays), which could potentially explain why the `Weekly Sales` records are extremely right skewed (*maybe* most of the sales happen on holidays).
+6. 99.68% of the `Weekly_Sales` are positive, which means that we could potentially drop the negative values without significantly affecting the integraty of our data. Having all positive numbers would allow us to take the logarithms of these positive values, which will help to make our records less skewed.
+7. There seems to be fewer records for certain stores and departments.
 
 #### `Features`
 
-Now let's move onto the `features` dataframe, which has 12 fields (columns) and 8190 observations (rows). Note that we had mannual changed the data types for the 'Store' and 'Date' columns when we imported the data.
+Now let's move on to the `features` dataframe, which has 12 fields (columns) and 8,190 observations (rows). Note that, again, we had mannually changed the data types for the 'Store' and 'Date' columns when we imported the data.
 
 
 ```python
 print(df_features.info())
 ```
-```
+
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 8190 entries, 0 to 8189
     Data columns (total 12 columns):
@@ -280,10 +306,11 @@ print(df_features.info())
     dtypes: bool(1), category(1), datetime64[ns](1), float64(9)
     memory usage: 657.6 KB
     None
-```    
+    
 
 
 ```python
+# inspecting rows containing NaN values
 display(df_features[df_features['CPI'].isnull()])
 display(df_features[df_features['Unemployment'].isnull()])
 ```
@@ -852,7 +879,7 @@ plt.show()
     
 
 
-![](images/p08_03.png)
+![png](output_11_2.png)
 
 
 
@@ -867,7 +894,7 @@ plt.show()
 ```
 
 
-![](images/p08_04.png)
+![png](output_12_0.png)
 
 
 
@@ -942,29 +969,29 @@ plt.show()
 
 
 
-![](images/p08_05.png)
+![png](output_13_1.png)
 
 
 We can see from the above tables and plots that:
 
-1. Compared to the `sales` dataframe, there are less records (8190) in the `features` dataframe. It makes sense because this dataframe is only detailed to store level and not department; for example, different departments in the same store *probably* experience the same weather on the same day.
-2. The are 182 unique dates from 2010-02-05 to 2013-07-26, which is a wider range of record than the `sales` dataframe.
-3. The missing values in the 'CPI' and 'Unemployment' columns do not have corresponding observations in the `sales` dataframe (outside of date range), which is good
-4. From the first 10 rows, we can see that the dates do match up; however, it wouldn't hurt to check the proportion of matching records (by date and store) especially if we are thinking about merging together the two dataframes
-5. The 5 mark down columns contain 'anonymous data related to promotional mark downs' as per Kaggle, and we might want to further inspect these columns (e.g. whether two mark downs occured at any point for the same store); at the same time, these 5 columns are also extremely right skewed
-6. CPI is steadily increasing for all stores, but different stores have different levels of CPIs. There also seems to be a bimodal distribution in the CPIs amongst all the stores
-7. Approximately 7% of the 8190 `features` records are holidays, which is consistent with the `sales` dataframe
-8. Less than 1% of each of the markdowns contains negative values, and we could consider dropping these observations if we need to take the logarithms of this field to make it less right skewed
+1. Compared to the `sales` dataframe, there are fewer records (8,190) in the `features` dataframe. This makes sense, because this dataframe is only detailed to the store-level and not to the department-level (different departments in the same store *probably* experience the same weather on the same day).
+2. The are 182 unique dates from 2010-02-05 to 2013-07-26, which is a wider range of records than the `sales` dataframe.
+3. The missing values in the 'CPI' and 'Unemployment' columns do not have corresponding observations in the `sales` dataframe (outside the date range), which means that removing these rows would not likely affect the integrity of our analysis.
+4. From the first 10 rows, we can see that the dates do match up; however, it would not hurt to check the proportion of matching records (by date and store), especially if we are thinking about merging the two dataframes together.
+5. The five markdown columns contain 'anonymous data related to promotional markdowns', as per Kaggle, and we might want to further inspect these columns (e.g. whether two or more markdowns occured at any point for the same store). At the same time, these five columns are also extremely right skewed.
+6. Less than 1% of each of the markdowns contain negative values, and we could consider dropping these observations if we need to take the logarithms of this field to make it less right skewed.
+7. The CPI (Consumer Price Index) is steadily increasing for all stores, but different stores have different levels of CPIs. There also seems to be a bimodal distribution among the CPI observations.
+8. Approximately 7% of the 8,190 `features` records are holidays, which is consistent with the `sales` dataframe.
 
 #### `Stores`
 
-Last but not least, let's take a look at the `stores` dataframe, which only has 3 fields (columns) and 45 observations (rows). Again, note that we had mannually changed the data types for the 'Store' and 'Type' columns when we imported the data.
+Last but not least, let's take a look at the `stores` dataframe, which only has three fields (columns) and 45 observations (rows). Again, note that we had mannually changed the data types for the 'Store' and 'Type' columns when we imported the data.
 
 
 ```python
 display(df_stores.info())
 ```
-```
+
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 45 entries, 0 to 44
     Data columns (total 3 columns):
@@ -979,7 +1006,7 @@ display(df_stores.info())
 
 
     None
-```
+
 
 
 ```python
@@ -1060,13 +1087,13 @@ plt.show()
 
 
 
-![](images/p08_06.png)
+![png](output_16_1.png)
 
 
-The `stores` dataframe appear to be smaller and simper. We can see that:
+The `stores` dataframe appears to be smaller and simpler. We can see that:
 
-1. Almost half of the stores are type A stores; and there is a correlation between store size and store type, with A being the largest and C being the smallest on average
-2. `Sizes` of the stores are not extremely skewed, with its mean close to its 50th percentile. However, the sizes of the stores seem to belong to a trimodel distribution, with the left and right peaks being higher than the middle one
+1. Almost half of the stores are type A stores, and there is a correlation between store size and store type, with A being the largest and C being the smallest, on average.
+2. `Sizes` of the stores are not extremely skewed, with the mean close to the 50th percentile. However, the sizes of the stores seem to follow a trimodel distribution, with the left and right peaks being higher (less spread out) than the middle one.
 
 ### Aggregation
 
@@ -1226,14 +1253,14 @@ df_merge.head()
 
 
 
-Scatter plots are helpful visualizing any linear or non-linear relationships between two variables. In our case, we suspect that CPI, Store Size, Unemployment Rate, and Store Type can have an impact on sales (besides time). After plotting each of them against Weekly Sales below, we can see that:
+Scatter plots are helpful for visualizing any linear or non-linear relationships between two variables. In our case, we suspect that, other than time, CPI, Store Size, Unemployment Rate, and Store Type could have potential impacts on Sales. After plotting each of them against Weekly Sales (see the four figures below), we can see that:
 
-1. There seems to be a `slightly` negative relationship betweeen CPI and Sales
-2. There also seems to be a `slightly` positive relationship between Size and Sales
-3. Unemployment, on the other hand, does not seem to affect sales much
-4. Type A stores seem to have the highest sales, whereas Type C storees seem to have the lowest.
+1. There seems to be a *slightly* negative relationship betweeen CPI and Sales.
+2. There also seems to be a *slightly* positive relationship between Size and Sales.
+3. Unemployment, on the other hand, does not seem to affect sales much.
+4. Type A stores seem to have the highest sales, whereas Type C stores seem to have the lowest.
 
-Some of these information might provide little to no help in the end; some of them might be repetitive, for example, Store Type, Size, and Sales seem to all have correlation with one another. However, it is important to keep these information in mind when we move on to building our models.
+Some of this information might provide little to no help in the end. Sme of this information might be repetitive; for example, Store Type, Size, and Sales seem to be correlated to one another. However, it is important to keep these potential relationships in mind when we move on to build our models in Part 2.
 
 
 ```python
@@ -1248,12 +1275,12 @@ plt.show()
 ```
 
 
-![](images/p08_07.png)
+![png](output_20_0.png)
 
 
-At the beginning of this notebook, we saw that (by randomly inspecting different combinations) seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales throughout time, while some others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments. 
+At the beginning of this Notebook, we saw that (by randomly inspecting different combinations) seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales over time, while others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments. 
 
-Even though is nice to be able to see detailed sales performance for each individual department in every store, we also want to inspect whether there are shared patterns in our sales data. Therefore, let's aggregate the data a little bit so that we could visualize and compare sales across different stores for the same department and then across different departments in the same store. From the two visualizations below, we can see that when we aggregate by department, the data looks a lot cleaner and organized than when we aggregate by stores. This again, echoes with our previous finding that certain departments are significantly skewing the sales for the entire store.
+Even though it is nice to be able to see detailed sales performances for each individual department in every store, we also want to inspect whether or not there are shared patterns in our sales data. Therefore, let's aggregate the data so that we can visualize and compare sales across different stores for the same department, and then across different departments within the same store. From the two visualizations below, we can see that, when we aggregate by department, the data look a lot cleaner and more organized than when we aggregate by stores. This again reinforces our previous finding that certain departments are significantly skewing the sales of the entire store.
 
 
 ```python
@@ -1276,7 +1303,7 @@ plt.show()
 ```
 
 
-![](images/p08_08.png)
+![png](output_22_0.png)
 
 
 
@@ -1302,5 +1329,5 @@ plt.show()
 ```
 
 
-![](images/p08_09.png)
+![png](output_23_0.png)
 

@@ -1,8 +1,14 @@
----
-title: "Untitled"
----
+## Multiple Linear Regression
 
-Regression is among one the most common used method when analyst is trying to describe the result of an event - like the house price, which is what we are going to focus on in this notebook. The 
+#### Author: Hao Zheng
+
+Regression is among one the most common used method when analyst is trying to describe the result of an event - like the house price, which is what we are going to focus on in this notebook. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_16_MLR&urlpath=tree%2FProject_16_MLR%2Fp16_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_16_MLR&urlpath=tree%2FProject_16_MLR%2Fp16_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_16_MLR/master?filepath=p16_mlr.ipynb" target="_blank" class="button">Launch Binder</a>
 
 
 ```python
@@ -328,7 +334,8 @@ info = raw_df.agg(['count', 'size', 'nunique')
 
 
 
-### Step 1: Include all the features within the dataframe
+### Step 1: Include two sample features within the dataframe
+
 
 ```python
 # Include the lot area and the year of sales features as x values, include SalePrice as y value
@@ -351,10 +358,10 @@ print('intercept:', model.intercept_)
 print('coefficients:', model.coef_)
 
 ```
-```
+
     coefficient of determination: 0.07024646007626767
     intercept: 3181205.713858099
     coefficients: [    2.09711551 -1505.28728351]
-```
+    
 
 The coefficient indicates that there is something wrong here in the model. The coefficient associated with the year is negative. But in real life we are witnessing a huge increase in house price every year. So we need to further look search for the appropriate features to include in the model.
