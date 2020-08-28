@@ -2,7 +2,7 @@
 title: "Resources"
 output: html_document
 ---
-If you’re new to open source development, here is some information to help you get started.
+If you’re new to cloud computing and version control, upon which this platform is built, here is some information to help you get started.
 
 ## Tools
 
@@ -25,25 +25,27 @@ Various interactive computing and collaboration tools are used throughout this p
 
 ### Collaboration {#collaboration}
 
-#### [Git]((https://git-scm.com/)) and [GitHub](https://github.com/) {.tabset .tabset-fade}
-
-
-##### Git
-Git is an open-source Version Control System (VSC) or Source Code Management (SCM) tool that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.
-
-1. This [interactive tutorial](https://learngitbranching.js.org/) on Git is a great place to start learning Git. 
-2. Once the interactive tutorial is done, set up Git on your local machine following this [guide](https://github.com/Analytics-at-Sauder/Introduction-to-Git) created by Will Jenden.
+#### Git and GitHub {.tabset .tabset-fade}
 
 For users who are new to the [command-line interface](https://tutorial.djangogirls.org/en/intro_to_command_line/), it might be more intuitive to learn GitHub first before diving into Git itself
 
+##### Git
+[Git](https://git-scm.com/) (/ɡɪt/) is an open-source Version Control System (VSC) or Source Code Management (SCM) tool that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.
+
+1. This [interactive tutorial](https://learngitbranching.js.org/) on Git is a great place to start learning Git. 
+2. Once the interactive tutorial is done, set up Git on your local machine following this [guide](https://github.com/Analytics-at-Sauder/Introduction-to-Git) created by Will Jenden.
+3. Learn more about Git by reading this [IBM Git Tutorial](https://developer.ibm.com/technologies/web-development/tutorials/d-learn-workings-git/)
+
+---
+
 ##### GitHub
-GitHub is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.
+[GitHub](https://github.com/) is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.
 
 1. This [short activity](https://guides.github.com/activities/hello-world/) is a great place to start learning GitHub. 
 2. To reinforce your GitHub learning, complete this [interactive course](https://lab.github.com/githubtraining/introduction-to-github) on GitHub. 
 3. More interative courses on GitHub can be found in the [GitHub Learning Lab](https://lab.github.com/)
 
- ---
+---
 
 #### ReviewNB
 [ReviewNB](https://github.com/marketplace/review-notebook-app) is a GitHub (marketplace) application that enables comprehensible comparisons and reviews of Jupyter notebooks. GitHub automatically shows differences for plain text files between branches and commits whenever they are compared with one another (here's an [example](https://github.com/octocat/linguist/compare/master...octocat:an-example-comparison-for-docs)), where addition is hightlighted in green and deletion in red. However, Jupyter Notebooks are normally presented as rich media rendering of [JSON files](https://nbformat.readthedocs.io/en/latest/format_description.html#notebook-file-format), which are not very interpretable when shown in plain text. With the help of ReviewNB, users can see the differences between two Jupyter Notebooks after they are rendered in a new window. At the same time, any edits or comments made in ReviewNB would be synced back to the GitHub.
@@ -62,22 +64,20 @@ The affiliated blog is still at its early stage of development. Here is a collec
 
 ### Research and Evaluation
 
-<b> Google Analytics </b>
+#### Google Analytics
 [Google Analytics](https://marketingplatform.google.com/about/analytics/) is embedded into this website and can be used to analyze website traffic and user interactions. This [beginner course](https://analytics.google.com/analytics/academy/course/6) is a great place to start learning.
 
-<b>Qualtrics </b>
+#### Qualtrics
 [Qualtrics](https://www.qualtrics.com/core-xm/survey-software/) is a survey and research tool with many functions. Here is a list of [tutorials](https://it.ubc.ca/services/teaching-learning-tools/survey-tool/qualtrics-training) to get you started. This service can be accessed through [UBC IT Services](https://it.ubc.ca/services/teaching-learning-tools/survey-tool)
 
 ## Cheat Sheets
- ---
 
 ### Git
-Git (/ɡɪt/) is a distributed version-control system for tracking changes in source code during software development. It is designed for coordinating work among programmers, but it can be used to track changes in any set of files.
+Check out [introduction to Git](#collaboration) above
 
-1.  [GitHub Git Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet/) (quick cheat sheet for Git created by GitHub)
+1. [GitHub Git Cheat Sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet/) (quick cheat sheet for Git created by GitHub)
 2. [Visual Git Cheat Sheet](https://ndpsoftware.com/git-cheatsheet.html)
 3. [Official Git Reference](https://git-scm.com/docs) (complete documentation of git commands)
-4. [IBM Git Tutorial](https://developer.ibm.com/technologies/web-development/tutorials/d-learn-workings-git/)
 
 ### Markdown 
 [Markdown](https://www.markdownguide.org/getting-started/) is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub
