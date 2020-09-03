@@ -52,7 +52,7 @@ For this Project, we start with one product. To mathematically model customer de
 #Read in the product demand information
 
 df = pd.read_excel('XYZ-1.xlsx', 'Data')
-demand = df[3:11]
+demand = df[6:]
 print(demand.head())
 
 ```
