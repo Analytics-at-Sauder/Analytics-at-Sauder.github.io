@@ -453,7 +453,7 @@ div.tocify {
 <div id="business-background" class="section level2">
 <h2>Business Background</h2>
 <hr />
-<p>In modern business environment, the company needs more significant efforts to reduce the operating cost and also increase customer satisfaction. Inventory has significant role to satisfy the customer demand hence, it becomes important asset for any organization.Therefore, it should be managed effectively and efficiently to minimize total cost and to satisfy the customer’s requirement. In any real condition, inventory management faces barriers in the form of a trade-off between maximizing profits and maximizing service level. Therefore, decisions involving inventory management can have an impact on the profitability of a business. By analyzing the expected profits under different scenarios, some certainty can be introduced into the decision making process.</p>
+<p>In the modern business environment, companies are requiring an increasing amount of effort to reduce operating costs and to improve customer satisfaction. Inventory can play a significant role in satisfying customer demand; therefore, inventory becomes an important asset for any organization. Thus, inventory should be managed effectively and efficiently in order to minimize total cost and to satisfy customer demand. In real life, inventory management faces several challenges, such as the tradeoff between minimizing total cost and maximizing service level; therefore, decisions involving inventory management can have a significant impact on the profitability of a business. By analyzing the expected profits under different scenarios, some certainty can be introduced into the decision making process.</p>
 <pre class="python"><code>#load packages 
 
 import numpy as np
@@ -472,13 +472,13 @@ from mpl_toolkits.mplot3d import Axes3D</code></pre>
 <h2>Data Entry and Manipulation</h2>
 <div id="operational-and-demand-data" class="section level3">
 <h3>Operational and Demand data</h3>
-<p>For this project, we start with one product. To mathematically model customers demand, the annual demand of the product is captured. The demand dataset, demand is the daily demand for 366 days.The summary dataset, Summary provides information on the product operations and associated costs such as:</p>
+<p>For this Project, we start with one product. To mathematically model customer demand, the annual demand of the product is captured. In the demand dataset, Demand is the daily demand for 366 days. In the summary dataset, Summary provides information on the product operations and associated costs, such as:</p>
 <ul>
 <li>Purchase Cost</li>
 <li>Supplier lead time</li>
 <li>Selling price</li>
-<li>Cost of ordering (Co): Administrative cost of ordering product from manufacturer</li>
-<li>Holding cost (Ch): Warehouse cost for each product</li>
+<li>Cost of ordering (Co): administrative cost of ordering product from manufacturer</li>
+<li>Holding cost (Ch): warehouse cost for each product</li>
 <li>Starting stock</li>
 <li>Product Size</li>
 </ul>
@@ -498,10 +498,7 @@ print(demand.head())
 demand[1].hist()
 plt.title(&#39;Histogram of past product sales &#39;)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_4_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_01.png" /></p>
 <pre class="python"><code>demand[1].std()</code></pre>
 <pre><code>55.07999993367887</code></pre>
 <pre class="python"><code>#Product information
@@ -579,7 +576,7 @@ Ch
 </tbody>
 </table>
 </div>
-<p>Demand statistics such as, Mean, Standard Deviation, Probability and demand during lead time is added to the summary dataset. The demand mean and standard deviation is calculated applying the mean and std function to the demand dataset. The demand probability is calculated by dividing the number of orders(non-zero) last year by the number of working days. The demand during lead-time (Demand_lead) is calculated by multiplying the mean demand, probability of sales and the supplier lead time.</p>
+<p>Demand statistics such as mean, standard deviation, probability, and demand during lead time are added to the summary dataset. The demand mean and standard deviation are calculated applying the mean and std functions, respectively, to the demand dataset. The demand probability is calculated by taking the number of orders (non-zero) last year and dividing it by the number of working days. The demand during lead-time (Demand_lead) is calculated by multiplying the mean demand, probability of sales, and the supplier lead time.</p>
 <pre class="python"><code>#use the mean_log log demand to avoid negative demand 
 summary[&#39;Mean_log&#39;]= np.mean([np.log(j) for j in demand[demand[1] &gt; 0][1]])
 summary[&#39;Mean&#39;]=demand[1].mean()
@@ -717,10 +714,7 @@ sd_log = summary[&#39;Std_log&#39;].item()</code></pre>
 </div>
 <div id="monte-carlo-simulation" class="section level2">
 <h2>Monte Carlo Simulation</h2>
-<p>Monte Carlo simulations are used to model the probability of different outcomes in a process that cannot easily be predicted due to the intervention of random variables. We use this technique to simulate the inventory management policies and resulting costs .</p>
-<div id="daily-demand-simulation" class="section level3">
-<h3>Daily Demand Simulation</h3>
-<p>The daily demand is simulated taking into account the sale probability 0.76, which means the product is sold 76 percent of the time.The function below simulates the possibility that there is a sale using the product’s probability of sale. And if there is a sale, then the demand follows a normal distribution.</p>
+<p>Monte Carlo simulations are used to model the probability of different outcomes in a process that cannot easily be predicted due to the intervention of random variables. We use this technique to simulate the inventory management policies and resulting costs. ## Daily Demand Simulation The daily demand is simulated, taking into account a sale probability of 0.76, which means that the product is sold 76% of the time. The function below simulates the possibility that there is a sale using the product’s probability of sale, and if there is a sale, then the demand follows a normal distribution.</p>
 <pre class="python"><code># Creating a function that allocates the demand  if there is a purchase
 # This function is included in the montecarlo simulation
 
@@ -735,7 +729,6 @@ def daily_demand(mean_log, sd_log, probability):
         return np.exp(np.random.normal(mean_log, sd_log))
     </code></pre>
 </div>
-</div>
 <div id="simulating-the-inventory-status" class="section level2">
 <h2>Simulating the Inventory status</h2>
 <p>In the simulation, the algorithm iterates through each day trying to capture the inventory level which changes based on the daily demand for the product.</p>
@@ -746,7 +739,7 @@ def daily_demand(mean_log, sd_log, probability):
 <li><p>If the sales can be completely serviced by the current inventory level — the inventory level is reduced by the sales amount and number of units sold on that day increments.</p></li>
 <li><p>If the demand cannot be serviced completely by the inventory level — the inventory on hand would be the number of units sold on that day</p></li>
 </ul>
-<p>In order to model the Periodic Review policy, the algorithm keeps track of the current day in the year. If the day of the year is equal to the review period, then the order is placed to replenish the stock to an order up-to quantity M. This value is the decision variable and is passed as an input to the algorithm. After the lead time has passed for that particular product, the inventory is updated by the order quantity that was placed. This is done for a duration of 365 days.</p>
+<p>IIn order to model the periodic review policy, the algorithm keeps track of the current day in the year. If the day of the year is equal to the review period, then the order is placed to replenish the stock up to quantity M. This value is the decision variable and is passed as an input to the algorithm. After the lead time has passed for that particular product, the inventory is updated by the order quantity that was placed. This process repeats for a total duration of 365 days.</p>
 <pre class="python"><code># Define Monte Carlo Simulation function to imitate a periodic review model 
 def pr_monte_carlo(M,summary,review_period=30):
     probability = summary[&#39;Probability&#39;].item()
@@ -798,14 +791,11 @@ plt.ylabel(&quot;Inventory Status&quot;)
 plt.axhline(2170, linewidth=1, color=&quot;red&quot;, linestyle=&quot;:&quot;)
 plt.title(&#39;Periodic Review: Inventory level for one simulation &#39;)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_15_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_02.png" /></p>
 </div>
 <div id="operational-cost" class="section level3">
 <h3>Operational Cost</h3>
-<p>To determine the profit the store would have made for that year, all the units that were sold are multiplied by the products selling price to calculate revenue. The costs come from three components:</p>
+<p>To determine the profit the store would have made for that year, we must determine the store’s annual revenue and annual costs. All the units that were sold are multiplied by the products selling price to calculate revenue. The costs come from three components</p>
 <ol style="list-style-type: decimal">
 <li>Product costs, Product costs are calculated by multiplying the unit costs of each product to the aggregation of the units ordered.</li>
 <li>Ordering costs The ordering costs are calculated by multiplying the number of times in that year an order was placed to the individual cost of ordering for that product. The inventory levels for each day of the year were aggregated to indicate how much stock was held throughout the duration of the year.</li>
@@ -828,7 +818,7 @@ def calculate_profit(data,days,summary):
 </div>
 <div id="expected-profit-calculation" class="section level3">
 <h3>Expected Profit Calculation</h3>
-<p>This simulation was carried out 100 times to give multiple realizations of profit and proportions of lost orders for each time. These results were used to plot a histogram and calculate the mean and standard deviation of profit and the proportion of lost orders for that particular order up-to point (M).</p>
+<p>This simulation was carried out 100 times to give multiple realizations of profits and proportions of lost orders for each simulated scenario. These results were used to plot a histogram in order to calculate the mean and standard deviation of the simulated profits and the proportion of lost orders for that particular order up-to point (M).</p>
 <pre class="python"><code>#function to provide expected profits and number of orders lost for each simulation 
 
 def mc_simulation( M, num_simulations,summary,days=365):
@@ -864,10 +854,7 @@ plt.xlabel(&quot;Profits&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_22_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_03.png" /></p>
 <pre class="python"><code>sns.distplot(
     o_list,
     kde=False
@@ -877,16 +864,13 @@ plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Mean percentage of orders lost &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_23_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_04.png" /></p>
 </div>
 </div>
 <div id="profit-optimization-in-periodic-review-model" class="section level2">
 <h2>Profit Optimization in Periodic Review Model</h2>
 <p>The model provides answers to the following question, 1. What is the expected profits and whats expected percentage of lost sales? 2. What should the Warehouse Capacity (M) be to ensure the highest expected profit?</p>
-<p>The second question can be answered by repeating this exercise for a range of values of M to determine the value that gives us the highest expected profit. In the the model below, we simulated the expected profits for warehouse capacity range 1800 to 4000.</p>
+<p>The second question can be answered by repeating this exercise for a range of values of M to determine the value that gives us the highest expected profit. In the the model below, we simulated the expected profits for a warehouse capacity within the range of 1,800 to 4,000.</p>
 <pre class="python"><code>#Function to vary M to calculate mean profit and percentage of orders lost
 def periodic_review(low, high,summary,step=100):
     m_range = [i for i in range(low, high, step)]
@@ -908,10 +892,7 @@ plt.xlabel(&quot;Ware house capacity&quot;)
 plt.ylabel(&quot;Expected Profit&quot;)
 plt.plot(xx, yy)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_27_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_05.png" /></p>
 <p>This gave an optimum expected profit of $93,883 for the order up-to point of 2600.</p>
 <pre class="python"><code># creating a dataframe with all the results
 idx = [&#39;Order-point M&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
@@ -985,7 +966,7 @@ Proportion of Lost Orders
 </div>
 <div id="continuous-review-model" class="section level3">
 <h3>Continuous Review Model</h3>
-<p>In the Continuous review model, the same quantity of items are ordered in each order. The order frequency varies in continuous systems because the inventory is monitored and orders are placed when items reach a particular level. In this model, the inventory levels are checked regularly and determine the reorder point (r). The distributor can also specify how much they want to order each time (i.e. order quantity (q)). The logic in the Monte Carlo simulation is updated for the Continuous Review policy.</p>
+<p>In the continuous review model, the same quantity of items are ordered in each order; however, the order frequency varies in continuous systems because the inventory is monitored and orders are placed when items reach a particular level. In this model, the inventory levels are checked regularly and help determine the reorder point (r). The distributor can also specify how much they want to order each time (i.e. order quantity (q)). The logic in the Monte Carlo simulation is updated for the continuous review policy.</p>
 <pre class="python"><code>
 def cc_monte_carlo(q, r,summary):
 
@@ -1038,8 +1019,7 @@ def cc_monte_carlo(q, r,summary):
         data[&#39;inv_level&#39;].append(round(inventory,0))
 
     return data</code></pre>
-<p>At each day the algorithm checks the inventory level and compares it with the reorder point. 1. If the inventory level is less than or equal to the reorder point, it then places an order. But this stock is realized only after the lead time for that product has passed. For example, Product 1 has a lead time of 9 days, if the order is placed on day 52, the inventory will be replenished on day 61.</p>
-<p>The algorithm then follows a similar decision logic in updating the inventory level, to the periodic review algorithm. The profit and expected lost orders calculation is similar to that of the periodic review policy.</p>
+<p>At each day, the algorithm checks the inventory level and compares it with the reorder point. If the inventory level is less than or equal to the reorder point, it then places an order. However, this stock only arrives on hand after the lead time for that product has passed. For example, Product 1 has a lead time of 9 days, so if the order is placed on day 52, the inventory will only be replenished on day 61. The algorithm then follows a similar decision logic to the periodic review algorithm in updating the inventory level. The profit and expected lost orders calculations are similar to that in the periodic review policy.</p>
 <pre class="python"><code>demand_lead = summary[&#39;leadtime_demand&#39;].item()
 #set the reorder point as demand during leadtime and reorder quantity as 2000
 data = cc_monte_carlo(2000, demand_lead,summary)
@@ -1050,10 +1030,7 @@ plt.xlabel(&quot;Days&quot;)
 plt.ylabel(&quot;Inventory Status&quot;)
 plt.axhline(3000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_33_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_06.png" /></p>
 <pre class="python"><code>#Number of orders
 len(data[&#39;orders&#39;])</code></pre>
 <p>12</p>
@@ -1082,10 +1059,7 @@ plt.xlabel(&quot;Profits&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_37_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_07.png" /></p>
 <pre class="python"><code>sns.distplot(
     o_list2,
     kde=False
@@ -1095,15 +1069,12 @@ plt.xlabel(&quot;Proportion of lost orders&quot;, labelpad=15)
 plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Orders Lost: Mean = 0.13 &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_38_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="p12_08.png" /></p>
 </div>
 </div>
 <div id="profit-optimization-in-continuous-review-model" class="section level2">
 <h2>Profit Optimization in Continuous Review Model</h2>
-<p>By performing a grid search between a range of values for the reorder value and order quantity points, a combination that optimizes the expected profit can be worked out. The model below performs simulations for order quantities from 1000 to 3000 and the re-order point between 500 and 1100. The plot seems to display a concave function signifying a maximum point for profit.</p>
+<p>By performing a grid search between a range of values for the reorder value (r) and order quantity (q) points, we can solve for a combination that optimizes the expected profit. The model below performs simulations for order quantities within a range of 1,000 to 3,000 and for the re-order point within a range of 500 and 1,100. The plot seems to display a concave function, which signifies a maximum point for profit.</p>
 <pre class="python"><code>def continous_review(q_guess, r_guess,summary,days):
     q_low = q_guess - 1000 #lower limit of order quantity
     q_high = q_guess + 1000 #upper limit of order quantity
@@ -1138,11 +1109,8 @@ ax.set_ylabel(&#39;Reorder Point&#39;)
 ax.set_zlabel(&#39;Profit&#39;)
 
 plt.show()</code></pre>
-<div class="figure">
-<img src="output_42_0.png" alt="png" />
-<p class="caption">png</p>
-</div>
-<p>Based on the simulations, a maximum profit of $145,331 for the order quantity of 2100 and the re-order point of 950 was derived.Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits and the proportion of orders lost over the period of the year for each of the products.</p>
+<p><img src="p12_09.png" /></p>
+<p>Based on the simulations, a maximum profit of $145,331 was derived for an order quantity of 2,100 and a re-order point of 950. Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits, and the proportion of orders lost over the period of the year for each of the products.</p>
 <pre class="python"><code>idx = [&#39;Order Quantity&#39;, &#39;Reorder Point&#39;, &#39;Expected Profit&#39;, &#39;Profit Standard Deviation&#39;, &#39;Proportion of Lost Orders&#39;]
 
 prod_review_2 = max(cc_review.items(), key=operator.itemgetter(1))
@@ -1282,8 +1250,7 @@ Proportion of Lost Orders
 </div>
 <div id="final-conclusion" class="section level2">
 <h2>Final Conclusion</h2>
-<p>As seen from the tables above, the Continuous Review policy outperforms the Periodic Review policy in terms of the expected profits for each product and proportion of lost orders. Using the analysis above, we can make a decision on the inventory policy parameter based on the product and operational information.</p>
-<p>The expected profits is dependent on different costs (holding, ordering and other costs) that are different for every product and organization. The right inventory management model depends on the impact of these cost and and the demand distribution of the product.</p>
+<p>As seen from the tables above, the continuous review policy outperforms the periodic review policy in terms of the expected profits for each product and proportion of lost orders. Using the analysis above, we can make a decision on the inventory policy parameter based on the product and operational information. The expected profits are dependent on different costs (holding costs, ordering costs or manufacturing costs, etc.) that are different for every product and organization. The right inventory management model depends on the impact of these cost and the demand distribution of the product.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
@@ -1358,7 +1325,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

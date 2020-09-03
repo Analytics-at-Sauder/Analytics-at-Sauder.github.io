@@ -13,7 +13,7 @@ In this project, we use Monte Carlo simulation and optimization tools to determi
 ## Business Background
   ----
 
-In modern business environment, the company needs more significant efforts to reduce the operating cost and also increase customer satisfaction. Inventory has significant role to satisfy the customer demand hence, it becomes important asset for any organization.Therefore, it should be managed effectively and efficiently to minimize total cost and to satisfy the customer’s requirement. In any real condition, inventory management faces barriers in the form of a trade-off between maximizing profits and maximizing service level. Therefore, decisions involving inventory management can have an impact on the profitability of a business. 
+In the modern business environment, companies are requiring an increasing amount of effort to reduce operating costs and to improve customer satisfaction. Inventory can play a significant role in satisfying customer demand; therefore, inventory becomes an important asset for any organization. Thus, inventory should be managed effectively and efficiently in order to minimize total cost and to satisfy customer demand. In real life, inventory management faces several challenges, such as the tradeoff between minimizing total cost and maximizing service level; therefore, decisions involving inventory management can have a significant impact on the profitability of a business.
 By analyzing the expected profits under different scenarios, some certainty can be introduced into the decision making process.
 
 
@@ -37,13 +37,13 @@ from mpl_toolkits.mplot3d import Axes3D
 
 ### Operational and Demand data
 
-For this project, we start with one product. To mathematically model customers demand, the annual demand of the product is captured. The demand dataset, demand is the daily demand for 366 days.The summary dataset, Summary provides information on the product operations and associated costs such as:
+For this Project, we start with one product. To mathematically model customer demand, the annual demand of the product is captured. In the demand dataset, Demand is the daily demand for 366 days. In the summary dataset, Summary provides information on the product operations and associated costs, such as:
 
 * Purchase Cost
 * Supplier lead time
 * Selling price
-* Cost of ordering (Co): Administrative cost of ordering product from manufacturer
-* Holding cost (Ch): Warehouse cost for each product
+* Cost of ordering (Co): administrative cost of ordering product from manufacturer
+* Holding cost (Ch): warehouse cost for each product
 * Starting stock
 * Product Size
 
@@ -74,7 +74,7 @@ plt.show()
 ```
 
 
-![png](output_4_0.png)
+![](p12_01.png)
 
 
 
@@ -143,7 +143,7 @@ summary.head()
 
 
 
-Demand statistics such as, Mean, Standard Deviation, Probability and demand during lead time is added to the summary dataset. The demand mean and standard deviation is calculated applying the mean and std function to the demand dataset. The demand probability is calculated by dividing the number of orders(non-zero) last year by the number of working days. The demand during lead-time (Demand_lead) is calculated by multiplying the mean demand, probability of sales and the supplier lead time.
+Demand statistics such as mean, standard deviation, probability, and demand during lead time are added to the summary dataset. The demand mean and standard deviation are calculated applying the mean and std functions, respectively, to the demand dataset. The demand probability is calculated by taking the number of orders (non-zero) last year and dividing it by the number of working days. The demand during lead-time (Demand_lead) is calculated by multiplying the mean demand, probability of sales, and the supplier lead time.
 
 
 ```python
@@ -242,10 +242,9 @@ sd_log = summary['Std_log'].item()
 ```
 
 ## Monte Carlo Simulation
-Monte Carlo simulations are used to model the probability of different outcomes in a process that cannot easily be predicted due to the intervention of random variables. We use this technique to simulate the inventory management policies and resulting costs . 
-
-### Daily Demand Simulation
-The daily demand is simulated taking into account the sale probability 0.76, which means the product is sold 76 percent of the time.The function below simulates the possibility that there is a sale  using the product's probability of sale. And if there is a sale, then the demand follows a normal distribution. 
+Monte Carlo simulations are used to model the probability of different outcomes in a process that cannot easily be predicted due to the intervention of random variables. We use this technique to simulate the inventory management policies and resulting costs.
+## Daily Demand Simulation
+The daily demand is simulated, taking into account a sale probability of 0.76, which means that the product is sold 76% of the time. The function below simulates the possibility that there is a sale using the product's probability of sale, and if there is a sale, then the demand follows a normal distribution. 
 
 
 ```python
@@ -275,7 +274,7 @@ The logic of the algorithm is as follows:
 
 * If the demand cannot be serviced completely by the inventory level — the inventory on hand would be the number of units sold on that day
 
-In order to model the Periodic Review policy, the algorithm keeps track of the current day in the year. If the day of the year is equal to the review period, then the order is placed to replenish the stock to an order up-to quantity M. This value is the decision variable and is passed as an input to the algorithm. After the lead time has passed for that particular product, the inventory is updated by the order quantity that was placed. This is done for a duration of 365 days.
+IIn order to model the periodic review policy, the algorithm keeps track of the current day in the year. If the day of the year is equal to the review period, then the order is placed to replenish the stock up to quantity M. This value is the decision variable and is passed as an input to the algorithm. After the lead time has passed for that particular product, the inventory is updated by the order quantity that was placed. This process repeats for a total duration of 365 days.
 
 
 ```python
@@ -338,12 +337,12 @@ plt.show()
 ```
 
 
-![png](output_15_0.png)
+![](p12_02.png)
 
 
 ### Operational Cost 
 
-To determine the profit the store would have made for that year, all the units that were sold are multiplied by the products selling price to calculate revenue. The costs come from three components:
+To determine the profit the store would have made for that year, we must determine the store's annual revenue and annual costs. All the units that were sold are multiplied by the products selling price to calculate revenue. The costs come from three components
 
 1. Product costs, 
 Product costs are calculated by multiplying the unit costs of each product to the aggregation of the units ordered.
@@ -372,7 +371,7 @@ def calculate_profit(data,days,summary):
 
 ### Expected Profit Calculation
 
-This simulation was carried out 100 times to give multiple realizations of profit and proportions of lost orders for each time. These results were used to plot a histogram and calculate the mean and standard deviation of profit and the proportion of lost orders for that particular order up-to point (M).     
+This simulation was carried out 100 times to give multiple realizations of profits and proportions of lost orders for each simulated scenario. These results were used to plot a histogram in order to calculate the mean and standard deviation of the simulated profits and the proportion of lost orders for that particular order up-to point (M).     
 
 
 ```python
@@ -425,7 +424,7 @@ plt.show()
 ```
 
 
-![png](output_22_0.png)
+![](p12_03.png)
 
 
 
@@ -442,7 +441,7 @@ plt.show()
 ```
 
 
-![png](output_23_0.png)
+![](p12_04.png)
 
 
 ## Profit Optimization in Periodic Review Model
@@ -451,7 +450,7 @@ The model provides answers to the following question,
 1. What is the expected profits and whats expected percentage of lost sales? 
 2. What should the Warehouse Capacity (M) be to ensure the highest expected profit?
 
-The second question can be answered by repeating this exercise for a range of values of M to determine the value that gives us the highest expected profit. In the the model below, we simulated the expected profits for warehouse capacity range 1800 to 4000. 
+The second question can be answered by repeating this exercise for a range of values of M to determine the value that gives us the highest expected profit. In the the model below, we simulated the expected profits for a warehouse capacity within the range of 1,800 to 4,000.
 
 
 ```python
@@ -483,7 +482,7 @@ plt.show()
 ```
 
 
-![png](output_27_0.png)
+![](p12_05.png)
 
 
 This gave an optimum expected profit of $93,883 for the order up-to point of 2600.
@@ -550,9 +549,9 @@ df_product_review
 
 
 ### Continuous Review Model
-In the Continuous review model, the same quantity of items are ordered in each order. The order frequency varies in continuous systems because the inventory is monitored and orders are placed when items reach a particular level.
-In this model, the inventory levels are checked regularly and determine the reorder point (r). The distributor can also specify how much they want to order each time (i.e. order quantity (q)).
-The logic in the Monte Carlo simulation is updated for the Continuous Review policy.
+In the continuous review model, the same quantity of items are ordered in each order; however, the order frequency varies in continuous systems because the inventory is monitored and orders are placed when items reach a particular level.
+In this model, the inventory levels are checked regularly and help determine the reorder point (r). The distributor can also specify how much they want to order each time (i.e. order quantity (q)).
+The logic in the Monte Carlo simulation is updated for the continuous review policy.
 
 
 ```python
@@ -610,10 +609,9 @@ def cc_monte_carlo(q, r,summary):
     return data
 ```
 
-At each day the algorithm checks the inventory level and compares it with the reorder point.
-1. If the inventory level is less than or equal to the reorder point, it then places an order. But this stock is realized only after the lead time for that product has passed. For example, Product 1 has a lead time of 9 days, if the order is placed on day 52, the inventory will be replenished on day 61.
-
-The algorithm then follows a similar decision logic in updating the inventory level, to the periodic review algorithm. The profit and expected lost orders calculation is similar to that of the periodic review policy.
+At each day, the algorithm checks the inventory level and compares it with the reorder point.
+If the inventory level is less than or equal to the reorder point, it then places an order. However, this stock only arrives on hand after the lead time for that product has passed. For example, Product 1 has a lead time of 9 days, so if the order is placed on day 52, the inventory will only be replenished on day 61.
+The algorithm then follows a similar decision logic to the periodic review algorithm in updating the inventory level. The profit and expected lost orders calculations are similar to that in the periodic review policy.
 
 
 ```python
@@ -630,7 +628,7 @@ plt.show()
 ```
 
 
-![png](output_33_0.png)
+![](p12_06.png)
 
 
 
@@ -681,7 +679,7 @@ plt.show()
 ```
 
 
-![png](output_37_0.png)
+![](p12_07.png)
 
 
 
@@ -698,12 +696,12 @@ plt.show()
 ```
 
 
-![png](output_38_0.png)
+![](p12_08.png)
 
 
 ## Profit Optimization in Continuous Review Model
 
-By performing a grid search between a range of values for the reorder value and order quantity points, a combination that optimizes the expected profit  can be worked out. The model below performs simulations for order quantities from 1000 to 3000 and the re-order point between 500 and 1100. The plot seems to display a concave function signifying a maximum point for profit.
+By performing a grid search between a range of values for the reorder value (r) and order quantity (q) points, we can solve for a combination that optimizes the expected profit. The model below performs simulations for order quantities within a range of 1,000 to 3,000 and for the re-order point within a range of 500 and 1,100. The plot seems to display a concave function, which signifies a maximum point for profit.
 
 
 
@@ -753,10 +751,10 @@ plt.show()
 ```
 
 
-![png](output_42_0.png)
+![](p12_09.png)
 
 
-Based on the simulations, a maximum profit of $145,331 for the order quantity of 2100 and the re-order point of 950 was derived.Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits and the proportion of orders lost over the period of the year for each of the products.
+Based on the simulations, a maximum profit of $145,331 was derived for an order quantity of 2,100 and a re-order point of 950. Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits, and the proportion of orders lost over the period of the year for each of the products.
 
 
 ```python
@@ -874,9 +872,8 @@ df_product_review
 
 ## Final Conclusion
 
-As seen from the tables above, the Continuous Review policy outperforms the Periodic Review policy in terms of the expected profits for each product and proportion of lost orders. Using the analysis above, we can make a decision on the inventory policy parameter based on the product and operational information. 
-
-The expected profits is dependent on different costs (holding, ordering and other costs) that are different for every product and organization. The right inventory management model depends on the impact of these cost and and the demand distribution of the product.
+As seen from the tables above, the continuous review policy outperforms the periodic review policy in terms of the expected profits for each product and proportion of lost orders. Using the analysis above, we can make a decision on the inventory policy parameter based on the product and operational information.
+The expected profits are dependent on different costs (holding costs, ordering costs or manufacturing costs, etc.) that are different for every product and organization. The right inventory management model depends on the impact of these cost and the demand distribution of the product.
 
 ## References
 [1] Anderson, Sweeney, Williams, Camm, Cochran, Fry, Ohlmann. An Introduction to Management Science: Quantitative approaches to Decision Making. 14th Edition, 2015. Cengage Learning. pp. 457–478.

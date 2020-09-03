@@ -2,7 +2,7 @@
 
 #### Author: Kemjika Ananaba
 
-In this project, we would review the EOQ model and its application when demand uncertainty is introduced. The periodic review model and continuous review model is also introduced using Monte Carlo simulation tools. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+In this Project, we will review the economic order quantity (EOQ) model and its application when demand uncertainty is introduced. The periodic review model and continuous review model are also introduced using Monte Carlo simulation tools. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook together with any accompanying data from the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
 <a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_04_Inventory_Management&urlpath=tree%2FProject_04_Inventory_Management%2Fp04_inventory_management.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
@@ -12,12 +12,12 @@ In this project, we would review the EOQ model and its application when demand u
 
 
 ## Background
----
-In the modern business environment, the company needs more significant efforts to reduce the operating cost and also increase customer satisfaction. Inventory has a significant role to satisfy the customer demand hence, it becomes an important asset for any organization. Therefore, it should be managed effectively and efficiently to minimize total cost and to satisfy the customer’s requirement. In any real condition, inventory management faces barriers in the form of a tradeoff between minimizing total cost and maximizing service level. Therefore, choosing the correct inventory policy that can be applied in the industry now becomes essential to management.
+ ---
+In the modern business environment, companies are requiring an increasing amount of effort to reduce operating costs and to improve customer satisfaction. Inventory can play a significant role in satisfying customer demand; therefore, inventory becomes an important asset for any organization. Thus, inventory should be managed effectively and efficiently in order to minimize total cost and to satisfy customer demand. In real life, inventory management faces several challenges, such as the tradeoff between minimizing total cost and maximizing service level; therefore, choosing the correct inventory policy is now essential to management.
 
 ## Economic Order Quantity (EOQ) Policy
 
-The simplest Policy to answer the question “How much product should I order this time?”, is the EOQ model. This policy assumes a constant demand and ignores the lost sales costs. However, in the EOQ model, the tradeoff between the fixed ordering cost (or, if you’re making the item, a fixed setup cost) and the inventory carrying cost is evaluated to calculate the optimal order quantity
+For the age-old question "How much product should I order this time?", the simplest answer is the EOQ model. This policy assumes a constant demand and ignores the costs of lost sales. Instead, in the EOQ model, the tradeoff between the fixed ordering cost (or, if you are manufacturing the good, then the fixed setup cost) and the inventory carrying cost is evaluated to calculate the optimal order quantity.
 
 <b> 1. EOQ = Qo = √ ((2 * Annual Demand * setup cost)/holding cost) </b>
 <br>
@@ -26,7 +26,7 @@ The simplest Policy to answer the question “How much product should I order th
 <b> 3. Total Cost = (Qo* holding cost / 2) + (Annual demand * Setup cost)/Qo </b>
 
 
-As a quick background, the EOQ model is meant to answer the question “How much product should I order this time?” That is when you order (or make) a widget, should you order just one unit, a hundred units, a thousand units, or more? To answer that question, you need to understand the trade-off between the fixed ordering cost (or, if you’re making the item, a fixed setup cost) and the inventory carrying cost. If there is a relatively high fixed cost, you want many units in order. If the inventory carrying cost is relatively high, you probably only want to order a few.
+As a quick background, the EOQ model is meant to answer the question “How much product should I order this time?” That is, when you order (or manufacture) a widget, should you order just one unit, a hundred units, a thousand units, or more? To answer that question, we need to understand the tradeoff between the fixed ordering cost (or, if you are manufacturing the good, then the fixed setup cost) and the inventory carrying cost. If there is a relatively high fixed cost, then we would want to order many units; however, if the inventory carrying cost is relatively high, we probably only want to order a few.
 
 ### EOQ  Model Example
 
@@ -103,8 +103,7 @@ review_period_eoq
 
 ### Simulation Model
 
-The EOQ Quantity and cycle time is applied in a simulation that tries to replicate a market with uncertain demand.
-We assume that the review period is 60 days and the order quantity of  20,000 units and a lead time of 0 days is assumed. The inventory status is recorded in the simulation.
+The EOQ quantity and cycle time are applied in simulations that try to replicate a market with uncertain demand. We assume that a review period of 60 days, an order quantity of 20,000 units, and a lead time of 0 days. The inventory status is recorded in the simulation.
 
 <b> Creating a function to simulate the daily demand</b>
 
@@ -196,7 +195,7 @@ def calculate_profit(data,days,unit_cost,holding_cost,order_cost,selling_p):
 
 ### Application of EOQ Model on constant demand
 
-This scenario assumes no uncertainty therefore a constant demand and a purchase probability of 1. Therefore the demand standard deviation is assumed to be zero and the EOQ quantity and review period are used.
+This scenario assumes no uncertainty; in other words, this scenario assumes a constant demand and a purchase probability of 1. Therefore, the demand standard deviation is assumed to be 0, and the EOQ quantity and review period are used.
 
 
 ```python
@@ -214,7 +213,7 @@ plt.show()
 ```
 
 
-![png](output_18_0.png)
+![](p04_01.png)
 
 
 
@@ -266,8 +265,7 @@ plt.show()
 ```
 
 
-![png](output_23_0.png)
-
+![](p04_02.png)
 
 
 ```python
@@ -299,7 +297,7 @@ The uncertainty in demand has caused an increase in costs due to an increase in 
 
 ### Scenario 2:  Continous Review model
 
-To combat the holding costs that can accumulate due to demand uncertainty, the reorder point is determined by the inventory level. This policy is called the continuous review model.
+To combat the holding costs that can accumulate due to demand uncertainty, we can determine the reorder point by the inventory level. This policy is called the continuous review model.
 
 
 ```python
@@ -360,7 +358,7 @@ plt.show()
 ```
 
 
-![png](output_29_0.png)
+![](p04_03.png)
 
 
 
@@ -452,7 +450,7 @@ plt.show()
 ```
 
 
-![png](output_35_0.png)
+![](p04_04.png)
 
 
 
@@ -536,11 +534,11 @@ summ_table
 
 ## Final Conclusion
 
-As seen from the tables above we can see in this case the Continuous Review policy outperforms the Periodic Review policy and the EOQ model in terms of the expected profits for each product and proportion of lost orders.
+From the tables above, we can see that the continuous review policy (scenario 2) outperforms the EOQ model (scenario 1) and the periodic review policy (scenario 3) in terms of the expected profits for each product and proportion of lost orders.
 
-However, both the continuous and periodic review policy have their advantages. Periodic review policy has a fixed review period which allows the organization to better forecasts the orders made over some time. Whereas the continuous review policy keeps the order size constant and gives flexibility in terms of the times to place the order. 
+Both the continuous and periodic review policies have their advantages. The periodic review policy has a fixed review period, which allows companies to better forecast the orders they made over some time. On the other hand, the continuous review policy keeps the order size constant and offers flexibility with regards to the times at which to place the order.
 
-The expected profits is dependent on different costs (holding, ordering and other costs) that are different for every product and organization. The right inventory management model depends on the impact of these cost and and the demand distribution of the product.
+The expected profits are dependent on different costs (holding costs, ordering costs or manufacturing costs, etc.) that are different for every product and organization. The right inventory management model depends on the impact of these cost and the demand distribution of the product
 
 
 ## References

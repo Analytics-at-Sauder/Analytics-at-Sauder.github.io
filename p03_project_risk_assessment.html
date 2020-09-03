@@ -570,10 +570,7 @@ print(proj_df.head())</code></pre>
 Name: Project, dtype: int64</code></pre>
 <pre class="python"><code>plt.bar(range(10,18),proj_df[&#39;Project&#39;].groupby(proj_df[&#39;Project&#39;]).count())</code></pre>
 <pre><code>&lt;BarContainer object of 8 artists&gt;</code></pre>
-<div class="figure">
-<img src="output_14_1.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="output_14_1.png" /></p>
 <p>Combining the distribution (the graph above) and the sample statistics of the project completion dates over the 1000 replications (output of the next cell), we can also see that the project completion time is right skewed, and that the worst case scenario is further away from the median than the best case scenario. In order to have a 95% chance of meeting the deadline, the quote should actually be around 15 as calculated below.</p>
 <pre class="python"><code>print(proj_df[&#39;Project&#39;].describe())</code></pre>
 <pre><code>count    1000.000000
@@ -641,10 +638,7 @@ print(proj_df.head())</code></pre>
 4       3       8       4       11</code></pre>
 <pre class="python"><code>plt.bar(range(min(proj_record),max(proj_record)+1),proj_df[&#39;Project&#39;].groupby(proj_df[&#39;Project&#39;]).count())</code></pre>
 <pre><code>&lt;BarContainer object of 6 artists&gt;</code></pre>
-<div class="figure">
-<img src="output_20_1.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="output_20_1.png" /></p>
 <pre class="python"><code>print(np.percentile(proj_record,95))</code></pre>
 <pre><code>11.0</code></pre>
 </div>
@@ -730,10 +724,7 @@ print(proj_df.head())</code></pre>
  array([ 6.15 ,  7.079,  8.008,  8.937,  9.866, 10.795, 11.724, 12.653,
         13.582, 14.511, 15.44 ]),
  &lt;a list of 10 Patch objects&gt;)</code></pre>
-<div class="figure">
-<img src="output_26_1.png" alt="png" />
-<p class="caption">png</p>
-</div>
+<p><img src="output_26_1.png" /></p>
 <pre class="python"><code>print(np.percentile(proj_record,95))</code></pre>
 <pre><code>13.08</code></pre>
 </div>
@@ -811,7 +802,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

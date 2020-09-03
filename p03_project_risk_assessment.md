@@ -190,7 +190,7 @@ plt.bar(range(10,18),proj_df['Project'].groupby(proj_df['Project']).count())
 
 
 
-![png](output_14_1.png)
+![](output_14_1.png)
 
 
 Combining the distribution (the graph above) and the sample statistics of the project completion dates over the 1000 replications (output of the next cell), we can also see that the project completion time is right skewed, and that the worst case scenario is further away from the median than the best case scenario. In order to have a 95% chance of meeting the deadline, the quote should actually be around 15 as calculated below.
@@ -290,7 +290,7 @@ plt.bar(range(min(proj_record),max(proj_record)+1),proj_df['Project'].groupby(pr
 
 
 
-![png](output_20_1.png)
+![](output_20_1.png)
 
 
 
@@ -415,7 +415,7 @@ plt.hist(proj_df['Project']) # note how the distribution is continuous now and n
 
 
 
-![png](output_26_1.png)
+![](output_26_1.png)
 
 
 

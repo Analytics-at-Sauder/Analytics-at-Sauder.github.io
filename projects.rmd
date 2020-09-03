@@ -82,3 +82,4 @@ output:
 
 [Inventory Management](p04_inventory_management.html)<br/>
 [Project Risk Assessment](p03_project_risk_assessment.html)<br/>
+[Inventory Decision Analysis](p12_inventory_decision_analysis.html)<br/>
