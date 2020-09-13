@@ -2,7 +2,7 @@
 
 #### Author: Kemjika Ananaba
 
-In this project, we would focus on combining RFM (Recency Frequency Monetary) Analysis with Clustering analysis to to identify different market segments. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+In this Project, we will focus on combining RFM (Recency, Frequency, and Monetary value) analysis with clustering analysis to to identify different market segments. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook together with any accompanying data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
 <a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_10_Customer_Segmentation&urlpath=tree%2FProject_10_Customer_Segmentation%2Fp10_customer_segmentation.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
@@ -13,35 +13,36 @@ In this project, we would focus on combining RFM (Recency Frequency Monetary) An
 
 
 ## Business Problem 
--------
+ -------
 
-Customer Analytics is important to run a successful business. Sales and marketing resources are finite and expensive, therefore it is important to answer these questions when developing a marketing strategy.
+Customer analytics are crucial in running a successful business. Sales and marketing resources are finite and expensive; therefore, it is important to answer these questions when developing a marketing strategy:
 
 * Who are our most/least valuable customers?
-* How can we acquire new customers that resemble our most valuable?
+* How can we acquire new customers that resemble our most valuable customers?
 
-The Recency-Frequency-Monetary value segmentation has been around for a while now and provides a pretty simple but effective way to segment customers.The project on [RFM analysis](https://master-of-business-analytics.github.io/Website/RFM_Analysis.html) provided a basic model that allows the business to segment its customers based on three criteria based on an existing customer’s transaction history; recency of Customer's Last purchase, frequency of purchases and total amount spent, which is referred to as monetary. 
-However, A RFM model can be used in conjunction with certain predictive models to gain even further insight into customer behavior. In this project, we analyze the K means cluster and  see how it enhance results from RFM analysis.
+The Recency, Frequency, and Monetary value strategy has been around the industry for a while and provides a simple but effective method of segmenting customers. Our Project on [RFM analysis](https://master-of-business-analytics.github.io/Website/RFM_Analysis.html) provides a basic model that allows businesses to segment their customers according to three criteria, based on an existing customer’s transaction history: the recency of a customer's last purchase, the frequency of a customer's purchases, and the total amount spent (which is referred to as "monetary"). 
 
-Here is a high level flow of the analysis.
+An RFM model can also be used in conjunction with certain predictive models to gain even further insight into customer behaviour. In this Project, we analyze the k-means clustering algorithm to witness how this technique can enhance the results of an RFM analysis.
 
-* Calculate R, F and M parameters
-* Apply k-means clustering algorithm on these parameters to group similar customers.
+Here is a high-level flow of the analysis:
 
-K-means is a popular approach for classification because of simplicity of implementation and been widely used in market segmentation. The number of clusters can be determined by using the elbow method
+* We first calculate the R, F, and M parameters,
+* Then we apply the k-means clustering algorithm on the three parameters to group similar customers.
+
+K-means clustering is a popular approach for classification because of its simplicity in implementation and because it has been widely used in the practice of market segmentation. The number of clusters can be determined by using the elbow method.
 
 
-## Data Set
+## Dataset
 
-There are  eight variables in the data set:
+There are  eight variables in the dataset:
 
-1. InvoiceNo: Invoice number,  A 6-digit integral number uniquely assigned to each transaction.
-2. StockCode: Product code, a 5-digit integral number uniquely assigned to each distinct product.
-3. Description: Product name
-4. Quantity: The quantities of each product (item) per transaction.
-5. InvoiceDate: Invoice Date and time. Numeric, the day and time when each transaction was generated.
-6. UnitPrice: Unit price. Numeric, Product price per unit in sterling.
-7. CustomerID: Customer number, a 5-digit integral number uniquely assigned to each customer.
+1. InvoiceNo: invoice number,  a 6-digit integral number uniquely assigned to each transaction.
+2. StockCode: product code, a 5-digit integral number uniquely assigned to each distinct product.
+3. Description: product name.
+4. Quantity: quantities of each product (item) per transaction.
+5. InvoiceDate: invoice date and time, a numeric value of the date and time when each transaction was generated.
+6. UnitPrice: unit price, a numeric value of the product price, per unit, in sterling.
+7. CustomerID: customer number, a 5-digit integral number uniquely assigned to each customer.
 8. Country 
 
 
@@ -163,9 +164,10 @@ df.head(5)
 
 
 
-# Data cleaning 
+## Data Cleaning 
 
-The dataset seemed relatively clean at first glance, but it was riddled with errors. There were quite a number of these positive/negative offsetting entries throughout the dataset, plus other apparent errors such as customers with negative transactions. More information on data cleaning can be found on the [data cleaning project](https://master-of-business-analytics.github.io/Website/Data_Cleaning.html).
+
+The dataset seems to be relatively clean at first glance, but it is actually riddled with errors. There are several  positive/negative offsetting entries throughout the dataset, in addition to other apparent errors, such as customers with negative transactions. More information on data cleaning can be found in our [Data Cleaning Project](https://master-of-business-analytics.github.io/Website/Data_Cleaning.html).
 
 The first step in cleaning the dataset is to check if there are any missing values and where the missing values are located.
 
@@ -179,15 +181,12 @@ df.isnull().sum().plot(kind='bar')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a26fd03d0>
 
 
+![](rfm_1.png)
 
 
-![png](output_5_1.png)
-
-
-The bar chart above shows that NaN values are located at the description and customer ID column. The purpose of this evaluating is current customer segmentation therefore transactions without customer ID do not provide any value and are dropped from the data frame below.  
+The bar chart above shows that the NaN values are located in the Description column and the CustomerID column. The purpose of this Project is to segment the current customers of a business; therefore, transactions without a valid CustomerID do not provide any value and are dropped from the data frame.  
 
 
 ```python
@@ -198,7 +197,7 @@ df=df.dropna(subset=['CustomerID'])
 df.isnull().sum()
 ```
 
-
+```
 
 
     InvoiceNo      0
@@ -211,7 +210,7 @@ df.isnull().sum()
     Country        0
     dtype: int64
 
-
+```
 
 
 ```python
@@ -299,11 +298,13 @@ df.describe()
 
 
 
-The summary table shows that very low negative values under the quantity values. Further analysis show that the minimum and maximum values have the same absolute values. This could be as a result of a mistake in data entry. There are two ways data input error is usually corrected; entering a value with the opposite sign to nullify the previous mistake or entering the difference between actual actual transaction and previous entry. 
+The summary table illustrates that very large negative values under Quantity. Further analysis shows that the minimum and maximum values have the same absolute values (74,215). This could simply be a product of a mistake in data entry. There are two ways data input errors are usually corrected: 
+- entering a value with the opposite sign to cancel out the previous mistake (so the minimum value will no longer be -74,215, but instead be +74,215, which is the maximum value), or 
+- entering the difference between the actual transaction and the previous entry. 
 
-The first instance corrected by:
-1. Confirming that both transactions are for one customer and drop the rows if true. 
-2. Repeating the previous step until the the minimum and maximum quantity values do not have the same absolute values.
+The first instance is corrected by:
+1. confirming that both transactions are for the same customer (if so, drop the duplicated row), and
+2. repeating the previous step until the the minimum and maximum Quantity values do not have the same absolute values.
 
 
 ```python
@@ -535,9 +536,9 @@ df2.describe()
 
 
 
-<b> Note that the Minimum quantity and Maximum quantity do not have the same absolute values. However, if this was not the case, the above step is repeated</b>
+<b> Note:</b> the minimum Quantity and maximum Quantity no longer have the same absolute values. However, if they continued to share the same absolute value, then the above step is repeated until they are no longer the same.
 
-The next step is to convert the date column to a date format and add the total sales column
+The next step is to convert the InvoiceDate column to a date format, and then calculate the total sales column, "Totalsum" (calculated as the Quantity multiplied by the UnitPrice for each transaction).
 
 
 ```python
@@ -645,32 +646,27 @@ print('{:,} transactions don\'t have a customer id'
 print('Transactions timeframe from {} to {}'.format(df2['InvoiceDate'].min(),
                                     df2['InvoiceDate'].max()))
 ```
-
+```
     60,424 rows; 6 columns
     0 transactions don't have a customer id
     Transactions timeframe from 2011-01-04 to 2011-03-30
-    
+```
 
-# RFM model
+## RFM Model
 
-The RFM model describes current customers historical purchase behavior using 3 feature:
+The RFM model describes the historical purchase behaviour of a company's current customers using three criteria:
 
 * When did the customer make their last purchase?
 * How often does the customer make a purchase?
-*  How much money does the customer spend?
+* How much money does the customer spend?
 
-The general assumption with the RFM model is that Customers that purchase in shorter time intervals in
-greater volumes at higher prices are more like to respond positively to future engagement and product offers.  
-The customer records are grouped by recency of their purchase, the frequency by their quantity, and the monetary value of the purchases. 
+The general assumption with the RFM model is that customers who purchase in shorter time intervals, in greater volumes, and at higher prices are more like to respond positively to future engagement and product offers. To identify who these responsive customers are, the customer records are grouped by the recency of the purchases, the frequency by the quantities, and the monetary value of the purchases. 
 
 
 ```python
 # create a table that aggregates the transactions by customer id to 
 # obtain recency score, frequency of purchase and monetary value
 
-
-# set current date as most recent date plus one day
-#df2['snapshot'] = df2['InvoiceDate'] + timedelta(days=1)  
 
 #group customers by their most recent purchase
 snapshot_date = df2['InvoiceDate'].max() + timedelta(days=1)  
@@ -766,14 +762,14 @@ rfm_df.head()
 
 
 
-# Cluster Analysis 
-Clustering is the process of dividing the entire data into groups (also known as clusters) based on the patterns in the data. The k-means clustering technique is an algorithm that tries to minimize the distance of the points in a cluster with their centroid. There are two steps in cluster analysis:
+## Cluster Analysis 
+Clustering is the process of dividing the entire data into groups (also known as clusters) based on the patterns in the data. The k-means clustering technique is an algorithm that tries to minimize the distance of the points in a cluster to their centroid. There are two steps in cluster analysis:
 
-1. Finding the optimal number of clusters: the number of cluster values where this decrease in inertia value becomes constant can be chosen as the right number of clusters for our data.
+1. finding the optimal number of clusters: the number of clusters, a value which decreases in inertia value and becomes constant, can be chosen as the right number of clusters for our data;
 
-2. Fit to kmeans model
+2. fit to the k-means model.
  
-Looking at the rfm data table above,  there is a lot of variation in the magnitude of the data. Since K-Means is a distance-based algorithm, this difference of magnitude can create a problem, therefore all the variables are standardized to the same magnitude using the scaler function.
+Looking at the RFM data table above, we observe a lot of variation in the magnitude of the data. Since k-means is a distance-based algorithm, this range in magnitude can be problematic; therefore, all the variables are standardized to the same magnitude using the scaler function.
 
 
 ```python
@@ -792,30 +788,11 @@ r_groups = pd.qcut(rfm_df1['Recency'], q=4, labels=r_labels)
 # Assign these labels to1111 4 equal percentile groups 
 f_groups = pd.qcut(rfm_df1['Frequency'], q=4, labels=f_labels)
 
-# Assign these labels to three equal percentile groups 
-#m_groups = pd.qcut(rfm_df1['Monetary'], q=4, labels=m_labels)
-
-
-
-# Create new columns R_score, M_score and F_score  
-#rfm_df1 = rfm_df1.assign(R_score = r_groups.values, F_score = f_groups.values, M_score = m_groups.values)
-#rfm_df1 = rfm_df1.assign(R_score = r_groups.values, F_score = f_groups.values)
-#rfm_df1 = rfm_df1[['R_score','F_score','M_score']]
-#rfm_df1 = rfm_df1[['R_score','F_score']]
-#rfm_df1.head()
-```
-
-
-```python
 # standardizing the data
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 data_scaled = scaler.fit_transform(rfm_df)
 
-```
-
-
-```python
 # fitting multiple k-means algorithms and storing the values in an empty list
 SSE = []
 for cluster in range(1,20):
@@ -834,13 +811,7 @@ plt.title('Elbow Curve')
 
 
 
-
-    Text(0.5, 1.0, 'Elbow Curve')
-
-
-
-
-![png](output_21_1.png)
+![](rfm_2.png)
 
 
 
@@ -934,20 +905,20 @@ rfm_df.head()
 rfm_df.cluster.value_counts()
 ```
 
-
+```
 
 
     1    934
     0    568
     2     96
     3      9
-    Name: cluster, dtype: int64
+```
 
 
 
-<b>The cluster value where this decrease in inertia value becomes constant can be chosen as the right cluster value for our data. Looking at the above elbow curve, we can choose any number of clusters between 4 to 6. The number of clusters is set as 5 and fit the model.</b>
+<b>The cluster value where this decrease in inertia value becomes constant will be chosen as the appropriate cluster value for our data.</b> Looking at the above elbow curve, we can choose between four to six clusters; in other words, we can appropriately group our customer data into four to six customer segments. We will choose to set the number of clusters at five, and now we will proceed to fit the model.
 
-One must also look at the computation cost while deciding the number of clusters. If a higher number of clusters is selected, the computation cost would increase.
+As a note, we must also consider the computation cost when deciding the number of clusters to implement in our data, as computation costs increase with a higher number of clusters.
 
 
 ```python
@@ -958,7 +929,7 @@ plt.show()
 ```
 
 
-![png](output_25_0.png)
+![](rfm_3.png)
 
 
 
@@ -969,7 +940,7 @@ plt.show()
 ```
 
 
-![png](output_26_0.png)
+![](rfm_4.png)
 
 
 
@@ -980,15 +951,17 @@ plt.show()
 ```
 
 
-![png](output_27_0.png)
+![](rfm_5.png)
 
 
-# Final Conclusion
+## Final Conclusion
 
-The box plots above show that the customers in Cluster 2 and Cluster 3 are the most recent and frequent customers of the company. However we can see that these clusters account for less than 10 percent of the total number of customers. This project provides a brief example of how cluster analysis can enhance results from RFM analysis. An RFM model can be used in conjunction with certain predictive models such as K-means clustering, Logistic Regression and Recommendation to gain even further insight into customer behavior. 
+The box plots above show that the customers in Cluster 2 and Cluster 3 are the company's most recent and frequent customers. However, we can see that the customers in these two clusters account for less than 10% of the total number of customers. 
+
+This Project provides a brief example of how cluster analysis can enhance the results of RFM analysis. An RFM model can be used in conjunction with certain predictive models, such as k-means clustering, logistic regression, and recommendation to gain even further insight into customer behaviour, which can ultimately elevate a company's marketing strategy. 
 
 
-# Reference 
+## References 
 
 1. Aditya,A. (2020, March 20). Predictive Segments using RFM Analysis: An In-Depth Guide. Retrieved July 03, 2020, from https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/
 2. Yexi Yuan. (2019, Aug 17). Recency, Frequency, Monetary Model with Python — and how Sephora uses it to optimize their Google and Facebook Ads. Retrieved July 03, 2020, from https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17
