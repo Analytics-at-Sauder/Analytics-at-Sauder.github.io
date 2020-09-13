@@ -856,10 +856,13 @@ print(&#39;Transactions timeframe from {} to {}&#39;.format(df[&#39;InvoiceDate&
 #Eliminating NA rows in Cstomer ID
 
 df=df[df.notnull().all(axis=1)] #eliminating NA</code></pre>
-<p>290,603 rows; 8 columns 76,064 transactions don’t have a customer id Transactions timeframe from 1/10/2011 10:04 to 5/20/2011 14:06</p>
+<pre><code>    290,603 rows; 8 columns
+    76,064 transactions don&#39;t have a customer id
+    Transactions timeframe from 1/10/2011 10:04 to 5/20/2011 14:06</code></pre>
 <pre class="python"><code>print(&#39;{:,} rows; {:,} columns&#39;
       .format(df.shape[0], df.shape[1]))</code></pre>
-<p>214,539 rows; 8 columns</p>
+<pre><code>    214,539 rows; 8 columns
+</code></pre>
 <pre class="python"><code>#remove mi
 df.drop(index=[df[&#39;Quantity&#39;].idxmax(), df[&#39;Quantity&#39;].idxmin()], inplace=True)
 df.describe()</code></pre>
@@ -2630,7 +2633,16 @@ rec_df = snapshot_date-df.groupby(&quot;CustomerID&quot;).agg({&quot;InvoiceDate
 rec_df.rename(columns={&quot;InvoiceDate&quot;: &quot;Recency&quot;}, inplace=True)#rename column
 rec_df=rec_df[&quot;Recency&quot;].apply(lambda x: x.days) #extracting number of days only
 rec_df.head(5)</code></pre>
-<p>CustomerID 12747.0 2 12748.0 1 12749.0 4 12820.0 3 12823.0 255 Name: Recency, dtype: int64</p>
+<pre><code>
+
+    CustomerID
+    12747.0      2
+    12748.0      1
+    12749.0      4
+    12820.0      3
+    12823.0    255
+    Name: Recency, dtype: int64
+</code></pre>
 </div>
 <div id="frequency" class="section level3">
 <h3>Frequency</h3>

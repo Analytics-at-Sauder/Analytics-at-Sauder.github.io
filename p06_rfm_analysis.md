@@ -271,21 +271,21 @@ print('Transactions timeframe from {} to {}'.format(df['InvoiceDate'].min(),
 
 df=df[df.notnull().all(axis=1)] #eliminating NA
 ```
-
+```
     290,603 rows; 8 columns
     76,064 transactions don't have a customer id
     Transactions timeframe from 1/10/2011 10:04 to 5/20/2011 14:06
-
+```
 
 
 ```python
 print('{:,} rows; {:,} columns'
       .format(df.shape[0], df.shape[1]))
 ```
-
+```
     214,539 rows; 8 columns
 
-
+```
 
 ```python
 #remove mi
@@ -1174,7 +1174,7 @@ rec_df=rec_df["Recency"].apply(lambda x: x.days) #extracting number of days only
 rec_df.head(5)
 ```
 
-
+```
 
 
     CustomerID
@@ -1185,7 +1185,7 @@ rec_df.head(5)
     12823.0    255
     Name: Recency, dtype: int64
 
-
+```
 
 ### Frequency
 
