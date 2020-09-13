@@ -2,7 +2,7 @@
 
 #### Author: Kemjika Ananaba
 
-In this project, we would review conjoint Analysis and its application when introducing a new product into the market. Rank-based conjoint analysis is carried out in this project using multiple linear regression. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+In this Project, we will learn about conjoint analysis and its application when introducing a new product into the market. Rank-based conjoint analysis is carried out in this Project using multiple linear regression. We encourage you to create your own Jupytor Notebook and follow along. You can also download this notebook together with any accompanying data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
 <a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_15_Conjoint_Analysis&urlpath=tree%2FProject_15_Conjoint_Analysis%2Fp15_conjoint_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
@@ -12,30 +12,30 @@ In this project, we would review conjoint Analysis and its application when intr
 
 
 ## Business Problem
----
+ ---
 
-In this project, we would review conjoint Analysis and its application when introducing a new product into the market. The project focuses on the evaluation of market research for a new brand of beer. The simulated data set is described by 3 attributes that describe a part of the beer to be introduced in the market: Price point, After Taste, Calorie level. All attributes but the After taste attribute have levels. Rank-based conjoint analysis answers the following questions:
+This Project focuses on the evaluation of market research for a new brand of beer. The simulated dataset captures three attributes that describe the new beer being introduced in the market: Price Point, After Taste, and Calorie Level. The Price Point and Calorie Level are recorded as levels. Rank-based conjoint analysis answers the following questions:
 
-1. How important are certain features of a product are to consumers 
-2. Identify the trade-offs consumers are willing to make, with regards to the product features
+1. How important are certain features of a product to consumers?
+2. What are the trade-offs consumers are willing to make with regards to the product features?
 
 
 ### Rank Based Conjoint Analysis
-There are various ways to perform conjoint analysis, however, in this project, we would focus on rank-based conjoint analysis. A Rank-Based Conjoint (RBC) model consists of exposing respondents to a set of product profiles described in terms of the same attributes (with varying levels) and ask them to rank the product profiles from the best to the worst.
+There are various ways to perform conjoint analysis. Here, we will focus on rank-based conjoint analysis. A Rank-Based Conjoint (RBC) model consists of exposing respondents to a set of product profiles, which all share the same attributes but at varying levels, and asks them to rank the product profiles from the best to the worst.
 
 ### Data 
-The dataset is an aggregated response from several survey responders. There are two columns, Rank and Stimulus. The rank column shows how each of the 18 combinations is ranked and the stimulus is product combinations.
+The dataset is an aggregated response from several survey responders. There are two columns: `Rank` and `Stimulus`. The Rank column shows how each of the 18 combinations of the three attributes are ranked, and the Stimulus column codes these product combinations based on the following categorizations:
 
 <b> Attribute/Levels </b> 
 
-* A is Price with 3 levels:   
-     1. 6 Dollars 
-     2. 5 Dollars
-     3. 4 Dollars 
-* B is After-Taste with 2 levels: 
+* "A" is Price Point with three levels:
+    1. $6
+    2. $5
+    3. $4
+* "B" is After Taste with two levels: 
      1. Strong
      2. Mild    
-* C is Calories with 3 levels:
+* "C" is Calorie Level with three levels:
      1. Full
      2. Regular
      3. Low 
@@ -109,7 +109,7 @@ Data.head(4)
 
 
 ## Data Manipulation
-The stimulus column is a bit cryptic, so some data manipulation is done here. There are in total 8 different product features, and 18 different combinations.
+The Stimulus column is a bit cryptic, so some data manipulation is needed here. In total, there are eight different product characteristics across the three attributes, and 18 different combinations.
 
 
 ```python
@@ -345,8 +345,9 @@ ConjointDummyDF.head()
 
 
 ## Linear Regression
-Conjoint analysis works by observing how respondents preferences change as one systematically varies the product features. It examines how they trade-off different aspects of the product, weighing options that have a mix of more desirable and less desirable qualities. The observations allow one to statistically deduce through linear regression, the part-worth of all of the levels across the product attributes.
-Multiple linear regression attempts to model the relationship between multiple explanatory variables such as the product features and a response variable, which is the product rank by fitting a linear equation to observed data.
+Conjoint analysis works by observing how respondents' preferences change as one systematically varies the product features. It examines how they trade-off different aspects of the product, weighing options that have a mix of more desirable and less desirable qualities. The observations allow us to statistically deduce, through linear regression, the part-worth of all eight of the levels across the three product attributes.
+
+Multiple linear regression attempts to model the relationship between multiple explanatory variables, such as the product features, and a response variable, the product rank, by fitting a linear equation to the observed data.
 
 
 ```python
@@ -457,10 +458,10 @@ df_res
 
 
 
-## Part Worth or Relative utility
-Central to the theory of conjoint analysis is the concept of product utility. Utility is a latent variable that reflects how desirable or valuable an object is in the mind of the respondent. The utility of a product is assessed from the value of its parts (part-worth). Conjoint analysis examines consumers’ responses to product ratings, rankings or choices, to estimate the part-worth of the various levels of each attribute of a product. Utility is not an absolute unit of measure; only relative values or differences in utilities matter.
+## Part Worth or Relative Utility
+Central to the theory of conjoint analysis is the concept of product utility. Utility is a latent variable that reflects how desirable or valuable an object is in the mind of the respondent. The utility of a product is assessed from the value of its parts (part-worth). Conjoint analysis examines consumers’ responses to product ratings, rankings, or choices to estimate the part-worth of the various levels of each attribute of a product. Utility is not an absolute unit of measure; only relative values or differences in utilities matter.
 
-We therefore focus on the coefficients in the regression output because this represents the average part-worth or relative utility  score across all attribute. The higher the coefficient of a product attribute, the higher the relative utility. There are three different attributes in the eight different levels. The cost $4 ranks highest, at a 7.46. And mild after taste ranks next in line at a 3.69 with regular calories coming in third at 2.46.
+We therefore focus on the coefficients in the multiple linear regression output because these represent the average part-worths or relative utility scores across all attributes. The higher the coefficient of a product attribute, the higher the relative utility. There are three different attributes in the eight different levels. The $4 Price Point (A3) ranks highest at a part-worth of 7.46; the second highest part-worth belongs to the Mild After Taste (B2), with a part-worth of 3.69; and the Regular Calories Level (C2) comes in third, with a part-worth at 2.46.
 
 <b> What would be the optimal product bundle? </b>
 
@@ -473,11 +474,11 @@ norm
 ```
 
 
-
+```
 
     [0.5481263776634827, 0.27112417340191036, 0.1807494489346069]
 
-
+```
 
 
 ```python
@@ -503,16 +504,16 @@ plt.show()
 ```
 
 
-![png](output_11_0.png)
+![](conjoint_1.png)
 
 
-## Relative importance of the product attributes
-The part worth is used to derive the importance and the relative importance of an attribute of the product. Attribute importance is the difference between the highest and lowest utility level of the attribute. Relative importance of an attribute is essentially its share of importance.
+## Relative Importance of the Product Attributes
+The part-worth is used to derive the importance and the relative importance of a product's attributes. An attribute's importance is the difference between the highest and lowest utility level of the attribute. Relative importance of an attribute is essentially its share of importance.
 
-If the distance between the utility levels of an attribute is large, then that attribute will have a larger bearing on the respondents choice of product than another attribute where the distance is not as large. The distance therefore is a reflection of the importance of the attribute in determining consumer preferences.
+If the distance between the utility levels of an attribute is large, then that attribute will have a larger bearing on the respondents choice of product than another attribute where the distance is not as large. The distance, therefore, is a reflection of the importance of the attribute in determining consumer preferences.
 
 * Distance = Max(part-worth) - Min(part-worth) 
-* Weight of attribute/importance = attribute distance / Sum(attribute distance)
+* Weight of attribute/importance = attribute distance / sum(attribute distance)
 
 
 ```python
@@ -529,10 +530,6 @@ def distance_cal(lista):
         newlist.append(x)
     return max(newlist) - min(newlist)
   
-```
-
-
-```python
 #create list of lists to be used in calculating the attribute importance and weight
 attributes= [price,Taste,Calories]
 
@@ -551,7 +548,7 @@ for item in attributes :
 
 ```
 
-    
+```    
      Attribute :  Price
     
      Distance :  11.999999999999993
@@ -572,7 +569,7 @@ for item in attributes :
     
      Importance %:  0.11764705882352938
     -----------------------
-    
+```
 
 
 ```python
@@ -594,12 +591,12 @@ plt.show()
 ```
 
 
-![png](output_15_0.png)
+![](conjoint_2.png)
 
 
 
-## Trade off analysis
-Product developers are constantly faced with trade-offs. For instance, changing the taste of the beer from a strong after taste to a mild after taste would result in an increase in price as the beer requires more additional resources. Whether this could result in an increase in demand could be determined by examining the trade-offs that consumers are willing to make.The figure below provides an illustration of attribute part-worth that is considered in the trade-off analysis. 
+## Trade-off Analysis
+Product developers are constantly faced with trade-offs. For instance, changing the taste of the beer from a Strong After Taste (B1) to a Mild After Taste (B2) would result in an increase in price as the beer requires more additional resources. Whether this would result in an increase in demand could be determined by examining the trade-offs that consumers are willing to make between a more preferred After Taste and a less desirable Price Point. The figure below illustrates the attributes part-worths that are considered in the trade-off analysis. 
 
 
 ```python
@@ -616,15 +613,15 @@ plt.show()
 ```
 
 
-![png](output_17_0.png)
+![](conjoint_3.png)
 
 
-Knowledge of the relative importance of various attributes can assist in marketing and advertising decisions. Other factors being equal, one would devote greater attention and resource to improving a product, on attributes that are of greatest importance to target consumers.
+Knowledge of the relative importance of various attributes can assist in marketing and advertising decisions. Other factors being equal, we should devote greater attention and resources to improving a product in its attributes that are of greatest importance to target consumers.
 
 ## Final Conclusion
-Conjoint analysis is a marketing research technique designed to help managers determine the preferences of customers and potential customers. In particular, it seeks to determine how consumers value the different attributes that make up a product and the trade-offs they are willing to make among the different attributes or features that compose the product. As such, conjoint analysis is best suited for products that have very tangible attributes that can be easily described or quantified.
+Conjoint analysis is a marketing research technique designed to help managers determine the preferences of customers and potential customers. In particular, it seeks to determine how consumers value the different attributes that make up a product and the trade-offs they are willing to make among the product's different attributes. As such, conjoint analysis is best suited for products with very tangible attributes that can be easily described or quantified.
 
-## Reference
+## References
 1. Conjoint Analysis. (n.d.). Retrieved from https://www.ashokcharan.com/Marketing-Analytics/~pd-conjoint-analysis.php
 2. Herka. (2020). Traditional-Conjoint-Analysis-with-Python. Retrieved from https://github.com/Herka/Traditional-Conjoint-Analysis-with-Python/blob/master/Traditional Conjoint Analyse.ipynb
 3. Pratama, A. (2018, December 04). How to Do Conjoint Analysis in python. Retrieved August 5, 2020, from https://ariepratama.github.io/How-to-do-conjoint-analysis-in-python/
