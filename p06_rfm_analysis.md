@@ -2,12 +2,12 @@
 
 #### Author: Kemjika Ananaba
 
-Customer Analytics is important to run a successful business. Sales and marketing resources are finite and expensive, therefore it is important to answer these questions when developing a marketing strategy.
+Customer analytics are important in order to run a successful business. Sales and marketing resources are finite and expensive; therefore, it is important to answer the following questions when developing a marketing strategy:
 
 * Who are our most/least valuable customers?
-* How can we acquire new customers that resemble our most valuable?
+* How can we acquire new customers who resemble our most valuable customers?
 
-In this project, we focus on RFM analysis. This type of analysis is used when historical data for existing customers is available. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+In this Project, we focus on RFM (Recency, Frequency, and Monetary value) analysis. This type of analysis is used when historical data for existing customers are available. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook together with any accompanying data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
 <a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_06_RFM_Analysis&urlpath=tree%2FProject_06_RFM_Analysis%2Fp06_rfm_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
@@ -17,35 +17,35 @@ In this project, we focus on RFM analysis. This type of analysis is used when hi
 
 ## Background
 
-RFM Analysis identifies existing customers who are most likely to remain loyal to a company or respond to a new product. RFM analysis allows you to create customized and personalized messaging, and this can be used to streamline the various messages you send to a specific customer and continue sending messages of only a particular type, thereby reducing the chance of dissatisfaction or annoyance, and create higher customer satisfaction. RFM is a model based on historical data and helps forecast future behavior based on past interactions. The RFM Model of customer value uses proven marketing principles to help businesses differentiate between marketing to existing and new users and helps them create relevantly and personalized messaging by understanding user behavior. The model allows the business to segment its users based on three criteria based on an existing customer’s transaction history, namely:
+RFM Analysis identifies existing customers who are most likely to remain loyal to a company or respond to a new product. Among other things, RFM analysis allows us to create customized and personalized messaging, which can be used to streamline the various messages you send to a specific customer and continue sending messages of only a particular type, thereby reducing the chance of dissatisfaction or annoyanc while creating higher customer satisfaction. RFM is a model based on historical data and helps forecast future behavior based on past interactions. The RFM Model of customer value uses proven marketing principles to help businesses differentiate between marketing to existing customers versus new users, allowing businesses to create relevant and personalized messaging by understanding user behavior. The model allows businesses to segment its users according to three criteria based on an existing customer’s transaction history, namely:
 
-1. The recency of Customer's Last purchase 
-2. Frequency of purchases 
-3. Total amount spent, which is referred to as monetary
+1. The Recency of the customer's last purchase 
+2. The Frequency of the customer's purchases 
+3. The total amount spent, which is referred to as the customer's Monetary value
 
-The RFM model, when used in conjunction with traditional models of segmentation, can help businesses visualize new and existing customers differently, and create favorable conditions to maximize customer lifetime value.
+The RFM model, when used in conjunction with traditional models of segmentation, can help businesses visualize new and existing customers differently, and thus create favourable conditions to maximize customer lifetime value.
 
 ## Business Problem 
 
 
-How do we segment our customers to reach them effectively through target marketing?
+How do we segment our customers to reach them effectively through targeted marketing?
 
-By applying the paraeto principle to a customer database,  80% of a company's revenue comes from 20% of the customers. RFM helps determine who the top 20% of customers are and groups the remaining customers into other segments such as price-sensitive, potentially loyal, brand sensitive, etc. This ensures that each customer is better targeted and convert the other segments into the higher value segments and increase customer lifetime value. 
+By applying the Pareto principle to a customer database, it is often the case that 80% of a company's revenue comes from 20% of its customers. RFM helps determine who the top 20% customers are and groups the remaining customers into other segments, such as price-sensitive, potentially loyal, brand sensitive, etc. This ensures that each customer is better targeted, converting the other segments into the higher-value segments, and increases customer lifetime value. 
 
-In this project, the customer sales data from January 2011 to May 2011 of an E-commerce store is analyzed to group customers from the United Kingdom into segments using the RFM model. The relevant libraries and the dataset is imported into the python environment. 
+In this Project, the customer sales data from January 2011 to May 2011 of an e-commerce store are analyzed to group customers from the United Kingdom into segments using the RFM model. The relevant libraries and the provided dataset are imported into the Python environment. 
 
 
-### Data Set
+### Dataset
 
-There are  eight variables in the data set:
+There are  eight variables in the dataset:
 
-1. InvoiceNo: Invoice number,  A 6-digit integral number uniquely assigned to each transaction.
-2. StockCode: Product code, a 5-digit integral number uniquely assigned to each distinct product.
-3. Description: Product name
-4. Quantity: The quantities of each product (item) per transaction.
-5. InvoiceDate: Invoice Date and time. Numeric, the day and time when each transaction was generated.
-6. UnitPrice: Unit price. Numeric, Product price per unit in sterling.
-7. CustomerID: Customer number, a 5-digit integral number uniquely assigned to each customer.
+1. InvoiceNo: invoice number,  a 6-digit integral number uniquely assigned to each transaction.
+2. StockCode: product code, a 5-digit integral number uniquely assigned to each distinct product.
+3. Description: product name
+4. Quantity: quantities of each product (item) per transaction.
+5. InvoiceDate: invoice Date and time, a numeric value of the date and time when each transaction was generated.
+6. UnitPrice: unit price, a numeric value of the product price, per unit, in sterling.
+7. CustomerID: customer number, a 5-digit integral number uniquely assigned to each customer.
 8. Country 
 
 
@@ -163,11 +163,11 @@ df.head(5)
 
 
 
-## Data cleaning 
+## Data Cleaning 
 
-The dataset seemed relatively clean at first glance, but it was actually riddled with Null values. The code chunk below creates a new column that calculates the total purchase for each transaction. The NA values are also identified and the rows containing these NA values are removed. 
+The dataset seems to be relatively clean at first glance, but it is actually riddled with null values. The code chunk below creates a new column that calculates the total purchase for each transaction. The NA values are also identified, and the rows containing these NA values are removed. 
 
-There are several methods of removing NA values from a dataset; replacing with another value or deleting the entire row. The choice of removal is dependent on the what data is been manipulated and how much data is available.
+There are several methods of removing NA values from a dataset, such as replacing the NA value with another value or deleting the row entirely. The latter method, to choose removing the row entirely, is dependent on what data have already been manipulated and how much data are available. 
 
 
 ```python
@@ -255,7 +255,7 @@ df.describe()
 
 
 
-In any event, it is good practice to sift out incorrect transactions, particularly when they result in extreme outliers. So in this section, the large transactions are scanned to clean the data. More information on data cleaning can be found on the [data cleaning project](https://master-of-business-analytics.github.io/Website/Data_Cleaning.html).
+In any event, it is good practice to sift out erroneous transactions, particularly when they result in extreme outliers. In this section, the large transactions are scanned to clean the data. More information on data cleaning can be found in our [Data Cleaning Project](https://master-of-business-analytics.github.io/Website/Data_Cleaning.html).
 
 
 ```python
@@ -275,7 +275,7 @@ df=df[df.notnull().all(axis=1)] #eliminating NA
     290,603 rows; 8 columns
     76,064 transactions don't have a customer id
     Transactions timeframe from 1/10/2011 10:04 to 5/20/2011 14:06
-    
+
 
 
 ```python
@@ -284,7 +284,7 @@ print('{:,} rows; {:,} columns'
 ```
 
     214,539 rows; 8 columns
-    
+
 
 
 ```python
@@ -462,15 +462,12 @@ df.describe()
 
 
 
-Note that the Minimum quantity and Maximum quantity have different absolute values.
+Note that the `minimum quantity` and `maximum quantity` have different absolute values.
 
 
 ```python
 df = df[df['UnitPrice']>0]
-```
 
-
-```python
 df.describe()
 ```
 
@@ -562,10 +559,7 @@ df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
 
 #creating a total sales column
 df["Totalsum"] = df['Quantity'] * df['UnitPrice']
-```
 
-
-```python
 #Check the remaining large negative transactions
 df[df.Totalsum<0].sort_values('Totalsum').head(10)
 ```
@@ -900,10 +894,7 @@ df[df.CustomerID==15749].sort_values('Totalsum').head(10)
 #index 257377,257778, 257375, 257373,2142,2205,2143,257374,257376,2204 - all calcellations
 
 df.drop(index=[257377,257778, 257375, 257373,2142,2205,2143,257374,257376,2204], inplace=True)
-```
 
-
-```python
 # customer 16029
 df[df.CustomerID==16029].sort_values('InvoiceDate').head(10)
 ```
@@ -1072,11 +1063,6 @@ df[df.CustomerID==16029].sort_values('InvoiceDate').head(10)
 # removing rows with the large equal absolute values
 df.drop(index=[35090,35080,35074,83508,35077,83505,35075,35084,35076,83502,35089,35071,35072,35032,35088,35026,83471,35082,35079,35073,83469,35087], inplace=True)
 
-
-```
-
-
-```python
 df.describe()
 ```
 
@@ -1170,11 +1156,11 @@ df.describe()
 
 
 
-The customer records are grouped by recency of their purchase, the frequency by their quantity, and the monetary value of the purchases. 
+The customer records are grouped by the recency of the purchases, the frequency of the quantities, and the monetary value of the purchases. 
 
-### Recency Scores
+### Recency 
 
-To calculate recency, a snapshot date is created. This date is one day after the most recent invoice date of the data set. The date difference is used to show the recency of the purchase.
+To calculate recency, a snapshot date is created. This date is one day after the most recent invoice date of the dataset. The date difference is used to show the recency of the purchase.
 
 
 ```python
@@ -1269,7 +1255,7 @@ freq_df.head()
 
 ### Monetary 
 
-To calculated the monetary score, the total value of the purchases made by each customer is calculated.
+To calculate the monetary score, the total value of each customer's purchases is calculated.
 
 
 ```python
@@ -1333,7 +1319,7 @@ mon_df.head(5)
 
 
 
-### RFM model
+### RFM Model
 
 
 ```python
@@ -1422,9 +1408,9 @@ rfm.head(7)
 
 
 
-### Creating Rank scores
+### Creating Rank Scores
     
-The customers are ranked in each criteria. Each criteria is broken into 5 buckets. Scores are assigned based on the relative percentile to the RFM features. This approach of scaling customers from 1-5 will result in, at the most, 125 different RFM scores (5x5x5), ranging from 111(lowest) to 555(highest) 
+The customers are ranked in each of the three criteria (R,F, and M). Each criteria is broken into five buckets, and customer scores are assigned based on the relative percentile of each RFM feature, with each bucket representing 20% of the distribution. This approach of scaling customers from 1-5 will result in, at most, 125 different RFM scores (5x5x5), ranging from 111 (lowest) to 555 (highest).
 
 
 ```python
@@ -1542,13 +1528,13 @@ rfm.head()
 
 ### RFM Score 
 
-There are many ways to calculate the aggregate RFM score. Most companies allocate different weights to each criteria. For example, a customer of R_score =1, F_score =2 , M_score =3 could either have a RFM score of:
+There are many ways to calculate the aggregate RFM score. Most companies allocate different weights to across the three criteria. For example, a customer of R_score=1, F_score=2 , M_score=3 could have the following possible RFM scores:
 
-1. 123 if weights 100,10,1 were allocated to each criteria. 
-2. 1+2+3 = 6 could be obtained
-3. (1+2+3)/3=2 could also be calculated. 
+1. 110+20+3 = 123 if weights 100, 10 , and 1 were allocated to the three criteria, respectively. 
+2. 1+2+3 = 6 if each of the three criteria are given an equal weight of 1.
+3. (1+2+3)/3 = 2 if we take the average of the three criteria. 
 
-Depending on the nature of the businesses, one might increase or decrease the relative importance of each RFM variable to arrive at the final score. In this project,the RFM score is simply the average of the individual R, F, and M scores.
+Depending on the nature of the business, we might increase or decrease the relative importance (the weight) of the three criteria variables to arrive at the final RFM score. In this Project, we continue forward by simply calculating the customer's aggregate RFM score as the average of the three R, F, and M scores. This calculation method will provide an aggregate RFM score from 1 (lowest) to 5 (highest).
 
 
 
@@ -1667,9 +1653,9 @@ rfm.head()
 
 
 
-# Customer Classification based on RFM Analysis
+## Customer Classification Based on RFM Analysis
 
-There are many ways we can use the RFM scores to create customer segments. The method used depends on the objective of the analysis. One way of using classifying customers is creating segments based on the average RFM score. Here, we take inspiration from some common segment names. 
+There are many ways we can use the RFM scores to create customer segments. The method used depends on the objective of the analysis. One way of classifying customers is by creating segments based on the average RFM score. Here, we adopt some common segment names for our quintile segments. 
 
 Customer Segment | Average Score
 -----------|----
@@ -1928,7 +1914,7 @@ plt.show()
 ```
 
 
-![png](output_37_0.png)
+![](output_37_0.png)
 
 
 
@@ -1936,7 +1922,7 @@ plt.show()
 rfm_level_agg['Monetary']['count']
 ```
 
-
+```
 
 
     RFM_Level
@@ -1946,43 +1932,50 @@ rfm_level_agg['Monetary']['count']
     Needs Attention       918
     Require Activation    634
     Name: count, dtype: int64
+```
 
 
+Recall that the customer segmentation calculation method above assigns equal weighs to a customer's recency, frequency, and monetary scores. RFM scores are practically used in various marketing strategies. For example, a business may choose to send specific types of communication or promotions based on the RFM segment in which customers appear:
 
-The customer segmentation above assigns equal weighs to recency, frequency and monetary scores. This method of segmentation is usually 
+1. Best Customers: this group consists of customers have an R_score=5, F_score=5 and M_Score=5, meaning that they transacted recently, do so often, and spend more than other customers. We would calculate an aggregate RFM score of 5. Earlier, we referred to this customer segment as "Can't lose them".  A shortened notation for this segment is 5-5-5 
 
-An alternative way is to select groups of customers to whom specific types of communications or promotions will be sent, based on the RFM segments in which they appear.
+2. High-Spending New Customers: this group consists of those customers in segments 5-1-5 and 5-1-4 . These are customers who transacted only once, but relatively recently, and they spent a lot. 
 
-1. Best Customers: This group consists of those customers who are found in R-score-1, F-score-1 and M-Score-1, meaning that they transacted recently, do so often and spend more than other customers. A shortened notation for this segment is 1-1-1.
+3. Lowest-Spending Active Loyal Customers: this group consists of those customers in segments 5-5-1 and 5-5-2. These are customers who transacted recently and do so often, but spend the least.
 
-2. High-spending New Customers: This group consists of those customers in 1-4-1 and 1-4-2. These are customers who transacted only once, but very recently and they spent a lot.
+4. Churned Best Customers: this group consists of those customers in segments 2-5-5, 1-5-5, 1-4-4 and 1-4-5. These are customers who transacted frequently and spent a lot, but it been a long time since they last transacted. 
 
-3. Lowest-Spending Active Loyal Customers: This group consists of those customers in segments 1-1-3 and 1-1-4 (they transacted recently and do so often, but spend the least).
+## Final Conclusion
 
-4.Churned Best Customers: This segment consists of those customers in groups 4-1-1, 4-1-2, 4-2-1 and 4-2-2 (they transacted frequently and spent a lot, but it been a long time since they have transacted).
-
-# Final Conclusion
-
-RFM is relatively simple technique that could drastically improve your marketing performance. RFM analysis helps organizations find answers to the following questions:
+RFM is a relatively simple technique that can drastically improve a company's marketing performance. RFM analysis helps organizations find answers to the following questions:
 
 * Who are your best customers?
-* Which of your customers could contribute to your churn rate?
-* Who has the potential to become valuable customers?
+
+* Which of your customers could be contributing to your churn rate?
+
+* Which of your customers have the potential to become valuable customers?
+
 * Which of your customers can be retained?
+
 * Which of your customers are most likely to respond to engagement campaigns?
 
-However there is some problems with traditional RFM analysis, it is: 
-* Computationally awkward and labor intensive. 
-* Ignores within quintile variance.
+However, there are some shortcomings with traditional RFM analysis, such as: 
+* Computationally awkward and labour intensive.
+
+* Ignores within-quintile variance.
+
 * Ordering of variables is arbitrary. Which do you sort by first? 
+
 * Some variables may have too few levels.
-* Correlations between variables create problems. E.g., first recency quintile may have more high frequency customers.
-* Does not generalize well to new customers. (e.g. How do new customers get assigned to a quintile?) 
 
-As a result, Logistic Regression usually is preferred to RFM analysis when predicting the behavior of the customer.
+* Correlations between variables create problems: for example, first recency quintile may have higher frequency customers.
+
+* Does not generalize well to new customers.: for example, how do new customers get assigned to a quintile? 
+
+As a result, logistic regression is usually preferred to RFM analysis when predicting the behaviour of the customer.
 
 
-# Reference 
+## References 
 
 1. Aditya,A. (2020, March 20). Predictive Segments using RFM Analysis: An In-Depth Guide. Retrieved July 03, 2020, from https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/
 
