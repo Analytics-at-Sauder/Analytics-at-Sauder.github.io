@@ -3,7 +3,8 @@ output_dir: "."
 output:
   html_document:
     includes:
-      in_header: script.html
+      in_header: script_head.html
+      before_body: script_body.html
       after_body: footer.html
     theme: simplex
     css: style.css

@@ -25,21 +25,17 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Google Tag Manager -->
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NFJ7QKG');</script>
 
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag('js', new Date());
+<!-- End Google Tag Manager -->
 
-  gtag('config', 'UA-171418385-1');
-</script>
-
-<!-- script hiding navbar when scrolling down -->
+<!-- Script hiding navbar when scrolling down -->
 
 <script>
   var didScroll;
@@ -77,6 +73,8 @@
     lastScrollTop = st;
   }
 </script>
+
+<!-- End of script hiding navbar when scrolling down -->
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -431,6 +429,13 @@ div.tocify {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFJ7QKG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="fluid-row" id="header">
 
@@ -1413,7 +1418,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
