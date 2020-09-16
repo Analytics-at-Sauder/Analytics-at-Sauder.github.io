@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>nb0014_common_probability_distributions.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<!-- Google Tag Manager -->
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NFJ7QKG');</script>
+
+<!-- End Google Tag Manager -->
+
+<!-- Script hiding navbar when scrolling down -->
+
+<script>
+  var didScroll;
+  var lastScrollTop = 0;
+  var delta = 1;
+  var navbarHeight = $('[role="navigation"]').outerHeight();
+
+  $(window).scroll(function(event) {
+    didScroll = true;
+  });
+
+  setInterval(function() {
+    if (didScroll) {
+      hasScrolled();
+      didScroll = false;
+    }
+  }, 250);
+
+  function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    if (Math.abs(lastScrollTop - st) <= delta)
+      return;
+
+    if (st > lastScrollTop && st > navbarHeight) {
+      // Scroll Down
+      $('[role="navigation"]').addClass('navbar-scroll-down');
+    } else {
+      // Scroll Up
+      if (st + $(window).height() < $(document).height()) {
+        $('[role="navigation"]').removeClass('navbar-scroll-down');
+      }
+    }
+
+    lastScrollTop = st;
+  }
+</script>
+
+<!-- End of script hiding navbar when scrolling down -->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Analytics@Sauder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="contribute.html">Contribute</a>
+</li>
+<li>
+  <a href="https://blogs.ubc.ca/businessanalytics">Blog</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+<li>
+  <a href="resource.html">Resource</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFJ7QKG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="common-probability-distributions" class="section level2">
+<h2>Common Probability Distributions</h2>
+<div id="ahthors-hossein-piri-steven-shechter" class="section level4">
+<h4>Ahthors: Hossein Piri, Steven Shechter</h4>
+<p>This notebook describes probability distributions often used in simulation modeling, demonstrates how to generate random variables from these distributions, and visualizes the distributions through their density functions and histograms from sampled data. Other distributions to consider adding in the future, which also often arise in certain applications, include: Weibull, Beta, Gamma, Poisson</p>
+<p>We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0014_Common_Probability_Distributions&urlpath=tree%2FNB0014_Common_Probability_Distributions%2Fnb0014_common_probability_distributions.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0014_Common_Probability_Distributions&urlpath=tree%2FNB0014_Common_Probability_Distributions%2Fnb0014_common_probability_distributions.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0014_Common_Probability_Distributions/master?filepath=nb0014_common_probability_distributions.ipynb" target="_blank" class="button">Launch Binder</a></p>
+</div>
+</div>
+<div id="probability-distributions-detailed-in-this-notebook" class="section level2">
+<h2>Probability distributions detailed in this notebook</h2>
+<hr />
+<div id="discrete-random-variables" class="section level3">
+<h3><u> <font color = blue > Discrete Random Variables: </font> </u></h3>
+</div>
+<div id="discrete-uniform-distribution" class="section level3">
+<h3><font color = red> Discrete Uniform Distribution </font></h3>
+<p>Example cases: often used when all you know is the minimum and maximum values a variable can take, and you know it can take any whole number value in between with equal probability. This is also used when you want to simulate drawing numbers out of a hat with equal chance, and with replacement each time. e.g., we can simulate the Birthday Problem by using a discrete uniform between 1 and 365 for each person in the room.</p>
+</div>
+<div id="binomial-distribution" class="section level3">
+<h3><font color = red> Binomial Distribution </font></h3>
+<p>Example cases: you want to generate the random number of people who show up for a flight, when you sold 100 tickets and each person has a .90 probability of showing up.</p>
+</div>
+<div id="general-discrete-distribution" class="section level3">
+<h3><font color = red> General Discrete Distribution </font></h3>
+<p>Example cases: you want to generate random whole numbers or categories, with a specific probability of getting each. e.g., the group size of a party arriving to a restaurant will be 1, 2, 3, or 4 with probabilities .2, .4, .1, and .3, respectively.</p>
+</div>
+<div id="continuous-random-variables" class="section level3">
+<h3><u> <font color = blue > Continuous Random Variables: </font> </u></h3>
+</div>
+<div id="continuous-uniform-distibution" class="section level3">
+<h3><font color = red> Continuous Uniform Distibution </font></h3>
+<p>Example cases: often used when all you know is the minimum and maximum values a variable can take, and you assume it can take any continuous value in between with equal probability. e.g., a service time that takes anywhere between 5 and 10 minutes.</p>
+</div>
+<div id="triangular-distribution" class="section level3">
+<h3><font color = red> Triangular Distribution </font></h3>
+<p>Example cases: often used when all you know is the minimum, maximum, and most likely values of a variable e.g., service time that is between 5 and 10 minutes, but most often takes 7 minutes.</p>
+</div>
+<div id="normal-distribution" class="section level3">
+<h3><font color = red> Normal Distribution </font></h3>
+<p>Example cases: you want to generate random demand that has a normal distribution with mean 150 and standard deviation 25.</p>
+</div>
+<div id="lognormal-distribution" class="section level3">
+<h3><font color = red> Lognormal Distribution </font></h3>
+<p>Example cases: often used when you want to generate variables with a “long right tail.” e.g., incomes in a population are often well-modeled by a log-normal distribution. e.g., If the ln (natural log) of your data looks like a Normal distribution with mean 4 and standard deviation 1, then you can simulate values as a Lognormal with parameters mean = 4 and sd = 1.</p>
+</div>
+<div id="exponential-distribution" class="section level3">
+<h3><font color = red> Exponential Distribution </font></h3>
+<p>Example cases: often used when you want to generate random times between arrivals to a queue; e.g., inter-arrival times that are exponentially distributed with an average of 5 minutes between arrivals.</p>
+</div>
+</div>
+<div id="examples-of-how-to-simulate-these-random-variables" class="section level2">
+<h2>Examples of how to simulate these random variables</h2>
+<hr />
+<pre class="python"><code>import scipy.stats as ss
+import numpy as np
+import matplotlib.pyplot as plt</code></pre>
+<div id="discrete-uniform-distribution-1" class="section level3">
+<h3><font color = red> Discrete Uniform Distribution </font></h3>
+<p>Example cases: often used when all you know is the minimum and maximum values a variable can take, and you know it can take any whole number value in between with equal probability. This is also used when you want to simulate drawing numbers out of a hat with equal chance, and with replacement each time. e.g., we can simulate the Birthday Problem by using a discrete uniform between 1 and 365 for each person in the room.</p>
+<pre class="python"><code>### Specify upper and lower bound
+lower, upper= 1, 365
+
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION: 
+np.random.randint(lower,upper+1)  #note: need the +1 to esnure that we will include the &quot;upper&quot; itself.
+
+# printing 3 outputs from this distribution
+print(np.random.randint(lower,upper+1))
+print(np.random.randint(lower,upper+1))
+print(np.random.randint(lower,upper+1))</code></pre>
+<pre><code>272
+182
+48</code></pre>
+</div>
+<div id="binomial-distribution-1" class="section level3">
+<h3><font color = red> Binomial Distribution </font></h3>
+<p>Example cases: you want to generate the random number of people who show up for a flight, when you sold 100 tickets and each person has a .90 probability of showing up.</p>
+<pre class="python"><code>### Specify n and p
+n, p = 100, 0.9
+
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION:
+np.random.binomial(n, p)
+
+# printing 3 outputs from this distribution
+print(np.random.binomial(n, p))
+print(np.random.binomial(n, p))
+print(np.random.binomial(n, p))</code></pre>
+<pre><code>93
+94
+88</code></pre>
+</div>
+<div id="general-discrete-distribution-1" class="section level3">
+<h3><font color = red> General Discrete Distribution </font></h3>
+<p>Example cases: you want to generate random whole numbers or categories, with a specific probability of getting each. e.g., the group size of a party arriving to a restaurant will be 1, 2, 3, or 4 with probabilities .2, .4, .1, and .3, respectively.</p>
+<pre class="python"><code>### Specify your array of possible outcomes and the probability of each outcome
+your_array=[1,2,3,4]
+probability=[.2,.4,.1,.3]
+
+### check if probability array is valid (i.e., this checks that the sum of probabilities equals 1)
+if ((np.sum(probability)&gt;1+1e-6)|(np.sum(probability)&lt;1-1e-6)):
+    print(&quot;Error: Your array is not valid&quot;)
+if len(your_array)!=len(probability):
+    print(&quot;Error: the size of your array and the assigned probabilities do not match&quot;)
+    
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION: 
+np.random.choice(your_array, p=probability)
+
+# printing 3 outputs from this distribution
+print(np.random.choice(your_array, p=probability))
+print(np.random.choice(your_array, p=probability))
+print(np.random.choice(your_array, p=probability))</code></pre>
+<pre><code>2
+2
+1</code></pre>
+</div>
+<div id="continuous-uniform-distibution-1" class="section level3">
+<h3><font color = red> Continuous Uniform Distibution </font></h3>
+<p>Example cases: often used when all you know is the minimum and maximum values a variable can take, and you assume it can take any continuous value in between with equal probability. e.g., a service time that takes anywhere between 5 and 10 minutes.</p>
+<pre class="python"><code>### Specify upper and lower bound
+lower, upper= 5, 10
+
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION: 
+np.random.uniform(lower, upper, 1)
+
+# printing 3 outputs from this distribution
+print(np.random.uniform(lower, upper, 1)) # 1 means that I need to generate 1 random number 
+print(np.random.uniform(lower, upper, 1))
+print(np.random.uniform(lower, upper, 1))</code></pre>
+<pre><code>[5.82251074]
+[5.84700153]
+[8.81755393]</code></pre>
+</div>
+<div id="triangular-distribution-1" class="section level3">
+<h3><font color = red> Triangular Distribution </font></h3>
+<p>Example cases: often used when all you know is the minimum, maximum, and most likely values of a variable e.g., service time that is between 5 and 10 minutes, but most often takes 7 minutes.</p>
+<pre class="python"><code>### Specify min, mode, max
+Min = 5
+Mode= 7
+Max= 10 
+
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION: 
+np.random.triangular(Min,Mode,Max, 1)
+
+# printing 3 outputs from this distribution
+print(np.random.triangular(Min,Mode,Max, 1)) # 1 means that I need to generate 1 random number 
+print(np.random.triangular(Min,Mode,Max, 1))
+print(np.random.triangular(Min,Mode,Max, 1))</code></pre>
+<pre><code>[7.15691271]
+[6.67251991]
+[6.18580362]</code></pre>
+</div>
+<div id="normal-distribution-1" class="section level3">
+<h3><font color = red> Normal Distribution </font></h3>
+<p>Example cases: you want to generate random demand that has a normal distribution with mean 150 and standard deviation 25.</p>
+<pre class="python"><code>### Specify mean and standard deviation
+mu, sigma = 150, 25 
+
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION:
+np.random.normal(mu,sigma,1) 
+
+# printing 3 outputs from this distribution
+print(np.random.normal(mu,sigma,1) ) # 1 means that I need to generate 1 random number 
+print(np.random.normal(mu,sigma,1) ) 
+print(np.random.normal(mu,sigma,1) ) </code></pre>
+<pre><code>[171.96470781]
+[154.90223985]
+[136.76167883]</code></pre>
+</div>
+<div id="lognormal-distribution-1" class="section level3">
+<h3><font color = red> Lognormal Distribution </font></h3>
+<p>Example cases: often used when you want to generate variables with a “long right tail.” e.g., incomes in a population are often well-modeled by a log-normal distribution. e.g., If the ln (natural log) of your data looks like a Normal distribution with mean 4 and standard deviation 1, then you can simulate values as a Lognormal with parameters mean = 4 and sd = 1.</p>
+<pre class="python"><code>### Specify the mean and standard deviation of the natural log of the random variable
+mu, sigma = 4, 1 
+
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION:
+np.random.lognormal(mu, sigma, 1)
+
+# printing 3 outputs from this distribution
+print(np.random.lognormal(mu, sigma, 1))  # 1 means that I need to generate 1 random number 
+print(np.random.lognormal(mu, sigma, 1)) 
+print(np.random.lognormal(mu, sigma, 1)) </code></pre>
+<pre><code>[24.79951668]
+[35.19124152]
+[45.98108506]</code></pre>
+</div>
+<div id="exponential-distribution-1" class="section level3">
+<h3><font color = red> Exponential Distribution </font></h3>
+<p>Example cases: often used when you want to generate random times between arrivals to a queue; e.g., inter-arrival times that are exponentially distributed with an average of 5 minutes between arrivals.</p>
+<pre class="python"><code>### Specify the mean
+mean = 5  
+
+### FUNCTION TO GENERATE RANDOM VARIABLE FROM THIS DISTRIBUTION:
+np.random.exponential(mean, 1)
+
+# printing 3 outputs from this distribution
+print(np.random.exponential(mean, 1)) # 1 means that I need to generate 1 random number 
+print(np.random.exponential(mean, 1)) 
+print(np.random.exponential(mean, 1)) </code></pre>
+<pre><code>[0.50251511]
+[2.1734863]
+[35.19966146]</code></pre>
+</div>
+</div>
+<div id="visualizations-of-these-random-variable-distributions-displaying-the-histogram-of-many-samples-in-blue-along-with-the-probability-density-function-in-red" class="section level2">
+<h2>Visualizations of these random variable distributions: Displaying the histogram of many samples (in blue), along with the probability density function (in red):</h2>
+<hr />
+<div id="discrete-uniform-distribution-2" class="section level3">
+<h3><font color = red> Discrete Uniform Distribution </font></h3>
+<pre class="python"><code>### Specify upper and lower bound
+lower, upper= 1, 10
+
+# Display the probability mass function (pmf):
+fig, ax = plt.subplots(1, 1) # This sets the ground for plotting two things simultaneously
+
+# Here I generate x and y for plotting PDF of uniform
+x =range(lower,upper+1)
+y=(1/len(x)) *np.ones(len(x))
+
+ax.plot(x, y, &#39;bo&#39;, ms=8, label=&#39;discrete uniform pmf&#39;, color=&#39;r&#39;) # These two lines plot the pdf.
+ax.vlines(x, 0, y, colors=&#39;b&#39;, lw=5, alpha=0.5, color=&#39;r&#39;)
+
+#Generate random numbers:
+#### How many random numbers you would like to generate
+N=1000
+result=[]
+for trial in range(N):
+    outcome=np.random.randint(lower,upper+1)
+    result.append(outcome)
+    
+    
+# And compare the histogram:
+bins = np.arange(np.floor(min(x)), np.ceil(max(x))+2)-0.5 
+count, bins, ignored=ax.hist(result, density=True,bins=bins , histtype=&#39;stepfilled&#39;)
+plt.show()</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_22_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+<div id="binomial-distribution-2" class="section level3">
+<h3><font color = red> Binomial Distribution </font></h3>
+<pre class="python"><code>### Specify n and p
+n, p = 100, 0.9
+
+fig, ax = plt.subplots(1, 1)
+
+# Display the probability mass function (pmf):
+x = np.arange(ss.binom.ppf(0.01, n, p),ss.binom.ppf(0.99, n, p))
+ax.plot(x,ss. binom.pmf(x, n, p), &#39;bo&#39;, ms=8, label=&#39;binom pmf&#39;, color=&#39;r&#39;)
+ax.vlines(x, 0, ss.binom.pmf(x, n, p), colors=&#39;b&#39;, lw=5, alpha=0.5, color=&#39;r&#39;)
+
+
+#How many random numbers you would like to generate
+N=1000 #
+result=[]
+for trial in range(N):
+    outcome=np.random.binomial(n, p)
+    result.append(outcome)
+    
+# And compare the histogram:   
+bins = np.arange(np.floor(min(x)), np.ceil(max(x))+2)   -0.5
+count, bins, ignored=ax.hist(result, density=True, bins=bins, histtype=&#39;stepfilled&#39;)
+plt.show()</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_24_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+<div id="general-discrete-distribution-2" class="section level3">
+<h3><font color = red> General Discrete Distribution </font></h3>
+<pre class="python"><code>### Specify your array of possible outcomes and the probability of each outcome
+your_array=[1,2,3,4]
+probability=[.2,.4,.1,.3]
+
+# Display the probability mass function (pmf):
+fig, ax = plt.subplots(1, 1)
+x =your_array
+y=probability
+ax.plot(x, y, &#39;bo&#39;, ms=8, label=&#39;binom pmf&#39;, color=&#39;r&#39;)
+ax.vlines(x, 0, y, colors=&#39;b&#39;, lw=5, alpha=0.5, color=&#39;r&#39;)
+
+
+#### How many random numbers you would like to generate
+N=1000
+
+result=[]
+for trial in range(N):
+    outcome= np.random.choice(your_array, p=probability)
+    result.append(outcome)
+    
+    
+# And compare the histogram:
+bins = np.arange(np.floor(min(x)), np.ceil(max(x))+2)-0.5  
+count, bins, ignored=ax.hist(result,bins=bins, density=True, histtype=&#39;stepfilled&#39;)
+plt.show()</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_26_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+<div id="continuous-uniform-distibution-2" class="section level3">
+<h3><font color = red> Continuous Uniform Distibution </font></h3>
+<pre class="python"><code>### Specify upper and lower bound
+lower, upper= 5, 10
+
+#### How many random numbers you would like to generate
+N=1000
+result = np.random.uniform(lower, upper, N)
+
+### Display the histogram of the samples, along with the probability density function:
+
+#### Histogram
+num_bins=100
+count, bins, ignored = plt.hist(result,num_bins, density=True, align=&#39;mid&#39;)
+
+#### PDF
+x = np.linspace(min(bins), max(bins), 10000)
+width=x[1]-x[0] ### Take the width of each bar
+size=np.size(x)
+pdf =( (1/size) *np.ones(size) )/width
+plt.plot(x, pdf, linewidth=2, color=&#39;r&#39;)
+plt.axis(&#39;tight&#39;)
+plt.show()</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_28_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+<div id="triangular-distribution-2" class="section level3">
+<h3><font color = red> Triangular Distribution </font></h3>
+<pre class="python"><code>### Specify min, mode, max
+Min = 5
+Mode= 7
+Max= 10 
+
+#### How many random numbers you would like to generate
+N=10000
+result  = np.random.triangular(Min,Mode,Max, N)
+
+### Display the histogram of the samples, along with the probability density function:
+
+num_bins=100
+count, bins, ignored = plt.hist(result , num_bins, density=True, align=&#39;mid&#39;)
+x = np.linspace(min(bins), max(bins), 1000)
+line1=2*(x-Min)/((Max-Min)*(Mode-Min))
+line2=2*(Max-x)/((Max-Min)*(Max-Mode))
+pdf = [min(line1[i],line2[i]) for i in range(len(line1))] ### Choose the minimum of two lines
+plt.plot(x, pdf, linewidth=2, color=&#39;r&#39;)
+plt.axis(&#39;tight&#39;)
+plt.show()
+</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_30_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+<div id="normal-distribution-2" class="section level3">
+<h3><font color = red> Normal Distribution </font></h3>
+<pre class="python"><code># Specify the mean and standard deviation
+mu, sigma = 150, 25 
+
+#### How many random numbers you would like to generate
+N=1000
+
+result= np.random.normal(mu,sigma,N) ### generate N random numbers
+
+### Display the histogram of the samples, along with the probability density function:
+num_bins=30
+count, bins, ignored = plt.hist(result, num_bins, density=True)
+plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *np.exp( - (bins - mu)**2 / (2 * sigma**2) ),linewidth=2, color=&#39;r&#39;)
+plt.show()</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_32_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+<div id="lognormal-distribution-2" class="section level3">
+<h3><font color = red> Lognormal Distribution </font></h3>
+<pre class="python"><code>### Specify the mean and standard deviation of the natural log of the random variable
+mu, sigma = 4, 1 
+
+#### How many random numbers you would like to generate
+N=1000
+result = np.random.lognormal(mu, sigma, N)
+
+### Display the histogram of the samples, along with the probability density function:
+
+bins = np.linspace(.1,500) #cutting it off at 500
+count, bins, ignored = plt.hist(result,bins = bins, density=True, align=&#39;mid&#39;)
+x = np.linspace(min(bins), 500, 10000)
+
+pdf = (np.exp(-(np.log(x) - mu)**2 / (2 * sigma**2))/ (x * sigma * np.sqrt(2 * np.pi)))
+plt.plot(x, pdf, linewidth=2, color=&#39;r&#39;)
+plt.axis(&#39;tight&#39;)
+plt.show()</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_34_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+<div id="exponential-distribution-2" class="section level3">
+<h3><font color = red> Exponential Distribution </font></h3>
+<pre class="python"><code>### Specify the mean
+mean = 5
+
+#### How many random numbers you would like to generate
+N=1000
+result = np.random.exponential(mean, N)
+
+### Display the histogram of the samples, along with the probability density function:
+
+num_bins=100
+count, bins, ignored = plt.hist(result , num_bins, density=True, align=&#39;mid&#39;)
+x = np.linspace(min(bins), 800, 10000)
+pdf = 1/mean*np.exp(-1/mean*x)
+plt.plot(x, pdf, linewidth=2, color=&#39;r&#39;)
+plt.axis(&#39;tight&#39;)
+plt.show()</code></pre>
+<div class="figure">
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_36_0.png" alt="png" />
+<p class="caption">png</p>
+</div>
+</div>
+</div>
+
+<div class="footer">
+  <p style="text-align: center;">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+    <br/>
+    Created and maintained by the
+    <br/>
+    <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+    <br/>
+    Licensed under a
+    <br/>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+    <br/>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+  </p>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

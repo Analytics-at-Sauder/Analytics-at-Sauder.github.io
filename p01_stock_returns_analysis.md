@@ -105,7 +105,7 @@ plt.show()
 ```
 
 
-![png](output_9_0.png)
+![png](p01_stock_returns_analysis_files/p01_stock_returns_analysis_9_0.png)
 
 
 ### Stock Return 
@@ -192,7 +192,7 @@ plt.show()
 ```
 
 
-![png](output_16_0.png)
+![png](p01_stock_returns_analysis_files/p01_stock_returns_analysis_16_0.png)
 
 
 The line plot above does not reveal much with regards to variation in trends across the four stocks' prices over the observed one-year time frame. Instead, the return distributions below enable us to quickly determine the differences in the stocks' behaviours over the one-year period.
@@ -206,7 +206,7 @@ plt.show()
 ```
 
 
-![png](output_18_0.png)
+![png](p01_stock_returns_analysis_files/p01_stock_returns_analysis_18_0.png)
 
 
 The volatility of a stock is a measurement of the change in variance in the stock returns over a specific period of time. It is common to compare the volatility of one stock with the volatility of another; this is done in order to get a feel for which stocks have less risk. Comparing the volatility of a stock to the volatility of the market index is also common practice in order to understand the stock’s volatility relative to the overall market. Generally, the higher the stock's volatility, the riskier the investment in that stock, which is insightful for making investment decisions.
@@ -232,7 +232,7 @@ plt.show()
 ```
 
 
-![png](output_20_0.png)
+![png](p01_stock_returns_analysis_files/p01_stock_returns_analysis_20_0.png)
 
 
 A scatter plot is a visual representation of the correlation between two items. It is related to the correlation coefficient, as it is used to indicate whether or not a linear relationship exists between two variables. The scatter plots above illustrate that there is a positive relationship between each pair of stock returns. We can further create a correlation matrix, as below, to check if any pair of our four stocks are correlated.
@@ -245,7 +245,7 @@ plt.show()
 ```
 
 
-![png](output_22_0.png)
+![png](p01_stock_returns_analysis_files/p01_stock_returns_analysis_22_0.png)
 
 
 Based on the correlation matrix, each possible pair of stocks show a positive correlation in stock returns, with the stock returns of Amazon and Microsoft having the highest correlation.
