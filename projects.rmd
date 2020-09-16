@@ -50,6 +50,7 @@ output:
 #### Data Collection
 
 [Web Scraping](p09_web_scraping.html)<br/>
+[Common Probability Distributions](nb0014_common_probability_distributions.html)<br/>
 
 #### Data Manipulation
 

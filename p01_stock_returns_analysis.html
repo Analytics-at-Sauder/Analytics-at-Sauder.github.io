@@ -544,7 +544,7 @@ plt.title(&#39;Price Evolution Comparison&#39;)
 plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_9_0.png" alt="png" />
+<img src="p01_stock_returns_analysis_files/p01_stock_returns_analysis_9_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <div id="stock-return" class="section level3">
@@ -608,7 +608,7 @@ ret.plot()
 plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_16_0.png" alt="png" />
+<img src="p01_stock_returns_analysis_files/p01_stock_returns_analysis_16_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>The line plot above does not reveal much with regards to variation in trends across the four stocks’ prices over the observed one-year time frame. Instead, the return distributions below enable us to quickly determine the differences in the stocks’ behaviours over the one-year period.</p>
@@ -617,7 +617,7 @@ ret.hist(bins=50, sharex=True, figsize=(12,8))
 # Show the resulting plot
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_18_0.png" alt="png" />
+<img src="p01_stock_returns_analysis_files/p01_stock_returns_analysis_18_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>The volatility of a stock is a measurement of the change in variance in the stock returns over a specific period of time. It is common to compare the volatility of one stock with the volatility of another; this is done in order to get a feel for which stocks have less risk. Comparing the volatility of a stock to the volatility of the market index is also common practice in order to understand the stock’s volatility relative to the overall market. Generally, the higher the stock’s volatility, the riskier the investment in that stock, which is insightful for making investment decisions.</p>
@@ -634,7 +634,7 @@ scatter_matrix(ret, diagonal=&#39;kde&#39;, alpha=0.8,figsize=(12,12))
 # Show the plot
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_20_0.png" alt="png" />
+<img src="p01_stock_returns_analysis_files/p01_stock_returns_analysis_20_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>A scatter plot is a visual representation of the correlation between two items. It is related to the correlation coefficient, as it is used to indicate whether or not a linear relationship exists between two variables. The scatter plots above illustrate that there is a positive relationship between each pair of stock returns. We can further create a correlation matrix, as below, to check if any pair of our four stocks are correlated.</p>
@@ -642,7 +642,7 @@ plt.show()</code></pre>
 sns.heatmap(ret.corr(), vmin=-1,cmap=sns.diverging_palette(20, 220, n=200), vmax=1, center= 0,mask=mask)
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_22_0.png" alt="png" />
+<img src="p01_stock_returns_analysis_files/p01_stock_returns_analysis_22_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>Based on the correlation matrix, each possible pair of stocks show a positive correlation in stock returns, with the stock returns of Amazon and Microsoft having the highest correlation.</p>
