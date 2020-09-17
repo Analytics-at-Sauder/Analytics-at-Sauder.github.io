@@ -11,7 +11,7 @@
 
 
 
-<title>p13_critical_path_analysis.utf8</title>
+<title>nb0013_critical_path_analysis.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -449,34 +449,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Critical Path Analysis</h2>
 <div id="author-charlie-cao" class="section level4">
 <h4>Author: Charlie Cao</h4>
-<p>In this notebook, we are going to explore ways that one can use python to look for and visualize critical paths in projects. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_13_Critical_Path_Analysis&urlpath=tree%2FProject_13_Critical_Path_Analysis%2Fp13_critical_path_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_13_Critical_Path_Analysis&urlpath=tree%2FProject_13_Critical_Path_Analysis%2Fp13_critical_path_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_13_Critical_Path_Analysis/master?filepath=p13_critical_path_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>In this Notebook, we are going to explore ways we can use Python to look for and visualize critical paths in projects. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0013_Critical_Path_Analysis&urlpath=tree%2FNB0013_Critical_Path_Analysis%2Fnb0013_critical_path_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0013_Critical_Path_Analysis&urlpath=tree%2FNB0013_Critical_Path_Analysis%2Fnb0013_critical_path_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0013_Critical_Path_Analysis/master?filepath=nb0013_critical_path_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="background" class="section level2">
 <h2>Background</h2>
 <hr />
-<p>Critical path is essentially the bottleneck of a project. Typically, in Project Management, the various tasks and dependicies would first be analyzed and identified using Work Breakdown Structure (WBS) and Program Evaluation and Review Technique (PERT) before they are pipelined into Critical Path Analysis (CPA). In order to reduce the amount of time that a project takes, a manager should seek to shorten tasks along the critical path. One way of finding the critical path is by identifying the path with 0 slack (or float). Slack is a buffer where delay of task completion might not always affect the entire project, and it is calculated by subtracting the earliest finishing time (EF) from the latest finishing time (LF), or equivalently, subtracting the earliest start time (ES) from the latest start time (LS). You could read more about CPA in this <a href="https://hbr.org/1963/09/the-abcs-of-the-critical-path-method">HBR article</a></p>
+<p>A critical path is essentially the bottleneck of a project. Typically, in Project Management, the various tasks and dependicies would first be analyzed and identified using Work Breakdown Structure (WBS) and Program Evaluation and Review Technique (PERT) before they are pipelined into Critical Path Analysis (CPA). In order to reduce the amount of time that a project takes, a manager should seek to shorten tasks along the critical path. One way of finding the critical path is by identifying the path with zero slack (or float). Slack is a buffer where a delay in task completion may not affect the timeline of the entire project, and it is calculated by subtracting the earliest finishing time (EF) from the latest finishing time (LF), or equivalently, subtracting the earliest start time (ES) from the latest start time (LS). You can read more about CPA in this <a href="https://hbr.org/1963/09/the-abcs-of-the-critical-path-method">HBR article</a></p>
 <p>Let’s consider the following example:</p>
 <ul>
-<li>Task A requires 3 days, and it can be started at any time</li>
-<li>Task B requires 5 days, and it can also be started at any time</li>
-<li>Task C requires 2 day, and it can only be started after both Task A and B are finished</li>
-<li>Task D requires 3 days, and it can start as soon as Task A is finished</li>
-<li>Task E requires 5 days, and it start as soon as Task C and D are finished</li>
+<li>Task A requires 3 days, and it can be started at any time.</li>
+<li>Task B requires 5 days, and it can also be started at any time.</li>
+<li>Task C requires 2 days, and it can only start after <em>both</em> Task A and Task B are finished.</li>
+<li>Task D requires 3 days, and it can only start after Task A is finished.</li>
+<li>Task E requires 5 days, and it can only start after <em>both</em> Task C and Task D are finished.</li>
 </ul>
 <div class="figure">
-<img src="images/p13_01.png" alt="Critical Path" />
+<img src="nb0013_images/p13_01.png" alt="Critical Path" />
 <p class="caption">Critical Path</p>
 </div>
-<p>By calculating the slack of each task, we can quickly identify that the critical path is <em>B -&gt; C -&gt; E</em>, since there is 0 slack along these three tasks. However, this analysis gets much more complicated when managers are presented with more tasks for each project. At the same time, when certain tasks are compressed, the critical path might change. It seems mechanical going through the same process repeatedly to look for critical paths, and we want to find ways to eliminate duplicate work. Therefore, we are going to experiment with some packages that can be used to help project managers visualize the dependencies of different projects, identify the critical path, and find out how the path changes as completion time is reduced for different tasks.</p>
+<p>By calculating the slack of each task, we can quickly identify that the critical path is <em>B -&gt; C -&gt; E</em>, since there is zero slack along the path connecting these three tasks. While the critical path was fairly simple to identify here, this analysis becomes much more complicated when managers are presented with more tasks for each project. Furthermore, when certain tasks are compressed, the critical path might change. It would be incredibly mechanical and tedious to repeat this process to identify the critical path for every single project we will ever face; therefore, in this Project, we will experiment with some packages that can be used to help Project Managers visualize the dependencies of different projects, identify the critical path, and understand how the critical path changes as completion times of different tasks are reduced.</p>
 </div>
 <div id="finding-and-visualizing-critical-path-in-python" class="section level2">
 <h2>Finding and Visualizing Critical Path in Python</h2>
 <hr />
-<p>In this notebook, we are going to use two packages, <code>networkx</code> (dependent on <code>matplotlib</code>) and <code>criticalpath</code> (install using <a href="https://docs.python.org/3/installing/index.html">pip</a> if you do not have these packages yet). We encourage you to read the documentations for <a href="https://networkx.github.io/documentation/networkx-2.4/">networkx</a>, a useful package for visualizing networks, as well as <a href="https://pypi.org/project/criticalpath/">criticalpath</a>, a simple developer package specifically designed to look for the critical path in a series of processes. First, let’s import the packages:</p>
+<p>In this Notebook, we are going to use two packages, <code>networkx</code> (dependent on <code>matplotlib</code>) and <code>criticalpath</code> (install using <a href="https://docs.python.org/3/installing/index.html">pip</a> if you do not have these packages yet). We encourage you to read the documentations for <a href="https://networkx.github.io/documentation/networkx-2.4/">networkx</a>, a useful package for visualizing networks, as well as <a href="https://pypi.org/project/criticalpath/">criticalpath</a>, a simple developer package specifically designed to look for the critical path in a series of processes. First, let’s import the packages:</p>
 <pre class="python"><code>import pandas as pd
 import datetime
 
@@ -487,7 +487,7 @@ import plotly.express as px
 from IPython.display import Image</code></pre>
 <div id="set-up-the-tasks-and-visualize-the-dependencies" class="section level3">
 <h3>Set Up the Tasks and Visualize the Dependencies</h3>
-<p>Before we start looking for the critical path, we have to set up a task list as well as the sequence and dependencies of the tasks. We do so by creating two lists of tuples. In the task list, each tuple contains the name of the task and any attribute of the task; the attribute(s) should be presented in a dictionary. In the dependency list, each tuple contains two tasks, with the second one dependent on the first. After the task and dependency lists are setup, we could initialize a directed graph (with arrows) and import the two lists:</p>
+<p>Before we start looking for the critical path, we have to set up a task list, as well as the sequence and dependencies of the tasks. We do so by creating two lists of tuples. In the task list, each tuple contains the name of the task and any attribute(s) of the task; the attribute(s) should be presented in a dictionary. In the dependency list, each tuple contains two tasks, with the second one dependent on the first. After the task and dependency lists are setup, we can initialize a directed graph (with arrows) and import the two lists:</p>
 <pre class="python"><code># set up the tasks:
 tasks = [(&quot;A&quot;, {&quot;Duration&quot;: 3}), 
          (&quot;B&quot;, {&quot;Duration&quot;: 5}), 
@@ -508,7 +508,7 @@ G = nx.DiGraph()
 # add tasks and dependencies (edges)
 G.add_nodes_from(tasks)
 G.add_edges_from(dependencies)</code></pre>
-<p>One thing to notice is that, by default, <code>networkx</code> randomly position the nodes every time it generates a plot. This is technically not a problem as long as the orders of the tasks remain the same; however, people usually want their graphs to be a little bit more predictable, and to make the graphs easier to understand the remember, it is a good idea to specify the (x, y) coordinates of the nodes (it might be helpful for you to draw it on a piece of paper first):</p>
+<p>One thing to notice is that, by default, <code>networkx</code> randomly positions the nodes every time it generates a plot. This is technically not a problem, as long as the ordering of the tasks remain the same; however, we usually want their graphs to be predictable and to understand. To do so, it is a good idea to specify the (x, y) coordinates of the nodes. It may be helpful for you to draw the plot on a piece of paper first.</p>
 <pre class="python"><code># set up the (arbitrary) positions of the tasks (nodes):
 pos_nodes = {&quot;A&quot;: (1, 3), 
              &quot;B&quot;: (1, 1), 
@@ -531,7 +531,7 @@ nx.draw_networkx_labels(G, pos=pos_attrs, labels=attrs)
 # set a little margin (padding) for the graph so the labels are not cut off
 plt.margins(0.1)</code></pre>
 <div class="figure">
-<img src="output_5_0.png" alt="png" />
+<img src="nb0013_critical_path_analysis_files/nb0013_critical_path_analysis_5_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -568,7 +568,7 @@ The current project duration is: 12 days</code></pre>
 </div>
 <div id="visualize-the-critical-path" class="section level3">
 <h3>Visualize the Critical Path</h3>
-<p>A picture is worth a thousand words (most of the time), and it would be much faster for people to understand which tasks can be crunched and the impact of reducing these tasks through a visualized network. Therefore, we bring back the graph from above, but this time we layer on top our current critical path:</p>
+<p>A picture is worth a thousand words, and it would be much faster for people to understand which tasks can be compressed, and the impact of reducing these tasks, through a visualized network. Therefore, we bring back the graph from above, but now, we layer our critical path on top of the plot we had earlier:</p>
 <pre class="python"><code># create a list of edges using the current critical path list:
 crit_edges = [(n, crit_path[i+1]) for i, n in enumerate(crit_path[:-1])]
 
@@ -582,13 +582,13 @@ nx.draw_networkx_edges(G, pos=pos_nodes, edgelist=crit_edges, width=10, alpha=0.
 # again, leaving some margin so the labels are not cut off
 plt.margins(0.1)</code></pre>
 <div class="figure">
-<img src="output_11_0.png" alt="png" />
+<img src="nb0013_critical_path_analysis_files/nb0013_critical_path_analysis_11_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
-<p>Looking for the critical path can easily become a hassle in a big project with ever changing timelines of various tasks. The <code>networkx</code> and <code>criticalpath</code> packages make it so much faster and easier to find and visualize the path that can use the most improvement. Now that you know the basics, we have created a challenge for you below so that you could apply these techniques to a more complicated problem by yourself. Don’t forget to go back and read the documentations of the different packages if you want to explore different ways of solving this problem!</p>
+<p>Looking for the critical path can easily become a hassle in big projects with ever changing timelines of various tasks. The <code>networkx</code> and <code>criticalpath</code> packages allow us to find and visualize the critical path - the path that can use the most improvement - much more quickly and easily. Now that we have covered the basics, we have created a challenge for you below so that you can apply these techniques to a more complicated problem by yourself. Do not forget to go back and read the documentations of the different packages, if you want to explore different ways of solving this problem!</p>
 <div id="gantt-charts" class="section level4">
 <h4>Gantt Charts</h4>
-<p>Another way of visualizing critical path is by plotting out the Gantt Chart</p>
+<p>Another way of visualizing the critical path is by plotting out the project’s Gantt Chart, which help to visualize the timeline of the tasks, including their start time, their duration, their end times, and their dependencies:</p>
 <pre class="python"><code>proj_startdate = date.today()
 
 proj_schedule = pd.DataFrame([dict(Task = key, 
@@ -734,14 +734,14 @@ Critical Path
 fig.update_yaxes(autorange=&quot;reversed&quot;) # otherwise tasks are listed from the bottom up
 Image(fig.to_image(format=&quot;png&quot;))</code></pre>
 <div class="figure">
-<img src="output_14_0.png" alt="png" />
+<img src="nb0013_critical_path_analysis_files/nb0013_critical_path_analysis_14_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 </div>
 </div>
 </div>
-<div id="reference" class="section level2">
-<h2>Reference</h2>
+<div id="references" class="section level2">
+<h2>References</h2>
 <hr />
 <p><a href="https://hbr.org/1963/09/the-abcs-of-the-critical-path-method" class="uri">https://hbr.org/1963/09/the-abcs-of-the-critical-path-method</a> <br> <a href="https://medium.com/@yujeshmalekushrestha/the-critical-path-analysis-in-project-management-94c75f77932f" class="uri">https://medium.com/@yujeshmalekushrestha/the-critical-path-analysis-in-project-management-94c75f77932f</a></p>
 </div>

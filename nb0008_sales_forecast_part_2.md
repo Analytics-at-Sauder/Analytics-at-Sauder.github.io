@@ -2,15 +2,16 @@
 
 #### Author: Charlie Cao
 
-This is the second of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+This is the second of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor Notebook and follow along. You can also download this notebook along with any accompanying data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
-<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
 
-<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_08_Sales_Forecast/master?filepath=p08_sales_forecast_part_2.ipynb" target="_blank" class="button">Launch Binder</a>
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0008_Sales_Forecast/master?filepath=nb0008_sales_forecast_part_2.ipynb" target="_blank" class="button">Launch Binder</a>
 
 ## Background
+
 ---
 
 The previous Notebook provides a detailed guide on the exploration and manipulation of data, while this Notebook will be centered around the modeling process itself. Understanding the data is important for analytics, and we recommend that you read the first Notebook (Part 1) prior to diving into modeling in order to gain a better grasp of our large and messy data. The datasets that we are using consist of sales records for a retailer with 45 stores, each containing several departments. They are already included in the GitHub Repository where this Jupyter Notebook is located (please see the "Data" folder), but you can also find them on [this Kaggle page](https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv). 
@@ -37,9 +38,9 @@ from ipywidgets import interact
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 
 # import data
-df_sales = pd.read_csv('Data/sales.csv')
-df_features = pd.read_csv('Data/features.csv')
-df_stores = pd.read_csv('Data/stores.csv')
+df_sales = pd.read_csv('nb0008_data/sales.csv')
+df_features = pd.read_csv('nb0008_data/features.csv')
+df_stores = pd.read_csv('nb0008_data/stores.csv')
 
 # converting the date column (initally stored as strings) to dates
 df_sales['Date'] = pd.to_datetime(df_sales['Date'], format='%d/%m/%Y')
@@ -348,7 +349,7 @@ ax.set(title='Weekly Sales', ylabel='');
 ```
 
 
-![png](output_8_0.png)
+![png](nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_8_0.png)
 
 
 #### Holidays
@@ -435,7 +436,7 @@ model.fit(sales_s1d1_train)
 
 # Warning messages might appear in our case because of limited data
 ```
-
+```
     WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
     WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
     WARNING:pystan:10 of 200 iterations saturated the maximum tree depth of 10 (5 %)
@@ -446,7 +447,7 @@ model.fit(sales_s1d1_train)
 
 
     <fbprophet.forecaster.Prophet at 0x1e5ad4e1d88>
-
+```
 
 
 ## Testing the Model
@@ -672,7 +673,7 @@ ax.set(title='Weekly Sales', ylabel='');
 ```
 
 
-![png](output_15_0.png)
+![png](nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_15_0.png)
 
 
 We can see right away that our forecast (green line) is consistently underestimating the observations (orange line), even though the observations are all within the 95% confidence interval of predictions. Combined with the component plots below (log scale), we can also see that the model includes a decreasing trend, and there is a large amount of uncertainty in the trend component as time goes on, as illustrated by the expanding confidence interval (shaded area). Holidays, on the other hand, do not seem to affect weekly sales for Department 1 in Store 1.
@@ -683,7 +684,7 @@ model.plot_components(forecast, figsize=(13,7));
 ```
 
 
-![png](output_17_0.png)
+![png](nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_17_0.png)
 
 
 ### Residual Diagnosis
@@ -703,10 +704,10 @@ errors_std = forecast_test['errors'].std()
 print('Residual mean: {:.2f}'.format(errors_mean))
 print('Residual standard deviation: {:.2f}'.format(errors_std))
 ```
-
+```
     Residual mean: -6369.44
     Residual standard deviation: 5974.84
-    
+```    
 
 
 ```python
@@ -743,7 +744,7 @@ plt.show()
 ```
 
 
-![png](output_21_0.png)
+![png](nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_21_0.png)
 
 
 
@@ -894,12 +895,12 @@ forecast.loc[:,'exp_yhat_lower'] = np.exp(forecast.loc[:,'yhat_lower'])
 display(forecast.tail())
 # Scroll to the right for back-transformed forecasts
 ```
-
+```
     WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
     WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
     WARNING:pystan:8 of 200 iterations saturated the maximum tree depth of 10 (4 %)
     WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation
-    
+```    
 
 
 <div>
@@ -1096,7 +1097,7 @@ ax.set(title='Weekly Sales', ylabel='');
 ```
 
 
-![png](output_27_0.png)
+![png](nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_27_0.png)
 
 
 ## Next Steps

@@ -2,13 +2,13 @@
 
 #### Author: Charlie Cao
 
-This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook along with any accompanying data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
-<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
+<a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
-<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
+<a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a>
 
-<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_08_Sales_Forecast/master?filepath=p08_sales_forecast_part_1.ipynb" target="_blank" class="button">Launch Binder</a>
+<a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0008_Sales_Forecast/master?filepath=nb0008_sales_forecast_part_1.ipynb" target="_blank" class="button">Launch Binder</a>
 
 ## Background
 
@@ -29,9 +29,9 @@ import seaborn as sns
 # ipywidgets are used to make interactive contents in Jupyter notebooks
 from ipywidgets import interact
 
-df_sales = pd.read_csv('Data/sales.csv')
-df_features = pd.read_csv('Data/features.csv')
-df_stores = pd.read_csv('Data/stores.csv')
+df_sales = pd.read_csv('nb0008_data/sales.csv')
+df_features = pd.read_csv('nb0008_data/features.csv')
+df_stores = pd.read_csv('nb0008_data/stores.csv')
 
 # converting the date column (initally stored as strings) to dates
 df_sales['Date'] = pd.to_datetime(df_sales['Date'], format='%d/%m/%Y')
@@ -174,12 +174,12 @@ plt.show()
 </table>
 </div>
 
-
+```
     CAUTION: 0.30% of the `Weekly_Sales` column is negative.
     
+```
 
-
-![png](output_6_2.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_6_2.png)
 
 
 
@@ -264,7 +264,7 @@ plt.show()
 
 
 
-![png](output_7_1.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_7_1.png)
 
 
 From the above charts, we can see that:
@@ -285,7 +285,7 @@ Now let's move on to the `features` dataframe, which has 12 fields (columns) and
 ```python
 print(df_features.info())
 ```
-
+```
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 8190 entries, 0 to 8189
     Data columns (total 12 columns):
@@ -306,7 +306,7 @@ print(df_features.info())
     dtypes: bool(1), category(1), datetime64[ns](1), float64(9)
     memory usage: 657.6 KB
     None
-    
+```    
 
 
 ```python
@@ -870,16 +870,16 @@ plt.show()
 </table>
 </div>
 
-
+```
     CAUTION: 0.10% of MarkDown1 (non-null) is negative.
     CAUTION: 0.86% of MarkDown2 (non-null) is negative.
     CAUTION: 0.36% of MarkDown3 (non-null) is negative.
     CAUTION: 0.00% of MarkDown4 (non-null) is negative.
     CAUTION: 0.05% of MarkDown5 (non-null) is negative.
-    
+```    
 
 
-![png](output_11_2.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_11_2.png)
 
 
 
@@ -894,7 +894,7 @@ plt.show()
 ```
 
 
-![png](output_12_0.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_12_0.png)
 
 
 
@@ -969,7 +969,7 @@ plt.show()
 
 
 
-![png](output_13_1.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_13_1.png)
 
 
 We can see from the above tables and plots that:
@@ -991,7 +991,7 @@ Last but not least, let's take a look at the `stores` dataframe, which only has 
 ```python
 display(df_stores.info())
 ```
-
+```
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 45 entries, 0 to 44
     Data columns (total 3 columns):
@@ -1006,7 +1006,7 @@ display(df_stores.info())
 
 
     None
-
+```
 
 
 ```python
@@ -1087,7 +1087,7 @@ plt.show()
 
 
 
-![png](output_16_1.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_16_1.png)
 
 
 The `stores` dataframe appears to be smaller and simpler. We can see that:
@@ -1275,7 +1275,7 @@ plt.show()
 ```
 
 
-![png](output_20_0.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_20_0.png)
 
 
 At the beginning of this Notebook, we saw that (by randomly inspecting different combinations) seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales over time, while others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments. 
@@ -1303,7 +1303,7 @@ plt.show()
 ```
 
 
-![png](output_22_0.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_22_0.png)
 
 
 
@@ -1329,5 +1329,5 @@ plt.show()
 ```
 
 
-![png](output_23_0.png)
+![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_23_0.png)
 

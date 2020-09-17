@@ -23,7 +23,7 @@ output:
 
 #### Healthcare
 
-[ER Resource Planning](p05_er_resource_planning.html)<br/>
+[ER Resource Planning](nb0005_er_resource_planning.html)<br/>
 
 #### Marketing
 
@@ -35,15 +35,15 @@ output:
 
 #### Project Management
 
-[Critical Path Analysis](p13_critical_path_analysis.html)<br/>
-[Project Risk Assessment](p03_project_risk_assessment.html)<br/>
+[Critical Path Analysis](nb0013_critical_path_analysis.html)<br/>
+[Project Risk Assessment](nb0003_project_risk_assessment.html)<br/>
 
 #### Supply Chain Management
 
 [Inventory Decision Analysis](p12_inventory_decision_analysis.html)<br/>
 [Inventory Management](p04_inventory_management.html)<br/>
-[Sales Forecast - Part I](p08_sales_forecast_part_1.html)<br/>
-[Sales Forecast - Part II](p08_sales_forecast_part_2.html)<br/>
+[Sales Forecast - Part I](nb0008_sales_forecast_part_1.html)<br/>
+[Sales Forecast - Part II](nb0008_sales_forecast_part_2.html)<br/>
 
 ### By Skills
 
@@ -59,12 +59,12 @@ output:
 
 #### Discrete Event Simulation
 
-[ER Resource Planning](p05_er_resource_planning.html)<br/>
+[ER Resource Planning](nb0005_er_resource_planning.html)<br/>
 
 #### Forecasting
 
-[Sales Forecast - Part I](p08_sales_forecast_part_1.html)<br/>
-[Sales Forecast - Part II](p08_sales_forecast_part_2.html)<br/>
+[Sales Forecast - Part I](nb0008_sales_forecast_part_1.html)<br/>
+[Sales Forecast - Part II](nb0008_sales_forecast_part_2.html)<br/>
 
 #### Linear Programming/Optimization
 
@@ -82,5 +82,5 @@ output:
 #### Monte Carlo Simulation
 
 [Inventory Management](p04_inventory_management.html)<br/>
-[Project Risk Assessment](p03_project_risk_assessment.html)<br/>
+[Project Risk Assessment](nb0003_project_risk_assessment.html)<br/>
 [Inventory Decision Analysis](p12_inventory_decision_analysis.html)<br/>
