@@ -11,7 +11,7 @@
 
 
 
-<title>p08_sales_forecast_part_1.utf8</title>
+<title>nb0008_sales_forecast_part_1.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -449,10 +449,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Sales Forecast (Part 1)</h2>
 <div id="author-charlie-cao" class="section level4">
 <h4>Author: Charlie Cao</h4>
-<p>This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_08_Sales_Forecast&urlpath=tree%2FProject_08_Sales_Forecast%2Fp08_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_08_Sales_Forecast/master?filepath=p08_sales_forecast_part_1.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0008_Sales_Forecast/master?filepath=nb0008_sales_forecast_part_1.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="background" class="section level2">
@@ -469,9 +469,9 @@ import seaborn as sns
 # ipywidgets are used to make interactive contents in Jupyter notebooks
 from ipywidgets import interact
 
-df_sales = pd.read_csv(&#39;Data/sales.csv&#39;)
-df_features = pd.read_csv(&#39;Data/features.csv&#39;)
-df_stores = pd.read_csv(&#39;Data/stores.csv&#39;)
+df_sales = pd.read_csv(&#39;nb0008_data/sales.csv&#39;)
+df_features = pd.read_csv(&#39;nb0008_data/features.csv&#39;)
+df_stores = pd.read_csv(&#39;nb0008_data/stores.csv&#39;)
 
 # converting the date column (initally stored as strings) to dates
 df_sales[&#39;Date&#39;] = pd.to_datetime(df_sales[&#39;Date&#39;], format=&#39;%d/%m/%Y&#39;)
@@ -626,9 +626,10 @@ Weekly_Sales
 </tbody>
 </table>
 </div>
-<p>CAUTION: 0.30% of the <code>Weekly_Sales</code> column is negative.</p>
+<pre><code>    CAUTION: 0.30% of the `Weekly_Sales` column is negative.
+    </code></pre>
 <div class="figure">
-<img src="output_6_2.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_6_2.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>display(df_sales.drop(&#39;Weekly_Sales&#39;, axis=1).describe().transpose())
@@ -775,7 +776,7 @@ NaT
 </table>
 </div>
 <div class="figure">
-<img src="output_7_1.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_7_1.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>From the above charts, we can see that:</p>
@@ -793,20 +794,26 @@ NaT
 <h4><code>Features</code></h4>
 <p>Now let’s move on to the <code>features</code> dataframe, which has 12 fields (columns) and 8,190 observations (rows). Note that, again, we had mannually changed the data types for the ‘Store’ and ‘Date’ columns when we imported the data.</p>
 <pre class="python"><code>print(df_features.info())</code></pre>
-<p>&lt;class ‘pandas.core.frame.DataFrame’&gt; RangeIndex: 8190 entries, 0 to 8189 Data columns (total 12 columns): # Column Non-Null Count Dtype<br />
-— —— ————– —–<br />
-0 Store 8190 non-null category<br />
-1 Date 8190 non-null datetime64[ns] 2 Temperature 8190 non-null float64<br />
-3 Fuel_Price 8190 non-null float64<br />
-4 MarkDown1 4032 non-null float64<br />
-5 MarkDown2 2921 non-null float64<br />
-6 MarkDown3 3613 non-null float64<br />
-7 MarkDown4 3464 non-null float64<br />
-8 MarkDown5 4050 non-null float64<br />
-9 CPI 7605 non-null float64<br />
-10 Unemployment 7605 non-null float64<br />
-11 IsHoliday 8190 non-null bool<br />
-dtypes: bool(1), category(1), datetime64<a href="1">ns</a>, float64(9) memory usage: 657.6 KB None</p>
+<pre><code>    &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+    RangeIndex: 8190 entries, 0 to 8189
+    Data columns (total 12 columns):
+     #   Column        Non-Null Count  Dtype         
+    ---  ------        --------------  -----         
+     0   Store         8190 non-null   category      
+     1   Date          8190 non-null   datetime64[ns]
+     2   Temperature   8190 non-null   float64       
+     3   Fuel_Price    8190 non-null   float64       
+     4   MarkDown1     4032 non-null   float64       
+     5   MarkDown2     2921 non-null   float64       
+     6   MarkDown3     3613 non-null   float64       
+     7   MarkDown4     3464 non-null   float64       
+     8   MarkDown5     4050 non-null   float64       
+     9   CPI           7605 non-null   float64       
+     10  Unemployment  7605 non-null   float64       
+     11  IsHoliday     8190 non-null   bool          
+    dtypes: bool(1), category(1), datetime64[ns](1), float64(9)
+    memory usage: 657.6 KB
+    None</code></pre>
 <pre class="python"><code># inspecting rows containing NaN values
 display(df_features[df_features[&#39;CPI&#39;].isnull()])
 display(df_features[df_features[&#39;Unemployment&#39;].isnull()])</code></pre>
@@ -2158,9 +2165,13 @@ max
 </tbody>
 </table>
 </div>
-<p>CAUTION: 0.10% of MarkDown1 (non-null) is negative. CAUTION: 0.86% of MarkDown2 (non-null) is negative. CAUTION: 0.36% of MarkDown3 (non-null) is negative. CAUTION: 0.00% of MarkDown4 (non-null) is negative. CAUTION: 0.05% of MarkDown5 (non-null) is negative.</p>
+<pre><code>    CAUTION: 0.10% of MarkDown1 (non-null) is negative.
+    CAUTION: 0.86% of MarkDown2 (non-null) is negative.
+    CAUTION: 0.36% of MarkDown3 (non-null) is negative.
+    CAUTION: 0.00% of MarkDown4 (non-null) is negative.
+    CAUTION: 0.05% of MarkDown5 (non-null) is negative.</code></pre>
 <div class="figure">
-<img src="output_11_2.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_11_2.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>fig, axes = plt.subplots(1,2,figsize=(15,5))
@@ -2171,7 +2182,7 @@ fig.autofmt_xdate(rotation=-30, ha=&#39;left&#39;)
 
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_12_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_12_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>display(df_features[[&#39;Store&#39;, &#39;Date&#39;, &#39;IsHoliday&#39;]].describe().transpose())
@@ -2294,7 +2305,7 @@ NaT
 </table>
 </div>
 <div class="figure">
-<img src="output_13_1.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_13_1.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>We can see from the above tables and plots that:</p>
@@ -2313,11 +2324,20 @@ NaT
 <h4><code>Stores</code></h4>
 <p>Last but not least, let’s take a look at the <code>stores</code> dataframe, which only has three fields (columns) and 45 observations (rows). Again, note that we had mannually changed the data types for the ‘Store’ and ‘Type’ columns when we imported the data.</p>
 <pre class="python"><code>display(df_stores.info())</code></pre>
-<p>&lt;class ‘pandas.core.frame.DataFrame’&gt; RangeIndex: 45 entries, 0 to 44 Data columns (total 3 columns): # Column Non-Null Count Dtype<br />
-— —— ————– —–<br />
-0 Store 45 non-null category 1 Type 45 non-null category 2 Size 45 non-null int64<br />
-dtypes: category(2), int64(1) memory usage: 2.3 KB</p>
-<p>None</p>
+<pre><code>    &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+    RangeIndex: 45 entries, 0 to 44
+    Data columns (total 3 columns):
+     #   Column  Non-Null Count  Dtype   
+    ---  ------  --------------  -----   
+     0   Store   45 non-null     category
+     1   Type    45 non-null     category
+     2   Size    45 non-null     int64   
+    dtypes: category(2), int64(1)
+    memory usage: 2.3 KB
+    
+
+
+    None</code></pre>
 <pre class="python"><code>display(pd.DataFrame(df_stores.drop(&#39;Store&#39;, axis=1).describe(include=&#39;all&#39;)).transpose().round(2))
 
 fig, axes = plt.subplots(1,3, figsize=(20,4))
@@ -2461,7 +2481,7 @@ NaN
 </table>
 </div>
 <div class="figure">
-<img src="output_16_1.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_16_1.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>The <code>stores</code> dataframe appears to be smaller and simpler. We can see that:</p>
@@ -2850,7 +2870,7 @@ sns.stripplot(x=&#39;Type&#39;, y=&#39;Weekly_Sales&#39;, jitter=0.4, alpha=0.1,
 
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_20_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_20_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <p>At the beginning of this Notebook, we saw that (by randomly inspecting different combinations) seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales over time, while others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments.</p>
@@ -2872,7 +2892,7 @@ for i in range(9):
         
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_22_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_22_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>fig, ax = plt.subplots(20, 5, sharex=&#39;col&#39;, sharey=&#39;row&#39;, figsize=(20, 50), dpi=100)
@@ -2894,7 +2914,7 @@ for i in range(20):
             dept_index += 1
 plt.show()</code></pre>
 <div class="figure">
-<img src="output_23_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_23_0.png" alt="png" />
 <p class="caption">png</p>
 </div>
 </div>

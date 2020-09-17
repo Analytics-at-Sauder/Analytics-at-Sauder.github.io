@@ -11,7 +11,7 @@
 
 
 
-<title>p03_project_risk_assessment.utf8</title>
+<title>nb0003_project_risk_assessment.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -449,35 +449,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Project Risk Assessment</h2>
 <div id="author-charlie-cao" class="section level4">
 <h4>Author: Charlie Cao</h4>
-<p>In this notebook, we are going to explore ways that one can apply Monte Carlo Simulation in predictiong project completion date and assess project risk. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook along with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_03_Project_Risk_Assessment&urlpath=tree%2FProject_03_Project_Risk_Assessment%2Fp03_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_03_Project_Risk_Assessment&urlpath=tree%2FProject_03_Project_Risk_Assessment%2Fp03_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_03_Project_Risk_Assessment/master?filepath=p03_project_risk_assessment.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>In this Notebook, we are going to explore ways to apply Monte Carlo Simulations in predicting a project’s completion date and assessing a project’s risk. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0003_Project_Risk_Assessment&urlpath=tree%2FNB0003_Project_Risk_Assessment%2Fnb0003_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0003_Project_Risk_Assessment&urlpath=tree%2FNB0003_Project_Risk_Assessment%2Fnb0003_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0003_Project_Risk_Assessment/master?filepath=nb0003_project_risk_assessment.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="background" class="section level2">
 <h2>Background</h2>
 <hr />
-<p>Monte Carlo Simulation is a great tool for business decision making under uncertainty, and it is well known in the Project Management domain. Instead of providing a simple predicted average project completion time, one could find a range of possible dates for completion. When you give an average completion prediction, there is a chance as high as 50% that one is going miss the deadline; however, no one likes to hear pessimistic estimates which would likely lead to the project bid won by a different team with a lower estimate (whether that is realistic or not). Monte Carlo Simulation in this case, could give you an idea of the possible distribution of the project completion time, which would then allow you to quote and make decisions that incorporates uncertainty.</p>
+<p>A Monte Carlo Simulation is a great tool for making business decisions under uncertainty, and it is well known in the Project Management domain. Rather than simply providing a predicted average project completion time, we can instead find a range of possible completion dates using a Monte Carlo Simulation. With a simple prediction of the average completion time, there is a chance as high as 50% that the deadline will be missed. On the other hand, to be conservative with a predicted completion time could likely lead us to lose the project bid to a different team with a lower estimate (whether that is a realistic one or not), because no one likes to hear pessimistic estimates. Monte Carlo Simulations, in this case, can give us an idea of the possible distribution of the project completion time, which would then allow us to quote and make decisions that incorporate uncertainty.</p>
 </div>
 <div id="scenario-one-sequential-tasks" class="section level2">
 <h2>Scenario One: Sequential Tasks</h2>
 <hr />
 <p>A construction project involves three tasks:</p>
-<ul>
+<ol style="list-style-type: decimal">
 <li>Task 1 is likely to take three days (70% probability), but it might also be completed in two days (with 10% probability) or four days (20% probability)</li>
-<li>Task 2 has a 60% probability of taking six days to finish, a 20% probability each of being completed in five days or eight days</li>
-<li>Task 3 has an 80% probability of being completed in four days, 5% probability of being completed in three days and a 15% probability of being completed in five days.</li>
-</ul>
+<li>Task 2 has a 60% probability of taking six days to finish and a 20% probability each of being completed in five days or eight days</li>
+<li>Task 3 has an 80% probability of being completed in four days, 5% probability of being completed in three days, and a 15% probability of being completed in five days.</li>
+</ol>
 <div class="figure">
-<img src="images/p03_01.png" alt="Sequential Tasks" />
+<img src="nb0003_images/p03_01.png" alt="Sequential Tasks" />
 <p class="caption">Sequential Tasks</p>
 </div>
-<p>Each task is dependent on the task before it, meaning that the three tasks must be executed in sequence. Your task is to provide information to the project manager concerning the expected completion time of the project and possible delays. Before we begin, install and import the following packages:</p>
+<p>Each task is dependent on the task before it, meaning that the three tasks must be executed in sequence. Your task is to provide information to the Project Manager concerning the expected completion time of the project and possible delays. Before we begin, install and import the following packages:</p>
 <pre class="python"><code>import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt</code></pre>
-<p>One simple method is to calculate the expected completion date of each task and then sumthem up, which would lead to the following:</p>
+<p>One simple method is to calculate the expected completion date of each task and then sum up these average predictions for the three tasks, which would lead to the following:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{split}
 E\,[Project\:Completion\:Time] &amp; = \sum_{n=1}^{3} E\,[Task_{n}\:Completion\:Time]\\
@@ -486,8 +486,8 @@ E\,[Project\:Completion\:Time] &amp; = \sum_{n=1}^{3} E\,[Task_{n}\:Completion\:
 &amp; = 13.3\:(days)
 \end{split}
 \end{equation}\]</span></p>
-<p>However, without getting in too much detail, there is a fair chance that the actual completion time of the project is shorter or longer than 13.3 days, and it would be helpful to know the probability of different project completion time. Simple scenarios like this might be easy to solve with mathematical equations (learn more about discrete random variables <a href="https://www.khanacademy.org/math/ap-statistics/random-variables-ap/discrete-random-variables/v/valid-discrete-probability-distribution-examples">here</a>), but real life situations are often much more complex. Therefore, Monte Carlo Simulation would be very useful in the sense that one could simulate the scenario without getting deep into the calculations. Simulated results also allow you to visualize the different instances and look at the actual distribution of those examples.</p>
-<p>Let’s start with simulating one instance of task 1:</p>
+<p>However, without getting into too much detail, there is a fair chance that the actual completion time of the project is shorter or longer than 13.3 days, and it would be helpful to know the probability of different project completion times. Simple scenarios like this might be easy to solve with mathematical equations (learn more about discrete random variables <a href="https://www.khanacademy.org/math/ap-statistics/random-variables-ap/discrete-random-variables/v/valid-discrete-probability-distribution-examples">here</a>), but real life situations are often much more complex. Therefore, a Monte Carlo Simulation would be very useful, because we will be able to simulate the different scenarios of possible task completion dates without getting deep into calculations. Simulated results also allow us to visualize the different scenarios and look at the actual distribution of those possibilities.</p>
+<p>Let’s start with simulating one instance of Task 1:</p>
 <pre class="python"><code>t1_comp = [3, 2, 4] # the possible completion time for task 1
 t1_prob = [0.7, 0.1, 0.2] # the probability of each completion time for task 1
 
@@ -515,8 +515,8 @@ print(t3_time)</code></pre>
 
 print(proj_time)</code></pre>
 <pre><code>[13]</code></pre>
-<p>Note that every time you run the above code chunks, there would be a different project completion time; the essence of Monte Carlo Simulation is that we could record all those completion time and visualize their distribution. Thus, we can go ahead and simulate the above scenario a large number of times, let’s say 1000 for now.</p>
-<p>Note that it is always a good habit to record the intermediate steps of your simulation so that you can go back to inspect and validatee your simulation. It is also a goo idea to define the number of replications as a variable so that in the future if we want to change it we don’t need to go through the entire document to look for every instance of it.</p>
+<p>Note that every time you run the above code chunks, there would be a different project completion time; the essence of Monte Carlo Simulations is that we could record all those completion time and visualize their distribution. Thus, we can go ahead and simulate the above scenario a large number of times, let’s say 1,000 for now.</p>
+<p>Note that it is always a good habit to record the intermediate steps of your simulation so that you can go back to inspect and validate your simulation. It is also good practice to define the number of replications (1,000) as a variable so that, in the future, if we want to change how many times we repeate the simulation, we will not have to search the entire document to look for every instance of it.</p>
 <pre class="python"><code>reps = 1000 # a variable specifying number of replications
 
 t1_record = [] # Initiate empty lists to record the competion time
@@ -548,7 +548,7 @@ for i in range(reps):
     t3_record.append(t3_time)
     
     proj_record.append(proj_time)</code></pre>
-<p>And there, you have 1000 replications of your “project”! It is a relatively fast simulation partially because the problem is fairly simple. For larger problems, however, you might want to look into how you can optimize (or parallel) your replications in order to speed up the process. We will wait until the next scenario to discuss about this topic. For now, let’s take a look at the first couple of results from our 1000 replications:</p>
+<p>And there, we have 1,000 replications of our construction project! It is a relatively fast simulation, partially because the problem is fairly simple. For larger problems, however, you might want to look into how you can optimize (or parallel) your replications in order to speed up the process. We will wait until the next scenario to dive deeper into this concept (see Scenario Two: Parallel Tasks, below). For now, let’s take a look at the first couple of results from our 1,000 replications:</p>
 <pre class="python"><code>proj_df = pd.DataFrame({&quot;Task_1&quot;: t1_record, # creating a dataframe using the lists of records
                         &quot;Task_2&quot;: t2_record, 
                         &quot;Task_3&quot;: t3_record, 
@@ -561,7 +561,7 @@ print(proj_df.head())</code></pre>
 2       3       6       4        9
 3       3       6       4        9
 4       3       8       4       11</code></pre>
-<p>Below we count the different instances of our project completion dates and plot out the distribution. As you can see, even though around 400 replications of our project are completed in about 13 days, there are quite a few that are completed before AND after 13 days. In situations like this, it is the most benefitial to clarify the possibilities, so that you can manage the expections of stakeholders without losing the bid of a project.</p>
+<p>Below, we count the different instances of our project completion dates and plot out the distribution. As you can see, even though there are around 400 instances where our project is completed in about 13 days, there are quite a few hundred instances where the project is completed in less than AND more than 13 days. In situations like this, it is benefitial to communicate these possibilities to the Project Manager, so that you can manage the expections of stakeholders without losing the bid of a project.</p>
 <pre class="python"><code>print(proj_df[&#39;Project&#39;].groupby(proj_df[&#39;Project&#39;]).count())</code></pre>
 <pre><code>Project
 10      1
@@ -575,8 +575,11 @@ print(proj_df.head())</code></pre>
 Name: Project, dtype: int64</code></pre>
 <pre class="python"><code>plt.bar(range(10,18),proj_df[&#39;Project&#39;].groupby(proj_df[&#39;Project&#39;]).count())</code></pre>
 <pre><code>&lt;BarContainer object of 8 artists&gt;</code></pre>
-<p><img src="output_14_1.png" /></p>
-<p>Combining the distribution (the graph above) and the sample statistics of the project completion dates over the 1000 replications (output of the next cell), we can also see that the project completion time is right skewed, and that the worst case scenario is further away from the median than the best case scenario. In order to have a 95% chance of meeting the deadline, the quote should actually be around 15 as calculated below.</p>
+<div class="figure">
+<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_14_1.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<p>In the graph above, we combine the distribution and the sample statistics of the project completion dates over the 1,000 replications (output of the next cell). We can see that the simulated project completion times are right-skewed; that is, the worst case scenario is further away from the median than the best case scenario. In order to have a 95% chance of meeting the deadline, the quote should actually be around 15 days, as calculated below.</p>
 <pre class="python"><code>print(proj_df[&#39;Project&#39;].describe())</code></pre>
 <pre><code>count    1000.000000
 mean       13.446000
@@ -593,9 +596,9 @@ Name: Project, dtype: float64</code></pre>
 <div id="scenario-two-parallel-tasks" class="section level2">
 <h2>Scenario Two: Parallel Tasks</h2>
 <hr />
-<p>Now we have received new information that Task 2 and 3 can actually be conducted at the same time.</p>
+<p>Now, we have received new information that Tasks 2 and 3 can actually be conducted at the same time.</p>
 <div class="figure">
-<img src="images/p03_02.png" alt="Parallel Tasks" />
+<img src="nb0003_images/p03_02.png" alt="Parallel Tasks" />
 <p class="caption">Parallel Tasks</p>
 </div>
 <p>With this update, the project completion time is now dependent on the task that gets completed later: <code>proj_time = t1_time + max(t2_time, t3_time)</code>. Therefore, we slightly modify our simulation to the following:</p>
@@ -643,26 +646,29 @@ print(proj_df.head())</code></pre>
 4       3       8       4       11</code></pre>
 <pre class="python"><code>plt.bar(range(min(proj_record),max(proj_record)+1),proj_df[&#39;Project&#39;].groupby(proj_df[&#39;Project&#39;]).count())</code></pre>
 <pre><code>&lt;BarContainer object of 6 artists&gt;</code></pre>
-<p><img src="output_20_1.png" /></p>
+<div class="figure">
+<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_20_1.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>print(np.percentile(proj_record,95))</code></pre>
 <pre><code>11.0</code></pre>
 </div>
 <div id="scenario-three-correlated-task-risks" class="section level2">
 <h2>Scenario Three: Correlated Task Risks</h2>
 <hr />
-<p>One would probably first think of correlation of coefficients when they first see correlated tasks. However, the number of correlation coefficients increases exponentially as the number of tasks increases, just like the possible combination of tasks (you can learn more about <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinations/v/combination-formula">combinations</a> and <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinatorics-precalc/v/permutation-formula">permutations</a> on Khan Academy), not to mention the amount of work that has to first go into deciding the relationships between thoses tasks. At the same time, correlation coefficients are mathematical concepts which do not carry the most meaningful real-world interpretations, especially when a project manager tries to understand why the correlation in risks exist or how it could be managed. Therefore, more frequently, one would specify a risk event that could potentially immpact multiple tasks and the probability of the risk event; one could also speicify a risk factor, which would again affect multiple tasks. For now, let’s go back to the assumption that the three tasks are sequential.</p>
+<p>When we see “correlated tasks”, we probably first think of correlation of coefficients. However, the number of correlation coefficients increases exponentially as the number of tasks increases, just like the possible combination of tasks (you can learn more about <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinations/v/combination-formula">combinations</a> and <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinatorics-precalc/v/permutation-formula">permutations</a> on Khan Academy), not to mention the amount of work that has to go into deciding the relationships between those tasks. At the same time, correlation coefficients are mathematical concepts which do not carry the most meaningful real-world interpretations, especially when a project manager tries to understand why the correlation in risks exists or how it could be managed. Therefore, more frequently, we would specify a risk event that could potentially impact multiple tasks and the probability of that risk event; we could also specify a risk factor, which would again affect multiple tasks. For now, let’s go back to the assumption that the three tasks are sequential, as in Scenario One.</p>
 <div class="figure">
-<img src="images/p03_01.png" alt="Sequential Tasks" />
+<img src="nb0003_images/p03_01.png" alt="Sequential Tasks" />
 <p class="caption">Sequential Tasks</p>
 </div>
-<p>In this scenario, the weather would have an impact on all three tasks, while internal communication would affect Task 2 and 3. Let’s say that there is a 40% chance of bad weather, in which case the project is going to be delayed for 2 days. Communication factor varies, on the other hand, in a way that is similar to a normal distribution with a mean of 1 and a standard deviation of 0.1: when the communication between team members is efficient, the communication factor is smaller than 1 and reduces project completion time; otherwise it is larger than 1 and increases completion time. By modeling the probability of risk events and factors, we would get the following equation:</p>
+<p>In this scenario, the weather would have an impact on all three tasks, while internal communication would affect only Tasks 2 and 3. Let’s say that there is a 40% chance of bad weather, in which case the project is going to be delayed for 2 days. On the other hand, the communication factor varies in a way that is similar to a normal distribution, with a mean of 1 and a standard deviation of 0.1. When the communication between team members is efficient, the communication factor is smaller than 1 and reduces the project completion time; otherwise it is larger than 1 and increases the completion time. By modeling the probability of risk events and factors, we arrive at the following equation:</p>
 <p><span class="math display">\[\begin{equation}
 \begin{split}
 &amp; Project\:Completion\:Time\\
 =\: &amp; 2 \cdot Weather + Task_{1}\:Completion\:Time + Communication\:Factor \cdot (Task_{2}\:Completion\:Time + Task_{3}\:Completion\:Time)
 \end{split}
 \end{equation}\]</span></p>
-<p>Since the weather is a binary event, while communication factor is normally distributed, we define them as the following:</p>
+<p>In our case, since the weather is a binary event, while the communication factor is normally distributed, we define them as the following:</p>
 <pre class="python"><code>weather = np.random.binomial(1, 0.4) # the arguments are &#39;number of trials&#39; and &#39;probability of success&#39;respectively
 communication = np.random.normal(1, 0.1)  # note that this is technically an indefinite float so rounding is needed
 
@@ -670,7 +676,7 @@ print(weather)
 print(communication)</code></pre>
 <pre><code>1
 0.9500478663155578</code></pre>
-<p>We can then modify our simulation as such:</p>
+<p>We can then modify our simulation, as such:</p>
 <pre class="python"><code>reps = 1000
 
 weather_record = [] # recording the events
@@ -729,12 +735,15 @@ print(proj_df.head())</code></pre>
  array([ 6.15 ,  7.079,  8.008,  8.937,  9.866, 10.795, 11.724, 12.653,
         13.582, 14.511, 15.44 ]),
  &lt;a list of 10 Patch objects&gt;)</code></pre>
-<p><img src="output_26_1.png" /></p>
+<div class="figure">
+<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_26_1.png" alt="png" />
+<p class="caption">png</p>
+</div>
 <pre class="python"><code>print(np.percentile(proj_record,95))</code></pre>
 <pre><code>13.08</code></pre>
 </div>
-<div id="reference" class="section level2">
-<h2>Reference</h2>
+<div id="references" class="section level2">
+<h2>References</h2>
 <hr />
 <p><a href="https://risk-engineering.org/notebook/monte-carlo-project-risk.html" class="uri">https://risk-engineering.org/notebook/monte-carlo-project-risk.html</a> <br> <a href="https://www.vosesoftware.com/riskwiki/Correlationwithprojectscheduleriskanalysis.php" class="uri">https://www.vosesoftware.com/riskwiki/Correlationwithprojectscheduleriskanalysis.php</a></p>
 <pre class="python"><code></code></pre>
