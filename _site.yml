@@ -11,21 +11,6 @@ output:
     toc: true
     toc_float:
       collapsed: false
-navbar:
-  title: "Analytics@Sauder"
-  left:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
-    - text: "Contribute"
-      href: contribute.html
-    - text: "Blog"
-      href: https://blogs.ubc.ca/businessanalytics
-    - text: "Projects"
-      href: projects.html
-    - text: "Resource"
-      href: resources.html
       
         
 
