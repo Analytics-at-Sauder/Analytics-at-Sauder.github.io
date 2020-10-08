@@ -11,7 +11,7 @@
 
 
 
-<title>p04_inventory_management.utf8</title>
+<title>Inventory Management</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,56 +25,17 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<!-- Google Tag Manager -->
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NFJ7QKG');</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
 
-<!-- End Google Tag Manager -->
-
-<!-- Script hiding navbar when scrolling down -->
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
 <script>
-  var didScroll;
-  var lastScrollTop = 0;
-  var delta = 1;
-  var navbarHeight = $('[role="navigation"]').outerHeight();
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  $(window).scroll(function(event) {
-    didScroll = true;
-  });
-
-  setInterval(function() {
-    if (didScroll) {
-      hasScrolled();
-      didScroll = false;
-    }
-  }, 250);
-
-  function hasScrolled() {
-    var st = $(this).scrollTop();
-
-    if (Math.abs(lastScrollTop - st) <= delta)
-      return;
-
-    if (st > lastScrollTop && st > navbarHeight) {
-      // Scroll Down
-      $('[role="navigation"]').addClass('navbar-scroll-down');
-    } else {
-      // Scroll Up
-      if (st + $(window).height() < $(document).height()) {
-        $('[role="navigation"]').removeClass('navbar-scroll-down');
-      }
-    }
-
-    lastScrollTop = st;
-  }
+  gtag('config', 'UA-171418385-1');
 </script>
-
-<!-- End of script hiding navbar when scrolling down -->
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -413,14 +374,122 @@ div.tocify {
 <li>
   <a href="contribute.html">Contribute</a>
 </li>
-<li>
-  <a href="https://blogs.ubc.ca/businessanalytics">Blog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li>
+      <a href="p14_model_with_MLP.html">Modeling with MLP</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="projects.html">Projects</a>
-</li>
-<li>
-  <a href="resources.html">Resource</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Regression</li>
+    <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -430,31 +499,19 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<!-- Google Tag Manager (noscript) -->
-
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFJ7QKG"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-<!-- End Google Tag Manager (noscript) -->
-
 <div class="fluid-row" id="header">
 
 
 
+<h1 class="title toc-ignore">Inventory Management</h1>
 
 </div>
 
 
-<div id="inventory-management" class="section level2">
-<h2>Inventory Management</h2>
-<div id="author-kemjika-ananaba" class="section level4">
-<h4>Author: Kemjika Ananaba</h4>
-<p>In this Project, we will review the economic order quantity (EOQ) model and its application when demand uncertainty is introduced. The periodic review model and continuous review model are also introduced using Monte Carlo simulation tools. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook together with any accompanying data from the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_04_Inventory_Management&urlpath=tree%2FProject_04_Inventory_Management%2Fp04_inventory_management.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_04_Inventory_Management&urlpath=tree%2FProject_04_Inventory_Management%2Fp04_inventory_management.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_04_Inventory_Management/master?filepath=p04_inventory_management.ipynb" target="_blank" class="button">Launch Binder</a></p>
-</div>
-</div>
+<p>In this project, we would review the EOQ model and its application when demand uncertainty is introduced. The periodic review model and continuous review model is also introduced using Monte Carlo simulation tools. All of the graphs and code can be found in the MBAN GitHub repository, feel free to download it and modify the numbers for your use case.</p>
+<p>The Jupyter notebook can be opened in the executable environment Syzygy.</p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_04_Inventory_Management&urlpath=tree%2FProject_04_Inventory_Management%2F
+" target="_blank" class="button">Launch Syzygy</a></p>
 <div id="background" class="section level2">
 <h2>Background</h2>
 <hr />
@@ -467,10 +524,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>As a quick background, the EOQ model is meant to answer the question “How much product should I order this time?” That is, when you order (or manufacture) a widget, should you order just one unit, a hundred units, a thousand units, or more? To answer that question, we need to understand the tradeoff between the fixed ordering cost (or, if you are manufacturing the good, then the fixed setup cost) and the inventory carrying cost. If there is a relatively high fixed cost, then we would want to order many units; however, if the inventory carrying cost is relatively high, we probably only want to order a few.</p>
 <div id="eoq-model-example" class="section level3">
 <h3>EOQ Model Example</h3>
+<p>The EOQ model is based on the application of the economic order quantity formula on historical data.</p>
 <p>Manufacturer’s demand = 120,000units/year</p>
-<p>Manufacturer’scosts:</p>
+<p>Manufacturer’s costs:</p>
 <ol style="list-style-type: decimal">
-<li><p>Fixed Cost per shipment (ordering cost) = $500/shipment</p></li>
+<li><p>Fixed cost per shipment (ordering cost) = $500/shipment</p></li>
 <li><p>Purchase cost = $1/unit</p></li>
 <li><p>Cost of holding one unit in inventory for one year = $0.3</p></li>
 <li><p>Selling Price = $7/unit</p></li>
@@ -495,16 +553,17 @@ order_cycle = cycle_time *360 #Assuming total of 360 working days in a year
 </code></pre>
 <p>What is the buyer’s optimal order quantity?</p>
 <pre class="python"><code>optimal_quantity</code></pre>
-<pre><code>20000.0</code></pre>
-<p>What is the ordering interval in days?</p>
+<pre><code>
+    20000.0</code></pre>
+<p>What is the ordering interval (in days)?</p>
 <pre class="python"><code>review_period_eoq = round(order_cycle,2)
 review_period_eoq</code></pre>
-<pre><code>60.0</code></pre>
+<pre><code>    60.0</code></pre>
 </div>
 <div id="simulation-model" class="section level3">
 <h3>Simulation Model</h3>
 <p>The EOQ quantity and cycle time are applied in simulations that try to replicate a market with uncertain demand. We assume that a review period of 60 days, an order quantity of 20,000 units, and a lead time of 0 days. The inventory status is recorded in the simulation.</p>
-<p><b> Creating a function to simulate the daily demand</b></p>
+<p><b> Creating a function to simulate daily demand</b></p>
 <pre class="python"><code># Creating a function that allocates the demand  if there is a purchase
 
 
@@ -516,6 +575,11 @@ def daily_demand(mean, sd, probability):
         return np.random.normal(mean, sd)
     #demand follows a log-normal distribution using mean and sd of the previous year&#39;s demand.</code></pre>
 <pre class="python"><code># Define Monte Carlo Simulation to replicate demand and inventory 
+# M = capacity of the ware house
+# review_period = Agreed time to place order (ie monthly = 30, every 10 days = 10)
+# probability = Probability of a sale
+# mean = Historical mean of sales
+# sd = Historical sales standard deviation
 
             
 def eoq_monte_carlo(M,review_period,probability,mean,sd):
@@ -555,6 +619,8 @@ def eoq_monte_carlo(M,review_period,probability,mean,sd):
 
     return data</code></pre>
 <pre class="python"><code>#function to total cost
+# data = output from the monte carlo function
+
 def calculate_cost(data,days,unit_cost,holding_cost,order_cost):
 
     Co = len(data[&#39;orders&#39;]) * order_cost
@@ -569,63 +635,65 @@ def calculate_profit(data,days,unit_cost,holding_cost,order_cost,selling_p):
 
     revenue = sum(data[&#39;units_sold&#39;]) * selling_price
     Co = len(data[&#39;orders&#39;]) * order_cost
-    Ch = sum(data[&#39;inv_level&#39;]) * holding_cost * size * (1 / days)
+    Ch = sum(data[&#39;inv_level&#39;]) * holding_cost * (1 / days)
     cost = sum(data[&#39;orders&#39;]) * unit_cost
 
     profit = revenue - cost - Co - Ch
 
-    return profit[0]</code></pre>
+    return profit</code></pre>
 </div>
-<div id="application-of-eoq-model-on-constant-demand" class="section level3">
-<h3>Application of EOQ Model on constant demand</h3>
+<div id="application-of-eoq-models-on-constant-demand" class="section level3">
+<h3>Application of EOQ Models on Constant Demand</h3>
 <p>This scenario assumes no uncertainty; in other words, this scenario assumes a constant demand and a purchase probability of 1. Therefore, the demand standard deviation is assumed to be 0, and the EOQ quantity and review period are used.</p>
-<pre class="python"><code>#df1 = eoq_monte_carlo(20000,60,prob, mean_demand,std_demand)
-df = eoq_monte_carlo(M = 20000,review_period=60,probability=1,mean=333.3,sd=0)
+<pre class="python"><code>#applying EOQ model 
+eoq_data = eoq_monte_carlo(M = 20000,review_period=60,probability=1,mean=333.3,sd=0)
 </code></pre>
 <pre class="python"><code>plt.figure(figsize=(25,8))
-plt.plot(df[&#39;inv_level&#39;])
+plt.plot(eoq_data[&#39;inv_level&#39;])
 plt.axhline(2000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()</code></pre>
 <p><img src="p04_01.png" /></p>
-<pre class="python"><code>cost = calculate_cost(df,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+<pre class="python"><code>cost = calculate_cost(eoq_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost</code></pre>
-<pre><code>105551.28333333334</code></pre>
+<pre><code>
+    105551.28333333334
+</code></pre>
 </div>
-<div id="scenario-1-applying-eoq-model-to-an-uncertain-demand" class="section level3">
-<h3>Scenario 1: Applying EOQ model to an uncertain demand</h3>
-<p>The scenario below assumes that uncertainty in demand for a product any given day and uncertainty in the number of products demanded.</p>
+<div id="scenario-1-applying-the-eoq-model-to-an-uncertain-demand" class="section level3">
+<h3>Scenario 1: Applying the EOQ Model to an Uncertain Demand</h3>
+<p>The scenario below assumes there is uncertainty in demand for a product on any given day and uncertainty in the number of products demanded.</p>
 <ol style="list-style-type: decimal">
 <li><p>Probability of demand in a given day = 0.9</p></li>
-<li><p>Mean Daily Demand = 333.3</p></li>
-<li><p>Standard deviation of Daily Demand = 20</p></li>
-<li><p>Leadtime = 0</p></li>
+<li><p>Mean daily demand = 333.3</p></li>
+<li><p>Standard deviation of daily demand = 20</p></li>
+<li><p>Lead time = 0</p></li>
 </ol>
 <pre class="python"><code>prob = 0.90 #probability of demand
 mean_demand = 333.3
 std_demand = 20
 inventory = optimal_quantity #staring with EOQ</code></pre>
-<pre class="python"><code>df2 = eoq_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)</code></pre>
+<pre class="python"><code>eoq_data2 = eoq_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)</code></pre>
 <pre class="python"><code>plt.figure(figsize=(25,8))
-plt.plot(df2[&#39;inv_level&#39;])
+plt.plot(eoq_data2[&#39;inv_level&#39;])
 plt.axhline(2000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()
 </code></pre>
 <p><img src="p04_02.png" /></p>
-<pre class="python"><code>cost2 = calculate_cost(df2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+<pre class="python"><code>cost2 = calculate_cost(eoq_data2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost2</code></pre>
-<pre><code>107359.66083333333</code></pre>
-<pre class="python"><code>revenue2 = calculate_profit(df2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
+<pre><code>    107630.785</code></pre>
+<pre class="python"><code>revenue2 = calculate_profit(eoq_data2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
 revenue2</code></pre>
-<pre><code>1628699.9933250002</code></pre>
-<p>The uncertainty in demand has caused an increase in costs due to an increase in the cycle inventory.</p>
+<pre><code>    427814.215</code></pre>
+<p>The diagram above show that when the EOQ model is used to calculate the re-order quantity, more and more inventory is held over time. The uncertainty in demand has caused an increase in costs due to an increase in the inventory cycle.</p>
 </div>
-<div id="scenario-2-continous-review-model" class="section level3">
-<h3>Scenario 2: Continous Review model</h3>
+<div id="scenario-2-continuous-review-model" class="section level3">
+<h3>Scenario 2: Continuous Review Model</h3>
 <p>To combat the holding costs that can accumulate due to demand uncertainty, we can determine the reorder point by the inventory level. This policy is called the continuous review model.</p>
 <pre class="python"><code>
-def cc_monte_carlo(M,r,probability,mean,sd):
+def cc_monte_carlo(Capacity,reorder_point,probability,mean,sd):
 
-    inventory = M
+    inventory = Capacity
 
     order_placed = False
     order_time = 0
@@ -640,11 +708,11 @@ def cc_monte_carlo(M,r,probability,mean,sd):
         
         #used to determine if there is a sale and what the demand would be
         data[&#39;daily_demand&#39;].append(day_demand)
-        if inventory &lt;= r :
+        if inventory &lt;= reorder_point :
             # Time to place an order
             
-            inventory += M
-            data[&#39;orders&#39;].append(round(M,0))
+            inventory += Capacity
+            data[&#39;orders&#39;].append(round(Capacity,0))
             #increase inventory with order quantity
             
         
@@ -663,23 +731,26 @@ def cc_monte_carlo(M,r,probability,mean,sd):
         data[&#39;inv_level&#39;].append(round(inventory,0))
 
     return data</code></pre>
-<pre class="python"><code>df3=cc_monte_carlo(M=20000,r=0,probability=0.9,mean=333.3,sd=20)</code></pre>
+<pre class="python"><code>cc_data=cc_monte_carlo(Capacity=20000,reorder_point=0,probability=1,mean=333.3,sd=20)</code></pre>
 <pre class="python"><code>plt.figure(figsize=(25,8))
-plt.plot(df3[&#39;inv_level&#39;])
+plt.plot(cc_data[&#39;inv_level&#39;])
 plt.axhline(2000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()</code></pre>
 <p><img src="p04_03.png" /></p>
-<pre class="python"><code>cost3 = calculate_cost(df3,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+<pre class="python"><code>cost3 = calculate_cost(cc_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost3</code></pre>
-<pre><code>105592.545</code></pre>
-<pre class="python"><code>revenue3 = calculate_profit(df3,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
+<pre><code>
+    105592.545</code></pre>
+<pre class="python"><code>revenue3 = calculate_profit(cc_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
 revenue3</code></pre>
-<pre><code>1665835.64935</code></pre>
-<p>The costs using this model are slightly lower than those of the EOQ model, and consequently, the expected profits from the continuous review model are higher than the EOQ model.</p>
+<pre><code>
+    1665835.64935</code></pre>
+<p>The costs using this model are slightly lower than those of the EOQ model, and consequently, the expected profits from the continuous review model are higher than that of the EOQ model.</p>
 </div>
 <div id="scenario-3-periodic-review-model" class="section level3">
-<h3>Scenario 3: Periodic Review model</h3>
-<p>Another policy to consider is the periodic review policy. Here the reorder point is the same as the EOQ model, however, the quantity ordered is varied according to the maximum order point. The order up-to quantity M is 20,000.</p>
+<h3>Scenario 3: Periodic Review Model</h3>
+<p>Another policy to consider is the periodic review policy. Here, the reorder point is the same as the EOQ model; however, the quantity ordered varies according to the maximum order point. The order up-to quantity, M, is 20,000.</p>
+<p>The difference between the EOQ model and the periodic review model is that the periodic review compares the current inventory status to the capacity of the warehouse at the review period. The difference between the current inventory status and the ware house capacity is used as the reorder quantity.</p>
 <pre class="python"><code># Define Monte Carlo Simulation to imitate a periodic review model 
 
             
@@ -719,18 +790,20 @@ def pr_monte_carlo(M,review_period,probability,mean,sd):
         data[&#39;inv_level&#39;].append(round(inventory,0))
 
     return data</code></pre>
-<pre class="python"><code>df4 = pr_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)</code></pre>
+<pre class="python"><code>pr_data= pr_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)</code></pre>
 <pre class="python"><code>plt.figure(figsize=(25,8))
-plt.plot(df4[&#39;inv_level&#39;])
+plt.plot(pr_data[&#39;inv_level&#39;])
 plt.axhline(2000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()</code></pre>
 <p><img src="p04_04.png" /></p>
-<pre class="python"><code>cost4 = calculate_cost(df4,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+<pre class="python"><code>cost4 = calculate_cost(pr_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost4</code></pre>
-<pre><code>112017.3925</code></pre>
-<pre class="python"><code>revenue4 = calculate_profit(df4,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
+<pre><code>
+    112017.3925</code></pre>
+<pre class="python"><code>revenue4 = calculate_profit(pr_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
 revenue4</code></pre>
-<pre><code>1615675.1662750002</code></pre>
+<pre><code>
+    1615675.1662750002</code></pre>
 <pre class="python"><code>summ_table =  pd.DataFrame({&#39;EOQ&#39;: [cost2, revenue2],&#39;Continous Review&#39;:[cost3,revenue3],&#39;Periodic Review&#39;:[cost4,revenue4]})
 idx = [&#39;Costs&#39;, &#39;Revenue&#39;]
 summ_table = summ_table.set_index(pd.Index(idx))
@@ -803,7 +876,7 @@ Revenue
 <h2>Final Conclusion</h2>
 <p>From the tables above, we can see that the continuous review policy (scenario 2) outperforms the EOQ model (scenario 1) and the periodic review policy (scenario 3) in terms of the expected profits for each product and proportion of lost orders.</p>
 <p>Both the continuous and periodic review policies have their advantages. The periodic review policy has a fixed review period, which allows companies to better forecast the orders they made over some time. On the other hand, the continuous review policy keeps the order size constant and offers flexibility with regards to the times at which to place the order.</p>
-<p>The expected profits are dependent on different costs (holding costs, ordering costs or manufacturing costs, etc.) that are different for every product and organization. The right inventory management model depends on the impact of these cost and the demand distribution of the product</p>
+<p>The expected profits are dependent on different costs (holding costs, ordering costs or manufacturing costs, etc.) that are different for every product and organization. The right inventory management model depends on the impact of these cost and the demand distribution of the product.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
@@ -811,23 +884,21 @@ Revenue
 <p>[2] Nagpurkar, M. (2020, April 2). Inventory Management using Python. Retrieved June 3, 2020, from <a href="https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314" class="uri">https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314</a></p>
 </div>
 
-<div class="footer">
-  <p style="text-align: center;">
-    <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
-    <br/>
-    Created and maintained by the
-    <br/>
-    <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
-    <br/>
-    Licensed under a
-    <br/>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-    <br/>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-  </p>
-</div>
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
 
 
 </div>
@@ -878,7 +949,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

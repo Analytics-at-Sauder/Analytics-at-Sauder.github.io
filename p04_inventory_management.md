@@ -10,9 +10,8 @@ In this Project, we will review the economic order quantity (EOQ) model and its 
 
 <a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_04_Inventory_Management/master?filepath=p04_inventory_management.ipynb" target="_blank" class="button">Launch Binder</a>
 
-
 ## Background
- ---
+---
 In the modern business environment, companies are requiring an increasing amount of effort to reduce operating costs and to improve customer satisfaction. Inventory can play a significant role in satisfying customer demand; therefore, inventory becomes an important asset for any organization. Thus, inventory should be managed effectively and efficiently in order to minimize total cost and to satisfy customer demand. In real life, inventory management faces several challenges, such as the tradeoff between minimizing total cost and maximizing service level; therefore, choosing the correct inventory policy is now essential to management.
 
 ## Economic Order Quantity (EOQ) Policy
@@ -30,11 +29,13 @@ As a quick background, the EOQ model is meant to answer the question “How much
 
 ### EOQ  Model Example
 
+The EOQ model is based on the application of the economic order quantity formula on historical data.
+
 Manufacturer’s demand = 120,000units/year  
 
-Manufacturer’scosts:
+Manufacturer’s costs:
 
-1. Fixed Cost per shipment (ordering cost) = $500/shipment
+1. Fixed cost per shipment (ordering cost) = $500/shipment
 
 2. Purchase cost = $1/unit
 
@@ -80,13 +81,13 @@ optimal_quantity
 ```
 
 
-
+```
 
     20000.0
+```
 
 
-
-What is the ordering interval in days?
+What is the ordering interval (in days)?
 
 
 ```python
@@ -96,16 +97,17 @@ review_period_eoq
 
 
 
-
+```
     60.0
-
+```
 
 
 ### Simulation Model
 
-The EOQ quantity and cycle time are applied in simulations that try to replicate a market with uncertain demand. We assume that a review period of 60 days, an order quantity of 20,000 units, and a lead time of 0 days. The inventory status is recorded in the simulation.
+The EOQ quantity and cycle time are applied in simulations that try to replicate a market with uncertain demand.
+We assume that a review period of 60 days, an order quantity of 20,000 units, and a lead time of 0 days. The inventory status is recorded in the simulation.
 
-<b> Creating a function to simulate the daily demand</b>
+<b> Creating a function to simulate daily demand</b>
 
 
 ```python
@@ -124,6 +126,11 @@ def daily_demand(mean, sd, probability):
 
 ```python
 # Define Monte Carlo Simulation to replicate demand and inventory 
+# M = capacity of the ware house
+# review_period = Agreed time to place order (ie monthly = 30, every 10 days = 10)
+# probability = Probability of a sale
+# mean = Historical mean of sales
+# sd = Historical sales standard deviation
 
             
 def eoq_monte_carlo(M,review_period,probability,mean,sd):
@@ -167,6 +174,8 @@ def eoq_monte_carlo(M,review_period,probability,mean,sd):
 
 ```python
 #function to total cost
+# data = output from the monte carlo function
+
 def calculate_cost(data,days,unit_cost,holding_cost,order_cost):
 
     Co = len(data['orders']) * order_cost
@@ -185,29 +194,29 @@ def calculate_profit(data,days,unit_cost,holding_cost,order_cost,selling_p):
 
     revenue = sum(data['units_sold']) * selling_price
     Co = len(data['orders']) * order_cost
-    Ch = sum(data['inv_level']) * holding_cost * size * (1 / days)
+    Ch = sum(data['inv_level']) * holding_cost * (1 / days)
     cost = sum(data['orders']) * unit_cost
 
     profit = revenue - cost - Co - Ch
 
-    return profit[0]
+    return profit
 ```
 
-### Application of EOQ Model on constant demand
+### Application of EOQ Models on Constant Demand
 
 This scenario assumes no uncertainty; in other words, this scenario assumes a constant demand and a purchase probability of 1. Therefore, the demand standard deviation is assumed to be 0, and the EOQ quantity and review period are used.
 
 
 ```python
-#df1 = eoq_monte_carlo(20000,60,prob, mean_demand,std_demand)
-df = eoq_monte_carlo(M = 20000,review_period=60,probability=1,mean=333.3,sd=0)
+#applying EOQ model 
+eoq_data = eoq_monte_carlo(M = 20000,review_period=60,probability=1,mean=333.3,sd=0)
 
 ```
 
 
 ```python
 plt.figure(figsize=(25,8))
-plt.plot(df['inv_level'])
+plt.plot(eoq_data['inv_level'])
 plt.axhline(2000, linewidth=1, color="grey", linestyle=":")
 plt.show()
 ```
@@ -216,30 +225,29 @@ plt.show()
 ![](p04_01.png)
 
 
-
 ```python
-cost = calculate_cost(df,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+cost = calculate_cost(eoq_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost
 ```
 
 
-
+```
 
     105551.28333333334
 
+```
 
+### Scenario 1: Applying the EOQ Model to an Uncertain Demand
 
-### Scenario 1: Applying EOQ model to an uncertain demand
-
-The scenario below assumes that uncertainty in demand for a product any given day and uncertainty in the number of products demanded.
+The scenario below assumes there is uncertainty in demand for a product on any given day and uncertainty in the number of products demanded.
 
 1. Probability of demand in a given day = 0.9
 
-2. Mean Daily Demand = 333.3
+2. Mean daily demand = 333.3
 
-3. Standard deviation of Daily Demand  = 20 
+3. Standard deviation of daily demand  = 20 
 
-4. Leadtime = 0
+4. Lead time = 0
 
 
 
@@ -252,13 +260,13 @@ inventory = optimal_quantity #staring with EOQ
 
 
 ```python
-df2 = eoq_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)
+eoq_data2 = eoq_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)
 ```
 
 
 ```python
 plt.figure(figsize=(25,8))
-plt.plot(df2['inv_level'])
+plt.plot(eoq_data2['inv_level'])
 plt.axhline(2000, linewidth=1, color="grey", linestyle=":")
 plt.show()
 
@@ -268,43 +276,43 @@ plt.show()
 ![](p04_02.png)
 
 
+
 ```python
-cost2 = calculate_cost(df2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+cost2 = calculate_cost(eoq_data2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost2
 ```
 
 
 
-
-    107359.66083333333
-
-
-
-
-```python
-revenue2 = calculate_profit(df2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
-revenue2
+```
+    107630.785
 ```
 
 
 
+```python
+revenue2 = calculate_profit(eoq_data2,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
+revenue2
+```
 
-    1628699.9933250002
+
+```
+    427814.215
+```
 
 
+The diagram above show that when the EOQ model is used to calculate the re-order quantity,  more and more inventory is held over time. The uncertainty in demand has caused an increase in costs due to an increase in the inventory cycle.
 
-The uncertainty in demand has caused an increase in costs due to an increase in the cycle inventory.
-
-### Scenario 2:  Continous Review model
+### Scenario 2:  Continuous Review Model
 
 To combat the holding costs that can accumulate due to demand uncertainty, we can determine the reorder point by the inventory level. This policy is called the continuous review model.
 
 
 ```python
 
-def cc_monte_carlo(M,r,probability,mean,sd):
+def cc_monte_carlo(Capacity,reorder_point,probability,mean,sd):
 
-    inventory = M
+    inventory = Capacity
 
     order_placed = False
     order_time = 0
@@ -319,11 +327,11 @@ def cc_monte_carlo(M,r,probability,mean,sd):
         
         #used to determine if there is a sale and what the demand would be
         data['daily_demand'].append(day_demand)
-        if inventory <= r :
+        if inventory <= reorder_point :
             # Time to place an order
             
-            inventory += M
-            data['orders'].append(round(M,0))
+            inventory += Capacity
+            data['orders'].append(round(Capacity,0))
             #increase inventory with order quantity
             
         
@@ -346,13 +354,13 @@ def cc_monte_carlo(M,r,probability,mean,sd):
 
 
 ```python
-df3=cc_monte_carlo(M=20000,r=0,probability=0.9,mean=333.3,sd=20)
+cc_data=cc_monte_carlo(Capacity=20000,reorder_point=0,probability=1,mean=333.3,sd=20)
 ```
 
 
 ```python
 plt.figure(figsize=(25,8))
-plt.plot(df3['inv_level'])
+plt.plot(cc_data['inv_level'])
 plt.axhline(2000, linewidth=1, color="grey", linestyle=":")
 plt.show()
 ```
@@ -363,35 +371,37 @@ plt.show()
 
 
 ```python
-cost3 = calculate_cost(df3,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+cost3 = calculate_cost(cc_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost3
 ```
 
 
-
+```
 
     105592.545
-
-
-
-
-```python
-revenue3 = calculate_profit(df3,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
-revenue3
 ```
 
 
 
+```python
+revenue3 = calculate_profit(cc_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
+revenue3
+```
+
+
+```
 
     1665835.64935
+```
 
 
+The costs using this model are slightly lower than those of the EOQ model, and consequently, the expected profits from the continuous review model are higher than that of the EOQ model.
 
-The costs using this model are slightly lower than those of the EOQ model, and consequently, the expected profits from the continuous review model are higher than the EOQ model.
+### Scenario 3: Periodic Review Model
 
-### Scenario 3: Periodic Review model
+Another policy to consider is the periodic review policy. Here, the reorder point is the same as the EOQ model; however, the quantity ordered varies according to the maximum order point. The order up-to quantity, M, is 20,000. 
 
-Another policy to consider is the periodic review policy. Here the reorder point is the same as the EOQ model, however, the quantity ordered is varied according to the maximum order point. The order up-to quantity M is 20,000.
+The difference between the EOQ model and the periodic review model is that the periodic review compares the current inventory status to the capacity of the warehouse at the review period. The difference between the current inventory status and the ware house capacity is used as the reorder quantity.
 
 
 ```python
@@ -438,13 +448,13 @@ def pr_monte_carlo(M,review_period,probability,mean,sd):
 
 
 ```python
-df4 = pr_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)
+pr_data= pr_monte_carlo(M = 20000,review_period=60,probability=0.9,mean=333.3,sd=20)
 ```
 
 
 ```python
 plt.figure(figsize=(25,8))
-plt.plot(df4['inv_level'])
+plt.plot(pr_data['inv_level'])
 plt.axhline(2000, linewidth=1, color="grey", linestyle=":")
 plt.show()
 ```
@@ -455,28 +465,28 @@ plt.show()
 
 
 ```python
-cost4 = calculate_cost(df4,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
+cost4 = calculate_cost(pr_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500)
 cost4
 ```
 
 
-
+```
 
     112017.3925
-
-
-
-
-```python
-revenue4 = calculate_profit(df4,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
-revenue4
 ```
 
 
 
+```python
+revenue4 = calculate_profit(pr_data,days=360,unit_cost=1,holding_cost=0.3,order_cost=500,selling_p=7)
+revenue4
+```
+
+
+```
 
     1615675.1662750002
-
+```
 
 
 
@@ -536,12 +546,13 @@ summ_table
 
 From the tables above, we can see that the continuous review policy (scenario 2) outperforms the EOQ model (scenario 1) and the periodic review policy (scenario 3) in terms of the expected profits for each product and proportion of lost orders.
 
-Both the continuous and periodic review policies have their advantages. The periodic review policy has a fixed review period, which allows companies to better forecast the orders they made over some time. On the other hand, the continuous review policy keeps the order size constant and offers flexibility with regards to the times at which to place the order.
+Both the continuous and periodic review policies have their advantages. The periodic review policy has a fixed review period, which allows companies to better forecast the orders they made over some time. On the other hand, the continuous review policy keeps the order size constant and offers flexibility with regards to the times at which to place the order. 
 
-The expected profits are dependent on different costs (holding costs, ordering costs or manufacturing costs, etc.) that are different for every product and organization. The right inventory management model depends on the impact of these cost and the demand distribution of the product
+The expected profits are dependent on different costs (holding costs, ordering costs or manufacturing costs, etc.) that are different for every product and organization. The right inventory management model depends on the impact of these cost and the demand distribution of the product.
 
 
 ## References
 [1] Anderson, Sweeney, Williams, Camm, Cochran, Fry, Ohlmann. An Introduction to Management Science: Quantitative approaches to Decision Making. 14th Edition, 2015. Cengage Learning. pp. 457–478.
 
 [2] Nagpurkar, M. (2020, April 2). Inventory Management using Python. Retrieved June 3, 2020, from https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314
+

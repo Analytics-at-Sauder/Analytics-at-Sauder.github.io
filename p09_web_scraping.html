@@ -11,7 +11,7 @@
 
 
 
-<title>p09_web_scraping.utf8</title>
+<title>Web Scraping</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,56 +25,17 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<!-- Google Tag Manager -->
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NFJ7QKG');</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
 
-<!-- End Google Tag Manager -->
-
-<!-- Script hiding navbar when scrolling down -->
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171418385-1"></script>
 <script>
-  var didScroll;
-  var lastScrollTop = 0;
-  var delta = 1;
-  var navbarHeight = $('[role="navigation"]').outerHeight();
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  $(window).scroll(function(event) {
-    didScroll = true;
-  });
-
-  setInterval(function() {
-    if (didScroll) {
-      hasScrolled();
-      didScroll = false;
-    }
-  }, 250);
-
-  function hasScrolled() {
-    var st = $(this).scrollTop();
-
-    if (Math.abs(lastScrollTop - st) <= delta)
-      return;
-
-    if (st > lastScrollTop && st > navbarHeight) {
-      // Scroll Down
-      $('[role="navigation"]').addClass('navbar-scroll-down');
-    } else {
-      // Scroll Up
-      if (st + $(window).height() < $(document).height()) {
-        $('[role="navigation"]').removeClass('navbar-scroll-down');
-      }
-    }
-
-    lastScrollTop = st;
-  }
+  gtag('config', 'UA-171418385-1');
 </script>
-
-<!-- End of script hiding navbar when scrolling down -->
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -413,14 +374,122 @@ div.tocify {
 <li>
   <a href="contribute.html">Contribute</a>
 </li>
-<li>
-  <a href="https://blogs.ubc.ca/businessanalytics">Blog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Topics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Finance</li>
+    <li>
+      <a href="p01_stock_returns_analysis.html">Stock Returns Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Healthcare</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Marketing</li>
+    <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li>
+      <a href="p10_customer_segmentation.html">Customer Segmentation</a>
+    </li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li>
+      <a href="p14_model_with_MLP.html">Modeling with MLP</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Project Management</li>
+    <li>
+      <a href="p13_critical_path_analysis.html">Critical Path Analysis</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supply Chain Management</li>
+    <li>
+      <a href="p12_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+    </li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+  </ul>
 </li>
-<li>
-  <a href="projects.html">Projects</a>
-</li>
-<li>
-  <a href="resources.html">Resource</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Browse by Skills
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Data Collection</li>
+    <li>
+      <a href="p09_web_scraping.html">Web Scraping</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Data Manipulation</li>
+    <li>
+      <a href="p07_data_cleaning.html">Data Cleaning</a>
+    </li>
+    <li>
+      <a href="p06_rfm_analysis.html">RFM Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Discrete Event Simulation</li>
+    <li>
+      <a href="p05_clinic_resource_planning.html">Clinic Resource Planning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Forecasting</li>
+    <li>
+      <a href="p08_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+    </li>
+    <li>
+      <a href="p08_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Programming/Optimization</li>
+    <li>
+      <a href="p02_price_versioning.html">Price Versioning</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Linear Regression</li>
+    <li>
+      <a href="p15_conjoint_analysis.html">Conjoint Analysis</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Machine Learning</li>
+    <li>
+      <a href="p11_recommender_system.html">Recommender System</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Monte Carlo Simulation</li>
+    <li>
+      <a href="p04_inventory_management.html">Inventory Management</a>
+    </li>
+    <li>
+      <a href="p03_project_risk_assessment.html">Project Risk Assessment</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -430,83 +499,78 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<!-- Google Tag Manager (noscript) -->
-
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFJ7QKG"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-<!-- End Google Tag Manager (noscript) -->
-
 <div class="fluid-row" id="header">
 
 
 
+<h1 class="title toc-ignore">Web Scraping</h1>
 
 </div>
 
 
-<div id="web-scraping" class="section level2">
-<h2>Web Scraping</h2>
-<div id="author-kemjika-ananaba" class="section level4">
-<h4>Author: Kemjika Ananaba</h4>
-<p>Scraping of websites is a very useful activity especially to achieve recruiting or marketing tasks. Using Python you can make this process smoother, using your time to focus on those profiles that have critical peculiarities. We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2Fp09_web_scraping.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2Fp09_web_scraping.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/Project_09_Web_Scraping/master?filepath=p09_web_scraping.ipynb" target="_blank" class="button">Launch Binder</a></p>
-</div>
-</div>
+<p>In this project, we would review the web data extraction and see an example of its application on a weather website. Scraping of websites is a very useful activity especially to achieve recruiting or marketing tasks. All of the code can be found in the MBAN GitHub repository, feel free to download it and modify for your use case.</p>
+<p><a href="https://pims.syzygy.ca/jupyter/user/qingkangcao/git-pull?repo=https%3A%2F%2Fgithub.com%2FMaster-of-Business-Analytics%2FProject_09_Web_Scraping&urlpath=tree%2FProject_09_Web_Scraping%2F" target="_blank" class="button">Launch Syzygy</a></p>
 <div id="what-is-web-scraping" class="section level2">
 <h2>What is Web Scraping?</h2>
 <p>Web Scraping is a technique used to extract data from websites. A prerequisite to web scraping is knowing a little bit about HTML code to know where the data to be captured is located in the HTML code. If you have ever copy and pasted information from a website, you have performed the same function as any web scraper, only on a smaller, manual scale.</p>
 <p>One way to scrape data is through Direct HTTP Requests. Websites are just a rendering of the HTML and CSS code that the web server returns as a result of a GET request of your browser. As a result, a simple script can send automatically HTTP requests and parse the answer, scraping the content. The python-requests package is used to make this request and enable data scraping.</p>
 <p>Sometimes websites load the content asynchronously. This means that the information to be scraped may not be contained in the first HTTP response, but are loaded only as a consequence of a page scrolling or after the click of a button. To overcome this barrier a Web Browser Driver, Selenium Web Driver, is used. The Web Browser drivers let you run a real web browser enabling your Python script to emulate user behavior on the page.</p>
-<p>Web scraping is a complicated process because all web pages do not follow the same format. Therefore, the code used to scrape data from a particular website can not be reapplied to another website. Therefore the python code has to customize the web-site’s HTML structure. However, websites can not be scraped multiple times as this can overload the server hosting the website, especially smaller websites.</p>
-<div id="basic-project" class="section level3">
-<h3>Basic project</h3>
-<p>In this project, we will scrap a seven-day weather forecast from a static weather forecast website, forecast.weather.gov for Houston.</p>
+<p>Web scraping is a complicated process because all web pages do not follow the same format. Therefore, the code used to scrape data from a particular website can not be reapplied to another website. Therefore the python code has to customized according to the web-site’s HTML structure.</p>
+<p>Before scraping any website, we should look for a terms and conditions page to see if there are explicit rules about scraping, therefore web scraping should be performed while honoring the data collection policy of the target website. Making many repeated requests to a website’s server may use up bandwidth, slowing down the website for other users and potentially overloading the server such that the website stops responding entirely.</p>
+</div>
+<div id="web-scraping-packages" class="section level2">
+<h2>Web-scraping packages</h2>
+<p>There are a whole host of Python libraries available to perform web scraping.</p>
+<p><b> Beautiful Soup</b> is a python library that makes it easy to scrape information from web pages. It sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree. Besides BeautifulSoup,scrapy and selenium libraries can also be used to capture data from a website. In cases where the website requires user login selenium works well.</p>
+</div>
+<div id="basic-project" class="section level2">
+<h2>Basic project</h2>
+<p>In this project, we will scrap a seven-day weather forecast for Houston from a static weather forecast website.</p>
 <p>First of all, load the required packages. The requests package is used to make a request to the website and enable us to download web pages that are loaded into the python environment</p>
 <pre class="python"><code>import requests
 from bs4 import BeautifulSoup
 import pandas as pd</code></pre>
 <p><b> Request URL</b></p>
-<pre class="python"><code>
+<pre class="python"><code>#link of website to be scraped
 url = &quot;https://forecast.weather.gov/MapClick.php?lat=29.685271900000032&amp;lon=-95.43426899999997#.XvL4ti-z1ZJ&quot;
-#link of website
+
 page = requests.get(url)
 soup = BeautifulSoup(page.content, &#39;html.parser&#39;)</code></pre>
-<p>The BeautifulSoup constructor parses raw HTML strings and produces an object that mirrors the HTML document’s structure. This makes web scraping very easy as you are able to find all the HTML tags. The output is the source code of the website. For example, the code below extracts all the a tag in the web page. The a tag defines a hyper-link, which is used to link from one page to another.</p>
+<p>The BeautifulSoup constructor parses raw HTML strings and produces an object that mirrors the HTML document’s structure. This makes web scraping very easy as you are able to find all the HTML tags. The output is the source code of the website.</p>
+<p>For example, the code below extracts all the a tag in the web page. The a tag defines a hyperlink, which is used to link from one page to another.</p>
 <pre class="python"><code>#To find all the links in the web page (a-tags in the output)
 print(soup.find_all(&#39;a&#39;)[0])
 
 </code></pre>
-<pre><code>&lt;a class=&quot;pull-left&quot; href=&quot;http://www.noaa.gov&quot; id=&quot;header-noaa&quot;&gt;&lt;img alt=&quot;National Oceanic and Atmospheric Administration&quot; src=&quot;/css/images/header_noaa.png&quot;/&gt;&lt;/a&gt;</code></pre>
+<pre><code>&lt;a class=&quot;pull-left&quot; href=&quot;http://www.noaa.gov&quot; id=&quot;header-noaa&quot;&gt;&lt;img alt=&quot;National Oceanic and Atmospheric Administration&quot; src=&quot;/css/images/header_noaa.png&quot;/&gt;&lt;/a&gt;
+</code></pre>
 <p>To identify the section that hosts tag the information that is needed, the source code of the web page can be checked by using the browser developer tools. The diagram below shows the web page and its corresponding source code. This is useful when identifying the tag id containing the information to be scraped from the web page.</p>
-<div class="figure">
-<img src="attachment:image.png" alt="image.png" />
-<p class="caption">image.png</p>
-</div>
+<p><img src="images/p09_01.png" /></p>
 <p>The developer source code shows that the tag id is seven-day-forecast-container.</p>
 <pre class="python"><code>#component of the html code contacting weather information
 week = soup.find(id=&#39;seven-day-forecast-body&#39;)
 </code></pre>
 <p>This shows every information contained in that tag id. To access all the items in this object week (weekdays), the information in the class tag “tombstone-container” is captured.</p>
-<pre class="python"><code>#each day
+<pre class="python"><code>#Extracting information for the week
 items = week.find_all(class_= &quot;tombstone-container&quot;)
-#first day
+#extracting the first item in the items list - day 1 
 day1=items[0] 
 day1</code></pre>
 <pre><code>&lt;div class=&quot;tombstone-container&quot;&gt;
 &lt;p class=&quot;period-name&quot;&gt;Overnight&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt=&quot;Overnight: A 30 percent chance of showers and thunderstorms.  Mostly cloudy, with a low around 78. Calm wind becoming east around 5 mph. &quot; class=&quot;forecast-icon&quot; src=&quot;newimages/medium/nscttsra30.png&quot; title=&quot;Overnight: A 30 percent chance of showers and thunderstorms.  Mostly cloudy, with a low around 78. Calm wind becoming east around 5 mph. &quot;/&gt;&lt;/p&gt;&lt;p class=&quot;short-desc&quot;&gt;Chance&lt;br/&gt;T-storms&lt;/p&gt;&lt;p class=&quot;temp temp-low&quot;&gt;Low: 78 °F&lt;/p&gt;&lt;/div&gt;</code></pre>
-<p>Each item contains all coding and image relating to one day. The information in each item in the item list is broken into columns: Day, weather description, and temperature.</p>
-<pre class="python"><code>print(day1.find(class_= &quot;period-name&quot;).get_text())  #day</code></pre>
+<p>Each item contains all coding and image relating to one day. The information in each item in the item list is broken into columns: Day, weather description, and temperature. A for-loop is used to extract all relevant weather information.</p>
+<pre class="python"><code># extracting day from first item in list &#39;items&#39;
+print(day1.find(class_= &quot;period-name&quot;).get_text())  #day</code></pre>
 <pre><code>NOW until7:00am Wed</code></pre>
 <pre class="python"><code>print(day1.find(class_= &quot;short-desc&quot;).get_text()) #weather</code></pre>
 <pre><code>Flash Flood Watch</code></pre>
 <pre class="python"><code>items[1].find(class_= &quot;temp&quot;).get_text()</code></pre>
 <pre><code>&#39;Low: 75 °F&#39;</code></pre>
 <p>A for-loop is used to loop through the items list to get the column information for each day.</p>
-<pre class="python"><code>period_name=[]
+<pre class="python"><code># For-loop to days for the week
+
+period_name=[]
 for day in items:
     name=day.find(class_= &quot;period-name&quot;).get_text()
     period_name.append(name)
@@ -520,7 +584,8 @@ period_name #period</code></pre>
  &#39;Friday&#39;,
  &#39;FridayNight&#39;,
  &#39;Saturday&#39;]</code></pre>
-<pre class="python"><code>short_description = []
+<pre class="python"><code># For-loop to extract weather description for each day
+short_description = []
 for day in items:
     name=day.find(class_= &quot;short-desc&quot;).get_text()
     short_description.append(name)
@@ -534,7 +599,8 @@ short_description #period</code></pre>
  &#39;ChanceT-storms&#39;,
  &#39;ChanceT-storms&#39;,
  &#39;ChanceT-storms&#39;]</code></pre>
-<pre class="python"><code>temperature = []
+<pre class="python"><code># For-loop to extract temperature for each day
+temperature = []
 for day in items:
     try:
         name=day.find(class_= &quot;temp&quot;).get_text()
@@ -552,7 +618,8 @@ temperature</code></pre>
  &#39;Low: 78 °F&#39;,
  &#39;High: 92 °F&#39;]</code></pre>
 <p>The panda package is used to merge all output lists into a table.</p>
-<pre class="python"><code>weather_table = pd.DataFrame({&#39;Period&#39;:period_name,
+<pre class="python"><code>#combine lists into data table
+weather_table = pd.DataFrame({&#39;Period&#39;:period_name,
                              &#39;Short description&#39;:short_description,
                              &#39;Temperature&#39;:temperature})
 
@@ -719,31 +786,28 @@ High: 92 °F
 </div>
 <p>This Table can be converted to a CSV file and used for data manipulation and analysis. This web scraping code can be used for different locations on the same website. Web scraping is an essential tool that almost every data analyst needs.</p>
 </div>
-</div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>The incredible amount of data on the Internet is a rich resource for any field of research or personal interest. To effectively harvest that data, web scraping is a necessary skill. The Python library’s requests and Beautiful Soup are powerful tools for the job. However, there are some challenges in web Scraping. Each website is unique and will need a customized treatment to extract the relevant information.Additionally, websites constantly change therefore once the site’s structure has changed, the scraper might not be able to find the relevant information.</p>
-<p>Web scraping can be used for social media analysis, product analysis, or financial analysis. An alternative way of accessing web data is requesting access through an API. An API (Application Programming Interface) is a set of procedures and communication protocols that provide access to the data of an application, operating system, or other services. This <a href="https://learn.datacamp.com/courses/importing-data-in-python-part-2">link</a> provides a valuable learning resource regarding API data Extraction.</p>
-<pre class="python"><code></code></pre>
+<p>Web scraping can be used for social media analysis, product analysis, or financial analysis. An alternative way of accessing web data is requesting access through an API. An API (Application Programming Interface) is a set of procedures and communication protocols that provide access to the data of an application, operating system, or other services.</p>
+<p><a href="https://opensource.com/article/20/5/web-scraping-python">OpenSource</a> provides a valuable learning resource regarding web scraping using Python.</p>
 </div>
 
-<div class="footer">
-  <p style="text-align: center;">
-    <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
-    <br/>
-    Created and maintained by the
-    <br/>
-    <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
-    <br/>
-    Licensed under a
-    <br/>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-    <br/>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-  </p>
-</div>
+&nbsp;
+<hr />
+<p style="text-align: center;">
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <a href="https://github.com/Master-of-Business-Analytics" class="fa fa-github fa-2x"></a>
+  <br/>
+  Created and maintained by the <a href="https://www.sauder.ubc.ca/programs/masters-degrees/mban">Master of Business Analytics</a> Community
+  <br/>
+  Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  <br/>
+  <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+</p>
+
+&nbsp;
 
 
 </div>
@@ -794,7 +858,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
