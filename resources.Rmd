@@ -1,5 +1,5 @@
 ---
-title: "Resource"
+title: "Resources"
 ---
 
 If you’re new to cloud computing and version control, upon which this platform is built, here is some information to help you get started.
