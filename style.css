@@ -102,7 +102,9 @@ div[role="navigation"]{
 }
 div.footer {
   margin-top: 60px;
-  padding: 20px;
+  width: 500%;
+  margin-left: -200%;
+  padding: 20px 200%;
   border-style: solid;
   border-color: #f0f0f0;
   border-width: 2px;
