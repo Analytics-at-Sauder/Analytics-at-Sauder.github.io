@@ -174,10 +174,10 @@ plt.show()
 </table>
 </div>
 
-```
+
     CAUTION: 0.30% of the `Weekly_Sales` column is negative.
     
-```
+
 
 ![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_6_2.png)
 
@@ -285,7 +285,7 @@ Now let's move on to the `features` dataframe, which has 12 fields (columns) and
 ```python
 print(df_features.info())
 ```
-```
+
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 8190 entries, 0 to 8189
     Data columns (total 12 columns):
@@ -306,7 +306,7 @@ print(df_features.info())
     dtypes: bool(1), category(1), datetime64[ns](1), float64(9)
     memory usage: 657.6 KB
     None
-```    
+    
 
 
 ```python
@@ -870,13 +870,13 @@ plt.show()
 </table>
 </div>
 
-```
+
     CAUTION: 0.10% of MarkDown1 (non-null) is negative.
     CAUTION: 0.86% of MarkDown2 (non-null) is negative.
     CAUTION: 0.36% of MarkDown3 (non-null) is negative.
     CAUTION: 0.00% of MarkDown4 (non-null) is negative.
     CAUTION: 0.05% of MarkDown5 (non-null) is negative.
-```    
+    
 
 
 ![png](nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_11_2.png)
@@ -991,7 +991,7 @@ Last but not least, let's take a look at the `stores` dataframe, which only has 
 ```python
 display(df_stores.info())
 ```
-```
+
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 45 entries, 0 to 44
     Data columns (total 3 columns):
@@ -1006,7 +1006,7 @@ display(df_stores.info())
 
 
     None
-```
+
 
 
 ```python
