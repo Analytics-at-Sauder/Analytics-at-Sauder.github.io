@@ -436,7 +436,7 @@ model.fit(sales_s1d1_train)
 
 # Warning messages might appear in our case because of limited data
 ```
-```
+
     WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
     WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
     WARNING:pystan:10 of 200 iterations saturated the maximum tree depth of 10 (5 %)
@@ -447,7 +447,7 @@ model.fit(sales_s1d1_train)
 
 
     <fbprophet.forecaster.Prophet at 0x1e5ad4e1d88>
-```
+
 
 
 ## Testing the Model
@@ -704,10 +704,10 @@ errors_std = forecast_test['errors'].std()
 print('Residual mean: {:.2f}'.format(errors_mean))
 print('Residual standard deviation: {:.2f}'.format(errors_std))
 ```
-```
+
     Residual mean: -6369.44
     Residual standard deviation: 5974.84
-```    
+    
 
 
 ```python
@@ -895,12 +895,12 @@ forecast.loc[:,'exp_yhat_lower'] = np.exp(forecast.loc[:,'yhat_lower'])
 display(forecast.tail())
 # Scroll to the right for back-transformed forecasts
 ```
-```
+
     WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
     WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
     WARNING:pystan:8 of 200 iterations saturated the maximum tree depth of 10 (4 %)
     WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation
-```    
+    
 
 
 <div>

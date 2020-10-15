@@ -259,6 +259,9 @@ iframe.about-page {
     overflow-x: hidden;
   }
 }
+.nav.nav-pills {
+  margin-bottom: 20px;
+}
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
   font-size: 28px;
   }
@@ -456,6 +459,30 @@ pre:not([class]) {
 }
 .project-item-container:hover {
   background-color: #f9f9f9;
+}
+.panel {
+  display: inline-block;
+  height: 100%;
+  width:  100%;
+  border-radius: 0;
+}
+.panel-heading h4 {
+  margin-top: 15px !important;
+}
+.row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+.row.make-columns {
+    -moz-column-width: 19em;
+    -webkit-column-width: 19em;
+    -moz-column-gap: 1em;
+    -webkit-column-gap:1em; 
+}
+.row.make-columns > div {
+    display: inline-block;
+    padding:  .5rem;
+    width:  100%; 
 }
 table {
     border-collapse: collapse;

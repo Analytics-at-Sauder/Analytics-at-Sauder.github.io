@@ -13,74 +13,136 @@ output:
 </style>
 ```
 
-## Browse Projects {.tabset .tabset-fade .tabset-pills}
+## Browse Notebooks {.tabset .tabset-fade .tabset-pills}
 
 ### By Topic
 
-#### Finance
+```{=html}
+<div class="row make-columns">
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Finance</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0001_stock_returns_analysis.html">Stock Returns Analysis</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Healthcare</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0005_er_resource_planning.html">ER Resource Planning</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Marketing</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0015_conjoint_analysis.html">Conjoint Analysis</a>
+        <a class="list-group-item" href="nb0010_customer_segmentation.html">Customer Segmentation</a>
+        <a class="list-group-item" href="nb0011_recommender_system.html">Recommender System</a>
+        <a class="list-group-item" href="nb0006_rfm_analysis.html">RFM Analysis</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Project Management</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0013_critical_path_analysis.html">Critical Path Analysis</a>
+        <a class="list-group-item" href="nb0003_project_risk_assessment.html">Project Risk Assessment</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Supply Chain Management</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0012_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+        <a class="list-group-item" href="nb0004_inventory_management.html">Inventory Management</a>
+        <a class="list-group-item" href="nb0008_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+        <a class="list-group-item" href="nb0008_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+      </div>
+    </div>
+  </div>
+</div>
+```
 
-[Stock Returns Analysis](p01_stock_returns_analysis.html)<br/>
-
-#### Healthcare
-
-[ER Resource Planning](nb0005_er_resource_planning.html)<br/>
-
-#### Marketing
-
-[Conjoint Analysis](p15_conjoint_analysis.html)<br/>
-[Customer Segmentation](p10_customer_segmentation.html)<br/>
-[Price Versioning](p02_price_versioning.html)<br/>
-[Recommender System](p11_recommender_system.html)<br/>
-[RFM Analysis](p06_rfm_analysis.html)<br/>
-
-#### Project Management
-
-[Critical Path Analysis](nb0013_critical_path_analysis.html)<br/>
-[Project Risk Assessment](nb0003_project_risk_assessment.html)<br/>
-
-#### Supply Chain Management
-
-[Inventory Decision Analysis](p12_inventory_decision_analysis.html)<br/>
-[Inventory Management](p04_inventory_management.html)<br/>
-[Sales Forecast - Part I](nb0008_sales_forecast_part_1.html)<br/>
-[Sales Forecast - Part II](nb0008_sales_forecast_part_2.html)<br/>
 
 ### By Skills
 
-#### Data Collection
-
-[Web Scraping](p09_web_scraping.html)<br/>
-[Common Probability Distributions](nb0014_common_probability_distributions.html)<br/>
-
-#### Data Manipulation
-
-[Data Cleaning](p07_data_cleaning.html)<br/>
-[RFM Analysis](p06_rfm_analysis.html)<br/>
-
-#### Discrete Event Simulation
-
-[ER Resource Planning](nb0005_er_resource_planning.html)<br/>
-
-#### Forecasting
-
-[Sales Forecast - Part I](nb0008_sales_forecast_part_1.html)<br/>
-[Sales Forecast - Part II](nb0008_sales_forecast_part_2.html)<br/>
-
-#### Linear Programming/Optimization
-
-[Price Versioning](p02_price_versioning.html)<br/>
-
-#### Regression
-
-[Conjoint Analysis](p15_conjoint_analysis.html)<br/>
-[Multiple Linear Regression](p16_mlr.html)<br/>
-
-#### Machine Learning
-
-[Recommender System](p11_recommender_system.html)<br/>
-
-#### Monte Carlo Simulation
-
-[Inventory Management](p04_inventory_management.html)<br/>
-[Project Risk Assessment](nb0003_project_risk_assessment.html)<br/>
-[Inventory Decision Analysis](p12_inventory_decision_analysis.html)<br/>
+```{=html}
+<div class="row make-columns">
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Data Collection</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0009_web_scraping.html">Web Scraping</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Data Manipulation</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0014_common_probability_distributions.html">Common Probability Distributions</a>
+        <a class="list-group-item" href="nb0007_data_cleaning.html">Data Cleaning</a>
+        <a class="list-group-item" href="nb0006_rfm_analysis.html">RFM Analysis</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Discrete-Event Simulation</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0005_er_resource_planning.html">ER Resource Planning</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Forecasting</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0008_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+        <a class="list-group-item" href="nb0008_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Linear Programming/Optimization</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0002_price_versioning.html">Price Versioning</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Machine Learning</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0011_recommender_system.html">Recommender System</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Monte Carlo Simulation</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0012_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+        <a class="list-group-item" href="nb0004_inventory_management.html">Inventory Management</a>
+        <a class="list-group-item" href="nb0003_project_risk_assessment.html">Project Risk Assessment</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Regression</h4></div>
+      <div class="list-group">
+        <a class="list-group-item" href="nb0015_conjoint_analysis.html">Conjoint Analysis</a>
+        <a class="list-group-item" href="nb0016_mlr.html">Multiple Linear Regression</a>
+      </div>
+    </div>
+  </div>
+</div>
+```
