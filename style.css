@@ -41,9 +41,12 @@ a.button:hover {
 a.button:active {
   box-shadow: inset 0 0 10px #A45C12;
 }
-a:hover, a:focus {
+a:hover, a.list-group-item:hover, a:focus, a.list-group-item:focus {
     color: #00b5e2;
     text-decoration: none;
+}
+a.list-group-item:hover, a.list-group-item:focus {
+  background-color: #ffffff;
 }
 a[role="tab"] {
   text-decoration: none;
@@ -55,7 +58,7 @@ a[role="tab"] {
   }
 }
 .bio .row {
-  margin: 0;
+  margin: 60px 0;
 }
 .bio div {
   text-align: center;
