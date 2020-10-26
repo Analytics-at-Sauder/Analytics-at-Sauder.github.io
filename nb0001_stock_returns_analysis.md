@@ -7,7 +7,7 @@ In this Project, we will focus on using Python and Pandas to retrieve historical
 1. Perform primary analysis of stock returns
 2. Calculate key financial statistics or moments
 
-We encourage you to create your own Jupytor notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+We encourage you to create your own Jupyter notebook and follow along. You can also download this notebook together with any affiliated data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
 <a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0001_Stock_Returns_Analysis&urlpath=tree%2FNB0001_Stock_Returns_Analysis%2Fnb0001_stock_returns_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
