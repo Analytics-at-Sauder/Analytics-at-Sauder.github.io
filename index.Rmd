@@ -20,7 +20,7 @@ output:
 </div>
 <div id="navigate-website" class="home-page">
   <h2>Navigate This Website</h2>
-  <p>The <a href="blog.ubc.ca/businessanalytics" target="_blank"><strong>Blog</strong></a> page, UBC Business Analytics Blog, is a platform where users can share posts and have discussions around any news, tools, and applications involving data analytics in the business world. The <a href="https://analytics-at-sauder.github.io/notebooks.html" target="_blank"><strong>Projects</strong></a> page contains a list of Jupyter Notebooks with applications of analytics in various business domains. Detailed information on how to contribute to our repository can be found under the <a href="https://analytics-at-sauder.github.io/resources.html" target="_blank"><strong>Resources</strong></a> page, along with tutorials for Git, GitHub, Jupyter Notebook, Syzygy, and Binder.</p>
+  <p>The <a href="blog.ubc.ca/businessanalytics" target="_blank"><strong>Blog</strong></a> page, UBC Business Analytics Blog, is a platform where users can share posts and have discussions around any news, tools, and applications involving data analytics in the business world. The <a href="https://analytics-at-sauder.github.io/notebooks.html" target="_blank"><strong>Notebooks</strong></a> page contains a list of Jupyter Notebooks with applications of analytics in various business domains. Detailed information on how to contribute to our repository can be found under the <a href="https://analytics-at-sauder.github.io/resources.html" target="_blank"><strong>Resources</strong></a> page, along with tutorials for Git, GitHub, Jupyter Notebook, Syzygy, and Binder.</p>
 </div>
 <div id="for-faculties" class="home-page">
   <h2>For Educators</h2>
