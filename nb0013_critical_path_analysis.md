@@ -2,7 +2,7 @@
 
 #### Author: Charlie Cao
 
-In this Notebook, we are going to explore ways we can use Python to look for and visualize critical paths in projects. We encourage you to create your own Jupytor Notebook and follow along. You can also download this Notebook along with any accompanying data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
+In this Notebook, we are going to explore ways we can use Python to look for and visualize critical paths in projects. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook along with any accompanying data in the [Notebooks and Data](https://github.com/Master-of-Business-Analytics/Notebooks_and_Data) GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the [Resource](https://analytics-at-sauder.github.io/resource.html) tab). 
 
 <a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0013_Critical_Path_Analysis&urlpath=tree%2FNB0013_Critical_Path_Analysis%2Fnb0013_critical_path_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a>
 
