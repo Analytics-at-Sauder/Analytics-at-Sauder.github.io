@@ -13,12 +13,22 @@
 
 <title>nb0016_mlr.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -368,10 +352,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Multiple Linear Regression</h2>
 <div id="author-hao-zheng" class="section level4">
 <h4>Author: Hao Zheng</h4>
-<p>A regression is among one of the most commonly used methods when it comes to analysts trying to describe the result of an event, such as the effect of different characteristics on housing prices, which is what we are going to focus on in this Notebook. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook together with the accompanying data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0016_MLR&urlpath=tree%2FNB0016_MLR%2Fnb0016_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0016_MLR&urlpath=tree%2FNB0016_MLR%2Fnb0016_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0016_MLR/master?filepath=nb0016_mlr.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>A regression is among one of the most commonly used methods when it comes to analysts trying to describe the result of an event, such as the effect of different characteristics on housing prices, which is what we are going to focus on in this Notebook. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook together with the accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0016_MLR&urlpath=tree%2FNB0016_MLR%2Fnb0016_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0016_MLR&urlpath=tree%2FNB0016_MLR%2Fnb0016_mlr.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0016_MLR/master?filepath=nb0016_mlr.ipynb" target="_blank" class="button">Launch Binder</a></p>
 <pre class="python"><code>import numpy as np
 from sklearn.linear_model import LinearRegression
 import pandas as pd
@@ -819,13 +803,23 @@ info = raw_df.agg([&#39;count&#39;, &#39;size&#39;, &#39;nunique&#39;])</code></
 <pre class="python"><code>#Also we can check the types of these variables since there are both qualitative variables and quantitative 
 #variables in the dataset
 print(raw_df.dtypes)</code></pre>
-<p>Id int64 MSSubClass int64 MSZoning object LotFrontage float64 LotArea int64 …<br />
-MoSold int64 YrSold int64 SaleType object SaleCondition object SalePrice int64 Length: 81, dtype: object</p>
+<pre><code>Id                 int64
+MSSubClass         int64
+MSZoning          object
+LotFrontage      float64
+LotArea            int64
+                  ...   
+MoSold             int64
+YrSold             int64
+SaleType          object
+SaleCondition     object
+SalePrice          int64
+Length: 81, dtype: object</code></pre>
 <p>There are more than enough variables in the dataframe to perform regression analyses. In reality, we usually use the variables that can best explain the changes in housing prices, which is our variable of interest. We can plot some of these variables to see if there are any relationships between them.</p>
 <pre class="python"><code>#Seaborn plot
 g = sns.pairplot(raw_df[[&#39;LotArea&#39;,&#39;YrSold&#39;,&#39;SalePrice&#39;]], palette=&#39;tab20&#39;,size=6)</code></pre>
 <div class="figure">
-<img src="nb0016_mlr_files/nb0016_mlr_8_0.png" alt="png" />
+<img src="nb0016_mlr_files/nb0016_mlr_8_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>We expect to see a positive relationship between SalePrice and LotArea. The relationship between the two is not as significant as we expected because of the influence of the outliers. To further explore this relationship, we can try to remove all the data points within the lotarea variable that are larger than 50,000 in order to eliminate the outliers that are impacting our analysis. We will not be doing further data exploration in this Notebook.</p>
@@ -836,10 +830,18 @@ g = sns.pairplot(raw_df[[&#39;LotArea&#39;,&#39;YrSold&#39;,&#39;SalePrice&#39;]
 x = raw_df.loc[:,[&#39;LotArea&#39;,&#39;YrSold&#39;]].values.tolist()
 y = list(map(int,raw_df[&quot;SalePrice&quot;].tolist()))
 x, y = np.array(x), np.array(y)</code></pre>
-<hr />
-<p>NameError Traceback (most recent call last)</p>
-<p><ipython-input-1-53e45b87fe2c> in <module> 1 # Include the LotArea and the YrSold features as x-values, include SalePrice as y-value —-&gt; 2 x = raw_df.loc[:,[‘LotArea’,‘YrSold’]].values.tolist() 3 y = list(map(int,raw_df[“SalePrice”].tolist())) 4 x, y = np.array(x), np.array(y)</p>
-<p>NameError: name ‘raw_df’ is not defined</p>
+<pre><code>---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+&lt;ipython-input-1-53e45b87fe2c&gt; in &lt;module&gt;
+      1 # Include the LotArea and the YrSold features as x-values, include SalePrice as y-value
+----&gt; 2 x = raw_df.loc[:,[&#39;LotArea&#39;,&#39;YrSold&#39;]].values.tolist()
+      3 y = list(map(int,raw_df[&quot;SalePrice&quot;].tolist()))
+      4 x, y = np.array(x), np.array(y)
+
+
+NameError: name &#39;raw_df&#39; is not defined</code></pre>
 <pre class="python"><code>model = LinearRegression().fit(x, y)
 # Get r squared value
 r_sq = model.score(x, y)
@@ -851,7 +853,9 @@ print(&#39;intercept:&#39;, model.intercept_)
 # Get coefficients
 print(&#39;coefficients:&#39;, model.coef_)
 </code></pre>
-<p>coefficient of determination: 0.07024646007626767 intercept: 3181205.713858099 coefficients: [ 2.09711551 -1505.28728351]</p>
+<pre><code>coefficient of determination: 0.07024646007626767
+intercept: 3181205.713858099
+coefficients: [    2.09711551 -1505.28728351]</code></pre>
 <p>The coefficient indicates that there is something wrong here in the model. The coefficient associated with the year is negative. But in real life, we are witnessing a huge increase in housing prices every year. Therefore, we need to further search for the appropriate features to include in the model.</p>
 </div>
 <div id="step-2-try-different-possiblity-with-the-model" class="section level3">
@@ -877,7 +881,9 @@ print(&#39;intercept:&#39;, model.intercept_)
 
 # Get coefficients
 print(&#39;coefficients:&#39;, model.coef_)</code></pre>
-<p>coefficient of determination: 0.0008365159328428406 intercept: 3656994.3109081727 coefficients: [-2.31433421e-01 -1.73005873e+03]</p>
+<pre><code>coefficient of determination: 0.0008365159328428406
+intercept: 3656994.3109081727
+coefficients: [-2.31433421e-01 -1.73005873e+03]</code></pre>
 <p>From the coefficient on YrSold, we can see that it is actually not changing the SalePrice. Therefore, we can move forward to remove this unhelpful variable in trying to explain the variations observed in SalePrice. We can also, potentially, add in more powerful variables into the model.</p>
 </div>
 <div id="more-practice" class="section level3">
@@ -902,7 +908,7 @@ print(&#39;coefficients:&#39;, model.coef_)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -920,7 +926,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

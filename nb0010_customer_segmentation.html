@@ -13,12 +13,22 @@
 
 <title>nb0010_customer_segmentation.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -368,10 +352,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Customer Segmentation</h2>
 <div id="author-kemjika-ananaba" class="section level4">
 <h4>Author: Kemjika Ananaba</h4>
-<p>In this Project, we will focus on combining RFM (Recency, Frequency, and Monetary value) analysis with clustering analysis to to identify different market segments. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook together with any accompanying data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0010_Customer_Segmentation&urlpath=tree%2FNB0010_Customer_Segmentation%2Fnb0010_customer_segmentation.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0010_Customer_Segmentation&urlpath=tree%2FNB0010_Customer_Segmentation%2Fnb0010_customer_segmentation.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0010_Customer_Segmentation/master?filepath=nb0010_customer_segmentation.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>In this Project, we will focus on combining RFM (Recency, Frequency, and Monetary value) analysis with clustering analysis to to identify different market segments. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook together with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0010_Customer_Segmentation&urlpath=tree%2FNB0010_Customer_Segmentation%2Fnb0010_customer_segmentation.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0010_Customer_Segmentation&urlpath=tree%2FNB0010_Customer_Segmentation%2Fnb0010_customer_segmentation.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0010_Customer_Segmentation/master?filepath=nb0010_customer_segmentation.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="business-problem" class="section level2">
@@ -381,7 +365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>Who are our most/least valuable customers?</li>
 <li>How can we acquire new customers that resemble our most valuable customers?</li>
 </ul>
-<p>The Recency, Frequency, and Monetary value strategy has been around the industry for a while and provides a simple but effective method of segmenting customers. Our Project on <a target="_blank" href="https://master-of-business-analytics.github.io/Website/RFM_Analysis.html">RFM analysis</a> provides a basic model that allows businesses to segment their customers according to three criteria, based on an existing customer’s transaction history: the recency of a customer’s last purchase, the frequency of a customer’s purchases, and the total amount spent (which is referred to as “monetary”).</p>
+<p>The Recency, Frequency, and Monetary value strategy has been around the industry for a while and provides a simple but effective method of segmenting customers. Our Project on <a href="https://master-of-business-analytics.github.io/Website/RFM_Analysis.html">RFM analysis</a> provides a basic model that allows businesses to segment their customers according to three criteria, based on an existing customer’s transaction history: the recency of a customer’s last purchase, the frequency of a customer’s purchases, and the total amount spent (which is referred to as “monetary”).</p>
 <p>An RFM model can also be used in conjunction with certain predictive models to gain even further insight into customer behaviour. In this Project, we analyze the k-means clustering algorithm to witness how this technique can enhance the results of an RFM analysis.</p>
 <p>Here is a high-level flow of the analysis:</p>
 <ul>
@@ -618,14 +602,14 @@ United Kingdom
 </div>
 <div id="data-cleaning" class="section level1">
 <h1>Data Cleaning</h1>
-<p>The dataset seems to be relatively clean at first glance, but it is actually riddled with errors. There are several positive/negative offsetting entries throughout the dataset, in addition to other apparent errors, such as customers with negative transactions. More information on data cleaning can be found in our <a target="_blank" href="https://master-of-business-analytics.github.io/Website/Data_Cleaning.html">Data Cleaning Project</a>.</p>
+<p>The dataset seems to be relatively clean at first glance, but it is actually riddled with errors. There are several positive/negative offsetting entries throughout the dataset, in addition to other apparent errors, such as customers with negative transactions. More information on data cleaning can be found in our <a href="https://master-of-business-analytics.github.io/Website/Data_Cleaning.html">Data Cleaning Project</a>.</p>
 <p>The first step in cleaning the dataset is to check if there are any missing values and where the missing values are located.</p>
 <pre class="python"><code>
 #Visualize the number of null values in the dataframe for each column
 df.isnull().sum().plot(kind=&#39;bar&#39;)</code></pre>
-<p>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a26fd03d0&gt;</p>
+<pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a26fd03d0&gt;</code></pre>
 <div class="figure">
-<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_5_1.png" alt="png" />
+<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_5_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>The bar chart above shows that the NaN values are located in the Description column and the CustomerID column. The purpose of this Project is to segment the current customers of a business; therefore, transactions without a valid CustomerID do not provide any value and are dropped from the data frame.</p>
@@ -634,7 +618,15 @@ df=df.dropna(subset=[&#39;CustomerID&#39;])
 
 #NA status across columns
 df.isnull().sum()</code></pre>
-<p>InvoiceNo 0 StockCode 0 Description 0 Quantity 0 InvoiceDate 0 UnitPrice 0 CustomerID 0 Country 0 dtype: int64</p>
+<pre><code>InvoiceNo      0
+StockCode      0
+Description    0
+Quantity       0
+InvoiceDate    0
+UnitPrice      0
+CustomerID     0
+Country        0
+dtype: int64</code></pre>
 <pre class="python"><code>df.describe()</code></pre>
 <div>
 <style scoped>
@@ -1339,7 +1331,9 @@ print(&#39;{:,} transactions don\&#39;t have a customer id&#39;
       .format(df2[df2.CustomerID.isnull()].shape[0]))
 print(&#39;Transactions timeframe from {} to {}&#39;.format(df2[&#39;InvoiceDate&#39;].min(),
                                     df2[&#39;InvoiceDate&#39;].max()))</code></pre>
-<p>60,424 rows; 6 columns 0 transactions don’t have a customer id Transactions timeframe from 2011-01-04 to 2011-03-30</p>
+<pre><code>60,424 rows; 6 columns
+0 transactions don&#39;t have a customer id
+Transactions timeframe from 2011-01-04 to 2011-03-30</code></pre>
 </div>
 <div id="rfm-model" class="section level1">
 <h1>RFM Model</h1>
@@ -1549,9 +1543,9 @@ plt.plot(frame[&#39;Cluster&#39;], frame[&#39;SSE&#39;], marker=&#39;o&#39;)
 plt.xlabel(&#39;Number of Clusters&#39;)
 plt.ylabel(&#39;Inertia&#39;)
 plt.title(&#39;Elbow Curve&#39;)</code></pre>
-<p>Text(0.5, 1.0, ‘Elbow Curve’)</p>
+<pre><code>Text(0.5, 1.0, &#39;Elbow Curve&#39;)</code></pre>
 <div class="figure">
-<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_21_1.png" alt="png" />
+<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_21_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>kmeans = KMeans(n_jobs = -1, n_clusters = 4, init=&#39;k-means++&#39;)
@@ -1696,7 +1690,11 @@ CustomerID
 </div>
 <pre class="python"><code>#Cluster number
 rfm_df.cluster.value_counts()</code></pre>
-<p>1 934 0 568 2 96 3 9 Name: cluster, dtype: int64</p>
+<pre><code>1    934
+0    568
+2     96
+3      9
+Name: cluster, dtype: int64</code></pre>
 <p><b>The cluster value where this decrease in inertia value becomes constant will be chosen as the appropriate cluster value for our data.</b> Looking at the above elbow curve, we can choose between four to six clusters; in other words, we can appropriately group our customer data into four to six customer segments. We will choose to set the number of clusters at five, and now we will proceed to fit the model.</p>
 <p>As a note, we must also consider the computation cost when deciding the number of clusters to implement in our data, as computation costs increase with a higher number of clusters.</p>
 <pre class="python"><code>#Recency plot
@@ -1704,21 +1702,21 @@ sns.boxplot(rfm_df.cluster,rfm_df.Recency)
 plt.title(&#39;Recency&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_25_0.png" alt="png" />
+<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_25_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>sns.boxplot(rfm_df.cluster,rfm_df.Frequency)
 plt.title(&#39;Frequency&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_26_0.png" alt="png" />
+<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_26_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>sns.boxplot(rfm_df.cluster,rfm_df.Monetary)
 plt.title(&#39;Monetary&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_27_0.png" alt="png" />
+<img src="nb0010_customer_segmentation_files/nb0010_customer_segmentation_27_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -1730,11 +1728,11 @@ plt.show()</code></pre>
 <div id="references" class="section level1">
 <h1>References</h1>
 <ol style="list-style-type: decimal">
-<li>Aditya,A. (2020, March 20). Predictive Segments using RFM Analysis: An In-Depth Guide. Retrieved July 03, 2020, from <a target="_blank" href="https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/" class="uri">https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/</a></li>
-<li>Yexi Yuan. (2019, Aug 17). Recency, Frequency, Monetary Model with Python — and how Sephora uses it to optimize their Google and Facebook Ads. Retrieved July 03, 2020, from <a target="_blank" href="https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17" class="uri">https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17</a></li>
-<li>Campbell, A. (2020, July 05). Customer_segmentation. Lecture presented at EARL 2017 in London, London. <a target="_blank" href="https://earlconf.com/2017/downloads/london/presentations/EARL2017_-_London_-_Alexander_Campbell_-_Customer_segmentation.pdf" class="uri">https://earlconf.com/2017/downloads/london/presentations/EARL2017_-_London_-_Alexander_Campbell_-_Customer_segmentation.pdf</a></li>
-<li>Pulkit Sharma (2020, April 23). K Means Clustering: K Means Clustering Algorithm in Python. Retrieved July 14, 2020, from <a target="_blank" href="https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/" class="uri">https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/</a></li>
-<li>Unknown. (2019, February 12). RFM Analysis. Retrieved July 14, 2020, from <a target="_blank" href="https://www.kaggle.com/yugagrawal95/rfm-analysis" class="uri">https://www.kaggle.com/yugagrawal95/rfm-analysis</a></li>
+<li>Aditya,A. (2020, March 20). Predictive Segments using RFM Analysis: An In-Depth Guide. Retrieved July 03, 2020, from <a href="https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/" class="uri">https://www.moengage.com/blog/rfm-analysis-using-predictive-segments/</a></li>
+<li>Yexi Yuan. (2019, Aug 17). Recency, Frequency, Monetary Model with Python — and how Sephora uses it to optimize their Google and Facebook Ads. Retrieved July 03, 2020, from <a href="https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17" class="uri">https://towardsdatascience.com/recency-frequency-monetary-model-with-python-and-how-sephora-uses-it-to-optimize-their-google-d6a0707c5f17</a></li>
+<li>Campbell, A. (2020, July 05). Customer_segmentation. Lecture presented at EARL 2017 in London, London. <a href="https://earlconf.com/2017/downloads/london/presentations/EARL2017_-_London_-_Alexander_Campbell_-_Customer_segmentation.pdf" class="uri">https://earlconf.com/2017/downloads/london/presentations/EARL2017_-_London_-_Alexander_Campbell_-_Customer_segmentation.pdf</a></li>
+<li>Pulkit Sharma (2020, April 23). K Means Clustering: K Means Clustering Algorithm in Python. Retrieved July 14, 2020, from <a href="https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/" class="uri">https://www.analyticsvidhya.com/blog/2019/08/comprehensive-guide-k-means-clustering/</a></li>
+<li>Unknown. (2019, February 12). RFM Analysis. Retrieved July 14, 2020, from <a href="https://www.kaggle.com/yugagrawal95/rfm-analysis" class="uri">https://www.kaggle.com/yugagrawal95/rfm-analysis</a></li>
 </ol>
 </div>
 
@@ -1754,7 +1752,7 @@ plt.show()</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1772,7 +1770,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

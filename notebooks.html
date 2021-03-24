@@ -11,14 +11,24 @@
 
 
 
-<title>Projects</title>
+<title>Notebooks</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -73,12 +83,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -91,32 +105,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -127,10 +116,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -147,6 +132,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -159,7 +147,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -252,9 +239,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -274,11 +258,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">Projects</h1>
+<h1 class="title toc-ignore">Notebooks</h1>
 
 </div>
 
@@ -289,7 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 </style>
 <div id="browse-notebooks" class="section level2 tabset tabset-fade tabset-pills">
-<h2>Browse Notebooks</h2>
+<h2 class="tabset tabset-fade tabset-pills">Browse Notebooks</h2>
 <div id="by-topic" class="section level3">
 <h3>By Topic</h3>
 <div class="row make-columns">
@@ -297,7 +281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Finance</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0001_stock_returns_analysis.html">Stock Returns Analysis</a>
+        <a class="list-group-item" href="nb0001_stock_returns_analysis.html">Stock Returns Analysis</a>
       </div>
     </div>
   </div>
@@ -305,7 +289,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Healthcare</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0005_er_resource_planning.html">ER Resource Planning</a>
+        <a class="list-group-item" href="nb0005_er_resource_planning.html">ER Resource Planning</a>
       </div>
     </div>
   </div>
@@ -313,10 +297,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Marketing</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0015_conjoint_analysis.html">Conjoint Analysis</a>
-        <a target="_blank" class="list-group-item" href="nb0010_customer_segmentation.html">Customer Segmentation</a>
-        <a target="_blank" class="list-group-item" href="nb0011_recommender_system.html">Recommender System</a>
-        <a target="_blank" class="list-group-item" href="nb0006_rfm_analysis.html">RFM Analysis</a>
+        <a class="list-group-item" href="nb0015_conjoint_analysis.html">Conjoint Analysis</a>
+        <a class="list-group-item" href="nb0010_customer_segmentation.html">Customer Segmentation</a>
+        <a class="list-group-item" href="nb0011_recommender_system.html">Recommender System</a>
+        <a class="list-group-item" href="nb0006_rfm_analysis.html">RFM Analysis</a>
       </div>
     </div>
   </div>
@@ -324,8 +308,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Project Management</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0013_critical_path_analysis.html">Critical Path Analysis</a>
-        <a target="_blank" class="list-group-item" href="nb0003_project_risk_assessment.html">Project Risk Assessment</a>
+        <a class="list-group-item" href="nb0013_critical_path_analysis.html">Critical Path Analysis</a>
+        <a class="list-group-item" href="nb0003_project_risk_assessment.html">Project Risk Assessment</a>
       </div>
     </div>
   </div>
@@ -333,10 +317,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Supply Chain Management</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0012_inventory_decision_analysis.html">Inventory Decision Analysis</a>
-        <a target="_blank" class="list-group-item" href="nb0004_inventory_management.html">Inventory Management</a>
-        <a target="_blank" class="list-group-item" href="nb0008_sales_forecast_part_1.html">Sales Forecast - Part I</a>
-        <a target="_blank" class="list-group-item" href="nb0008_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+        <a class="list-group-item" href="nb0012_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+        <a class="list-group-item" href="nb0004_inventory_management.html">Inventory Management</a>
+        <a class="list-group-item" href="nb0008_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+        <a class="list-group-item" href="nb0008_sales_forecast_part_2.html">Sales Forecast - Part II</a>
       </div>
     </div>
   </div>
@@ -349,7 +333,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Data Collection</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0009_web_scraping.html">Web Scraping</a>
+        <a class="list-group-item" href="nb0009_web_scraping.html">Web Scraping</a>
       </div>
     </div>
   </div>
@@ -357,9 +341,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Data Manipulation</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0014_common_probability_distributions.html">Common Probability Distributions</a>
-        <a target="_blank" class="list-group-item" href="nb0007_data_cleaning.html">Data Cleaning</a>
-        <a target="_blank" class="list-group-item" href="nb0006_rfm_analysis.html">RFM Analysis</a>
+        <a class="list-group-item" href="nb0014_common_probability_distributions.html">Common Probability Distributions</a>
+        <a class="list-group-item" href="nb0007_data_cleaning.html">Data Cleaning</a>
+        <a class="list-group-item" href="nb0006_rfm_analysis.html">RFM Analysis</a>
       </div>
     </div>
   </div>
@@ -367,7 +351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Discrete-Event Simulation</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0005_er_resource_planning.html">ER Resource Planning</a>
+        <a class="list-group-item" href="nb0005_er_resource_planning.html">ER Resource Planning</a>
       </div>
     </div>
   </div>
@@ -375,8 +359,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Forecasting</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0008_sales_forecast_part_1.html">Sales Forecast - Part I</a>
-        <a target="_blank" class="list-group-item" href="nb0008_sales_forecast_part_2.html">Sales Forecast - Part II</a>
+        <a class="list-group-item" href="nb0008_sales_forecast_part_1.html">Sales Forecast - Part I</a>
+        <a class="list-group-item" href="nb0008_sales_forecast_part_2.html">Sales Forecast - Part II</a>
       </div>
     </div>
   </div>
@@ -384,7 +368,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Linear Programming/Optimization</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0002_price_versioning.html">Price Versioning</a>
+        <a class="list-group-item" href="nb0002_price_versioning.html">Price Versioning</a>
       </div>
     </div>
   </div>
@@ -392,7 +376,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Machine Learning</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0011_recommender_system.html">Recommender System</a>
+        <a class="list-group-item" href="nb0011_recommender_system.html">Recommender System</a>
       </div>
     </div>
   </div>
@@ -400,9 +384,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Monte Carlo Simulation</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0012_inventory_decision_analysis.html">Inventory Decision Analysis</a>
-        <a target="_blank" class="list-group-item" href="nb0004_inventory_management.html">Inventory Management</a>
-        <a target="_blank" class="list-group-item" href="nb0003_project_risk_assessment.html">Project Risk Assessment</a>
+        <a class="list-group-item" href="nb0012_inventory_decision_analysis.html">Inventory Decision Analysis</a>
+        <a class="list-group-item" href="nb0004_inventory_management.html">Inventory Management</a>
+        <a class="list-group-item" href="nb0003_project_risk_assessment.html">Project Risk Assessment</a>
       </div>
     </div>
   </div>
@@ -410,8 +394,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="panel panel-default">
       <div class="panel-heading"><h4>Regression</h4></div>
       <div class="list-group">
-        <a target="_blank" class="list-group-item" href="nb0015_conjoint_analysis.html">Conjoint Analysis</a>
-        <a target="_blank" class="list-group-item" href="nb0016_mlr.html">Multiple Linear Regression</a>
+        <a class="list-group-item" href="nb0015_conjoint_analysis.html">Conjoint Analysis</a>
+        <a class="list-group-item" href="nb0016_mlr.html">Multiple Linear Regression</a>
       </div>
     </div>
   </div>
@@ -433,7 +417,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -451,7 +435,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

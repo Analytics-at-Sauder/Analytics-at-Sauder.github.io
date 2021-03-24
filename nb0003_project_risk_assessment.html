@@ -13,12 +13,22 @@
 
 <title>nb0003_project_risk_assessment.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -368,10 +352,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Project Risk Assessment</h2>
 <div id="author-charlie-cao" class="section level4">
 <h4>Author: Charlie Cao</h4>
-<p>In this Notebook, we are going to explore ways to apply Monte Carlo Simulations in predicting a project’s completion date and assessing a project’s risk. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0003_Project_Risk_Assessment&urlpath=tree%2FNB0003_Project_Risk_Assessment%2Fnb0003_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0003_Project_Risk_Assessment&urlpath=tree%2FNB0003_Project_Risk_Assessment%2Fnb0003_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0003_Project_Risk_Assessment/master?filepath=nb0003_project_risk_assessment.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>In this Notebook, we are going to explore ways to apply Monte Carlo Simulations in predicting a project’s completion date and assessing a project’s risk. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0003_Project_Risk_Assessment&urlpath=tree%2FNB0003_Project_Risk_Assessment%2Fnb0003_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0003_Project_Risk_Assessment&urlpath=tree%2FNB0003_Project_Risk_Assessment%2Fnb0003_project_risk_assessment.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0003_Project_Risk_Assessment/master?filepath=nb0003_project_risk_assessment.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="background" class="section level2">
@@ -389,7 +373,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>Task 3 has an 80% probability of being completed in four days, 5% probability of being completed in three days, and a 15% probability of being completed in five days.</li>
 </ol>
 <div class="figure">
-<img src="nb0003_images/p03_01.png" alt="Sequential Tasks" />
+<img src="nb0003_images/p03_01.png" alt="" />
 <p class="caption">Sequential Tasks</p>
 </div>
 <p>Each task is dependent on the task before it, meaning that the three tasks must be executed in sequence. Your task is to provide information to the Project Manager concerning the expected completion time of the project and possible delays. Before we begin, install and import the following packages:</p>
@@ -405,7 +389,7 @@ E\,[Project\:Completion\:Time] &amp; = \sum_{n=1}^{3} E\,[Task_{n}\:Completion\:
 &amp; = 13.3\:(days)
 \end{split}
 \end{equation}\]</span></p>
-<p>However, without getting into too much detail, there is a fair chance that the actual completion time of the project is shorter or longer than 13.3 days, and it would be helpful to know the probability of different project completion times. Simple scenarios like this might be easy to solve with mathematical equations (learn more about discrete random variables <a target="_blank" href="https://www.khanacademy.org/math/ap-statistics/random-variables-ap/discrete-random-variables/v/valid-discrete-probability-distribution-examples">here</a>), but real life situations are often much more complex. Therefore, a Monte Carlo Simulation would be very useful, because we will be able to simulate the different scenarios of possible task completion dates without getting deep into calculations. Simulated results also allow us to visualize the different scenarios and look at the actual distribution of those possibilities.</p>
+<p>However, without getting into too much detail, there is a fair chance that the actual completion time of the project is shorter or longer than 13.3 days, and it would be helpful to know the probability of different project completion times. Simple scenarios like this might be easy to solve with mathematical equations (learn more about discrete random variables <a href="https://www.khanacademy.org/math/ap-statistics/random-variables-ap/discrete-random-variables/v/valid-discrete-probability-distribution-examples">here</a>), but real life situations are often much more complex. Therefore, a Monte Carlo Simulation would be very useful, because we will be able to simulate the different scenarios of possible task completion dates without getting deep into calculations. Simulated results also allow us to visualize the different scenarios and look at the actual distribution of those possibilities.</p>
 <p>Let’s start with simulating one instance of Task 1:</p>
 <pre class="python"><code>t1_comp = [3, 2, 4] # the possible completion time for task 1
 t1_prob = [0.7, 0.1, 0.2] # the probability of each completion time for task 1
@@ -495,7 +479,7 @@ Name: Project, dtype: int64</code></pre>
 <pre class="python"><code>plt.bar(range(10,18),proj_df[&#39;Project&#39;].groupby(proj_df[&#39;Project&#39;]).count())</code></pre>
 <pre><code>&lt;BarContainer object of 8 artists&gt;</code></pre>
 <div class="figure">
-<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_14_1.png" alt="png" />
+<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_14_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>In the graph above, we combine the distribution and the sample statistics of the project completion dates over the 1,000 replications (output of the next cell). We can see that the simulated project completion times are right-skewed; that is, the worst case scenario is further away from the median than the best case scenario. In order to have a 95% chance of meeting the deadline, the quote should actually be around 15 days, as calculated below.</p>
@@ -517,7 +501,7 @@ Name: Project, dtype: float64</code></pre>
 <hr />
 <p>Now, we have received new information that Tasks 2 and 3 can actually be conducted at the same time.</p>
 <div class="figure">
-<img src="nb0003_images/p03_02.png" alt="Parallel Tasks" />
+<img src="nb0003_images/p03_02.png" alt="" />
 <p class="caption">Parallel Tasks</p>
 </div>
 <p>With this update, the project completion time is now dependent on the task that gets completed later: <code>proj_time = t1_time + max(t2_time, t3_time)</code>. Therefore, we slightly modify our simulation to the following:</p>
@@ -566,7 +550,7 @@ print(proj_df.head())</code></pre>
 <pre class="python"><code>plt.bar(range(min(proj_record),max(proj_record)+1),proj_df[&#39;Project&#39;].groupby(proj_df[&#39;Project&#39;]).count())</code></pre>
 <pre><code>&lt;BarContainer object of 6 artists&gt;</code></pre>
 <div class="figure">
-<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_20_1.png" alt="png" />
+<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_20_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>print(np.percentile(proj_record,95))</code></pre>
@@ -575,9 +559,9 @@ print(proj_df.head())</code></pre>
 <div id="scenario-three-correlated-task-risks" class="section level2">
 <h2>Scenario Three: Correlated Task Risks</h2>
 <hr />
-<p>When we see “correlated tasks”, we probably first think of correlation of coefficients. However, the number of correlation coefficients increases exponentially as the number of tasks increases, just like the possible combination of tasks (you can learn more about <a target="_blank" href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinations/v/combination-formula">combinations</a> and <a target="_blank" href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinatorics-precalc/v/permutation-formula">permutations</a> on Khan Academy), not to mention the amount of work that has to go into deciding the relationships between those tasks. At the same time, correlation coefficients are mathematical concepts which do not carry the most meaningful real-world interpretations, especially when a project manager tries to understand why the correlation in risks exists or how it could be managed. Therefore, more frequently, we would specify a risk event that could potentially impact multiple tasks and the probability of that risk event; we could also specify a risk factor, which would again affect multiple tasks. For now, let’s go back to the assumption that the three tasks are sequential, as in Scenario One.</p>
+<p>When we see “correlated tasks”, we probably first think of correlation of coefficients. However, the number of correlation coefficients increases exponentially as the number of tasks increases, just like the possible combination of tasks (you can learn more about <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinations/v/combination-formula">combinations</a> and <a href="https://www.khanacademy.org/math/precalculus/x9e81a4f98389efdf:prob-comb/x9e81a4f98389efdf:combinatorics-precalc/v/permutation-formula">permutations</a> on Khan Academy), not to mention the amount of work that has to go into deciding the relationships between those tasks. At the same time, correlation coefficients are mathematical concepts which do not carry the most meaningful real-world interpretations, especially when a project manager tries to understand why the correlation in risks exists or how it could be managed. Therefore, more frequently, we would specify a risk event that could potentially impact multiple tasks and the probability of that risk event; we could also specify a risk factor, which would again affect multiple tasks. For now, let’s go back to the assumption that the three tasks are sequential, as in Scenario One.</p>
 <div class="figure">
-<img src="nb0003_images/p03_01.png" alt="Sequential Tasks" />
+<img src="nb0003_images/p03_01.png" alt="" />
 <p class="caption">Sequential Tasks</p>
 </div>
 <p>In this scenario, the weather would have an impact on all three tasks, while internal communication would affect only Tasks 2 and 3. Let’s say that there is a 40% chance of bad weather, in which case the project is going to be delayed for 2 days. On the other hand, the communication factor varies in a way that is similar to a normal distribution, with a mean of 1 and a standard deviation of 0.1. When the communication between team members is efficient, the communication factor is smaller than 1 and reduces the project completion time; otherwise it is larger than 1 and increases the completion time. By modeling the probability of risk events and factors, we arrive at the following equation:</p>
@@ -655,7 +639,7 @@ print(proj_df.head())</code></pre>
         13.582, 14.511, 15.44 ]),
  &lt;a list of 10 Patch objects&gt;)</code></pre>
 <div class="figure">
-<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_26_1.png" alt="png" />
+<img src="nb0003_project_risk_assessment_files/nb0003_project_risk_assessment_26_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>print(np.percentile(proj_record,95))</code></pre>
@@ -664,7 +648,7 @@ print(proj_df.head())</code></pre>
 <div id="references" class="section level2">
 <h2>References</h2>
 <hr />
-<p><a target="_blank" href="https://risk-engineering.org/notebook/monte-carlo-project-risk.html" class="uri">https://risk-engineering.org/notebook/monte-carlo-project-risk.html</a> <br> <a target="_blank" href="https://www.vosesoftware.com/riskwiki/Correlationwithprojectscheduleriskanalysis.php" class="uri">https://www.vosesoftware.com/riskwiki/Correlationwithprojectscheduleriskanalysis.php</a></p>
+<p><a href="https://risk-engineering.org/notebook/monte-carlo-project-risk.html" class="uri">https://risk-engineering.org/notebook/monte-carlo-project-risk.html</a> <br> <a href="https://www.vosesoftware.com/riskwiki/Correlationwithprojectscheduleriskanalysis.php" class="uri">https://www.vosesoftware.com/riskwiki/Correlationwithprojectscheduleriskanalysis.php</a></p>
 <pre class="python"><code></code></pre>
 </div>
 
@@ -684,7 +668,7 @@ print(proj_df.head())</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -702,7 +686,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
