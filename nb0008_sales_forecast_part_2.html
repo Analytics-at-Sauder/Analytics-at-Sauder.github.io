@@ -13,12 +13,22 @@
 
 <title>nb0008_sales_forecast_part_2.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -368,16 +352,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Sales Forecaset (Part 2)</h2>
 <div id="author-charlie-cao" class="section level4">
 <h4>Author: Charlie Cao</h4>
-<p>This is the second of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupyter Notebook and follow along. You can also download this notebook along with any accompanying data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0008_Sales_Forecast/master?filepath=nb0008_sales_forecast_part_2.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>This is the second of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupyter Notebook and follow along. You can also download this notebook along with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_2.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0008_Sales_Forecast/master?filepath=nb0008_sales_forecast_part_2.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="background" class="section level2">
 <h2>Background</h2>
 <hr />
-<p>The previous Notebook provides a detailed guide on the exploration and manipulation of data, while this Notebook will be centered around the modeling process itself. Understanding the data is important for analytics, and we recommend that you read the first Notebook (Part 1) prior to diving into modeling in order to gain a better grasp of our large and messy data. The datasets that we are using consist of sales records for a retailer with 45 stores, each containing several departments. They are already included in the GitHub Repository where this Jupyter Notebook is located (please see the “Data” folder), but you can also find them on <a target="_blank" href="https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv">this Kaggle page</a>.</p>
+<p>The previous Notebook provides a detailed guide on the exploration and manipulation of data, while this Notebook will be centered around the modeling process itself. Understanding the data is important for analytics, and we recommend that you read the first Notebook (Part 1) prior to diving into modeling in order to gain a better grasp of our large and messy data. The datasets that we are using consist of sales records for a retailer with 45 stores, each containing several departments. They are already included in the GitHub Repository where this Jupyter Notebook is located (please see the “Data” folder), but you can also find them on <a href="https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv">this Kaggle page</a>.</p>
 <p>Let’s first start by importing the libraries we need and loading our data:</p>
 <pre class="python"><code>import pandas as pd
 import numpy as np
@@ -418,7 +402,7 @@ df_stores[&#39;Type&#39;] = df_stores[&#39;Type&#39;].astype(&#39;category&#39;)
 <p>In this Notebook, we will be using the <code>Prophet</code> forecasting package developed by Facebook. However, there are many other forecasting methods and packages, such as ARIMA models, ETS models, or a combination of explanatory models (linear regression) and time series models; some machine learning models can also be used to predict time series. After reading this Notebook, we encourage you to experiment with different forecasting packages in Python (or R) so that you can find the best fit for your data.</p>
 <div id="stl-decomposition" class="section level3">
 <h3>STL Decomposition</h3>
-<p>Time series data can usually be described with Trend, Cycle, and Seasonality. The book, “Forecasting: Principles and Practice”, does a great job defining these three components in <a target="_blank" href="https://otexts.com/fpp2/tspatterns.html">Chapter 2.3</a>. Oftentimes, identifying these components in our data (and understanding our data in general) can help us select the most appropriate model(s). There are many different ways to decompose time series data. STL decomposition (short for Seasonal and Trend decomposition using Loess) is helpful in our case because we have weekly data, while a lot of other decomposition methods are only applicable to monthly or quarterly data. Here, we utilize <code>ipywidgets</code> again (please read its <a target="_blank" href="https://ipywidgets.readthedocs.io/en/latest/">documentation</a> for more information or for tutorials), together with the <code>STL</code> function from <code>statsmodels</code>, to inspect the different trends and seasonalities across stores and departments:</p>
+<p>Time series data can usually be described with Trend, Cycle, and Seasonality. The book, “Forecasting: Principles and Practice”, does a great job defining these three components in <a href="https://otexts.com/fpp2/tspatterns.html">Chapter 2.3</a>. Oftentimes, identifying these components in our data (and understanding our data in general) can help us select the most appropriate model(s). There are many different ways to decompose time series data. STL decomposition (short for Seasonal and Trend decomposition using Loess) is helpful in our case because we have weekly data, while a lot of other decomposition methods are only applicable to monthly or quarterly data. Here, we utilize <code>ipywidgets</code> again (please read its <a href="https://ipywidgets.readthedocs.io/en/latest/">documentation</a> for more information or for tutorials), together with the <code>STL</code> function from <code>statsmodels</code>, to inspect the different trends and seasonalities across stores and departments:</p>
 <pre class="python"><code>def stl_viz(store_num, dept_num):
     try:
         # Subsetting data according to store and department number
@@ -719,7 +703,7 @@ y
 </tbody>
 </table>
 </div>
-<p>ATTENTION: Training set has 91 rows</p>
+<pre><code>ATTENTION: Training set has 91 rows</code></pre>
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -806,7 +790,7 @@ y
 </tbody>
 </table>
 </div>
-<p>ATTENTION: Testing set has 52 rows</p>
+<pre><code>ATTENTION: Testing set has 52 rows</code></pre>
 <pre class="python"><code># Visualize train/test split
 plt.rc(&#39;figure&#39;,figsize=(15,5))
 fig, ax = plt.subplots()
@@ -820,7 +804,7 @@ ax.axvline(threshold_date, color=&#39;grey&#39;, linestyle=&#39;--&#39;)
 ax.legend(loc=&#39;upper right&#39;)
 ax.set(title=&#39;Weekly Sales&#39;, ylabel=&#39;&#39;);</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_8_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_8_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -921,7 +905,7 @@ holiday
 </div>
 <div id="fitting" class="section level4">
 <h4>Fitting</h4>
-<p>Now that we have our datasets ready, we can finally fit the model. One of the parameters of the model is called <code>mcmc_samples</code>, which sepcifies the number of samples to draw using the <a target="_blank" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo</a> method; this parameter has an impact on the confidence interval of our model, but for simplicity, we will not get into further details for the purposes of this Notebook.</p>
+<p>Now that we have our datasets ready, we can finally fit the model. One of the parameters of the model is called <code>mcmc_samples</code>, which sepcifies the number of samples to draw using the <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo</a> method; this parameter has an impact on the confidence interval of our model, but for simplicity, we will not get into further details for the purposes of this Notebook.</p>
 <pre class="python"><code>model = Prophet(yearly_seasonality=True, 
                 weekly_seasonality=False, 
                 daily_seasonality=False, 
@@ -932,8 +916,16 @@ holiday
 model.fit(sales_s1d1_train)
 
 # Warning messages might appear in our case because of limited data</code></pre>
-<p>WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed WARNING:pystan:10 of 200 iterations saturated the maximum tree depth of 10 (5 %) WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation</p>
-<p>&lt;fbprophet.forecaster.Prophet at 0x1e5ad4e1d88&gt;</p>
+<pre><code>WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
+WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
+WARNING:pystan:10 of 200 iterations saturated the maximum tree depth of 10 (5 %)
+WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation
+
+
+
+
+
+&lt;fbprophet.forecaster.Prophet at 0x1e5ad4e1d88&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -1412,13 +1404,13 @@ ax.axvline(threshold_date, color=&#39;grey&#39;, linestyle=&#39;--&#39;)
 ax.legend(loc=&#39;upper left&#39;)
 ax.set(title=&#39;Weekly Sales&#39;, ylabel=&#39;&#39;);</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_15_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_15_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>We can see right away that our forecast (green line) is consistently underestimating the observations (orange line), even though the observations are all within the 95% confidence interval of predictions. Combined with the component plots below (log scale), we can also see that the model includes a decreasing trend, and there is a large amount of uncertainty in the trend component as time goes on, as illustrated by the expanding confidence interval (shaded area). Holidays, on the other hand, do not seem to affect weekly sales for Department 1 in Store 1.</p>
 <pre class="python"><code>model.plot_components(forecast, figsize=(13,7));</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_17_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_17_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <div id="residual-diagnosis" class="section level3">
@@ -1434,7 +1426,8 @@ errors_std = forecast_test[&#39;errors&#39;].std()
 
 print(&#39;Residual mean: {:.2f}&#39;.format(errors_mean))
 print(&#39;Residual standard deviation: {:.2f}&#39;.format(errors_std))</code></pre>
-<p>Residual mean: -6369.44 Residual standard deviation: 5974.84</p>
+<pre><code>Residual mean: -6369.44
+Residual standard deviation: 5974.84</code></pre>
 <pre class="python"><code>fig, axes = plt.subplots(2,2,figsize=(15,10))
 
 # Plot residual distribution
@@ -1466,7 +1459,7 @@ plot_acf(x=forecast_test[&#39;errors&#39;], ax=axes[1,1])
 
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_21_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_21_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code># Calculate key error metrics
@@ -1652,7 +1645,10 @@ forecast.loc[:,&#39;exp_yhat_lower&#39;] = np.exp(forecast.loc[:,&#39;yhat_lower
 
 display(forecast.tail())
 # Scroll to the right for back-transformed forecasts</code></pre>
-<p>WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed WARNING:pystan:8 of 200 iterations saturated the maximum tree depth of 10 (4 %) WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation</p>
+<pre><code>WARNING:pystan:n_eff / iter below 0.001 indicates that the effective sample size has likely been overestimated
+WARNING:pystan:Rhat above 1.1 or below 0.9 indicates that the chains very likely have not mixed
+WARNING:pystan:8 of 200 iterations saturated the maximum tree depth of 10 (4 %)
+WARNING:pystan:Run again with max_treedepth larger than 10 to avoid saturation</code></pre>
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2106,7 +2102,7 @@ ax.axvline(max(sales_s1d1_df[&#39;Date&#39;]), color=&#39;grey&#39;, linestyle=&
 ax.legend(loc=&#39;upper left&#39;)
 ax.set(title=&#39;Weekly Sales&#39;, ylabel=&#39;&#39;);</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_27_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_2_files/nb0008_sales_forecast_part_2_27_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -2115,7 +2111,7 @@ ax.set(title=&#39;Weekly Sales&#39;, ylabel=&#39;&#39;);</code></pre>
 <hr />
 <p>Now that you have a basic understanding of our data, as well as forecasting for a single time series in Python using <code>Prophet</code>, we encourage you to:</p>
 <ol style="list-style-type: decimal">
-<li>Read through the <a target="_blank" href="https://facebook.github.io/prophet/docs/quick_start.html">documentation for Prophet</a> and fine-tune any additional parameters that you think could improve our model.</li>
+<li>Read through the <a href="https://facebook.github.io/prophet/docs/quick_start.html">documentation for Prophet</a> and fine-tune any additional parameters that you think could improve our model.</li>
 <li>Create your own Prophet model with a different dataset. Try to find a time series that is much longer than what we used in this Notebook so that you have more data to work with.</li>
 <li>Come up with a strategy to efficiently forecast for multiple stores and departments.</li>
 </ol>
@@ -2137,7 +2133,7 @@ ax.set(title=&#39;Weekly Sales&#39;, ylabel=&#39;&#39;);</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -2155,7 +2151,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

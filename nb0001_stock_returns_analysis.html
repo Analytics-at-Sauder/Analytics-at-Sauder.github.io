@@ -13,12 +13,22 @@
 
 <title>nb0001_stock_returns_analysis.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -373,10 +357,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>Perform primary analysis of stock returns</li>
 <li>Calculate key financial statistics or moments</li>
 </ol>
-<p>We encourage you to create your own Jupyter notebook and follow along. You can also download this notebook together with any affiliated data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0001_Stock_Returns_Analysis&urlpath=tree%2FNB0001_Stock_Returns_Analysis%2Fnb0001_stock_returns_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0001_Stock_Returns_Analysis&urlpath=tree%2FNB0001_Stock_Returns_Analysis%2Fnb0001_stock_returns_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0001_Stock_Returns_Analysis/master?filepath=nb0001_stock_returns_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>We encourage you to create your own Jupyter notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0001_Stock_Returns_Analysis&urlpath=tree%2FNB0001_Stock_Returns_Analysis%2Fnb0001_stock_returns_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0001_Stock_Returns_Analysis&urlpath=tree%2FNB0001_Stock_Returns_Analysis%2Fnb0001_stock_returns_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0001_Stock_Returns_Analysis/master?filepath=nb0001_stock_returns_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
 <pre class="python"><code>import pandas as pd
 from pandas_datareader import data as pdr
 import yfinance as yf
@@ -463,7 +447,7 @@ plt.title(&#39;Price Evolution Comparison&#39;)
 plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_9_0.png" alt="png" />
+<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_9_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <div id="stock-return" class="section level3">
@@ -527,7 +511,7 @@ ret.plot()
 plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_16_0.png" alt="png" />
+<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_16_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>The line plot above does not reveal much with regards to variation in trends across the four stocks’ prices over the observed one-year time frame. Instead, the return distributions below enable us to quickly determine the differences in the stocks’ behaviours over the one-year period.</p>
@@ -536,7 +520,7 @@ ret.hist(bins=50, sharex=True, figsize=(12,8))
 # Show the resulting plot
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_18_0.png" alt="png" />
+<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_18_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>The volatility of a stock is a measurement of the change in variance in the stock returns over a specific period of time. It is common to compare the volatility of one stock with the volatility of another; this is done in order to get a feel for which stocks have less risk. Comparing the volatility of a stock to the volatility of the market index is also common practice in order to understand the stock’s volatility relative to the overall market. Generally, the higher the stock’s volatility, the riskier the investment in that stock, which is insightful for making investment decisions.</p>
@@ -553,7 +537,7 @@ scatter_matrix(ret, diagonal=&#39;kde&#39;, alpha=0.8,figsize=(12,12))
 # Show the plot
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_20_0.png" alt="png" />
+<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_20_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>A scatter plot is a visual representation of the correlation between two items. It is related to the correlation coefficient, as it is used to indicate whether or not a linear relationship exists between two variables. The scatter plots above illustrate that there is a positive relationship between each pair of stock returns. We can further create a correlation matrix, as below, to check if any pair of our four stocks are correlated.</p>
@@ -561,7 +545,7 @@ plt.show()</code></pre>
 sns.heatmap(ret.corr(), vmin=-1,cmap=sns.diverging_palette(20, 220, n=200), vmax=1, center= 0,mask=mask)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_22_0.png" alt="png" />
+<img src="nb0001_stock_returns_analysis_files/nb0001_stock_returns_analysis_22_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>Based on the correlation matrix, each possible pair of stocks show a positive correlation in stock returns, with the stock returns of Amazon and Microsoft having the highest correlation.</p>
@@ -657,8 +641,8 @@ AMZN  0.000926  0.014432 -0.058477   1.858702 -0.004840</code></pre>
 <div id="references" class="section level2">
 <h2>References</h2>
 <ol style="list-style-type: decimal">
-<li>Bhardwaj, S. (2018, December 10). Use these two tools to look for less risky, promising stocks. Retrieved July 16, 2020, from <a target="_blank" href="https://economictimes.indiatimes.com/wealth/invest/use-these-two-tools-to-look-for-less-risky-promising-stocks/articleshow/66997140.cms" class="uri">https://economictimes.indiatimes.com/wealth/invest/use-these-two-tools-to-look-for-less-risky-promising-stocks/articleshow/66997140.cms</a></li>
-<li>Unknown. (2019). Scipy.stats.pearsonr¶. Retrieved July 16, 2020, from <a target="_blank" href="http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.pearsonr.html" class="uri">http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.pearsonr.html</a></li>
+<li>Bhardwaj, S. (2018, December 10). Use these two tools to look for less risky, promising stocks. Retrieved July 16, 2020, from <a href="https://economictimes.indiatimes.com/wealth/invest/use-these-two-tools-to-look-for-less-risky-promising-stocks/articleshow/66997140.cms" class="uri">https://economictimes.indiatimes.com/wealth/invest/use-these-two-tools-to-look-for-less-risky-promising-stocks/articleshow/66997140.cms</a></li>
+<li>Unknown. (2019). Scipy.stats.pearsonr¶. Retrieved July 16, 2020, from <a href="http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.pearsonr.html" class="uri">http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.pearsonr.html</a></li>
 </ol>
 </div>
 
@@ -678,7 +662,7 @@ AMZN  0.000926  0.014432 -0.058477   1.858702 -0.004840</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -696,7 +680,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

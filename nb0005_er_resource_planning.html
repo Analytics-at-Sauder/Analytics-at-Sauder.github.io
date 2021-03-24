@@ -13,12 +13,22 @@
 
 <title>nb0005_er_resource_planning.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -368,16 +352,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>ER Resource Planning</h2>
 <div id="author-charlie-cao" class="section level4">
 <h4>Author: Charlie Cao</h4>
-<p>In this notebook, we are going to explore ways that one can apply Discrete Event Simulation when making resource planning decisions for Emergency Rooms (ER). We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0005_ER_Resource_Planning&urlpath=tree%2FNB0005_ER_Resource_Planning%2Fnb0005_er_resource_planning.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0005_ER_Resource_Planning&urlpath=tree%2FNB0005_ER_Resource_Planning%2Fnb0005_er_resource_planning.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0005_ER_Resource_Planning/master?filepath=nb0005_er_resource_planning.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>In this notebook, we are going to explore ways that one can apply Discrete Event Simulation when making resource planning decisions for Emergency Rooms (ER). We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0005_ER_Resource_Planning&urlpath=tree%2FNB0005_ER_Resource_Planning%2Fnb0005_er_resource_planning.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0005_ER_Resource_Planning&urlpath=tree%2FNB0005_ER_Resource_Planning%2Fnb0005_er_resource_planning.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0005_ER_Resource_Planning/master?filepath=nb0005_er_resource_planning.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="background" class="section level2">
 <h2>Background</h2>
 <hr />
-<p>Discrete Event Simulation (DES) is a useful decision making tool that can be applied to situations where resources are limited and where there are queues in the process or system. Using DES, stakeholders can assess simulated outcomes, as measured by specified Key Point Indicators (KPIs), of various scenarios (e.g. different bed capacities or staffing schedules in an emergency room) without having to conduct costly experiments onsite (read more about DES itself <a target="_blank" href="https://www.sciencedirect.com/topics/engineering/discrete-event-simulation">here</a>).</p>
+<p>Discrete Event Simulation (DES) is a useful decision making tool that can be applied to situations where resources are limited and where there are queues in the process or system. Using DES, stakeholders can assess simulated outcomes, as measured by specified Key Point Indicators (KPIs), of various scenarios (e.g. different bed capacities or staffing schedules in an emergency room) without having to conduct costly experiments onsite (read more about DES itself <a href="https://www.sciencedirect.com/topics/engineering/discrete-event-simulation">here</a>).</p>
 <p>Nowadays, there are many software that enable not only simulations, but also animations of systems and processes. However, in this Notebook, we will take a look at a DES framework within Python called SimPy. The Notebook is divided into two sections. In the first half, we will take a look at the basic functionalities of SimPy with a simple emergency room (ER) example; in the second half, we will build Python <code>classes</code> and objects using SimPy. Through this Notebook, we hope to help provide a basic understanding of some DES software packages do behind the scenes.</p>
 </div>
 <div id="process-oriented-modeling" class="section level2">
@@ -411,7 +395,7 @@ sim_time = 24.0</code></pre>
 <p>After the environment is initiated, we can create our <code>resource</code>, a bed, within the <code>environment</code>:</p>
 <pre class="python"><code>bed = sim.Resource(env, capacity=cap_bed)</code></pre>
 <p>In the first function, <code>arrival()</code>, which we will be defining below, we want the user to pass in three arguments: - the <code>environment</code> of this particular simulation, - the average number of patient arrivals per hour, and - the resource needed for each patient.</p>
-<p>As long as the simulation is still running, this function will continue to operate. The function contains <code>yield</code> instead of <code>return</code>, which allows it to become a <code>generator</code> (read more about Python <a target="_blank" href="https://wiki.python.org/moin/Generators"><code>generators</code></a>. Every time a patient variable (object) is created through this function, the environment is progressed for the randomly simulated amount of interarrival time.</p>
+<p>As long as the simulation is still running, this function will continue to operate. The function contains <code>yield</code> instead of <code>return</code>, which allows it to become a <code>generator</code> (read more about Python <a href="https://wiki.python.org/moin/Generators"><code>generators</code></a>. Every time a patient variable (object) is created through this function, the environment is progressed for the randomly simulated amount of interarrival time.</p>
 <pre class="python"><code>def arrival(env, avg_arr, bed):
     i = 1
     while True:
@@ -458,7 +442,7 @@ sim_time = 24.0</code></pre>
             print(&#39;{}: {} left us after {}, unfortunately&#39;.format(str(timedelta(hours=round(env.now,2))),
                                                                   patient_id,
                                                                   str(timedelta(hours=round(wait,2)))))</code></pre>
-<p>Finally, let’s load the patient arrivals into our environment using the <code>process()</code> method of our <code>environment</code> (read more about SimPy <a target="_blank" href="https://simpy.readthedocs.io/en/latest/simpy_intro/basic_concepts.html"><code>processes</code></a>), and then we can start the simulation using the <code>run()</code> method.</p>
+<p>Finally, let’s load the patient arrivals into our environment using the <code>process()</code> method of our <code>environment</code> (read more about SimPy <a href="https://simpy.readthedocs.io/en/latest/simpy_intro/basic_concepts.html"><code>processes</code></a>), and then we can start the simulation using the <code>run()</code> method.</p>
 <p>In SimPy, simulations normally start at time 0 (unitless). We can define time units however we want to, although it is good practice to keep it consistent to avoid confusion. In the functions above, we re-formatted the unitless time by passing it into a <code>timedelta()</code> function as hours, and displayed it after transforming it into a string using the <code>str()</code> function.</p>
 <pre class="python"><code>env.process(arrival(env, avg_arr, bed))
 env.run(until=sim_time)</code></pre>
@@ -575,7 +559,7 @@ env.run(until=sim_time)</code></pre>
 <li>The output is long and not very readable, even for such a simple simulation, and</li>
 <li>If we were to create more functions for a more complicated simulation, each function can easily get lost.</li>
 </ol>
-<p>In the second half of this Notebook, we are going to use <code>classes</code> and <code>methods</code> to separate the different processes and objects/entities; we will also visualize a couple of Key Point Indicators (KPIs), so that the simulation results are easier to interpret. <code>Classes</code> help us better organize the different methods (functions) by giving them more structure (read more about Python <a target="_blank" href="https://docs.python.org/3/tutorial/classes.html"><code>class</code></a>).</p>
+<p>In the second half of this Notebook, we are going to use <code>classes</code> and <code>methods</code> to separate the different processes and objects/entities; we will also visualize a couple of Key Point Indicators (KPIs), so that the simulation results are easier to interpret. <code>Classes</code> help us better organize the different methods (functions) by giving them more structure (read more about Python <a href="https://docs.python.org/3/tutorial/classes.html"><code>class</code></a>).</p>
 </div>
 <div id="object-oriented-modeling" class="section level2">
 <h2>Object-Oriented Modeling</h2>
@@ -795,7 +779,7 @@ class Bed:
 model = Model()
 model.run()</code></pre>
 <div class="figure">
-<img src="nb0005_er_resource_planning_files/nb0005_er_resource_planning_23_0.png" alt="png" />
+<img src="nb0005_er_resource_planning_files/nb0005_er_resource_planning_23_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>Next, we want to calculate and display the simulation result statistics:</p>
@@ -2180,8 +2164,8 @@ Survival
 <div id="references-and-attributions" class="section level2">
 <h2>References and Attributions</h2>
 <ul>
-<li>Allen, M. (2018). An Emergency Department Model in SimPy, with Patient Prioritization and Capacityy Limited by Doctor Availability (Object-Based). Retrieved from: <a target="_blank" href="https://pythonhealthcare.org/2018/07/18/89-an-emergency-department-model-in-simpy-with-patient-prioritisation-and-capacity-limited-by-doctor-availability-object-based/" class="uri">https://pythonhealthcare.org/2018/07/18/89-an-emergency-department-model-in-simpy-with-patient-prioritisation-and-capacity-limited-by-doctor-availability-object-based/</a></li>
-<li>Isken, M. (2017). An Object-Oriented SimPy Patient Flow Simulation Model. Retrieved from: <a target="_blank" href="http://hselab.org/simpy-first-oo-patflow-model.html" class="uri">http://hselab.org/simpy-first-oo-patflow-model.html</a></li>
+<li>Allen, M. (2018). An Emergency Department Model in SimPy, with Patient Prioritization and Capacityy Limited by Doctor Availability (Object-Based). Retrieved from: <a href="https://pythonhealthcare.org/2018/07/18/89-an-emergency-department-model-in-simpy-with-patient-prioritisation-and-capacity-limited-by-doctor-availability-object-based/" class="uri">https://pythonhealthcare.org/2018/07/18/89-an-emergency-department-model-in-simpy-with-patient-prioritisation-and-capacity-limited-by-doctor-availability-object-based/</a></li>
+<li>Isken, M. (2017). An Object-Oriented SimPy Patient Flow Simulation Model. Retrieved from: <a href="http://hselab.org/simpy-first-oo-patflow-model.html" class="uri">http://hselab.org/simpy-first-oo-patflow-model.html</a></li>
 </ul>
 </div>
 
@@ -2201,7 +2185,7 @@ Survival
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -2219,7 +2203,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

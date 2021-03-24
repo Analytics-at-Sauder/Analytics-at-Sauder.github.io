@@ -13,12 +13,22 @@
 
 <title>nb0011_recommender_system.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -369,10 +353,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="author-hao-zheng" class="section level4">
 <h4>Author: Hao Zheng</h4>
 <p>While we talk about marketing, most of us will think about the diverse ads on the television. However, in real world, marketing is everywhere. Especially with the help from programming languages, advertisement can reach all corners of your life in an easier way without letting you notice it. For example, personizing the replying message so that customers feel connected.</p>
-<p>In this project, we will lead you through a combination of text processing and marketing that mainly focus on the content optimization aspect: the recommender system and let you understand how the system actually works. We encourage you to create your own Jupyter notebook and follow along. You can also download this notebook together with any affiliated data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0011_Recommender_System&urlpath=tree%2FNB0011_Recommender_System%2Fnb0011_recommender_system.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0011_Recommender_System&urlpath=tree%2FNB0011_Recommender_System%2Fnb0011_recommender_system.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0011_Recommender_System/master?filepath=nb0011_recommender_system.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>In this project, we will lead you through a combination of text processing and marketing that mainly focus on the content optimization aspect: the recommender system and let you understand how the system actually works. We encourage you to create your own Jupyter notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0011_Recommender_System&urlpath=tree%2FNB0011_Recommender_System%2Fnb0011_recommender_system.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0011_Recommender_System&urlpath=tree%2FNB0011_Recommender_System%2Fnb0011_recommender_system.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0011_Recommender_System/master?filepath=nb0011_recommender_system.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="business-problem" class="section level2">
@@ -516,7 +500,7 @@ Avatar
 [{“id”: 28, “name”: “Action”}, {“id”: 12, "nam…
 </td>
 <td>
-<a target="_blank" href="http://www.avatarmovie.com/" class="uri">http://www.avatarmovie.com/</a>
+<a href="http://www.avatarmovie.com/" class="uri">http://www.avatarmovie.com/</a>
 </td>
 <td>
 [{“id”: 1463, “name”: “culture clash”}, {“id”:…
@@ -584,7 +568,7 @@ Pirates of the Caribbean: At World’s End
 [{“id”: 12, “name”: “Adventure”}, {“id”: 14, "…
 </td>
 <td>
-<a target="_blank" href="http://disney.go.com/disneypictures/pirates/" class="uri">http://disney.go.com/disneypictures/pirates/</a>
+<a href="http://disney.go.com/disneypictures/pirates/" class="uri">http://disney.go.com/disneypictures/pirates/</a>
 </td>
 <td>
 [{“id”: 270, “name”: “ocean”}, {“id”: 726, "na…
@@ -771,7 +755,7 @@ Avatar
 [{“id”: 28, “name”: “Action”}, {“id”: 12, "nam…
 </td>
 <td>
-<a target="_blank" href="http://www.avatarmovie.com/" class="uri">http://www.avatarmovie.com/</a>
+<a href="http://www.avatarmovie.com/" class="uri">http://www.avatarmovie.com/</a>
 </td>
 <td>
 [{“id”: 1463, “name”: “culture clash”}, {“id”:…
@@ -839,7 +823,7 @@ Pirates of the Caribbean: At World’s End
 [{“id”: 12, “name”: “Adventure”}, {“id”: 14, "…
 </td>
 <td>
-<a target="_blank" href="http://disney.go.com/disneypictures/pirates/" class="uri">http://disney.go.com/disneypictures/pirates/</a>
+<a href="http://disney.go.com/disneypictures/pirates/" class="uri">http://disney.go.com/disneypictures/pirates/</a>
 </td>
 <td>
 [{“id”: 270, “name”: “ocean”}, {“id”: 726, "na…
@@ -987,7 +971,7 @@ ax.bar(new_df1[&#39;title&#39;][0:5],new_df1[&#39;score_cal&#39;][0:5])
 plt.grid(True)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0011_recommender_system_files/nb0011_recommender_system_11_0.png" alt="png" />
+<img src="nb0011_recommender_system_files/nb0011_recommender_system_11_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>Based on the calculated results, we will be able to recomend Inception, The Dark Knight, Intersetllar, Fight Club and The Avengers to all the people because these are the most welcomed popular movies.</p>
@@ -1052,8 +1036,11 @@ count_matrix = count.fit_transform(new_df2[&#39;test&#39;])
 from sklearn.metrics.pairwise import cosine_similarity
 
 cosine_sim2 = cosine_similarity(count_matrix, count_matrix)</code></pre>
-<p>/Users/haozheng/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:4: SettingWithCopyWarning: A value is trying to be set on a copy of a slice from a DataFrame</p>
-<p>See the caveats in the documentation: <a target="_blank" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy" class="uri">https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</a> after removing the cwd from sys.path.</p>
+<pre><code>/Users/haozheng/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:4: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  after removing the cwd from sys.path.</code></pre>
 <pre class="python"><code>#Construct a reverse map of indices and movie titles
 indices = pd.Series(new_df2.index, index=new_df2[&#39;title&#39;]).drop_duplicates()
 
@@ -1078,7 +1065,17 @@ def get_recom(title,cosine_sim):
     return df2[&#39;title&#39;].iloc[movie_indices]
 </code></pre>
 <pre class="python"><code>get_recom(&#39;Avatar&#39;, cosine_sim2)</code></pre>
-<p>85 Captain America: The Winter Soldier 2444 Damnation Alley 71 The Mummy: Tomb of the Dragon Emperor 83 The Lovers 518 Inspector Gadget 600 Killer Elite 678 Dragon Blade 786 The Monkey King 2 1273 Extreme Ops 1324 Virgin Territory Name: title, dtype: object</p>
+<pre><code>85        Captain America: The Winter Soldier
+2444                          Damnation Alley
+71      The Mummy: Tomb of the Dragon Emperor
+83                                 The Lovers
+518                          Inspector Gadget
+600                              Killer Elite
+678                              Dragon Blade
+786                         The Monkey King 2
+1273                              Extreme Ops
+1324                         Virgin Territory
+Name: title, dtype: object</code></pre>
 <p>Here we have the recommending list that is based on user’s preference. This is going to perform way better than the first method. However, we can still continue to improve it.</p>
 </div>
 </div>
@@ -1094,8 +1091,8 @@ def get_recom(title,cosine_sim):
 <div id="reference" class="section level2">
 <h2>Reference</h2>
 <hr />
-<p><a target="_blank" href="https://www.kaggle.com/tmdb/tmdb-movie-metadata" class="uri">https://www.kaggle.com/tmdb/tmdb-movie-metadata</a></p>
-<p><a target="_blank" href="https://www.kaggle.com/ibtesama/getting-started-with-a-movie-recommendation-system/?select=tmdb_5000_movies.csv" class="uri">https://www.kaggle.com/ibtesama/getting-started-with-a-movie-recommendation-system/?select=tmdb_5000_movies.csv</a></p>
+<p><a href="https://www.kaggle.com/tmdb/tmdb-movie-metadata" class="uri">https://www.kaggle.com/tmdb/tmdb-movie-metadata</a></p>
+<p><a href="https://www.kaggle.com/ibtesama/getting-started-with-a-movie-recommendation-system/?select=tmdb_5000_movies.csv" class="uri">https://www.kaggle.com/ibtesama/getting-started-with-a-movie-recommendation-system/?select=tmdb_5000_movies.csv</a></p>
 </div>
 
 <div class="footer">
@@ -1114,7 +1111,7 @@ def get_recom(title,cosine_sim):
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1132,7 +1129,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

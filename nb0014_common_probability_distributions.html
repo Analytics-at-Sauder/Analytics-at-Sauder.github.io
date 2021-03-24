@@ -13,12 +13,22 @@
 
 <title>nb0014_common_probability_distributions.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -369,10 +353,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="ahthors-hossein-piri-steven-shechter" class="section level4">
 <h4>Ahthors: Hossein Piri, Steven Shechter</h4>
 <p>This notebook describes probability distributions often used in simulation modeling, demonstrates how to generate random variables from these distributions, and visualizes the distributions through their density functions and histograms from sampled data. Other distributions to consider adding in the future, which also often arise in certain applications, include: Weibull, Beta, Gamma, Poisson</p>
-<p>We encourage you to create your own Jupyter notebook and follow along. You can also download this notebook together with any affiliated data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0014_Common_Probability_Distributions&urlpath=tree%2FNB0014_Common_Probability_Distributions%2Fnb0014_common_probability_distributions.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0014_Common_Probability_Distributions&urlpath=tree%2FNB0014_Common_Probability_Distributions%2Fnb0014_common_probability_distributions.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0014_Common_Probability_Distributions/master?filepath=nb0014_common_probability_distributions.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>We encourage you to create your own Jupyter notebook and follow along. You can also download this notebook together with any affiliated data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0014_Common_Probability_Distributions&urlpath=tree%2FNB0014_Common_Probability_Distributions%2Fnb0014_common_probability_distributions.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0014_Common_Probability_Distributions&urlpath=tree%2FNB0014_Common_Probability_Distributions%2Fnb0014_common_probability_distributions.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0014_Common_Probability_Distributions/master?filepath=nb0014_common_probability_distributions.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="probability-distributions-detailed-in-this-notebook" class="section level2">
@@ -601,7 +585,7 @@ bins = np.arange(np.floor(min(x)), np.ceil(max(x))+2)-0.5
 count, bins, ignored=ax.hist(result, density=True,bins=bins , histtype=&#39;stepfilled&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_22_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_22_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -630,7 +614,7 @@ bins = np.arange(np.floor(min(x)), np.ceil(max(x))+2)   -0.5
 count, bins, ignored=ax.hist(result, density=True, bins=bins, histtype=&#39;stepfilled&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_24_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_24_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -662,7 +646,7 @@ bins = np.arange(np.floor(min(x)), np.ceil(max(x))+2)-0.5
 count, bins, ignored=ax.hist(result,bins=bins, density=True, histtype=&#39;stepfilled&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_26_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_26_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -690,7 +674,7 @@ plt.plot(x, pdf, linewidth=2, color=&#39;r&#39;)
 plt.axis(&#39;tight&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_28_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_28_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -718,7 +702,7 @@ plt.axis(&#39;tight&#39;)
 plt.show()
 </code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_30_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_30_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -738,7 +722,7 @@ count, bins, ignored = plt.hist(result, num_bins, density=True)
 plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *np.exp( - (bins - mu)**2 / (2 * sigma**2) ),linewidth=2, color=&#39;r&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_32_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_32_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -762,7 +746,7 @@ plt.plot(x, pdf, linewidth=2, color=&#39;r&#39;)
 plt.axis(&#39;tight&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_34_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_34_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -785,7 +769,7 @@ plt.plot(x, pdf, linewidth=2, color=&#39;r&#39;)
 plt.axis(&#39;tight&#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_36_0.png" alt="png" />
+<img src="nb0014_common_probability_distributions_files/nb0014_common_probability_distributions_36_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -807,7 +791,7 @@ plt.show()</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -825,7 +809,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

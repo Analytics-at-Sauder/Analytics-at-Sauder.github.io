@@ -18,8 +18,3 @@ You can request to be added as a member of the [Analytics@Sauder Organization] o
 Once you are familiar with Git and GitHub, [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) and/or [clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) any repository, edit the Jupyter Notebook, and propose your changes by [creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/proposing-changes-to-your-work-with-pull-requests). One of our administrators will go through the pull requests on a regular basis and approve the changes as needed.
 
 Alternatively, if you ran into a problem that you cannot solve or if you just have general comments for a specific notebook, you can [create an issue](https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue) within the corresponding repository. Questions will be addressed by one of our administrators periodically.
-
-### Write A Blog Post
-
-The affiliated blog is still at its early stage of development. Details on blog post contributions will be provided soon.
-

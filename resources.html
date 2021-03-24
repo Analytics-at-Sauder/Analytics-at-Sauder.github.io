@@ -13,12 +13,22 @@
 
 <title>Resources</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -373,50 +357,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h3>Interactive Computing</h3>
 <div id="jupyter-notebook" class="section level4">
 <h4>Jupyter Notebook</h4>
-<p><a target="_blank" href="https://jupyter.org/about">Jupyter Notebook</a> is an open-source interactive computing tool that enables <a target="_blank" href="https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58">computational narratives</a>. With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R. Juper Notebook can be downloaded using <a target="_blank" href="https://www.anaconda.com/products/individual">Anaconda</a></p>
+<p><a href="https://jupyter.org/about">Jupyter Notebook</a> is an open-source interactive computing tool that enables <a href="https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58">computational narratives</a>. With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R. Juper Notebook can be downloaded using <a href="https://www.anaconda.com/products/individual">Anaconda</a></p>
 </div>
 <div id="nbviewer" class="section level4">
 <h4>NBViewer</h4>
-<p><a target="_blank" href="https://nbviewer.jupyter.org/">NBViewer</a> allows users to browse static versions of Jupyter Notebooks in public GitHub respositories (read more on GitHub below).</p>
+<p><a href="https://nbviewer.jupyter.org/">NBViewer</a> allows users to browse static versions of Jupyter Notebooks in public GitHub respositories (read more on GitHub below).</p>
 </div>
 <div id="binder" class="section level4">
 <h4>Binder</h4>
-<p><a target="_blank" href="https://mybinder.org/">Binder</a> in contrary to NBViewer, hosts interactive Jupyter Notebook images. Users can edit and execute notebooks hosted on Binder, but changes will not be saved or stored.</p>
+<p><a href="https://mybinder.org/">Binder</a> in contrary to NBViewer, hosts interactive Jupyter Notebook images. Users can edit and execute notebooks hosted on Binder, but changes will not be saved or stored.</p>
 </div>
 <div id="syzygy" class="section level4">
 <h4>Syzygy</h4>
-<p><a target="_blank" href="https://intro.syzygy.ca/">Syzygy</a> hosts virtual Hubs that allow users to create, execute, and save Jupyter Notebooks in a cloud server. Users can log into Syzygy using both Google accounts and UBC accounts when pulling Jupyter Notebooks from <strong><a target="_blank" href="analytics-at-sauder.github.io">Analytics@Sauder</a></strong>.</p>
+<p><a href="https://intro.syzygy.ca/">Syzygy</a> hosts virtual Hubs that allow users to create, execute, and save Jupyter Notebooks in a cloud server. Users can log into Syzygy using both Google accounts and UBC accounts when pulling Jupyter Notebooks from <strong><a href="analytics-at-sauder.github.io">Analytics@Sauder</a></strong>.</p>
 </div>
 </div>
 <div id="collaboration" class="section level3">
 <h3>Collaboration</h3>
 <div id="git-and-github" class="section level4 tabset tabset-fade">
-<h4>Git and GitHub</h4>
-<p>For users who are new to the <a target="_blank" href="https://tutorial.djangogirls.org/en/intro_to_command_line/">command-line interface</a>, it might be more intuitive to learn GitHub first before diving into Git itself</p>
+<h4 class="tabset tabset-fade">Git and GitHub</h4>
+<p>For users who are new to the <a href="https://tutorial.djangogirls.org/en/intro_to_command_line/">command-line interface</a>, it might be more intuitive to learn GitHub first before diving into Git itself</p>
 <div id="git" class="section level5">
 <h5>Git</h5>
-<p><a target="_blank" href="https://git-scm.com/">Git</a> (/ɡɪt/) is an open-source Version Control System (VSC) or Source Code Management (SCM) tool that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.</p>
+<p><a href="https://git-scm.com/">Git</a> (/ɡɪt/) is an open-source Version Control System (VSC) or Source Code Management (SCM) tool that allows users to create multiple independent local branches (versions) of the same folder that can be merged or deleted. These branches are especially useful for experiments and testing. Users can push local branches to remote repositories when working in a team. Git also enables team collaborations when used with remote repositories (cloud folders) hosted on platforms such as GitHub.</p>
 <ol style="list-style-type: decimal">
-<li>This <a target="_blank" href="https://learngitbranching.js.org/">interactive tutorial</a> on Git is a great place to start learning Git.</li>
-<li>Once the interactive tutorial is done, set up Git on your local machine following this <a target="_blank" href="https://github.com/Analytics-at-Sauder/Introduction-to-Git">guide</a> created by Will Jenden.</li>
-<li>Learn more about Git by reading this <a target="_blank" href="https://developer.ibm.com/technologies/web-development/tutorials/d-learn-workings-git/">IBM Git Tutorial</a></li>
+<li>This <a href="https://learngitbranching.js.org/">interactive tutorial</a> on Git is a great place to start learning Git.</li>
+<li>Once the interactive tutorial is done, set up Git on your local machine following this <a href="https://github.com/Analytics-at-Sauder/Introduction-to-Git">guide</a> created by Will Jenden.</li>
+<li>Learn more about Git by reading this <a href="https://developer.ibm.com/technologies/web-development/tutorials/d-learn-workings-git/">IBM Git Tutorial</a></li>
 </ol>
 <hr />
 </div>
 <div id="github" class="section level5">
 <h5>GitHub</h5>
-<p><a target="_blank" href="https://github.com/">GitHub</a> is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.</p>
+<p><a href="https://github.com/">GitHub</a> is a code hosting platform for version control and collaboration, which can be compared to a cloud folder such as Google Drive with additional functionalities. When used along with Git locally, GitHub is a powerful and efficient tool for users to collaborate on large projects with many files. In many cases, employers also see GitHub as a portfolio platform for students who are interested in jobs in the technical field.</p>
 <ol style="list-style-type: decimal">
-<li>This <a target="_blank" href="https://guides.github.com/activities/hello-world/">short activity</a> is a great place to start learning GitHub.</li>
-<li>To reinforce your GitHub learning, complete this <a target="_blank" href="https://lab.github.com/githubtraining/introduction-to-github">interactive course</a> on GitHub.</li>
-<li>More interative courses on GitHub can be found in the <a target="_blank" href="https://lab.github.com/">GitHub Learning Lab</a></li>
+<li>This <a href="https://guides.github.com/activities/hello-world/">short activity</a> is a great place to start learning GitHub.</li>
+<li>To reinforce your GitHub learning, complete this <a href="https://lab.github.com/githubtraining/introduction-to-github">interactive course</a> on GitHub.</li>
+<li>More interative courses on GitHub can be found in the <a href="https://lab.github.com/">GitHub Learning Lab</a></li>
 </ol>
 <hr />
 </div>
 </div>
 <div id="reviewnb" class="section level4">
 <h4>ReviewNB</h4>
-<p><a target="_blank" href="https://github.com/marketplace/review-notebook-app">ReviewNB</a> is a GitHub (marketplace) application that enables comprehensible comparisons and reviews of Jupyter notebooks. GitHub automatically shows differences for plain text files between branches and commits whenever they are compared with one another (here’s an <a target="_blank" href="https://github.com/octocat/linguist/compare/master...octocat:an-example-comparison-for-docs">example</a>), where addition is hightlighted in green and deletion in red. However, Jupyter Notebooks are normally presented as rich media rendering of <a target="_blank" href="https://nbformat.readthedocs.io/en/latest/format_description.html#notebook-file-format">JSON files</a>, which are not very interpretable when shown in plain text. With the help of ReviewNB, users can see the differences between two Jupyter Notebooks after they are rendered in a new window. At the same time, any edits or comments made in ReviewNB would be synced back to the GitHub.</p>
+<p><a href="https://github.com/marketplace/review-notebook-app">ReviewNB</a> is a GitHub (marketplace) application that enables comprehensible comparisons and reviews of Jupyter notebooks. GitHub automatically shows differences for plain text files between branches and commits whenever they are compared with one another (here’s an <a href="https://github.com/octocat/linguist/compare/master...octocat:an-example-comparison-for-docs">example</a>), where addition is hightlighted in green and deletion in red. However, Jupyter Notebooks are normally presented as rich media rendering of <a href="https://nbformat.readthedocs.io/en/latest/format_description.html#notebook-file-format">JSON files</a>, which are not very interpretable when shown in plain text. With the help of ReviewNB, users can see the differences between two Jupyter Notebooks after they are rendered in a new window. At the same time, any edits or comments made in ReviewNB would be synced back to the GitHub.</p>
 </div>
 </div>
 <div id="web-development" class="section level3">
@@ -424,23 +408,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>This website is currently generated using the built in site-generater for RStudio, styled using external CSS and Javascript, while the affiliated blog is created using UBC Blog, which is powered by WordPress. However, in the foreseeable future, alternative web development tools might be applied to either or both of the website and the blog.</p>
 <div id="rstudio" class="section level4">
 <h4>RStudio</h4>
-<p><a target="_blank" href="https://rstudio.com/products/rstudio/">RStudio</a> and <a target="_blank" href="https://rmarkdown.rstudio.com/lesson-1.html">RMarkdown</a> is an Integrated Development Environment (IDE) for R, a statistical computing programming language. RMarkdown on the other hand is a package that comes with a built-in site generater that is useful for analysts and researchers who want to create HTML-formatted content using RMarkdown files (similar to Jupyter notebooks)</p>
-<p>The <a target="_blank" href="https://resources.github.com/whitepapers/github-and-rstudio/">r-mark down guide</a> provides a clear guide on how to create a simple website using rmarkdown’s site generater and publish it through GitHub Pages. For more complex customization, the <a target="_blank" href="https://bookdown.org/yihui/rmarkdown/html-document.html">RMarkdown Guidebook</a> provides more tips.</p>
+<p><a href="https://rstudio.com/products/rstudio/">RStudio</a> and <a href="https://rmarkdown.rstudio.com/lesson-1.html">RMarkdown</a> is an Integrated Development Environment (IDE) for R, a statistical computing programming language. RMarkdown on the other hand is a package that comes with a built-in site generater that is useful for analysts and researchers who want to create HTML-formatted content using RMarkdown files (similar to Jupyter notebooks)</p>
+<p>The <a href="https://resources.github.com/whitepapers/github-and-rstudio/">r-mark down guide</a> provides a clear guide on how to create a simple website using rmarkdown’s site generater and publish it through GitHub Pages. For more complex customization, the <a href="https://bookdown.org/yihui/rmarkdown/html-document.html">RMarkdown Guidebook</a> provides more tips.</p>
 </div>
 <div id="ubc-blog-and-wordpress" class="section level4">
 <h4>UBC Blog and WordPress</h4>
-<p>The affiliated blog is still at its early stage of development. Here is a collection of <a target="_blank" href="https://blogs.ubc.ca/blogsandbox/faq/">video tutorials</a> created by Blogging Sandbox on how to use <a target="_blank" href="https://blogs.ubc.ca/about/">UBC Blog</a> and <a target="_blank" href="https://wordpress.com/support/">WordPress</a>.</p>
+<p>The affiliated blog is still at its early stage of development. Here is a collection of <a href="https://blogs.ubc.ca/blogsandbox/faq/">video tutorials</a> created by Blogging Sandbox on how to use <a href="https://blogs.ubc.ca/about/">UBC Blog</a> and <a href="https://wordpress.com/support/">WordPress</a>.</p>
 </div>
 </div>
 <div id="research-and-evaluation" class="section level3">
 <h3>Research and Evaluation</h3>
 <div id="google-analytics" class="section level4">
 <h4>Google Analytics</h4>
-<p><a target="_blank" href="https://marketingplatform.google.com/about/analytics/">Google Analytics</a> is embedded into this website and can be used to analyze website traffic and user interactions. This <a target="_blank" href="https://analytics.google.com/analytics/academy/course/6">beginner course</a> is a great place to start learning.</p>
+<p><a href="https://marketingplatform.google.com/about/analytics/">Google Analytics</a> is embedded into this website and can be used to analyze website traffic and user interactions. This <a href="https://analytics.google.com/analytics/academy/course/6">beginner course</a> is a great place to start learning.</p>
 </div>
 <div id="qualtrics" class="section level4">
 <h4>Qualtrics</h4>
-<p><a target="_blank" href="https://www.qualtrics.com/core-xm/survey-software/">Qualtrics</a> is a survey and research tool with many functions. Here is a list of <a target="_blank" href="https://it.ubc.ca/services/teaching-learning-tools/survey-tool/qualtrics-training">tutorials</a> to get you started. This service can be accessed through <a target="_blank" href="https://it.ubc.ca/services/teaching-learning-tools/survey-tool">UBC IT Services</a></p>
+<p><a href="https://www.qualtrics.com/core-xm/survey-software/">Qualtrics</a> is a survey and research tool with many functions. Here is a list of <a href="https://it.ubc.ca/services/teaching-learning-tools/survey-tool/qualtrics-training">tutorials</a> to get you started. This service can be accessed through <a href="https://it.ubc.ca/services/teaching-learning-tools/survey-tool">UBC IT Services</a></p>
 </div>
 </div>
 </div>
@@ -448,20 +432,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Cheat Sheets</h2>
 <div id="git-1" class="section level3">
 <h3>Git</h3>
-<p>Check out <a target="_blank" href="#collaboration">introduction to Git</a> above</p>
+<p>Check out <a href="#collaboration">introduction to Git</a> above</p>
 <ol style="list-style-type: decimal">
-<li><a target="_blank" href="https://github.github.com/training-kit/downloads/github-git-cheat-sheet/">GitHub Git Cheat Sheet</a> (quick cheat sheet for Git created by GitHub)</li>
-<li><a target="_blank" href="https://ndpsoftware.com/git-cheatsheet.html">Visual Git Cheat Sheet</a></li>
-<li><a target="_blank" href="https://git-scm.com/docs">Official Git Reference</a> (complete documentation of git commands)</li>
+<li><a href="https://github.github.com/training-kit/downloads/github-git-cheat-sheet/">GitHub Git Cheat Sheet</a> (quick cheat sheet for Git created by GitHub)</li>
+<li><a href="https://ndpsoftware.com/git-cheatsheet.html">Visual Git Cheat Sheet</a></li>
+<li><a href="https://git-scm.com/docs">Official Git Reference</a> (complete documentation of git commands)</li>
 </ol>
 </div>
 <div id="markdown" class="section level3">
 <h3>Markdown</h3>
-<p><a target="_blank" href="https://www.markdownguide.org/getting-started/">Markdown</a> is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub</p>
+<p><a href="https://www.markdownguide.org/getting-started/">Markdown</a> is a lightweight markup language that can be used to format plain text documents. It is frequently used in Jupyter Notebooks and on GitHub</p>
 <ol style="list-style-type: decimal">
-<li><a target="_blank" href="https://www.markdownguide.org/cheat-sheet/">Markdown Cheat Sheet</a> by Markdown Guide</li>
-<li><a target="_blank" href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">GitHub Flavored Markdown</a></li>
-<li><a target="_blank" href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting%20Equations.html">Math Equations in Markdown</a></li>
+<li><a href="https://www.markdownguide.org/cheat-sheet/">Markdown Cheat Sheet</a> by Markdown Guide</li>
+<li><a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">GitHub Flavored Markdown</a></li>
+<li><a href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting%20Equations.html">Math Equations in Markdown</a></li>
 </ol>
 </div>
 </div>
@@ -470,17 +454,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="databases" class="section level3">
 <h3>Databases</h3>
 <ol style="list-style-type: decimal">
-<li><a target="_blank" href="https://www.mergentonline.com/login.php">Mergent Online</a></li>
-<li><a target="_blank" href="http://resources.library.ubc.ca/page.php?id=477">UBC Library Database</a></li>
-<li><a target="_blank" href="https://www.kaggle.com/datasets">Kaggle</a></li>
+<li><a href="https://www.mergentonline.com/login.php">Mergent Online</a></li>
+<li><a href="http://resources.library.ubc.ca/page.php?id=477">UBC Library Database</a></li>
+<li><a href="https://www.kaggle.com/datasets">Kaggle</a></li>
 </ol>
 </div>
 <div id="other-data-sources" class="section level3">
 <h3>Other Data sources</h3>
 <ol style="list-style-type: decimal">
-<li><a target="_blank" href="https://archive.ics.uci.edu/ml/datasets.php">UCI Machine Learning Repository</a></li>
-<li><a target="_blank" href="https://www.instacart.com/datasets/grocery-shopping-2017">Three Million Instacart Orders</a></li>
-<li><a target="_blank" href="https://github.com/OpportunityInsights/EconomicTracker">Opportunity Insights Economic Tracker</a></li>
+<li><a href="https://archive.ics.uci.edu/ml/datasets.php">UCI Machine Learning Repository</a></li>
+<li><a href="https://www.instacart.com/datasets/grocery-shopping-2017">Three Million Instacart Orders</a></li>
+<li><a href="https://github.com/OpportunityInsights/EconomicTracker">Opportunity Insights Economic Tracker</a></li>
 </ol>
 </div>
 </div>
@@ -501,7 +485,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -519,7 +503,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

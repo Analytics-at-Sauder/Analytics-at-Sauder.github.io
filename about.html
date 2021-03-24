@@ -13,12 +13,22 @@
 
 <title>About This Project</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -73,12 +83,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -91,32 +105,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -127,10 +116,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -147,6 +132,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -159,7 +147,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -252,9 +239,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -274,7 +258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -285,7 +269,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <iframe src="https://www.youtube.com/embed/AyTXiWXWBpQ" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="about-page"></iframe>
 <p>The goal of this Project is to create an open repository for learning resources to enhance data analysis and meta-skills for business analytics professionals of all skill levels. The UBC Business Analytics Learning Resources will provide various opportunities for hands-on experience and experimentation, grounded in ‘real-life’ data and business problems, using open-source and cloud-based tools (e.g. Interactive Computing Environment, Jupyter Notebooks). These resources allow all users to enhance their meta-skills, including technical skills such as the ability to deploy the results of their analyses), where these skills are in high-demand in the both the business and data analytics industries.</p>
-<p>The UBC Business Analytics Learning Resources repository contains real world problems, where business analytics programming skills will be used in providing solutions. These resources will benefit not only MBAN students, including alumni and prospective students, but also other students at UBC’s Sauder School of Business, including students of the MBA, BCOM, and MM programs. This website is also linked to a <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Code_repository" target="_blank">Github repository</a> that hosts the actual Python and R Notebooks, which are available for download and modification.</p>
+<p>The UBC Business Analytics Learning Resources repository contains real world problems, where business analytics programming skills will be used in providing solutions. These resources will benefit not only MBAN students, including alumni and prospective students, but also other students at UBC’s Sauder School of Business, including students of the MBA, BCOM, and MM programs. This website is also linked to a <a href="https://github.com/Master-of-Business-Analytics/Code_repository" target="_blank">Github repository</a> that hosts the actual Python and R Notebooks, which are available for download and modification.</p>
 <div id="team" class="section level2 bio">
   <h2 style="text-align: center;">Our Team</h2>
   <br />
@@ -296,7 +280,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div id="kemjika-ananaba-bio" class="col-md-7 col-sm-7 col-xs-12">
       <h3>Kemjika Ananaba</h3>
-      <p>Kemjika Ananaba is a Masters of Business Analytics 2020 candidate at University of British Columbia and a supply chain professional with over five years experience solving business and process problems using data analytics and continuous improvement tools. She is currently a Supply Chain Analyst at Lululemon.</p>
+      <p>Kemjika Ananaba is a Masters of Business Analytics 2020 candidate at University of British Columbia and a supply chain professional with over five years experience solving business and process problems using data analytics and continuous improvement tools.</p>
     </div>
   </div>
   <div id="hao-zheng" class="section level3 row">
@@ -378,7 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -396,7 +380,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

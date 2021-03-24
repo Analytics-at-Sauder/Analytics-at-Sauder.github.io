@@ -13,12 +13,22 @@
 
 <title>nb0008_sales_forecast_part_1.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -368,16 +352,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Sales Forecast (Part 1)</h2>
 <div id="author-charlie-cao" class="section level4">
 <h4>Author: Charlie Cao</h4>
-<p>This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0008_Sales_Forecast/master?filepath=nb0008_sales_forecast_part_1.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>This is the first of a series of two notebooks on the topic of Sales Forecast. Through this series, we want to showcase one of the many ways that one can follow exloring and forecasting time series data. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook along with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0008_Sales_Forecast&urlpath=tree%2FNB0008_Sales_Forecast%2Fnb0008_sales_forecast_part_1.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0008_Sales_Forecast/master?filepath=nb0008_sales_forecast_part_1.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="background" class="section level2">
 <h2>Background</h2>
 <hr />
-<p>In this first Notebook, we will focus on explorating and manipulating our data, while the second Notebook will focus on modeling the data. Understanding the data is important for analytics, and we recommend that you read this Notebook before diving into modeling (Part 2) in order to gain a better grasp of our large and messy datasets. The datasets that we are using consist of sales records for a retailer with 45 stores, each containing several departments. They are already included in the GitHub Repository where this Jupyter Notebook is located (please see the “Data” folder), but you can also find them on <a target="_blank" href="https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv">this Kaggle page</a>.</p>
+<p>In this first Notebook, we will focus on explorating and manipulating our data, while the second Notebook will focus on modeling the data. Understanding the data is important for analytics, and we recommend that you read this Notebook before diving into modeling (Part 2) in order to gain a better grasp of our large and messy datasets. The datasets that we are using consist of sales records for a retailer with 45 stores, each containing several departments. They are already included in the GitHub Repository where this Jupyter Notebook is located (please see the “Data” folder), but you can also find them on <a href="https://www.kaggle.com/manjeetsingh/retaildataset?select=sales+data-set.csv">this Kaggle page</a>.</p>
 <p>Let’s first start by importing the libraries we need and loading our data:</p>
 <pre class="python"><code>import pandas as pd
 import numpy as np
@@ -416,7 +400,7 @@ df_stores[&#39;Type&#39;] = df_stores[&#39;Type&#39;].astype(&#39;category&#39;)
 <li>What are the distributions of the different columns?</li>
 <li>Are there any columns that are highly correlated with another?</li>
 </ul>
-<p>After a preliminary exploration of the data, if there are several missing values or if the distribution of a column is highly left/right skewed, both of which could potentially affect the accruacy of our models, then we would want to first think about replacing or transforming the data before building, comparing, and selecting our models. Since we have a big dataset containing data from multiple stores and multiple departments, we can create an interactive (and basic) widget using <code>ipywidgets</code> for a preliminary inspection of the sales record at each store and department (please read its <a target="_blank" href="https://ipywidgets.readthedocs.io/en/latest/">documentation</a> for more information or for tutorials).</p>
+<p>After a preliminary exploration of the data, if there are several missing values or if the distribution of a column is highly left/right skewed, both of which could potentially affect the accruacy of our models, then we would want to first think about replacing or transforming the data before building, comparing, and selecting our models. Since we have a big dataset containing data from multiple stores and multiple departments, we can create an interactive (and basic) widget using <code>ipywidgets</code> for a preliminary inspection of the sales record at each store and department (please read its <a href="https://ipywidgets.readthedocs.io/en/latest/">documentation</a> for more information or for tutorials).</p>
 <pre class="python"><code>def sales_viz(store_num, dept_num):
     fig, axes = plt.subplots(1,2, figsize=(10,3), dpi=100)
     # Subset the data based on store and department numbers
@@ -545,9 +529,9 @@ Weekly_Sales
 </tbody>
 </table>
 </div>
-<p>CAUTION: 0.30% of the <code>Weekly_Sales</code> column is negative.</p>
+<pre><code>CAUTION: 0.30% of the `Weekly_Sales` column is negative.</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_6_2.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_6_2.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>display(df_sales.drop(&#39;Weekly_Sales&#39;, axis=1).describe().transpose())
@@ -694,7 +678,7 @@ NaT
 </table>
 </div>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_7_1.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_7_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>From the above charts, we can see that:</p>
@@ -712,20 +696,26 @@ NaT
 <h4><code>Features</code></h4>
 <p>Now let’s move on to the <code>features</code> dataframe, which has 12 fields (columns) and 8,190 observations (rows). Note that, again, we had mannually changed the data types for the ‘Store’ and ‘Date’ columns when we imported the data.</p>
 <pre class="python"><code>print(df_features.info())</code></pre>
-<p>&lt;class ‘pandas.core.frame.DataFrame’&gt; RangeIndex: 8190 entries, 0 to 8189 Data columns (total 12 columns): # Column Non-Null Count Dtype<br />
-— —— ————– —–<br />
-0 Store 8190 non-null category<br />
-1 Date 8190 non-null datetime64[ns] 2 Temperature 8190 non-null float64<br />
-3 Fuel_Price 8190 non-null float64<br />
-4 MarkDown1 4032 non-null float64<br />
-5 MarkDown2 2921 non-null float64<br />
-6 MarkDown3 3613 non-null float64<br />
-7 MarkDown4 3464 non-null float64<br />
-8 MarkDown5 4050 non-null float64<br />
-9 CPI 7605 non-null float64<br />
-10 Unemployment 7605 non-null float64<br />
-11 IsHoliday 8190 non-null bool<br />
-dtypes: bool(1), category(1), datetime64<a target="_blank" href="1">ns</a>, float64(9) memory usage: 657.6 KB None</p>
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 8190 entries, 0 to 8189
+Data columns (total 12 columns):
+ #   Column        Non-Null Count  Dtype         
+---  ------        --------------  -----         
+ 0   Store         8190 non-null   category      
+ 1   Date          8190 non-null   datetime64[ns]
+ 2   Temperature   8190 non-null   float64       
+ 3   Fuel_Price    8190 non-null   float64       
+ 4   MarkDown1     4032 non-null   float64       
+ 5   MarkDown2     2921 non-null   float64       
+ 6   MarkDown3     3613 non-null   float64       
+ 7   MarkDown4     3464 non-null   float64       
+ 8   MarkDown5     4050 non-null   float64       
+ 9   CPI           7605 non-null   float64       
+ 10  Unemployment  7605 non-null   float64       
+ 11  IsHoliday     8190 non-null   bool          
+dtypes: bool(1), category(1), datetime64[ns](1), float64(9)
+memory usage: 657.6 KB
+None</code></pre>
 <pre class="python"><code># inspecting rows containing NaN values
 display(df_features[df_features[&#39;CPI&#39;].isnull()])
 display(df_features[df_features[&#39;Unemployment&#39;].isnull()])</code></pre>
@@ -2077,9 +2067,13 @@ max
 </tbody>
 </table>
 </div>
-<p>CAUTION: 0.10% of MarkDown1 (non-null) is negative. CAUTION: 0.86% of MarkDown2 (non-null) is negative. CAUTION: 0.36% of MarkDown3 (non-null) is negative. CAUTION: 0.00% of MarkDown4 (non-null) is negative. CAUTION: 0.05% of MarkDown5 (non-null) is negative.</p>
+<pre><code>CAUTION: 0.10% of MarkDown1 (non-null) is negative.
+CAUTION: 0.86% of MarkDown2 (non-null) is negative.
+CAUTION: 0.36% of MarkDown3 (non-null) is negative.
+CAUTION: 0.00% of MarkDown4 (non-null) is negative.
+CAUTION: 0.05% of MarkDown5 (non-null) is negative.</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_11_2.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_11_2.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>fig, axes = plt.subplots(1,2,figsize=(15,5))
@@ -2090,7 +2084,7 @@ fig.autofmt_xdate(rotation=-30, ha=&#39;left&#39;)
 
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_12_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_12_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>display(df_features[[&#39;Store&#39;, &#39;Date&#39;, &#39;IsHoliday&#39;]].describe().transpose())
@@ -2213,7 +2207,7 @@ NaT
 </table>
 </div>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_13_1.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_13_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>We can see from the above tables and plots that:</p>
@@ -2232,11 +2226,20 @@ NaT
 <h4><code>Stores</code></h4>
 <p>Last but not least, let’s take a look at the <code>stores</code> dataframe, which only has three fields (columns) and 45 observations (rows). Again, note that we had mannually changed the data types for the ‘Store’ and ‘Type’ columns when we imported the data.</p>
 <pre class="python"><code>display(df_stores.info())</code></pre>
-<p>&lt;class ‘pandas.core.frame.DataFrame’&gt; RangeIndex: 45 entries, 0 to 44 Data columns (total 3 columns): # Column Non-Null Count Dtype<br />
-— —— ————– —–<br />
-0 Store 45 non-null category 1 Type 45 non-null category 2 Size 45 non-null int64<br />
-dtypes: category(2), int64(1) memory usage: 2.3 KB</p>
-<p>None</p>
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 45 entries, 0 to 44
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype   
+---  ------  --------------  -----   
+ 0   Store   45 non-null     category
+ 1   Type    45 non-null     category
+ 2   Size    45 non-null     int64   
+dtypes: category(2), int64(1)
+memory usage: 2.3 KB
+
+
+
+None</code></pre>
 <pre class="python"><code>display(pd.DataFrame(df_stores.drop(&#39;Store&#39;, axis=1).describe(include=&#39;all&#39;)).transpose().round(2))
 
 fig, axes = plt.subplots(1,3, figsize=(20,4))
@@ -2380,7 +2383,7 @@ NaN
 </table>
 </div>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_16_1.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_16_1.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>The <code>stores</code> dataframe appears to be smaller and simpler. We can see that:</p>
@@ -2769,7 +2772,7 @@ sns.stripplot(x=&#39;Type&#39;, y=&#39;Weekly_Sales&#39;, jitter=0.4, alpha=0.1,
 
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_20_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_20_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>At the beginning of this Notebook, we saw that (by randomly inspecting different combinations) seasonalities and trends vary across stores and departments. Some stores/deparments have consistant sales over time, while others see huge spikes either in the middle or at the end of each year. There are also increasing or decreasing trends in certain stores/departments.</p>
@@ -2791,7 +2794,7 @@ for i in range(9):
         
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_22_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_22_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>fig, ax = plt.subplots(20, 5, sharex=&#39;col&#39;, sharey=&#39;row&#39;, figsize=(20, 50), dpi=100)
@@ -2813,7 +2816,7 @@ for i in range(20):
             dept_index += 1
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_23_0.png" alt="png" />
+<img src="nb0008_sales_forecast_part_1_files/nb0008_sales_forecast_part_1_23_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -2835,7 +2838,7 @@ plt.show()</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -2853,7 +2856,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

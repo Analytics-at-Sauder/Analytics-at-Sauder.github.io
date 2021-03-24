@@ -13,12 +13,22 @@
 
 <title>nb0012_inventory_decision_analysis.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -76,12 +86,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- End of script hiding navbar when scrolling down -->
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -94,32 +108,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -130,10 +119,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -150,6 +135,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
@@ -162,7 +150,6 @@ summary {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -294,13 +281,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -334,9 +321,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a target="_blank" href="about.html">About</a>
 </li>
 <li>
-  <a target="_blank" href="https://blogs.ubc.ca/businessanalytics">News</a>
-</li>
-<li>
   <a target="_blank" href="notebooks.html">Notebooks</a>
 </li>
 <li>
@@ -356,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -368,10 +352,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2>Inventory Decision Analysis</h2>
 <div id="author-kemjika-ananaba" class="section level4">
 <h4>Author: Kemjika Ananaba</h4>
-<p>In this Project, we use Monte Carlo simulation and optimization tools to determine the optimal expected profits under different scenarios. In the <strong>Inventory Managemen Notebook</strong>, we looked at two inventory management policies: continuous review policy and periodic review policy. This Project compares the optimal expected profits across these two policies. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook together with any accompanying data in the <a target="_blank" href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a target="_blank" href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
-<p><a target="_blank" href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0012_Inventory_Decision_Analysis&urlpath=tree%2FNB0012_Inventory_Decision_Analysis%2Fnb0012_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
-<p><a target="_blank" href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0012_Inventory_Decision_Analysis&urlpath=tree%2FNB0012_Inventory_Decision_Analysis%2Fnb0012_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
-<p><a target="_blank" href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0012_Inventory_Decision_Analysis/master?filepath=nb0012_inventory_decision_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
+<p>In this Project, we use Monte Carlo simulation and optimization tools to determine the optimal expected profits under different scenarios. In the <strong>Inventory Managemen Notebook</strong>, we looked at two inventory management policies: continuous review policy and periodic review policy. This Project compares the optimal expected profits across these two policies. We encourage you to create your own Jupyter Notebook and follow along. You can also download this Notebook together with any accompanying data in the <a href="https://github.com/Master-of-Business-Analytics/Notebooks_and_Data">Notebooks and Data</a> GitHub Repository. Alternatively, if you do not have Python or Jupyter Notebook installed yet, you may experiment with a virtual Notebook by launching Binder or Syzygy below (learn more about these two tools in the <a href="https://analytics-at-sauder.github.io/resource.html">Resource</a> tab).</p>
+<p><a href="https://ubc.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0012_Inventory_Decision_Analysis&urlpath=tree%2FNB0012_Inventory_Decision_Analysis%2Fnb0012_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (UBC)</a></p>
+<p><a href="https://pims.syzygy.ca/jupyter/hub/user-redirect/git-pull?repo=https%3A%2F%2Fgithub.com%2FAnalytics-at-Sauder%2FNB0012_Inventory_Decision_Analysis&urlpath=tree%2FNB0012_Inventory_Decision_Analysis%2Fnb0012_inventory_decision_analysis.ipynb&branch=master" target="_blank" class="button">Launch Syzygy (Google)</a></p>
+<p><a href="https://mybinder.org/v2/gh/Analytics-at-Sauder/NB0012_Inventory_Decision_Analysis/master?filepath=nb0012_inventory_decision_analysis.ipynb" target="_blank" class="button">Launch Binder</a></p>
 </div>
 </div>
 <div id="business-background" class="section level2">
@@ -424,7 +408,7 @@ demand[1].hist()
 plt.title(&#39;Histogram of past product sales &#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_4_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_4_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>demand[1].std()</code></pre>
@@ -725,7 +709,7 @@ plt.axhline(2170, linewidth=1, color=&quot;red&quot;, linestyle=&quot;:&quot;)
 plt.title(&#39;Periodic Review: Inventory level for one simulation &#39;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_15_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_15_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -780,7 +764,7 @@ def mc_simulation( M, num_simulations,summary,days=365):
 p_list, o_list = mc_simulation(2170,100,summary)        
 #mean profit and percentage of orders lost
 print([np.mean(p_list),np.mean(o_list)])</code></pre>
-<p>[87361.3, 0.10891022806232062]</p>
+<pre><code>[87361.3, 0.10891022806232062]</code></pre>
 <pre class="python"><code>sns.distplot(
     p_list,
     kde=False,
@@ -791,7 +775,7 @@ plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_22_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_22_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>sns.distplot(
@@ -804,7 +788,7 @@ plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Mean percentage of orders lost &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_23_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_23_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -835,7 +819,7 @@ plt.ylabel(&quot;Expected Profit&quot;)
 plt.plot(xx, yy)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_27_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_27_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>This gave an optimum expected profit of $93,883 at the order up-to point (M) of 2,600.</p>
@@ -980,12 +964,12 @@ plt.ylabel(&quot;Inventory Status&quot;)
 plt.axhline(3000, linewidth=1, color=&quot;grey&quot;, linestyle=&quot;:&quot;)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_33_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_33_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>#Number of orders
 len(data[&#39;orders&#39;])</code></pre>
-<p>12</p>
+<pre><code>12</code></pre>
 <pre class="python"><code>def cc_mc_simulation(q, r, num_simulations,summary,days=365):
     profit_list = []
     orders_lost_list = []
@@ -1012,7 +996,7 @@ plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Profit Distribution&quot;, y=1.02, fontsize=22)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_37_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_37_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <pre class="python"><code>sns.distplot(
@@ -1025,7 +1009,7 @@ plt.ylabel(&quot;Number of simulations&quot;, labelpad=15)
 plt.title(&quot;Orders Lost: Mean = 0.13 &quot;, y=1.02, fontsize=18)
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_38_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_38_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 </div>
@@ -1068,7 +1052,7 @@ ax.set_zlabel(&#39;Profit&#39;)
 
 plt.show()</code></pre>
 <div class="figure">
-<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_42_0.png" alt="png" />
+<img src="nb0012_inventory_decision_analysis_files/nb0012_inventory_decision_analysis_42_0.png" alt="" />
 <p class="caption">png</p>
 </div>
 <p>Based on the simulations, a maximum profit of $145,331 was derived for an order quantity of 2,100 and a re-order point of 950. Using this policy, the table below lists out the optimal reorder points, optimal order quantity, the expected annual profits, and the proportion of orders lost over the period of the year for each of the products.</p>
@@ -1217,7 +1201,7 @@ Proportion of Lost Orders
 <div id="references" class="section level2">
 <h2>References</h2>
 <p>[1] Anderson, Sweeney, Williams, Camm, Cochran, Fry, Ohlmann. An Introduction to Management Science: Quantitative approaches to Decision Making. 14th Edition, 2015. Cengage Learning. pp. 457–478.</p>
-<p>[2] Nagpurkar, M. (2020, April 2). Inventory Management using Python. Retrieved June 3, 2020, from <a target="_blank" href="https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314" class="uri">https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314</a></p>
+<p>[2] Nagpurkar, M. (2020, April 2). Inventory Management using Python. Retrieved June 3, 2020, from <a href="https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314" class="uri">https://towardsdatascience.com/inventory-management-using-python-17cb7ddf9314</a></p>
 </div>
 
 <div class="footer">
@@ -1236,7 +1220,7 @@ Proportion of Lost Orders
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1254,7 +1238,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
