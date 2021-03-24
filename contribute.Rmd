@@ -9,12 +9,12 @@ This project started as a foundation to what we hope is the beginning of an ever
 
 Here, we will walk you through several ways that you can contribute; however, it is strongly recommended that you first take a look at the list of tools that are implemented in this project on the [Resources](resources.html) page, especially [Git and GitHub](resources.html#collaboration), to better understand the current structure of this platform.
 
-### Share Your Own Notebooks
-
-You can request to be added as a member of the [Analytics@Sauder Organization] on GitHub. As a member, you would be able to [create your own repositories](https://docs.github.com/en/github/getting-started-with-github/create-a-repo) and upload any notebooks that you want to share with others. Once a new repositories is created, please inform one of our administorators so that it can be added onto this website.
-
 ### Provide Suggestions for Existing Notebooks
 
 Once you are familiar with Git and GitHub, [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) and/or [clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) any repository, edit the Jupyter Notebook, and propose your changes by [creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/proposing-changes-to-your-work-with-pull-requests). One of our administrators will go through the pull requests on a regular basis and approve the changes as needed.
 
 Alternatively, if you ran into a problem that you cannot solve or if you just have general comments for a specific notebook, you can [create an issue](https://docs.github.com/en/github/managing-your-work-on-github/creating-an-issue) within the corresponding repository. Questions will be addressed by one of our administrators periodically.
+
+### Participate in the Discussion Forum
+We encourage you to use our [community discussion forum](https://github.com/Analytics-at-Sauder/community-discussion/discussions/1) as a place to
+engage with others by asking questions and sharing ideas.
