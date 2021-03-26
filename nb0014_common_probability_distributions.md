@@ -1,6 +1,6 @@
 ## Common Probability Distributions
 
-#### Ahthors: Hossein Piri, Steven Shechter
+#### Authors: Hossein Piri, Steven Shechter
 
 This notebook describes probability distributions often used in simulation modeling, demonstrates how to generate random variables from these distributions, and visualizes the distributions through their density functions and histograms from sampled data. Other distributions to consider adding in the future, which also often arise in certain applications, include: Weibull, Beta, Gamma, Poisson
 
