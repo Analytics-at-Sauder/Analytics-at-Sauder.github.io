@@ -75,7 +75,7 @@ print(np.random.randint(lower,upper+1))
     272
     182
     48
-    
+
 
 ### <font color = red> Binomial Distribution </font>
 Example cases: you want to generate the random number of people who show up for a flight, when you sold 100 tickets and each person has a .90 probability of showing up.   
@@ -97,7 +97,7 @@ print(np.random.binomial(n, p))
     93
     94
     88
-    
+
 
 ### <font color = red> General Discrete Distribution </font>
 Example cases: you want to generate random whole numbers or categories, with a specific probability of getting each.  e.g., the group size of a party arriving to a restaurant will be 1, 2, 3, or 4 with probabilities .2, .4, .1, and .3, respectively.
@@ -126,7 +126,7 @@ print(np.random.choice(your_array, p=probability))
     2
     2
     1
-    
+
 
 ### <font color = red> Continuous Uniform Distibution </font>
 Example cases: often used when all you know is the minimum and maximum values a variable can take, and you assume it can take any continuous value in between with equal probability.  e.g., a service time that takes anywhere between 5 and 10 minutes.
@@ -148,7 +148,7 @@ print(np.random.uniform(lower, upper, 1))
     [5.82251074]
     [5.84700153]
     [8.81755393]
-    
+
 
 ### <font color = red> Triangular Distribution </font>
 Example cases: often used when all you know is the minimum, maximum, and most likely values of a variable e.g., service time that is between 5 and 10 minutes, but  most often takes 7 minutes.
@@ -172,7 +172,7 @@ print(np.random.triangular(Min,Mode,Max, 1))
     [7.15691271]
     [6.67251991]
     [6.18580362]
-    
+
 
 ### <font color = red> Normal Distribution </font>
 Example cases: you want to generate random demand that has a normal distribution with mean 150 and standard deviation 25.
@@ -194,7 +194,7 @@ print(np.random.normal(mu,sigma,1) )
     [171.96470781]
     [154.90223985]
     [136.76167883]
-    
+
 
 ### <font color = red> Lognormal Distribution </font>
 Example cases: often used when you want to generate variables with a "long right tail." e.g., incomes in a population are often well-modeled by a log-normal distribution.  e.g., If the ln (natural log) of your data looks like a Normal distribution with mean 4 and standard deviation 1, then you can simulate values as a Lognormal with parameters mean = 4 and sd = 1. 
@@ -216,7 +216,7 @@ print(np.random.lognormal(mu, sigma, 1))
     [24.79951668]
     [35.19124152]
     [45.98108506]
-    
+
 
 ### <font color = red> Exponential Distribution </font>
 Example cases: often used when you want to generate random times between arrivals to a queue; e.g., inter-arrival times that are exponentially  distributed with an average of 5 minutes between arrivals.
@@ -238,7 +238,7 @@ print(np.random.exponential(mean, 1))
     [0.50251511]
     [2.1734863]
     [35.19966146]
-    
+
 
 ## Visualizations of these random variable distributions: Displaying the histogram of many samples (in blue), along with the probability density function (in red):
 
