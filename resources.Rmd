@@ -12,7 +12,7 @@ Various interactive computing and collaboration tools are used throughout this p
 
 #### Jupyter Notebook
 
-[Jupyter Notebook](https://jupyter.org/about) is an open-source interactive computing tool that enables [computational narratives](https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58). With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R. Juper Notebook can be downloaded using [Anaconda](https://www.anaconda.com/products/individual)
+[Jupyter Notebook](https://jupyter.org/about) is an open-source interactive computing tool that enables [computational narratives](https://blog.jupyter.org/project-jupyter-computational-narratives-as-the-engine-of-collaborative-data-science-2b5fb94c3c58). With Jupyter Notebook, one can create and share executable programming documents where code is accompanied by writings and visualizations. Currently, Jupyter Notebook is compatible with both Python and R. Jupyter Notebook can be downloaded using [Anaconda](https://www.anaconda.com/products/individual)
 
 #### NBViewer
 [NBViewer](https://nbviewer.jupyter.org/) allows users to browse static versions of Jupyter Notebooks in public GitHub respositories (read more on GitHub below).
