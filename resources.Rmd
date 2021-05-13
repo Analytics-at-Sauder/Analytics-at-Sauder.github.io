@@ -101,3 +101,4 @@ Check out [introduction to Git](#collaboration) above
 2. [Three Million Instacart Orders](https://www.instacart.com/datasets/grocery-shopping-2017)
 3. [Opportunity Insights Economic Tracker](https://github.com/OpportunityInsights/EconomicTracker)
 4. [Google Public Data Explorer](https://www.google.com/publicdata/directory)
+5. [Data Planet](https://resources.library.ubc.ca/page.php?details=data-planet&id=2650)
